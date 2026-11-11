@@ -293,6 +293,19 @@ As built (10 Nov 2026), `pid_graph/vision_checks.py`:
 Fixed, parameterised templates plus the memory-backend equivalents, each with a test asserting both backends agree on U-100.
 CQ15 output is headed "candidates for curation — not compensating measures" and never writes `COMPENSATES_FOR`.
 
+As built (10 Nov 2026), `pid_graph/topology_queries.py`:
+- `isolation(tag)` CQ14, `same_pressure(tag)` CQ15, `blast_radius(id)` CQ16, `loop_membership(tag)` CQ17, `drawing_vs_ce()` CQ18. The first argument is a
+  Neo4j driver or a store; the answer has the same shape. Each template is written once over a dozen backend primitives, and each primitive has a Cypher
+  form and an in-memory form. The agreement test runs every template in both modes on both backends and requires identical answers.
+- T7: CQ14–CQ17 use trusted facts only by default, on every relationship and node, and report `vision_facts_left_out`. `include_pending=True` (CLI
+  `--include-pending`) uses everything and the header begins `EXPLORATION ONLY`. CQ18 is a consistency check on what is drawn, so it reads pending facts by
+  default and says so. With nothing accepted, CQ14–CQ17 return empty answers for U-100, with a note that the facts may be awaiting review.
+- A walk that stops before reaching equipment reports `open_ends`, so a gap left by a pending or rejected fact is visible in the answer.
+- CQ15 walks both ways and through equipment (a vessel is one pressure system); it stops at an actuated valve (`role = final_element`) or an untagged valve
+  with `normal_position = closed`. A manual valve with no stated position is taken as open. It knows nothing of pumps, compressors or check valves.
+- Paths are followed for at most 40 relationships. The templates are not exposed as MCP tools yet.
+- Verified on `neo4j-pidgraph` in two states: everything pending, and 72 facts accepted with 1 rejected. Both backends agreed in both.
+
 ### Phase 8 — Eval
 1. Extend the U-100 gold set: every Segment-level instrument placement, every equipment-level flow pair, every loop and its members.
 2. `eval/topology_eval.py`: precision / recall for tags, flow relationships and loops; instrument-placement accuracy; share of facts flagged by T5;

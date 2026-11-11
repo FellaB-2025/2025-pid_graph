@@ -134,6 +134,7 @@ and have no templates yet).
 | `pid_graph/pipeline.py`, `run_all.py` | `build_store()`; `python -m pid_graph` end to end |
 | `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20; titles for X21–X29) |
 | `pid_graph/load_pidkg.py` | v1.3 vision layer: pid-to-kg `graph.json` → Segment, InlineItem, ControlLoop, FLOWS_TO, SIGNAL_TO, MEMBER_OF, with exceptions X21–X29. Dry run by default; `--apply` to write. In the pipeline: `python -m pid_graph --pidkg <graph.json>` (off by default) |
+| `pid_graph/topology_queries.py` | Fixed templates CQ14–CQ18 (`isolation`, `same_pressure`, `blast_radius`, `loop_membership`, `drawing_vs_ce`) over a Neo4j driver or a store; trusted facts only unless `--include-pending`, which is labelled EXPLORATION ONLY |
 | `pid_graph/vision_checks.py` | Vision against the registers: tag regions per sheet, derived flow vs pid_audit, instrument's line, drawn trips vs C&E, fail position, loop membership (exceptions X30–X36). Derived `FEEDS` are reported, never written |
 | `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
 | `reports/review_register_U-100.xlsx` | The one committed file in `reports/`: the engineer's accept / reject decisions on vision facts |
@@ -183,11 +184,24 @@ SIF-100-03 (the C&E has PT-1001D closing XV-1001; no such trip is drawn). 37 exc
 Tag check: PID-100-001 both 13, index only TT-1003, vision only FIC-1004, LIC-1006, XV-1002; PID-100-002 both 2, index only
 XV-1002, vision only FT-1006, PIC-1005. Derived flow agrees with pid_audit on L-101, L-102, L-103 and L-104.
 
+**CQ14–CQ18** (`topology_queries`, with `--include-pending`, since nothing is accepted yet; without it CQ14–CQ17 are empty and say
+152 vision facts were left out):
+
+- `isolation PT-1001A`: taps L-101.3; upstream XV-1001 then HV-1001, ending at BL-100; downstream no valves, ending at V-1002.
+- `isolation PT-1005`: upstream no valves back to V-1002; downstream an untagged gate valve, PV-1005, an untagged gate valve, ending at BL-200.
+- `same_pressure PT-1001A`: candidates PT-1001B, PT-1001C, PI-1001, FT-1004 (same segment) and PT-1005 (5 hops, alarm PT-1005.PAH);
+  blocked at BDV-1001, LV-1006, PV-1005, XV-1001. Headed "candidates for curation — not compensating measures".
+- `blast_radius XV-1001`: L-101.3, FT-1004, L-101.4, V-1002; instruments FT-1004, PI-1001, PT-1001A/B/C, XV-1001; loops F-1004, L-1002,
+  P-1001; SIF-100-01, -02, -03.
+- `loop_membership PV-1005`: loop P-1005 (control, pressure); sensor PT-1005 on L-102.2 (index: L-102).
+- `drawing_vs_ce`: 10 drawn trips, 11 C&E pairs; not drawn: SIF-100-03 PT-1001D → XV-1001; drawn and not in the C&E: none.
+- Neo4j and memory backends give identical answers.
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 232 collected; 232 passed with Neo4j up on port 7688 (10 Nov 2026); 4 are skipped when Neo4j is down. After Phase 5 it was 205. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 247 collected; 247 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 6 it was 232. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

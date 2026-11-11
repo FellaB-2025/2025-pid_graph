@@ -292,3 +292,10 @@
   check, `scripts/make_pidkg_discrepancies.py`, `DISCREPANCIES.md`). Loader: a trip drawn without an interlock
   symbol is now in `drawn_trips` too. Real U-100: X30 XV-1002, X34 SIF-100-03. `tests/test_v13_phase6.py`
   (27 cases). 232 passed, Neo4j up.
+- Phase 7, branch `v1.3/phase-7-templates`: `pid_graph/topology_queries.py` - CQ14 isolation, CQ15 same_pressure,
+  CQ16 blast_radius, CQ17 loop_membership, CQ18 drawing_vs_ce; each written once over backend primitives with a
+  Cypher form and an in-memory form; trusted facts only unless `--include-pending` (labelled EXPLORATION ONLY);
+  CQ18 reads pending by default. `tests/test_v13_phase7.py` (15 cases) including Neo4j-vs-memory agreement, which
+  mirrors whatever review state the database holds. Verified on `neo4j-pidgraph` all-pending and with 72 accepted /
+  1 rejected (scratch register); database restored to all-pending. 247 passed.
+- Not done: the new templates are not MCP tools; `validate.py` has no CQ14-CQ18 sketches.
