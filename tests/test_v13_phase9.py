@@ -82,3 +82,34 @@ def test_stress_test_material_can_never_be_committed(path):
     run = subprocess.run(["git", "check-ignore", path], cwd=ROOT, capture_output=True, text=True)
     assert run.stdout.strip() == path
     assert subprocess.run(["git", "ls-files", "data/external", "work"], cwd=ROOT, capture_output=True, text=True).stdout.strip() == ""
+
+
+# ---- what the stress test is allowed to leave in the repository ---------------------------------
+def test_committed_scores_are_numbers_only_and_say_they_are_unverified():
+    scores = json.loads((ROOT / "eval" / "stress_test_scores.json").read_text(encoding="utf-8"))
+    assert scores["gold_verified_by_engineer"] is False and "NOT yet checked by an engineer" in scores["note"]
+    assert set(scores["sets"]) == {"pahala", "virden"}
+
+    def leaves(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                yield from leaves(v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from leaves(v)
+        else:
+            yield x
+    for name, s in scores["sets"].items():
+        for part in ("report_only", "scores"):
+            assert all(isinstance(v, (int, float)) or v is None for v in leaves(s[part])), f"{name}.{part} holds text from a drawing"
+        assert s["report_only"]["t5"]["flag_rate"] == round(s["report_only"]["t5"]["flagged"] / s["report_only"]["t5"]["facts"], 3)
+    doc = (ROOT / "docs" / "STRESS_TEST.md").read_text(encoding="utf-8")
+    for needle in ("pilot", "not checked by an engineer", "No OCR", "agreement between two", "0.388", "0.248", "81 of 81"):
+        assert needle in doc, needle
+
+
+def test_no_drawing_material_is_tracked():
+    if shutil.which("git") is None or not (ROOT / ".git").exists():
+        pytest.skip("not a git checkout")
+    tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.lower()
+    assert "pahala" not in tracked and "virden" not in tracked and "data/external" not in tracked

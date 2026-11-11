@@ -306,3 +306,11 @@
   loop members P 0.68 R 1.0, placement 11 / 11, 20 of 120 facts flagged. No threshold set (Alan's call).
   `tests/test_v13_phase8.py` (11 cases). 258 passed.
 - Open for Alan: set the pass thresholds; `eval/gold_PID-100-001.json` still lists TT-1003 pending confirmation.
+- Phase 9 (pilot), branch `v1.3/phase-9-stress-test`: `load_pidkg --no-master --report-only`. Alan asked for the two
+  public sets to be downloaded; they are in git-ignored `data/external/` (Pahala 7.3 MB epa.gov, Virden 3.3 MB
+  gov.mb.ca). Extracted two sheets of each in `work/pahala` and `work/virden` with independent subagents; gold for
+  Pahala p.11 and p.20 and Virden p.6 written by separate subagents that could not see the extractions, in
+  `data/external/gold/`. Scores in `eval/stress_test_scores.json` (numbers only) and `docs/STRESS_TEST.md`.
+  Tags agree well (Virden scan 81 of 81); flow is not scoreable on isolated sheets; T5 flag rate 0.388 / 0.248.
+- OPEN for Alan: gold files are not engineer-checked; decide whether to run the other 23 sheets (about 2.5 M tokens);
+  no OCR on this machine.

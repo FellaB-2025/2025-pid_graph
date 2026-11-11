@@ -126,6 +126,7 @@ and have no templates yet).
 | `SESSION_LOG.md` | Running log for cold pickup |
 | `PIDKG_UPGRADE.md` | Plan for v1.2 → v1.3 (segment topology + vision extraction) |
 | `docs/V1_3_INVENTORY.md` | Phase 0 inventory of the repo against that plan |
+| `docs/STRESS_TEST.md`, `eval/stress_test_scores.json` | Phase 9 pilot: pid-to-kg on two sheets each of two public drawing sets. Numbers only; the drawings, gold files and graphs stay in git-ignored `data/external/` and `work/` and must never be committed. Gold not yet checked by an engineer |
 | `pid_graph/ontology.py` | Closed schema + validators (`check_label`, `check_key`, `check_rel`, `check_provenance`) |
 | `pid_graph/tags.py` | Canonical tag regex, prefix classification, `role()` |
 | `pid_graph/records.py` | `MemoryStore` (MERGE semantics, conflicts, `to_dict()` dump) |
@@ -212,11 +213,15 @@ LG-1002 grouped into loops by tag number; none of these is loaded. Review worklo
 below 0.85 confidence. pid-to-kg's own `eval_kg.py`: tags P 0.913 R 1.0, flow 1.0 / 1.0, placement 11 / 11, loops recall
 1.0 with mean member overlap 0.927. These are clean synthetic sheets; they say nothing about real drawings.
 
+**Stress test pilot** (real public drawings, extraction only, gold from a second model reader and unverified): tags P 0.933 R 1.0 on a
+vector sheet (allowing one alias) and 81 of 81 on a 150 dpi scan; instrument placement 2 of 5 and 12 of 12; flow not scoreable on
+isolated sheets. T5 flag rate 0.388 and 0.248 against 0.219 for U-100 without a master. Details and caveats in `docs/STRESS_TEST.md`.
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 258 collected; 258 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 7 it was 247. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 271 collected; 271 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 8 it was 258. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

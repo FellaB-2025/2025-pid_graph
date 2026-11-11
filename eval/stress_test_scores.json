@@ -1,0 +1,312 @@
+{
+ "note": "Phase 9 stress test, pilot of two sheets per set, 10 Nov 2026. Numbers only: no drawing, render, tag list or extracted graph is kept in the repository. Gold files were written by an independent model reader and are NOT yet checked by an engineer, so every score here is agreement between two machine reads, not accuracy.",
+ "tool": "pid-to-kg 0.1.0 @ 7ee3a82, no OCR (Python 3.14)",
+ "scorer": "pid-to-kg eval_kg.py, unmodified",
+ "gold_verified_by_engineer": false,
+ "sets": {
+  "pahala": {
+   "kind": "digital vector PDF, text mostly outlined",
+   "pages_in_set": "9-25",
+   "pages_extracted": [
+    11,
+    20
+   ],
+   "report_only": {
+    "sheets": [
+     {
+      "page": 11,
+      "tiles_reviewed": 12,
+      "unreadable": 0
+     },
+     {
+      "page": 20,
+      "tiles_reviewed": 12,
+      "unreadable": 0
+     }
+    ],
+    "nodes": 50,
+    "nodes_by_type": {
+     "Boundary": 1,
+     "Component": 7,
+     "ControlLoop": 4,
+     "Equipment": 4,
+     "Instrument": 15,
+     "OffPageConnector": 4,
+     "PipeSegment": 12,
+     "Plant": 1,
+     "Sheet": 2
+    },
+    "relationships": 56,
+    "relationships_by_type": {
+     "ACTUATES": 1,
+     "FEEDS": 1,
+     "FLOWS_TO": 24,
+     "MEASURES": 3,
+     "MEMBER_OF": 12,
+     "PART_OF": 3,
+     "SIGNAL_TO": 12
+    },
+    "tagged": {
+     "equipment": 3,
+     "instruments": 11,
+     "instruments_untagged": 4,
+     "components": 3,
+     "components_untagged": 4
+    },
+    "segments": {
+     "total": 12,
+     "on_a_numbered_line": 0
+    },
+    "off_page_connectors": {
+     "total": 4,
+     "paired": 0,
+     "unpaired": 4
+    },
+    "unreadable": 0,
+    "qa_issues": {
+     "total": 20,
+     "by_severity": {
+      "info": 13,
+      "warning": 7
+     },
+     "by_code": {
+      "equipment_not_connected": 1,
+      "inferred_flow_direction": 1,
+      "isolated_instrument": 1,
+      "non_isa_tag": 11,
+      "possible_missed_tags": 2,
+      "unmatched_off_page": 4
+     }
+    },
+    "confidence": {
+     "0.60": 2,
+     "0.70": 3,
+     "0.75": 3,
+     "0.80": 11,
+     "0.85": 28,
+     "0.90": 21,
+     "0.95": 19,
+     "1.00": 2
+    },
+    "t5": {
+     "facts": 67,
+     "flagged": 26,
+     "flag_rate": 0.388,
+     "by_flag": {
+      "inferred_direction": 13,
+      "inline_item": 12,
+      "low_confidence": 14
+     }
+    }
+   },
+   "scores": {
+    "page_11": {
+     "tags": {
+      "precision": 0.867,
+      "recall": 0.929,
+      "correct": 13,
+      "missed": 1,
+      "extra": 2
+     },
+     "flow": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "correct": 0,
+      "missed": 4,
+      "extra": 0
+     },
+     "instrument_placement": {
+      "correct": 0,
+      "total": 5
+     },
+     "loops": {
+      "recall": 1.0,
+      "mean_member_overlap": 1.0,
+      "gold_loops": 3
+     }
+    },
+    "page_11_basin_alias_allowed": {
+     "tags": {
+      "precision": 0.933,
+      "recall": 1.0,
+      "correct": 14,
+      "missed": 0,
+      "extra": 1
+     },
+     "flow": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "correct": 0,
+      "missed": 4,
+      "extra": 0
+     },
+     "instrument_placement": {
+      "correct": 2,
+      "total": 5
+     },
+     "loops": {
+      "recall": 1.0,
+      "mean_member_overlap": 1.0,
+      "gold_loops": 3
+     }
+    },
+    "page_20": {
+     "tags": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "correct": 2,
+      "missed": 0,
+      "extra": 0
+     },
+     "flow": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "correct": 0,
+      "missed": 0,
+      "extra": 1
+     },
+     "instrument_placement": {
+      "correct": 0,
+      "total": 0
+     },
+     "loops": {
+      "recall": 1.0,
+      "mean_member_overlap": 0.5,
+      "gold_loops": 1
+     }
+    }
+   },
+   "extraction_tokens": 163123,
+   "extraction_minutes": 3.7
+  },
+  "virden": {
+   "kind": "scanned, about 150 dpi, no text layer",
+   "pages_in_set": "5-14",
+   "pages_extracted": [
+    6,
+    14
+   ],
+   "report_only": {
+    "sheets": [
+     {
+      "page": 6,
+      "tiles_reviewed": 8,
+      "unreadable": 3
+     },
+     {
+      "page": 14,
+      "tiles_reviewed": 8,
+      "unreadable": 4
+     }
+    ],
+    "nodes": 338,
+    "nodes_by_type": {
+     "Boundary": 13,
+     "Component": 71,
+     "ControlLoop": 26,
+     "Equipment": 20,
+     "Instrument": 91,
+     "OffPageConnector": 2,
+     "PipeSegment": 112,
+     "Plant": 1,
+     "Sheet": 2
+    },
+    "relationships": 458,
+    "relationships_by_type": {
+     "ACTUATES": 10,
+     "FEEDS": 33,
+     "FLOWS_TO": 224,
+     "MEASURES": 28,
+     "MEMBER_OF": 83,
+     "PART_OF": 6,
+     "SIGNAL_TO": 73,
+     "TRIPS": 1
+    },
+    "tagged": {
+     "equipment": 17,
+     "instruments": 88,
+     "instruments_untagged": 3,
+     "components": 51,
+     "components_untagged": 20
+    },
+    "segments": {
+     "total": 112,
+     "on_a_numbered_line": 79
+    },
+    "off_page_connectors": {
+     "total": 2,
+     "paired": 0,
+     "unpaired": 2
+    },
+    "unreadable": 7,
+    "qa_issues": {
+     "total": 27,
+     "by_severity": {
+      "info": 8,
+      "warning": 19
+     },
+     "by_code": {
+      "duplicate_tag": 6,
+      "equipment_not_connected": 10,
+      "inferred_flow_direction": 1,
+      "isolated_instrument": 3,
+      "loop_no_final_element": 1,
+      "loop_no_sensor": 2,
+      "low_confidence": 2,
+      "unmatched_off_page": 2
+     }
+    },
+    "confidence": {
+     "0.55": 2,
+     "0.60": 14,
+     "0.70": 44,
+     "0.75": 9,
+     "0.80": 38,
+     "0.85": 343,
+     "0.90": 204,
+     "0.95": 3,
+     "1.00": 2
+    },
+    "t5": {
+     "facts": 564,
+     "flagged": 140,
+     "flag_rate": 0.248,
+     "by_flag": {
+      "inferred_direction": 4,
+      "inline_item": 64,
+      "low_confidence": 91
+     }
+    }
+   },
+   "scores": {
+    "page_06": {
+     "tags": {
+      "precision": 0.988,
+      "recall": 1.0,
+      "correct": 81,
+      "missed": 0,
+      "extra": 1
+     },
+     "flow": {
+      "precision": 0.385,
+      "recall": 0.714,
+      "correct": 5,
+      "missed": 2,
+      "extra": 8
+     },
+     "instrument_placement": {
+      "correct": 12,
+      "total": 12
+     },
+     "loops": {
+      "recall": 1.0,
+      "mean_member_overlap": 0.949,
+      "gold_loops": 9
+     }
+    }
+   },
+   "extraction_tokens": 213598,
+   "extraction_minutes": 7.5
+  }
+ }
+}

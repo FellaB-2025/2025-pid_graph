@@ -330,6 +330,14 @@ As built (10 Nov 2026):
 4. **Never commit the drawings, the renders, the marked-up PDFs or the extracted graphs.** The repo's own notes say the drawings remain under their
    original owners' terms. Commit only the scores and a short `docs/STRESS_TEST.md`.
 
+As run (10 Nov 2026) — a **pilot**, not the whole of this phase:
+- `load_pidkg.py --no-master --report-only` is built (`report_only()`): counts, pid-to-kg's QA issues and the T5 flag rate, reading no registers and writing nothing.
+- Two sheets of each set were extracted (Pahala pages 11 and 20, Virden pages 6 and 14), not all 27: about 80,000 to 110,000 tokens a sheet.
+- Step 3's gold files were written by a second, independent model reader, not by hand, and are **not yet checked by an engineer**. The scores are agreement
+  between two machine reads. They were scored with pid-to-kg's `eval_kg.py`; pid_graph's own scorer needs segment-level gold that nobody has written for a real sheet.
+- Committed: `eval/stress_test_scores.json` (numbers only), `eval/stress_scores.py`, `docs/STRESS_TEST.md`. Nothing from the drawings.
+- Still to do if wanted: the other 23 sheets, an engineer-checked gold file, a run with OCR (needs Python 3.10–3.12).
+
 ### Phase 10 — DEXPI class and plant summary
 1. Carry `dexpi_class` into `dexpiClass` (section 2.4) as a standalone property. There is no anchoring check to extend: add one validator check listing Equipment / Instrument / InlineItem nodes seen by vision with no `dexpiClass`.
 2. `reports/summary_<unit>.md`: equipment-level flow, instruments with locations, loops, SIFs with initiators and final elements, alarms.
