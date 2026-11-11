@@ -125,7 +125,9 @@ Phase 5 markup is written fresh with PyMuPDF.
 
 ## 7. Differences from the plan that were NOT edited (for Alan to decide)
 
-1. **Phase 3 has nothing to extract — blocker.** `data/U100-PIDS-TX-0057.pdf` pages 2–4 are a
+1. **Phase 3 has nothing to extract — blocker. RESOLVED 10 Nov 2026:** `scripts/make_dummy_pdf.py`
+   now draws the three sheets (see `data/U100-PIDS-DRAWN-CONTENT.json` and
+   `tests/test_dummy_drawings.py`). As found at Phase 0: `data/U100-PIDS-TX-0057.pdf` pages 2–4 are a
    border, a title block and the text "dummy drawing body - no graphics"
    (`scripts/make_dummy_pdf.py`). Vision extraction needs drawn U-100 P&IDs that agree with the
    index and the topology CSV. Either the dummy-PDF script is extended to draw them, or drawings

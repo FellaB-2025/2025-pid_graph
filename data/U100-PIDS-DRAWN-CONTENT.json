@@ -1,0 +1,770 @@
+{
+ "note": "DUMMY DATA. Answer key for the synthetic U-100 P&IDs drawn by scripts/make_dummy_pdf.py. Not read by any loader. 'order' lists the items along a line in flow order, taps included; 'path' lists the in-line ones only.",
+ "unit": "U-100",
+ "sheets": {
+  "PID-100-001": {
+   "equipment": [
+    {
+     "id": "V-1002",
+     "tag": "V-1002",
+     "kind": "pressure_vessel",
+     "name": "INLET KO DRUM",
+     "text": [
+      "V-1002"
+     ]
+    }
+   ],
+   "components": [
+    {
+     "id": "HV-1001",
+     "tag": "HV-1001",
+     "kind": "ball_valve",
+     "text": [
+      "HV-1001"
+     ]
+    },
+    {
+     "id": "XV-1001",
+     "tag": "XV-1001",
+     "kind": "on_off_valve",
+     "text": [
+      "XV-1001"
+     ],
+     "actuator": "solenoid",
+     "fail_position": "FC"
+    },
+    {
+     "id": "V1",
+     "tag": null,
+     "kind": "gate_valve",
+     "text": [],
+     "normal_position": "LO"
+    },
+    {
+     "id": "BDV-1001",
+     "tag": "BDV-1001",
+     "kind": "on_off_valve",
+     "text": [
+      "BDV-1001"
+     ],
+     "actuator": "solenoid",
+     "fail_position": "FO"
+    },
+    {
+     "id": "LV-1006",
+     "tag": "LV-1006",
+     "kind": "control_valve",
+     "text": [
+      "LV-1006"
+     ],
+     "actuator": "pneumatic",
+     "fail_position": "FC"
+    },
+    {
+     "id": "XV-1002",
+     "tag": "XV-1002",
+     "kind": "on_off_valve",
+     "text": [
+      "XV-1002"
+     ],
+     "actuator": "solenoid",
+     "fail_position": "FC"
+    },
+    {
+     "id": "V2",
+     "tag": null,
+     "kind": "check_valve",
+     "text": []
+    }
+   ],
+   "instruments": [
+    {
+     "id": "PT-1001A",
+     "tag": "PT-1001A",
+     "function": "PT",
+     "location": "field",
+     "text": [
+      "PT",
+      "1001A"
+     ],
+     "measures": {
+      "line": "L-101"
+     }
+    },
+    {
+     "id": "PT-1001B",
+     "tag": "PT-1001B",
+     "function": "PT",
+     "location": "field",
+     "text": [
+      "PT",
+      "1001B"
+     ],
+     "measures": {
+      "line": "L-101"
+     }
+    },
+    {
+     "id": "PT-1001C",
+     "tag": "PT-1001C",
+     "function": "PT",
+     "location": "field",
+     "text": [
+      "PT",
+      "1001C"
+     ],
+     "measures": {
+      "line": "L-101"
+     }
+    },
+    {
+     "id": "PI-1001",
+     "tag": "PI-1001",
+     "function": "PI",
+     "location": "field",
+     "text": [
+      "PI",
+      "1001"
+     ],
+     "measures": {
+      "line": "L-101"
+     }
+    },
+    {
+     "id": "FT-1004",
+     "tag": "FT-1004",
+     "function": "FT",
+     "location": "field",
+     "text": [
+      "FT",
+      "1004"
+     ],
+     "inline": true
+    },
+    {
+     "id": "FIC-1004",
+     "tag": "FIC-1004",
+     "function": "FIC",
+     "location": "dcs",
+     "text": [
+      "FIC",
+      "1004"
+     ]
+    },
+    {
+     "id": "LG-1002",
+     "tag": "LG-1002",
+     "function": "LG",
+     "location": "field",
+     "text": [
+      "LG",
+      "1002"
+     ],
+     "measures": {
+      "item": "V-1002"
+     }
+    },
+    {
+     "id": "LT-1002A",
+     "tag": "LT-1002A",
+     "function": "LT",
+     "location": "field",
+     "text": [
+      "LT",
+      "1002A"
+     ],
+     "measures": {
+      "item": "V-1002"
+     }
+    },
+    {
+     "id": "LT-1002B",
+     "tag": "LT-1002B",
+     "function": "LT",
+     "location": "field",
+     "text": [
+      "LT",
+      "1002B"
+     ],
+     "measures": {
+      "item": "V-1002"
+     }
+    },
+    {
+     "id": "LT-1006",
+     "tag": "LT-1006",
+     "function": "LT",
+     "location": "field",
+     "text": [
+      "LT",
+      "1006"
+     ],
+     "measures": {
+      "item": "V-1002"
+     }
+    },
+    {
+     "id": "LIC-1006",
+     "tag": "LIC-1006",
+     "function": "LIC",
+     "location": "dcs",
+     "text": [
+      "LIC",
+      "1006"
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "id": "L1",
+     "line_no": "L-101",
+     "size": "12\"",
+     "service": "FEED GAS",
+     "from": "BL-100",
+     "to": "V-1002",
+     "order": [
+      "HV-1001",
+      "XV-1001",
+      "PT-1001A",
+      "PT-1001B",
+      "PT-1001C",
+      "PI-1001",
+      "FT-1004"
+     ],
+     "path": [
+      "HV-1001",
+      "XV-1001",
+      "FT-1004"
+     ],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L2",
+     "line_no": "L-104",
+     "size": "6\"",
+     "service": "BLOWDOWN",
+     "from": "V-1002",
+     "to": "FLARE-HDR",
+     "order": [
+      "V1",
+      "BDV-1001"
+     ],
+     "path": [
+      "V1",
+      "BDV-1001"
+     ],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L3",
+     "line_no": "L-105",
+     "size": "2\"",
+     "service": "FUEL GAS",
+     "from": "V-1002",
+     "to": "OPC1",
+     "order": [],
+     "path": [],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L4",
+     "line_no": "L-102",
+     "size": "10\"",
+     "service": "FEED GAS",
+     "from": "V-1002",
+     "to": "OPC2",
+     "order": [],
+     "path": [],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L5",
+     "line_no": "L-103",
+     "size": "3\"",
+     "service": "LIQUID",
+     "from": "V-1002",
+     "to": "BL-103",
+     "order": [
+      "LV-1006",
+      "XV-1002",
+      "V2"
+     ],
+     "path": [
+      "LV-1006",
+      "XV-1002",
+      "V2"
+     ],
+     "flow_direction": "shown"
+    }
+   ],
+   "signals": [
+    {
+     "from": "FT-1004",
+     "to": "FIC-1004",
+     "type": "electrical",
+     "purpose": "measurement"
+    },
+    {
+     "from": "LT-1006",
+     "to": "LIC-1006",
+     "type": "electrical",
+     "purpose": "measurement"
+    },
+    {
+     "from": "LIC-1006",
+     "to": "LV-1006",
+     "type": "electrical",
+     "purpose": "control"
+    },
+    {
+     "from": "PT-1001A",
+     "to": "XV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "PT-1001A",
+     "to": "BDV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "PT-1001B",
+     "to": "XV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "PT-1001B",
+     "to": "BDV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "PT-1001C",
+     "to": "XV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "PT-1001C",
+     "to": "BDV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-1"
+    },
+    {
+     "from": "LT-1002A",
+     "to": "XV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-2"
+    },
+    {
+     "from": "LT-1002A",
+     "to": "XV-1002",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-2"
+    },
+    {
+     "from": "LT-1002B",
+     "to": "XV-1001",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-2"
+    },
+    {
+     "from": "LT-1002B",
+     "to": "XV-1002",
+     "type": "electrical",
+     "purpose": "trip",
+     "via_interlock": "I-2"
+    }
+   ],
+   "off_page_connectors": [
+    {
+     "id": "OPC1",
+     "direction": "out",
+     "other_drawing": "PID-100-002",
+     "other_item": "",
+     "line_no": "L-105",
+     "name": "TO PID-100-002 / L-105",
+     "text": [
+      "TO",
+      "PID-100-002",
+      "L-105"
+     ]
+    },
+    {
+     "id": "OPC2",
+     "direction": "out",
+     "other_drawing": "PID-100-002",
+     "other_item": "",
+     "line_no": "L-102",
+     "name": "TO PID-100-002 / L-102",
+     "text": [
+      "TO",
+      "PID-100-002",
+      "L-102"
+     ]
+    }
+   ],
+   "boundaries": [
+    {
+     "id": "BL-100",
+     "tag": "BL-100",
+     "name": "FEED GAS FROM BL-100",
+     "direction": "source",
+     "text": [
+      "FEED",
+      "GAS",
+      "FROM",
+      "BL-100"
+     ]
+    },
+    {
+     "id": "FLARE-HDR",
+     "tag": "FLARE-HDR",
+     "name": "BLOWDOWN TO FLARE HEADER",
+     "direction": "sink",
+     "text": [
+      "BLOWDOWN",
+      "TO",
+      "FLARE-HDR"
+     ]
+    },
+    {
+     "id": "BL-103",
+     "tag": "BL-103",
+     "name": "LIQUID TO BL-103",
+     "direction": "sink",
+     "text": [
+      "LIQUID",
+      "TO",
+      "BL-103"
+     ]
+    }
+   ],
+   "notes": [
+    "1. I-1 = SIF-100-01: PT-1001A/B/C HIGH-HIGH (2oo3) CLOSES XV-1001 AND OPENS BDV-1001.",
+    "2. I-2 = SIF-100-02: LT-1002A/B HIGH-HIGH (2oo3) CLOSES XV-1001 AND XV-1002.",
+    "3. LO = LOCKED OPEN.  FC / FO = FAIL CLOSED / FAIL OPEN.",
+    "4. DASHED LINES ARE ELECTRICAL SIGNALS.  SQUARED BUBBLES ARE DCS FUNCTIONS.",
+    "5. DUMMY DATA - NOT A REAL FACILITY."
+   ]
+  },
+  "PID-100-002": {
+   "equipment": [],
+   "components": [
+    {
+     "id": "V1",
+     "tag": null,
+     "kind": "gate_valve",
+     "text": []
+    },
+    {
+     "id": "V2",
+     "tag": null,
+     "kind": "reducer",
+     "text": []
+    },
+    {
+     "id": "PV-1005",
+     "tag": "PV-1005",
+     "kind": "control_valve",
+     "text": [
+      "PV-1005"
+     ],
+     "actuator": "pneumatic",
+     "fail_position": "FO"
+    },
+    {
+     "id": "V3",
+     "tag": null,
+     "kind": "reducer",
+     "text": []
+    },
+    {
+     "id": "V4",
+     "tag": null,
+     "kind": "gate_valve",
+     "text": []
+    }
+   ],
+   "instruments": [
+    {
+     "id": "PT-1005",
+     "tag": "PT-1005",
+     "function": "PT",
+     "location": "field",
+     "text": [
+      "PT",
+      "1005"
+     ],
+     "measures": {
+      "line": "L-102"
+     }
+    },
+    {
+     "id": "PIC-1005",
+     "tag": "PIC-1005",
+     "function": "PIC",
+     "location": "dcs",
+     "text": [
+      "PIC",
+      "1005"
+     ]
+    },
+    {
+     "id": "FT-1006",
+     "tag": "FT-1006",
+     "function": "FT",
+     "location": "field",
+     "text": [
+      "FT",
+      "1006"
+     ],
+     "inline": true
+    }
+   ],
+   "lines": [
+    {
+     "id": "L1",
+     "line_no": "L-102",
+     "size": "10\"",
+     "service": "FEED GAS",
+     "from": "OPC1",
+     "to": "BL-200",
+     "order": [
+      "PT-1005",
+      "V1",
+      "V2",
+      "PV-1005",
+      "V3",
+      "V4"
+     ],
+     "path": [
+      "V1",
+      "V2",
+      "PV-1005",
+      "V3",
+      "V4"
+     ],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L2",
+     "line_no": "L-105",
+     "size": "2\"",
+     "service": "FUEL GAS",
+     "from": "OPC2",
+     "to": "B1",
+     "order": [
+      "FT-1006"
+     ],
+     "path": [
+      "FT-1006"
+     ],
+     "flow_direction": "shown"
+    }
+   ],
+   "signals": [
+    {
+     "from": "PT-1005",
+     "to": "PIC-1005",
+     "type": "electrical",
+     "purpose": "measurement"
+    },
+    {
+     "from": "PIC-1005",
+     "to": "PV-1005",
+     "type": "electrical",
+     "purpose": "control"
+    }
+   ],
+   "off_page_connectors": [
+    {
+     "id": "OPC1",
+     "direction": "in",
+     "other_drawing": "PID-100-001",
+     "other_item": "V-1002",
+     "line_no": "L-102",
+     "name": "FROM PID-100-001 / V-1002  L-102",
+     "text": [
+      "FROM",
+      "PID-100-001",
+      "V-1002",
+      "L-102"
+     ]
+    },
+    {
+     "id": "OPC2",
+     "direction": "in",
+     "other_drawing": "PID-100-001",
+     "other_item": "V-1002",
+     "line_no": "L-105",
+     "name": "FROM PID-100-001 / V-1002  L-105",
+     "text": [
+      "FROM",
+      "PID-100-001",
+      "V-1002",
+      "L-105"
+     ]
+    }
+   ],
+   "boundaries": [
+    {
+     "id": "BL-200",
+     "tag": "BL-200",
+     "name": "FEED GAS TO BL-200",
+     "direction": "sink",
+     "text": [
+      "FEED",
+      "GAS",
+      "TO",
+      "BL-200"
+     ]
+    },
+    {
+     "id": "B1",
+     "tag": null,
+     "name": "FUTURE FUEL GAS",
+     "direction": "sink",
+     "text": [
+      "FUTURE",
+      "FUEL",
+      "GAS"
+     ]
+    }
+   ],
+   "notes": [
+    "1. FC / FO = FAIL CLOSED / FAIL OPEN.",
+    "2. DASHED LINES ARE ELECTRICAL SIGNALS.  SQUARED BUBBLES ARE DCS FUNCTIONS.",
+    "3. DUMMY DATA - NOT A REAL FACILITY."
+   ]
+  },
+  "PID-100-003": {
+   "equipment": [],
+   "components": [
+    {
+     "id": "V1",
+     "tag": null,
+     "kind": "gate_valve",
+     "text": []
+    },
+    {
+     "id": "V2",
+     "tag": null,
+     "kind": "strainer",
+     "text": []
+    },
+    {
+     "id": "V3",
+     "tag": null,
+     "kind": "gate_valve",
+     "text": []
+    },
+    {
+     "id": "V4",
+     "tag": null,
+     "kind": "check_valve",
+     "text": []
+    }
+   ],
+   "instruments": [],
+   "lines": [
+    {
+     "id": "L1",
+     "line_no": "",
+     "size": "1\"",
+     "service": "INSTRUMENT AIR",
+     "from": "B1",
+     "to": "B2",
+     "order": [
+      "V1",
+      "V2"
+     ],
+     "path": [
+      "V1",
+      "V2"
+     ],
+     "flow_direction": "shown"
+    },
+    {
+     "id": "L2",
+     "line_no": "",
+     "size": "1\"",
+     "service": "NITROGEN",
+     "from": "B3",
+     "to": "B4",
+     "order": [
+      "V3",
+      "V4"
+     ],
+     "path": [
+      "V3",
+      "V4"
+     ],
+     "flow_direction": "shown"
+    }
+   ],
+   "signals": [],
+   "off_page_connectors": [],
+   "boundaries": [
+    {
+     "id": "B1",
+     "tag": null,
+     "name": "INSTRUMENT AIR HEADER",
+     "direction": "source",
+     "text": [
+      "INSTRUMENT",
+      "AIR",
+      "HEADER"
+     ]
+    },
+    {
+     "id": "B2",
+     "tag": null,
+     "name": "INSTRUMENT AIR USERS",
+     "direction": "sink",
+     "text": [
+      "INSTRUMENT",
+      "AIR",
+      "USERS"
+     ]
+    },
+    {
+     "id": "B3",
+     "tag": null,
+     "name": "NITROGEN HEADER",
+     "direction": "source",
+     "text": [
+      "NITROGEN",
+      "HEADER"
+     ]
+    },
+    {
+     "id": "B4",
+     "tag": null,
+     "name": "NITROGEN UTILITY STATION",
+     "direction": "sink",
+     "text": [
+      "NITROGEN",
+      "UTILITY",
+      "STATION"
+     ]
+    }
+   ],
+   "notes": [
+    "1. UTILITY LINES ARE NOT NUMBERED ON THIS SHEET.",
+    "2. DUMMY DATA - NOT A REAL FACILITY."
+   ]
+  }
+ }
+}

@@ -136,7 +136,7 @@ and have no templates yet).
 | `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set |
 | `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py`, `test_v13_phase1.py`; `tests/fixtures/graph_U-100_v1_2.json` is the frozen v1.2 dump |
 | `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py` |
-| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/` |
+| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader) |
 | `reports/` | Generated outputs (git-ignored): `exception_register_<unit>.xlsx`, `graph_<unit>.json`, `load_report_<unit>.json`, explorer, reports |
 | `src/` | Two early stray copies of `db.py` / `check_env.py`; not imported by anything |
 
@@ -151,7 +151,13 @@ Commands are in `README.md`. The usual build:
 Re-verified on 10 Nov 2026 with the memory backend unless marked *(log)*, which means taken
 from `SESSION_LOG.md` (Neo4j, 9 Sep 2026) and not re-run.
 
-**Tests:** 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Drawings:** the synthetic P&IDs agree with `data/pid_audit_U100_topology.csv` row for row.
+TT-1003 and PT-1001D are not drawn; FT-1006 is drawn on PID-100-002; XV-1002 is drawn on
+PID-100-001; PID-100-003 shows two unnumbered utility lines and nothing tagged. Drawn but in no
+register: the DCS controllers LIC-1006, FIC-1004 and PIC-1005, ten untagged fittings, the
+signal lines, and line sizes and services.
+
+**Tests:** 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

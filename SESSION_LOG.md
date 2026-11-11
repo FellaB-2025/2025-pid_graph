@@ -238,3 +238,10 @@
   (git-ignored, unmodified); separate `.venv-pidkg` (Python 3.14.3); its own tests: 78 passed. OCR package not
   installed (needs Python 3.10-3.12), so OCR hints and auto-orientation will be skipped in Phase 3.
   `THIRD_PARTY_NOTICES.md` records source, commit, licence, set-up and the run log. `tests/test_v13_phase2.py`.
+- Drawn dummy P&IDs, branch `v1.3/dummy-drawings`: `scripts/make_dummy_pdf.py` now draws the three sheets
+  (ISA-style, vector) from the index, the pid_audit topology export and the C&E; `--all` rebuilds both issues
+  and `data/U100-PIDS-DRAWN-CONTENT.json` (answer key). Planted discrepancies kept: TT-1003 and PT-1001D not
+  drawn, FT-1006 on PID-100-002, XV-1002 on PID-100-001. Title blocks and the v1.2 dump unchanged.
+  `tests/test_dummy_drawings.py`. 148 passed, 4 skipped.
+- Open: `eval/gold_PID-100-001.json` still lists TT-1003 on L-101 "pending human confirmation"; the drawing
+  now says it is not there. Gold set left untouched for Alan to decide.
