@@ -475,6 +475,82 @@ def apply(store: MemoryStore, result: dict) -> dict:
     return {"nodes": len(result["nodes"]), "rels": len(result["rels"]), "conflicts": len(result["conflicts"])}
 
 
+def report_only(pidkg_graph: dict) -> dict:
+    """What an extraction holds, with no master list and no graph to reconcile against (Phase 9).
+
+    For drawings of a plant pid_graph has no registers for. Nothing is mapped, gated or written:
+    this only counts what pid-to-kg produced, its own QA issues, and how much of it trust rule T5
+    would send to priority review if it were loaded (confidence < 0.85, inferred flow direction,
+    off-page, or touching an untagged fitting)."""
+    nodes = {n["id"]: n for n in pidkg_graph.get("nodes", [])}
+    edges = pidkg_graph.get("edges", [])
+    count = lambda items, key: dict(sorted(_tally(key(x) for x in items).items()))
+    attr = lambda n: n.get("attributes") or {}
+    sheets = [{"drawing_number": attr(n).get("drawing_number"), "revision": attr(n).get("revision"), "page": attr(n).get("page"),
+               "unreadable": len(attr(n).get("unreadable") or []), "tiles_reviewed": len(attr(n).get("tiles_reviewed") or [])}
+              for n in nodes.values() if n["type"] == "Sheet"]
+    untagged = {n["id"] for n in nodes.values() if n["type"] == "Component" and not n.get("tag")}
+    opc = {n["id"] for n in nodes.values() if n["type"] == "OffPageConnector"}
+    paired = {x for e in edges if e["type"] == "FLOWS_TO" and e["source"] in opc and e["target"] in opc for x in (e["source"], e["target"])}
+    segs = [n for n in nodes.values() if n["type"] == "PipeSegment"]
+    low = lambda x: ["low_confidence"] if float(x.get("confidence") or 0) < 0.85 else []
+    # the facts pid_graph would hold as vision facts, each with its T5 flags
+    flags_per_fact: list[list[str]] = []
+    for n in nodes.values():
+        if n["type"] in ("PipeSegment", "ControlLoop") or n["id"] in untagged:
+            flags_per_fact.append(low(n) + (["inline_item"] if n["id"] in untagged else []))
+    for e in edges:
+        a = attr(e)
+        if e["type"] not in ("FLOWS_TO", "MEASURES", "SIGNAL_TO", "MEMBER_OF"):
+            continue
+        if e["type"] == "FLOWS_TO" and (e["source"] in opc) != (e["target"] in opc):
+            continue                                           # a hop into or out of a connector is not a fact of its own
+        flags_per_fact.append(low(e) + (["inferred_direction"] if a.get("flow_direction") == "inferred" else [])
+                              + (["off_page"] if a.get("off_page") else [])
+                              + (["inline_item"] if e["source"] in untagged or e["target"] in untagged else []))
+    facts, flagged = len(flags_per_fact), sum(1 for f in flags_per_fact if f)
+    issues = pidkg_graph.get("issues", [])
+    scored = [x for x in list(nodes.values()) + edges if not x.get("derived") and x.get("type") not in ("Sheet", "Plant")]
+    return {"generator": pidkg_graph.get("generator"), "plant": (pidkg_graph.get("plant") or {}).get("name"),
+            "source_file": (pidkg_graph.get("plant") or {}).get("source_file"), "sheets": sorted(sheets, key=lambda x: x["page"] or 0),
+            "nodes": len(nodes), "nodes_by_type": count(nodes.values(), lambda n: n["type"]),
+            "relationships": len(edges), "relationships_by_type": count(edges, lambda e: e["type"]),
+            "tagged": {"equipment": sum(1 for n in nodes.values() if n["type"] == "Equipment" and n.get("tag")),
+                       "instruments": sum(1 for n in nodes.values() if n["type"] == "Instrument" and n.get("tag")),
+                       "instruments_untagged": sum(1 for n in nodes.values() if n["type"] == "Instrument" and not n.get("tag")),
+                       "components": sum(1 for n in nodes.values() if n["type"] == "Component" and n.get("tag")),
+                       "components_untagged": len(untagged)},
+            "segments": {"total": len(segs), "on_a_numbered_line": sum(1 for n in segs if attr(n).get("line_number"))},
+            "off_page_connectors": {"total": len(opc), "paired": len(paired), "unpaired": len(opc - paired)},
+            "unreadable": sum(x["unreadable"] for x in sheets),
+            "qa_issues": {"total": len(issues), "by_severity": count(issues, lambda i: i.get("severity")), "by_code": count(issues, lambda i: i.get("code"))},
+            "confidence": count(scored, lambda x: "%.2f" % float(x.get("confidence") or 0)),
+            "t5": {"facts": facts, "flagged": flagged, "flag_rate": round(flagged / facts, 3) if facts else None,
+                   "by_flag": dict(sorted(_tally(f for fs in flags_per_fact for f in fs).items()))},
+            "applied": False}
+
+
+def _tally(values) -> dict:
+    out: dict = {}
+    for v in values:
+        out[str(v)] = out.get(str(v), 0) + 1
+    return out
+
+
+def print_report_only(r: dict) -> None:
+    print(f"  {r['generator']} on {r['source_file']} ({r['plant']}); {len(r['sheets'])} sheet(s)")
+    for s in r["sheets"]:
+        print(f"    page {s['page']}: {s['drawing_number']} rev {s['revision']}  tiles read {s['tiles_reviewed']}  unreadable {s['unreadable']}")
+    print(f"  nodes {r['nodes']} {r['nodes_by_type']}")
+    print(f"  relationships {r['relationships']} {r['relationships_by_type']}")
+    print(f"  tagged {r['tagged']}")
+    print(f"  segments {r['segments']}; off-page connectors {r['off_page_connectors']}; unreadable items {r['unreadable']}")
+    print(f"  QA issues {r['qa_issues']['total']} {r['qa_issues']['by_severity']} {r['qa_issues']['by_code']}")
+    print(f"  confidence {r['confidence']}")
+    print(f"  T5: {r['t5']['flagged']} of {r['t5']['facts']} facts would be flagged for priority review ({r['t5']['flag_rate']}) {r['t5']['by_flag']}")
+    print("  REPORT ONLY: no master list, nothing reconciled, nothing applied.")
+
+
 def print_report(result: dict) -> None:
     s = result["summary"]
     print(f"  source {s['source']} on {s['file']}; sheets matched {s['sheets_matched']}")
@@ -502,10 +578,26 @@ def main(argv=None) -> int:
     ap.add_argument("--transmittal", default=None)
     ap.add_argument("--load-run", default=None)
     ap.add_argument("--apply", action="store_true", help="merge into the staged graph and write graph_<unit>.json (default: dry run)")
+    ap.add_argument("--no-master", action="store_true", help="the plant has no instrument index here; only with --report-only")
+    ap.add_argument("--report-only", action="store_true", help="count what the extraction holds; reconcile and apply nothing; only with --no-master")
+    ap.add_argument("--report-json", default="", help="with --report-only: also write the report to this file")
     ap.add_argument("--out", default=str(ROOT / "reports"))
     a = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if a.no_master != a.report_only:
+        ap.error("--no-master and --report-only go together: without a master list nothing can be reconciled or applied, only counted")
+    if a.report_only:
+        if a.apply:
+            ap.error("--report-only never applies anything; drop --apply")
+        rep = report_only(json.loads(Path(a.graph).read_text(encoding="utf-8")))
+        print("load_pidkg REPORT ONLY (no master list)")
+        print_report_only(rep)
+        if a.report_json:
+            Path(a.report_json).parent.mkdir(parents=True, exist_ok=True)
+            Path(a.report_json).write_text(json.dumps(rep, indent=1), encoding="utf-8")
+            print(f"  -> {a.report_json}")
+        return 0
     load_run = a.load_run or new_load_run(a.transmittal or "run")
     store, _ = build_store(unit=a.unit, index=a.index, topology=a.topology, load_run=load_run, ce=a.ce or None, pdf=a.pdf,
                            transmittal=a.transmittal, curated=a.curated or None, srs=a.srs or None, lopa=a.lopa or None)
