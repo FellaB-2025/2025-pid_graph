@@ -39,6 +39,7 @@ def main(argv=None) -> int:
     ap.add_argument("--lopa", default=str(ROOT / "data" / "U100-LOPA-001-Rev-A.xlsx"), help="LOPA register (v1.2); '' to skip")
     ap.add_argument("--pdf", default=None, help="Aconex per-unit P&ID PDF; title blocks give drawing revisions")
     ap.add_argument("--transmittal", default=None, help="Aconex transmittal number, stamped into load_run")
+    ap.add_argument("--pidkg", default="", help="pid-to-kg graph.json (v1.3 vision layer); off by default, and off means the v1.2 graph")
     ap.add_argument("--gold", default=str(ROOT / "eval" / "gold_PID-100-001.json"))
     ap.add_argument("--backend", choices=["memory", "neo4j"], default="memory")
     ap.add_argument("--load-run", default=None, help="run id stamped on every node/edge (default: timestamp)")
@@ -153,6 +154,15 @@ def main(argv=None) -> int:
         print(f"    SKIP {s['ref']}: {s['reason']}")
     for u in tr["unplaced"]:
         print(f"    UNPLACED {u['ref']}: {u['from']} -> {u['to']}: {u['reason']}")
+    pidkg = None
+    if a.pidkg:
+        banner(3, "Load pid-to-kg vision extraction -> Segment, InlineItem, ControlLoop (v1.3; every fact review=pending)")
+        from .load_pidkg import apply as pidkg_apply, index_tags, print_report, reconcile as pidkg_reconcile
+        pidkg = pidkg_reconcile(json.loads(Path(a.pidkg).read_text(encoding="utf-8")), index_tags(store), store,
+                                unit=a.unit, load_run=load_run)
+        print_report(pidkg)
+        pidkg_apply(store, pidkg)
+        reports["pidkg"] = pidkg["summary"]
     counts = store.counts()
     reports["counts"] = counts
     print(f"  store: {counts['nodes']} nodes {counts['by_label']}")
@@ -198,6 +208,12 @@ def main(argv=None) -> int:
         tmp.conflicts = store.conflicts
         rec["exceptions"] += [e for e in reconcile(tmp, unit=a.unit)["exceptions"] if e["code"] == "X6"]
         rec["summary"]["exceptions"] = len(rec["exceptions"])
+    if pidkg:
+        # Vision exceptions (X21-X29) join the same register; they are produced by the loader, not re-derived here.
+        rec["exceptions"] += pidkg["exceptions"]
+        rec["summary"]["exceptions"] = len(rec["exceptions"])
+        for e in pidkg["exceptions"]:
+            rec["summary"]["exceptions_by_code"][e["code"]] = rec["summary"]["exceptions_by_code"].get(e["code"], 0) + 1
     reg = write_register(rec, out / f"exception_register_{a.unit}.xlsx")
     for k, v in rec["summary"].items():
         print(f"  {k:32} {v}")

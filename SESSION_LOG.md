@@ -254,3 +254,10 @@
 - For Phase 4 / 6 (details in RUN.md): interlock diamonds I-1 / I-2 came out as Instruments, so drawn trips are
   two-hop; pid-to-kg's derived TRIPS wrongly includes PI-1001 and LG-1002; boundary names are flag text
   ("FEED GAS FROM BL-100"), not tags.
+- Phase 4, branch `v1.3/phase-4-loader`: `pid_graph/load_pidkg.py` (pure `reconcile`, `apply`, dry-run CLI with
+  `--apply`), `--pidkg` switch in `run_all` (off by default), exception codes X21-X29 in the same register.
+  Decided by Alan: interlock symbols are collapsed into direct initiator -> final element trip signals (`via`),
+  one X29 row per symbol. Also: pid-to-kg's derived TRIPS is not used; boundaries match on the tag inside the
+  flag text; Equipment master = non-stub Equipment in the graph. On U-100: +32 nodes, +120 relationships, all
+  review=pending, 15 new exceptions, 0 conflicts. `tests/test_v13_phase4.py` (25 cases). 183 passed, 4 skipped.
+- Not verified: Neo4j write of the new labels (Neo4j not running). `--no-master --report-only` (Phase 9) not built.

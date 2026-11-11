@@ -205,8 +205,9 @@ A pure `reconcile(pidkg_graph, index, existing_graph) -> {nodes, rels, exception
 |---|---|
 | `Sheet` | match to existing `Document` by drawing number + revision; no match → exception |
 | `Equipment` (tagged) | existing `Equipment` by tag; not in index/equipment list → exception (T1) |
-| `Boundary` | existing `Equipment` (battery limit / header) by name; else exception |
+| `Boundary` | existing `Equipment` (battery limit / header) whose tag appears in the flag text (`FEED GAS FROM BL-100` → `BL-100`); none or several → exception |
 | `Instrument` (tagged) | existing `Instrument`; not in index → exception (T1) |
+| `Instrument` that is an interlock symbol (not in the index; every signal in and out is a trip — the `I-1` diamond) | no node; collapsed into direct trip signals (see `SIGNAL_TO`); one exception row per symbol. Decided by Alan, 10 Nov 2026 |
 | `Component` with a tag | existing `Instrument` (valve); not in index → exception (T1) |
 | `Component` without a tag | new `InlineItem` |
 | `PipeSegment` | new `Segment` + `SEGMENT_OF` its `Line` (`line_number` → `line_no`; unknown line → exception) |
@@ -216,14 +217,31 @@ A pure `reconcile(pidkg_graph, index, existing_graph) -> {nodes, rels, exception
 | `FLOWS_TO` | `FLOWS_TO` (carry `flow_direction`, `off_page`, `confidence`) |
 | `MEASURES` → PipeSegment | `MEASURES` Instrument → Segment |
 | `MEASURES` → Equipment | compare with existing index `MEASURES`; same → skip; different → conflict |
-| `SIGNAL_TO` | `SIGNAL_TO` |
+| `SIGNAL_TO` | `SIGNAL_TO`. Through an interlock symbol: one `SIGNAL_TO` initiator → final element, `purpose=trip`, `via` = the symbol, `via_name` = what the drawing notes call it |
 | `MEMBER_OF` | `MEMBER_OF` |
 | `FEEDS` (derived) | not loaded; pid_graph derives its own in Phase 6 |
-| `ACTUATES`, `TRIPS`, `CASCADES_TO`, `PART_OF`, any state-like node or relationship | skipped by design; counted. Never mapped onto pid_graph's own `ACTUATES`, `CASCADES_TO`, `HAS_STATE` or `State`. `TRIPS` is kept in memory for the Phase 6 cross-check |
+| `ACTUATES`, `TRIPS`, `CASCADES_TO`, `PART_OF`, any state-like node or relationship | skipped by design; counted. Never mapped onto pid_graph's own `ACTUATES`, `CASCADES_TO`, `HAS_STATE` or `State`. `TRIPS` is **not** used for the Phase 6 cross-check: pid-to-kg derives it by tag number and it over-reaches (on U-100 it has PI-1001 and LG-1002 tripping valves). The loader returns the drawn trip signals as `drawn_trips` instead |
 | `issues`, per-sheet `unreadable` | exception rows (T6) |
 
 Also: normalise tags with pid_graph's own normaliser, not theirs; idempotent `--apply`; every written fact gets
 `extracted_by=pidkg_vision`, `review=pending` (or the decision already in the review register), full provenance.
+
+As built (10 Nov 2026), `pid_graph/load_pidkg.py`:
+- Signature is `reconcile(pidkg_graph, index, existing_graph, *, unit, load_run, review=None)`; it also returns `conflicts`,
+  `seen` (tag → drawings vision found it on), `drawn_trips` and `summary`. `apply(store, result)` does the merge.
+- `--apply` is new with this loader (no v1.2 loader has it). The standalone CLI is a dry run unless `--apply` is given.
+  In the full pipeline the loader is switched on with `python -m pid_graph --pidkg <graph.json>`; off is the default and gives the v1.2 graph.
+- The master for `Equipment` is the existing graph: a non-stub `Equipment` node. There is no equipment list.
+- Exception codes X21–X29 (titles in `reconcile.TITLES`): X21 on P&ID not in index (T1), X22 in index not on P&ID (T2), X23 sheet matches
+  no drawing revision, X24 boundary unmatched, X25 line not in the graph, X26 off-page connector unpaired, X27 pid-to-kg QA issue /
+  unreadable (T6), X28 not representable, X29 interlock symbol collapsed.
+- A line drawn on two sheets gets segment numbers `1..n` running across the sheets, so `<line_no>.<k>` cannot collide.
+- A line with no number gets no `Segment` (X25), because `line_no` is a required property; section 2.1's `<doc_no>.<local>.<k>` key is not used.
+- An `InlineItem` or `ControlLoop` that no loaded relationship touches is not written. New nodes are `SHOWN_ON` their drawing.
+  Existing nodes are not given a vision `SHOWN_ON`: relationship identity is (type, start, end, `source_doc`), so it would merge
+  into pid_audit's and be lost. What vision saw is in `seen`.
+- `MEMBER_OF` roles map `transmitter`/`element`/`switch` → `sensor`; `gauge`, `indicator` and `other` are not in the closed list and are skipped.
+- `--no-master --report-only` (Phase 9) is not built yet.
 
 Tests: on the Phase 3 fixture — every row of the table above has a case; counts are computed from the fixture, not hard-coded;
 running `--apply` twice changes nothing; with the loader off the v1.2 dump is byte-identical.
@@ -238,7 +256,7 @@ Each check writes rows to the exception register or `conflicts`, with both sourc
 1. Tag check, index vs vision (T3).
 2. Derived `FEEDS` (walk `FLOWS_TO`) vs v1.2 `FEEDS` from `data/pid_audit_*_topology.csv`.
 3. Instrument's Line per the index vs the Line of the Segment vision placed it on.
-4. Drawn trip signals vs C&E `INITIATES` / `ACTUATES` (CQ18).
+4. Drawn trip signals (`SIGNAL_TO` with `purpose=trip`, i.e. the loader's `drawn_trips`; not pid-to-kg's `TRIPS`) vs C&E `INITIATES` / `ACTUATES` (CQ18).
 5. Valve fail position / actuator as drawn vs the index remarks (e.g. "Fail open").
 6. Loop membership from drawn signals vs the index `loop` column.
 

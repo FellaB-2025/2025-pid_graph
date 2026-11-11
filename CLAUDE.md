@@ -126,7 +126,9 @@ and have no templates yet).
 | `pid_graph/neo4j_store.py`, `db.py` | Constraints, wipe-per-unit, batched MERGE, read-back; driver from `.env` |
 | `pid_graph/loaders/` | `tables.py` (header aliases), `titleblock.py`, `docs.py`, `index_loader.py`, `ce_table.py`, `ce_loader.py`, `srs_loader.py`, `lopa_loader.py`, `curated_loader.py`, `pid_loader.py` |
 | `pid_graph/pipeline.py`, `run_all.py` | `build_store()`; `python -m pid_graph` end to end |
-| `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20) |
+| `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20; titles for X21–X29) |
+| `pid_graph/load_pidkg.py` | v1.3 vision layer: pid-to-kg `graph.json` → Segment, InlineItem, ControlLoop, FLOWS_TO, SIGNAL_TO, MEMBER_OF, with exceptions X21–X29. Dry run by default; `--apply` to write. In the pipeline: `python -m pid_graph --pidkg <graph.json>` (off by default) |
+| `tests/fixtures/pidkg_U-100/` | Frozen pid-to-kg extraction of the synthetic P&IDs (`graph.json`, `qa_report.md`, `extract/`, `RUN.md`) |
 | `pid_graph/queries.py` | Fixed Cypher templates: `out_of_service`, `shelve_impact`, `moc_impact`, `trip` (Neo4j only) |
 | `pid_graph/validate.py` | Structural checks + CQ sketches on the live graph |
 | `pid_graph/mcp_server.py`, `.mcp.json` | Read-only MCP server (12 tools, stdio) |
@@ -157,7 +159,17 @@ PID-100-001; PID-100-003 shows two unnumbered utility lines and nothing tagged. 
 register: the DCS controllers LIC-1006, FIC-1004 and PIC-1005, ten untagged fittings, the
 signal lines, and line sizes and services.
 
-**Tests:** 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Vision layer** (memory backend, `--pidkg tests\fixtures\pidkg_U-100\graph.json` added to the
+usual build): 32 new nodes (Segment 21, InlineItem 6, ControlLoop 5) and 120 new relationships
+(FLOWS_TO 37, SHOWN_ON 32, SEGMENT_OF 21, MEMBER_OF 14, SIGNAL_TO 10, MEASURES 6), all
+`review = pending`; graph total 81 nodes / 284 relationships; 0 conflicts. Fifteen more
+exceptions: X21 ×4 (FT-1006, LIC-1006, FIC-1004, PIC-1005), X22 TT-1003, X24 ×5 (FUTURE FUEL GAS
+and the four utility boundaries), X25 ×2 (the unnumbered utility lines), X27 (pid-to-kg warning
+on loop F-1004), X29 ×2 (I-1, I-2). Ten drawn trip signals: PT-1001A/B/C → XV-1001 and BDV-1001
+via I-1; LT-1002A/B → XV-1001 and XV-1002 via I-2. With `--pidkg` off the graph is v1.2,
+byte for byte.
+
+**Tests:** 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

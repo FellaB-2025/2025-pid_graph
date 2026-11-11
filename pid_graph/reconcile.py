@@ -47,6 +47,16 @@ TITLES = {
     "X18": "LOPA-credited layer not in any register / not representable",
     "X19": "SIF in SRS but not in C&E, or in C&E but not in SRS",
     "X20": "Sensor architecture disagrees between SRS and C&E",
+    # v1.3: raised by load_pidkg.py (the vision layer), not by reconcile(); listed here so one table names every code
+    "X21": "On P&ID (vision), not in the instrument index / equipment",
+    "X22": "In the index, not found on the P&ID (vision)",
+    "X23": "Vision sheet matches no drawing revision in the graph",
+    "X24": "Vision boundary matches no battery limit / header",
+    "X25": "Vision line is not a line in the graph",
+    "X26": "Off-page connector not paired",
+    "X27": "pid-to-kg QA issue or unreadable item",
+    "X28": "Vision fact cannot be represented",
+    "X29": "Interlock symbol collapsed into direct trip signals",
 }
 EXTRACTED = ("pid_audit", "manual", "llm")
 
