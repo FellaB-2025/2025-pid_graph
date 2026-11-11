@@ -1,0 +1,11 @@
+{
+  "moc_id": "MOC-2026-015",
+  "title": "Add third level transmitter LT-1002C to SIF-100-02 to complete the 2oo3 group",
+  "sif": "SIF-100-02",
+  "change_type": "add_initiator",
+  "new_voting": "2oo3",
+  "new_initiators": ["LT-1002C"],
+  "justification": "Reconciliation finding F6: the C&E declares 2oo3 voting but lists only LT-1002A and LT-1002B. Installing LT-1002C makes the C&E, SRS and hardware consistent and restores the intended fault tolerance.",
+  "originator": "Functional Safety Engineer (dummy)",
+  "date": "2026-09-04"
+}

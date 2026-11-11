@@ -1,0 +1,35 @@
+# © 2026 Alan Bowden — Bowden Simulators. All rights reserved.
+
+# --- Python ---
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- Secrets and credentials (never commit) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.secret
+credentials*
+secrets*
+*_token*
+*.token
+
+# --- v1.3 upgrade working areas (PIDKG_UPGRADE.md) ---
+work/
+third_party/
+data/external/
+
+# --- Generated outputs: rebuilt on every run ---
+reports/*
+# ...except the review register, which holds an engineer's decisions and is read back by the loader
+!reports/review_register_*.xlsx
+
+# --- Machine-local tool settings ---
+.claude/settings.local.json

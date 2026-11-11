@@ -1,0 +1,23 @@
+{
+  "sheet": "PID-100-001",
+  "note": "Hand-built gold set for one drawing of the dummy unit U-100 (8 Sep 2026). Nodes are everything the drawing shows; edges are the location and flow edges a correct extraction must yield. TT-1003 is included on L-101 because the index places it there with 'indication only' - a human must confirm against the drawing before this gold set is frozen.",
+  "nodes": [
+    ["Instrument", "HV-1001"], ["Instrument", "XV-1001"], ["Instrument", "PT-1001A"], ["Instrument", "PT-1001B"],
+    ["Instrument", "PT-1001C"], ["Instrument", "PI-1001"], ["Instrument", "TT-1003"], ["Instrument", "FT-1004"],
+    ["Instrument", "LG-1002"], ["Instrument", "LT-1002A"], ["Instrument", "LT-1002B"], ["Instrument", "LT-1006"],
+    ["Instrument", "LV-1006"], ["Instrument", "XV-1002"], ["Instrument", "BDV-1001"],
+    ["Equipment", "BL-100"], ["Equipment", "V-1002"], ["Equipment", "BL-103"], ["Equipment", "FLARE-HDR"],
+    ["Line", "L-101"], ["Line", "L-103"], ["Line", "L-104"]
+  ],
+  "edges": [
+    ["INSTALLED_ON", "HV-1001", "L-101"], ["INSTALLED_ON", "XV-1001", "L-101"],
+    ["INSTALLED_ON", "PT-1001A", "L-101"], ["INSTALLED_ON", "PT-1001B", "L-101"], ["INSTALLED_ON", "PT-1001C", "L-101"],
+    ["INSTALLED_ON", "PI-1001", "L-101"], ["INSTALLED_ON", "TT-1003", "L-101"], ["INSTALLED_ON", "FT-1004", "L-101"],
+    ["INSTALLED_ON", "LG-1002", "V-1002"], ["INSTALLED_ON", "LT-1002A", "V-1002"], ["INSTALLED_ON", "LT-1002B", "V-1002"],
+    ["INSTALLED_ON", "LT-1006", "V-1002"],
+    ["INSTALLED_ON", "LV-1006", "L-103"], ["INSTALLED_ON", "XV-1002", "L-103"], ["INSTALLED_ON", "BDV-1001", "L-104"],
+    ["FEEDS", "BL-100", "L-101"], ["FEEDS", "L-101", "V-1002"],
+    ["FEEDS", "V-1002", "L-103"], ["FEEDS", "L-103", "BL-103"],
+    ["FEEDS", "V-1002", "L-104"], ["FEEDS", "L-104", "FLARE-HDR"]
+  ]
+}

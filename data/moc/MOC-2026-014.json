@@ -1,0 +1,14 @@
+{
+  "moc_id": "MOC-2026-014",
+  "title": "Upgrade SIF-100-03 initiator architecture from 1oo1 to 2oo3",
+  "sif": "SIF-100-03",
+  "change_type": "voting_change",
+  "new_voting": "2oo3",
+  "new_initiators": [
+    "PT-1001E",
+    "PT-1001F"
+  ],
+  "justification": "SIF-100-03 relies on a single transmitter (PT-1001D). A 2oo3 group raises hardware fault tolerance to 1, allows on-line proof testing of one transmitter, and reduces spurious trips of the feed gas inlet.",
+  "originator": "Process Control Engineer (dummy)",
+  "date": "2026-09-04"
+}

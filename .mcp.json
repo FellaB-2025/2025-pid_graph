@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "pid_graph": {
+      "type": "stdio",
+      "command": "C:\\Users\\alanm\\ai-engineering-tools\\pid_graph\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pid_graph.mcp_server"],
+      "cwd": "C:\\Users\\alanm\\ai-engineering-tools\\pid_graph"
+    }
+  }
+}
