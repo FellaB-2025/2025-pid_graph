@@ -18,7 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 COLORS = {"Instrument": "#2f7fb8", "Equipment": "#b8672f", "Line": "#6b6b6b", "SIF": "#c0392b",
-          "Alarm": "#d8a400", "State": "#8e44ad", "Document": "#2e8b57", "Scenario": "#16a085"}
+          "Alarm": "#d8a400", "State": "#8e44ad", "Document": "#2e8b57", "Scenario": "#16a085",
+          "Segment": "#95a5a6", "InlineItem": "#e67e22", "ControlLoop": "#5d6dce"}      # v1.3 vision layer
 
 TEMPLATE = r"""<!doctype html>
 <html><head><meta charset="utf-8"><title>pid_graph explorer - __UNIT__</title>
@@ -66,7 +67,7 @@ TEMPLATE = r"""<!doctype html>
 </style></head><body>
 <div id="side">
  <h1>pid_graph explorer - __UNIT__</h1>
- <div style="color:#666">__NODES__ nodes, __EDGES__ relationships, ontology v1.2, load __LOADRUN__</div>
+ <div style="color:#666">__NODES__ nodes, __EDGES__ relationships, ontology v1.3, load __LOADRUN__</div>
  <div style="color:#888;margin-top:4px">SHOWN_ON (provenance) relationships start hidden; click its pill or the Documents preset to see them.</div>
  <h2>Find</h2><input id="q" type="text" placeholder="tag, alarm id, SIF id, drawing... (Enter to select)">
  <h2>Labels</h2><div id="labels"></div>
@@ -118,7 +119,7 @@ document.querySelectorAll('button[data-p]').forEach(b => b.onclick = () => {
   const p = b.dataset.p; presetStubs = p === 'stubs';
   labels.forEach(l => on.label[l] = true); rels.forEach(r => on.rel[r] = true);
   if (p === 'sis') { on.label.Document = false; on.label.Line = false; ['SHOWN_ON', 'FEEDS', 'MEASURES', 'INSTALLED_ON'].forEach(r => on.rel[r] = false); }
-  if (p === 'flow') { labels.forEach(l => on.label[l] = (l === 'Line' || l === 'Equipment' || l === 'Instrument')); rels.forEach(r => on.rel[r] = (r === 'FEEDS' || r === 'INSTALLED_ON' || r === 'MEASURES')); }
+  if (p === 'flow') { labels.forEach(l => on.label[l] = ['Line', 'Equipment', 'Instrument', 'Segment', 'InlineItem'].includes(l)); rels.forEach(r => on.rel[r] = ['FEEDS', 'INSTALLED_ON', 'MEASURES', 'FLOWS_TO', 'SEGMENT_OF'].includes(r)); }
   if (p === 'docs') { rels.forEach(r => on.rel[r] = r === 'SHOWN_ON'); }
   syncPills(); render(); });
 // ---- drawing ----
