@@ -234,3 +234,7 @@
 - Not verified: the 4 Neo4j tests (Neo4j not running). `ensure_schema` will create three more uniqueness
   constraints (segment_id, item_id, loop_key) on the next neo4j run.
 - Open before Phase 3: the synthetic P&ID PDFs have no drawing graphics (inventory section 7, item 1).
+- Phase 2, branch `v1.3/phase-2-pidkg-tool`: pid-to-kg cloned to `third_party/pid-to-kg` at commit 7ee3a82
+  (git-ignored, unmodified); separate `.venv-pidkg` (Python 3.14.3); its own tests: 78 passed. OCR package not
+  installed (needs Python 3.10-3.12), so OCR hints and auto-orientation will be skipped in Phase 3.
+  `THIRD_PARTY_NOTICES.md` records source, commit, licence, set-up and the run log. `tests/test_v13_phase2.py`.
