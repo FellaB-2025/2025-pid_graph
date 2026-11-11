@@ -181,7 +181,7 @@ byte for byte.
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 204 collected; 200 passed, 4 skipped with Neo4j down. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 205 collected; 205 passed with Neo4j up on port 7688 (10 Nov 2026); 201 passed, 4 skipped with Neo4j down. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

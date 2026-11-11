@@ -284,3 +284,5 @@
   fails (the MCP server it starts reads `.env`) and the pid_graph MCP server in Claude Code talks to kg_suppression's
   database. With NEO4J_URI=bolt://localhost:7688 in the environment: 204 passed, 1 failed (that test); the same
   test body passes when the server is given the environment.
+- `.env` now points at `bolt://localhost:7688` (changed at Alan's request; the file is git-ignored). With no
+  overrides: environment check OK, 205 passed, 0 skipped, 0 failed. The open item above is closed.
