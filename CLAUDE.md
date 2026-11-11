@@ -145,7 +145,8 @@ and have no templates yet).
 | `pid_graph/intake.py` | Readiness check for a new document |
 | `pid_graph/explorer.py` | Self-contained HTML explorer with in-page assessments |
 | `pid_graph/report.py`, `oos.py` | Engineer reports (md + docx); out-of-service register |
-| `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set |
+| `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set (v1.2, one sheet, pid_audit) |
+| `eval/topology_eval.py`, `eval/gold_topology_U-100.json` | v1.3 topology eval of a pid-to-kg extraction: tags, flow pairs, loops, instrument placement, review workload. `eval/make_topology_gold.py` builds the gold (and `gold_pidkg_U-100.json` for pid-to-kg's own `eval_kg.py`); first numbers in `eval/TOPOLOGY_BASELINE.md` |
 | `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py`, `test_v13_phase1.py`; `tests/fixtures/graph_U-100_v1_2.json` is the frozen v1.2 dump |
 | `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py` |
 | `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader) |
@@ -197,11 +198,25 @@ XV-1002, vision only FT-1006, PIC-1005. Derived flow agrees with pid_audit on L-
 - `drawing_vs_ce`: 10 drawn trips, 11 C&E pairs; not drawn: SIF-100-03 PT-1001D → XV-1001; drawn and not in the C&E: none.
 - Neo4j and memory backends give identical answers.
 
+**Topology eval baseline** (`python -m eval.topology_eval --pidkg-eval`, frozen fixture, 10 Nov 2026; no pass threshold set):
+
+| | Gold | Predicted | Correct | Precision | Recall |
+|---|---|---|---|---|---|
+| Tags | 21 | 23 | 21 | 0.913 | 1.000 |
+| Flow pairs | 7 | 7 | 7 | 1.000 | 1.000 |
+| Loops | 5 | 7 | 5 | 0.714 | 1.000 |
+| Loop members | 17 | 25 | 17 | 0.680 | 1.000 |
+
+Instrument placement 11 / 11 exact. Spurious: the interlock diamonds I-1 and I-2 read as tags and loops, and PI-1001 /
+LG-1002 grouped into loops by tag number; none of these is loaded. Review workload: 20 of 120 facts flagged (0.167), none
+below 0.85 confidence. pid-to-kg's own `eval_kg.py`: tags P 0.913 R 1.0, flow 1.0 / 1.0, placement 11 / 11, loops recall
+1.0 with mean member overlap 0.927. These are clean synthetic sheets; they say nothing about real drawings.
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 247 collected; 247 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 6 it was 232. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 258 collected; 258 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 7 it was 247. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

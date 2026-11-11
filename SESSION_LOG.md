@@ -299,3 +299,10 @@
   mirrors whatever review state the database holds. Verified on `neo4j-pidgraph` all-pending and with 72 accepted /
   1 rejected (scratch register); database restored to all-pending. 247 passed.
 - Not done: the new templates are not MCP tools; `validate.py` has no CQ14-CQ18 sketches.
+- Phase 8, branch `v1.3/phase-8-eval`: `eval/gold_topology_U-100.json` (tags, 11 placements, 7 flow pairs, 5 loops)
+  and `eval/gold_pidkg_U-100.json`, both built by `eval/make_topology_gold.py` from the drawings' answer key;
+  `eval/topology_eval.py` (scores before the gate, review workload after it, `--pidkg-eval` runs pid-to-kg's
+  own scorer); `eval/TOPOLOGY_BASELINE.md`. Baseline: tags P 0.913 R 1.0, flow 1.0 / 1.0, loops P 0.714 R 1.0,
+  loop members P 0.68 R 1.0, placement 11 / 11, 20 of 120 facts flagged. No threshold set (Alan's call).
+  `tests/test_v13_phase8.py` (11 cases). 258 passed.
+- Open for Alan: set the pass thresholds; `eval/gold_PID-100-001.json` still lists TT-1003 pending confirmation.

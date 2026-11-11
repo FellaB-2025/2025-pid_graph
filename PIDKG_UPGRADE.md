@@ -313,6 +313,15 @@ As built (10 Nov 2026), `pid_graph/topology_queries.py`:
 3. Also run pid-to-kg's own `scripts/eval_kg.py` against a gold file in its format, so the two scores can be compared.
 4. Record the baseline numbers in `CLAUDE.md`. No pass threshold is set in this plan: Alan sets it after seeing the first run.
 
+As built (10 Nov 2026):
+- The existing `eval/gold_PID-100-001.json` (v1.2, one sheet, pid_audit) is left as it is. The topology gold is a new file,
+  `eval/gold_topology_U-100.json`: tags per sheet, 11 instrument placements, 7 equipment-level flow pairs, 5 loops with their members.
+  It is built by `eval/make_topology_gold.py` from the drawings' answer key, so it is exact for U-100; a real drawing needs a hand-checked file in the same format.
+- Placement is scored at segment level without depending on segment numbering: the line, and the nearest in-line thing either side.
+- `eval/topology_eval.py` scores pid-to-kg's `graph.json` before the gate (that is what measures the extraction), and reports the review workload after the gate.
+- `--pidkg-eval` runs pid-to-kg's unmodified `eval_kg.py` on `eval/gold_pidkg_U-100.json`. The two scorers agree except on loops, where they measure different things.
+- First numbers are in `eval/TOPOLOGY_BASELINE.md` and summarised in `CLAUDE.md`. No threshold is set.
+
 ### Phase 9 — Real-drawing stress test (extraction only)
 1. Download by hand into `data/external/` (gitignored): the Pahala WWTP set (digital) and the Virden WWTF set (scanned), from the links in
    https://github.com/ScottDuncanAI/public-chemical-manufacturing-datasets.

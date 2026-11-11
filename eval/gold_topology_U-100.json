@@ -1,0 +1,202 @@
+{
+ "note": "DUMMY DATA. Topology gold set for the synthetic U-100 P&IDs (TX-0057). Built by eval/make_topology_gold.py from the drawings' answer key data/U100-PIDS-DRAWN-CONTENT.json, so it is exact for these sheets.",
+ "unit": "U-100",
+ "sheets": [
+  "PID-100-001",
+  "PID-100-002",
+  "PID-100-003"
+ ],
+ "tags": {
+  "PID-100-001": [
+   "BDV-1001",
+   "FIC-1004",
+   "FT-1004",
+   "HV-1001",
+   "LG-1002",
+   "LIC-1006",
+   "LT-1002A",
+   "LT-1002B",
+   "LT-1006",
+   "LV-1006",
+   "PI-1001",
+   "PT-1001A",
+   "PT-1001B",
+   "PT-1001C",
+   "V-1002",
+   "XV-1001",
+   "XV-1002"
+  ],
+  "PID-100-002": [
+   "FT-1006",
+   "PIC-1005",
+   "PT-1005",
+   "PV-1005"
+  ],
+  "PID-100-003": []
+ },
+ "placements": [
+  {
+   "tag": "FT-1004",
+   "sheet": "PID-100-001",
+   "on": "line",
+   "line": "L-101",
+   "after": "XV-1001",
+   "before": "V-1002",
+   "in_line": true
+  },
+  {
+   "tag": "LG-1002",
+   "sheet": "PID-100-001",
+   "on": "equipment",
+   "equipment": "V-1002"
+  },
+  {
+   "tag": "LT-1002A",
+   "sheet": "PID-100-001",
+   "on": "equipment",
+   "equipment": "V-1002"
+  },
+  {
+   "tag": "LT-1002B",
+   "sheet": "PID-100-001",
+   "on": "equipment",
+   "equipment": "V-1002"
+  },
+  {
+   "tag": "LT-1006",
+   "sheet": "PID-100-001",
+   "on": "equipment",
+   "equipment": "V-1002"
+  },
+  {
+   "tag": "PI-1001",
+   "sheet": "PID-100-001",
+   "on": "line",
+   "line": "L-101",
+   "after": "XV-1001",
+   "before": "FT-1004",
+   "in_line": false
+  },
+  {
+   "tag": "PT-1001A",
+   "sheet": "PID-100-001",
+   "on": "line",
+   "line": "L-101",
+   "after": "XV-1001",
+   "before": "FT-1004",
+   "in_line": false
+  },
+  {
+   "tag": "PT-1001B",
+   "sheet": "PID-100-001",
+   "on": "line",
+   "line": "L-101",
+   "after": "XV-1001",
+   "before": "FT-1004",
+   "in_line": false
+  },
+  {
+   "tag": "PT-1001C",
+   "sheet": "PID-100-001",
+   "on": "line",
+   "line": "L-101",
+   "after": "XV-1001",
+   "before": "FT-1004",
+   "in_line": false
+  },
+  {
+   "tag": "FT-1006",
+   "sheet": "PID-100-002",
+   "on": "line",
+   "line": "L-105",
+   "after": "off-page",
+   "before": "FUTURE FUEL GAS",
+   "in_line": true
+  },
+  {
+   "tag": "PT-1005",
+   "sheet": "PID-100-002",
+   "on": "line",
+   "line": "L-102",
+   "after": "off-page",
+   "before": "gate_valve",
+   "in_line": false
+  }
+ ],
+ "flow_pairs": [
+  {
+   "from": "INSTRUMENT AIR HEADER",
+   "to": "INSTRUMENT AIR USERS",
+   "via_lines": []
+  },
+  {
+   "from": "NITROGEN HEADER",
+   "to": "NITROGEN UTILITY STATION",
+   "via_lines": []
+  },
+  {
+   "from": "BL-100",
+   "to": "V-1002",
+   "via_lines": [
+    "L-101"
+   ]
+  },
+  {
+   "from": "V-1002",
+   "to": "BL-200",
+   "via_lines": [
+    "L-102"
+   ]
+  },
+  {
+   "from": "V-1002",
+   "to": "BL-103",
+   "via_lines": [
+    "L-103"
+   ]
+  },
+  {
+   "from": "V-1002",
+   "to": "FLARE-HDR",
+   "via_lines": [
+    "L-104"
+   ]
+  },
+  {
+   "from": "V-1002",
+   "to": "FUTURE FUEL GAS",
+   "via_lines": [
+    "L-105"
+   ]
+  }
+ ],
+ "loops": {
+  "F-1004": [
+   "FIC-1004",
+   "FT-1004"
+  ],
+  "L-1002": [
+   "LT-1002A",
+   "LT-1002B",
+   "XV-1001",
+   "XV-1002"
+  ],
+  "L-1006": [
+   "LIC-1006",
+   "LT-1006",
+   "LV-1006"
+  ],
+  "P-1001": [
+   "BDV-1001",
+   "PT-1001A",
+   "PT-1001B",
+   "PT-1001C",
+   "XV-1001"
+  ],
+  "P-1005": [
+   "PIC-1005",
+   "PT-1005",
+   "PV-1005"
+  ]
+ }
+}
