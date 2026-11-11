@@ -29,7 +29,7 @@ INSTRUCTIONS = """\
 pid_graph is a Neo4j knowledge graph of the functional-safety layer of a process unit: Instrument,
 Equipment, Line, SIF, Alarm, State, Document and Scenario (LOPA) nodes; MEASURES, INSTALLED_ON, FEEDS,
 INITIATES, ACTUATES, PROTECTS, RAISES, CASCADES_TO, GENERATES, VALID_IN, HAS_STATE, COMPENSATES_FOR,
-CREDITS, THREATENS and SHOWN_ON relationships (ontology v1.2). SIF nodes carry the SRS requirements as
+CREDITS, THREATENS and SHOWN_ON relationships (the ontology v1.2 register layer; v1.3 is described below). SIF nodes carry the SRS requirements as
 sil_srs, setpoint_srs, safe_state, process_safety_time, response_time, proof_test_interval,
 bypass_conditions etc.; the C&E's own sil and INITIATES setpoints sit beside them, and the exception
 register (X15-X20) says where LOPA, SRS and C&E disagree. Instrument and Alarm nodes may carry oos_*
@@ -210,7 +210,7 @@ def exceptions(code: str | None = None, identifier: str | None = None, unit: str
     return {"summary": rec["summary"], "codes": TITLES, "count": len(rows), "exceptions": rows}
 
 
-@server.tool(description="The closed v1 schema: labels with their key properties, relationship types with direction and meaning, "
+@server.tool(description="The closed schema (ontology v1.3): labels with their key properties, relationship types with direction and meaning, "
                          "provenance properties and extracted_by values, and the exception codes.")
 def schema_reference() -> dict:
     meaning = {"MEASURES": "Instrument -> Line/Equipment: what the device senses",

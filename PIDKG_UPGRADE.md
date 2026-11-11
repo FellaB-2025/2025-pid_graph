@@ -358,9 +358,23 @@ As built (10 Nov 2026):
 1. Update `CLAUDE.md` (lists, files, known-good answers), the ontology doc and the README cheat sheet.
 2. `git tag v1.3.0`.
 3. Regenerate `reports/graph_U-100.json` and confirm kg_suppression still passes against it:
-   `cd ..\..\kg_suppression ; python load_pid.py ..\ai-engineering-tools\pid_graph\reports\graph_U-100.json ; python -m pytest -q`
+   `cd C:\dev\kg_suppression ; python load_pid.py C:\Users\alanm\ai-engineering-tools\pid_graph\reports\graph_U-100.json ; python -m pytest -q`
+   (path corrected in Phase 11: kg_suppression is at `C:\dev\kg_suppression`, not two folders up)
    Its `load_pid.py` skips unknown labels and relationships by design (they are counted under "skipped by design"), so the new
    `Segment`, `InlineItem`, `ControlLoop`, `FLOWS_TO`, `SIGNAL_TO`, `MEMBER_OF`, `SEGMENT_OF` and Segment-level `MEASURES` should arrive as skips. Confirm that, do not assume it.
+
+As built (10 Nov 2026), v1.3.0:
+- `CLAUDE.md`, `PID_GRAPH_ONTOLOGY_V1_3.md` (an "As built" section), `README.md` (v1.3 cheat sheet and layout) and `PID_GRAPH_DECISIONS.md`
+  (section 14, D-V13-01 to D-V13-11) are updated. `tests/test_v13_phase11.py` checks that the closed lists in the documents are the ones in the code.
+- `reports/graph_U-100.json` was regenerated with the vision layer (81 nodes / 284 relationships). The September files it replaced are kept in
+  `reports/_before_v1.3/` (git-ignored).
+- kg_suppression, confirmed and not assumed: `load_pid.py` in dry run, writing to a temporary folder, gives 27 nodes, 26 relationships and 17 exceptions
+  from the new dump, and its three output files are byte-identical to those from the September dump. The new facts arrive under "skipped by design":
+  `Segment` 21, `InlineItem` 6, `ControlLoop` 5, `FLOWS_TO` 37, `SEGMENT_OF` 21, `MEMBER_OF` 14, `SIGNAL_TO` 10, six more `MEASURES` (the Segment-level
+  ones) and 32 more `SHOWN_ON`. Its own tests: 109 passed, run without `tests/test_neo4j.py` (that test loads into kg_suppression's database, which
+  this project has no business touching). Nothing in the kg_suppression folder was changed.
+- Tag `v1.3.0` is on the Phase 11 commit, on branch `v1.3/phase-11-close-out`. `main` still ends at the Phase 0 commit: the eleven phase branches are a
+  straight line on top of it, so merging is a fast-forward, and that is Alan's to do.
 
 ### Later (separate plan, not this build)
 - kg_suppression: use accepted Segment topology to *propose* the `MEASURES` Instrument→Equipment rows that today come back as

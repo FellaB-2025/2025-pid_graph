@@ -291,3 +291,31 @@ changes the ontology.
   operator-facing surface, the shift handover page, says *element* for a thing out of service rather than
   *node*. Reason: the explorer is visibly nodes and lines and the words should match the picture; the ontology
   and Neo4j already say relationship; an operator reading a handover should not meet database vocabulary.
+
+## 14. v1.3 decisions (Claude Code, 10 Nov 2026): vision layer
+
+Made while carrying out `PIDKG_UPGRADE.md`. The plan's "As built" notes hold the detail; these are the ones a
+later change must not undo by accident.
+
+- **D-V13-01 Vision is a loader source, not an authority.** pid-to-kg's `graph.json` is an input file. The index
+  still decides which tagged nodes exist (X21, X22). Nothing vision writes can start or end a safety relationship.
+- **D-V13-02 Every vision fact is `review = pending` until an engineer accepts it** in
+  `reports/review_register_<unit>.xlsx`, by name. A decision with no reviewer is not a decision. A rejected fact
+  leaves the graph and stays in the register with the reason.
+- **D-V13-03 Trust rule T7 is one function** (`ontology.trusted`), applied in the Cypher templates, the reports,
+  the summary and the explorer. With nothing accepted, the trusted view of the graph is exactly the v1.2 graph.
+- **D-V13-04 Interlock symbols are collapsed** (decided by Alan): an `I-1` diamond is not a node; its trips load as
+  direct initiator → final element signals with `via`, and one X29 row per symbol.
+- **D-V13-05 pid-to-kg's derived `TRIPS`, `ACTUATES`, `FEEDS` and `CASCADES_TO` are never loaded.** Its `TRIPS`
+  groups by tag number and over-reaches. The drawing-versus-C&E check uses drawn trip signals.
+- **D-V13-06 Derived `FEEDS` are reported, not written** (see ontology v1.3, as built).
+- **D-V13-07 The loader does not touch v1.2 nodes**, except for the informative `dexpiClass` pair. With the
+  loader off, the U-100 dump is byte-identical to v1.2; a test holds a frozen copy.
+- **D-V13-08 pid_graph has its own Neo4j container** (`neo4j-pidgraph`, bolt 7688). The shared `neo4j-kg` was
+  found holding kg_suppression's data. Community edition has one database per container.
+- **D-V13-09 A query never looks a node up by `line_no` without the `Line` label.** A `Segment` carries `line_no`
+  too; an accepted segment was matched as its line until this was fixed.
+- **D-V13-10 The synthetic P&IDs are drawn** by `scripts/make_dummy_pdf.py` and agree with the pid_audit export
+  row for row. Their answer key is the topology gold set. Real drawings are never committed; only scores are.
+- **D-V13-11 The vision extraction fixture is frozen.** Extraction is not deterministic; a re-run is a new fixture
+  with its own `RUN.md` and review.

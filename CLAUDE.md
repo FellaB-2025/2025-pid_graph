@@ -10,7 +10,8 @@ and this file is corrected.
 
 pid_graph is a cross-document knowledge graph for the functional-safety layer of a process unit:
 instrument index + P&IDs + cause & effect chart + SRS + LOPA, on Neo4j, with a closed schema
-(ontology v1.2). It answers one family of questions with full provenance: *this element is out of
+(ontology v1.3: the v1.2 register layer plus a vision layer of segment topology read from the P&IDs,
+which an engineer accepts fact by fact). It answers one family of questions with full provenance: *this element is out of
 service — what protection is lost, what remains, what compensates?* (bypass, MOS, alarm shelving,
 interlock bypass), plus MOC impact, trip investigation and cross-document consistency.
 
@@ -58,8 +59,8 @@ documents are ever added.
 ## 3. Closed lists (ontology v1.3)
 
 Source of truth: `PID_GRAPH_ONTOLOGY_V1_3.md`, transcribed in `pid_graph/ontology.py`. v1.3 is v1.2
-plus the rows marked v1.3; nothing in v1.2 changed meaning. The v1.3 rows are in the schema and the
-validators only: no loader writes them until Phase 4 of `PIDKG_UPGRADE.md`.
+plus the rows marked v1.3; nothing in v1.2 changed meaning. The v1.3 rows are written only by
+`load_pidkg.py`, always with `extracted_by = pidkg_vision` and a `review` state.
 
 ### Labels (11)
 
@@ -114,8 +115,8 @@ Other closed values: `extracted_by` ∈ `pid_audit, llm, manual, table, pidkg_vi
 alarm, status, unknown`; `MEMBER_OF.role` ∈ `sensor, controller, relay, final_element`;
 `Document.doc_type` ∈ `PID, CE, IDX, CUR, SRS, LOPA`; unknown revision = `UNKNOWN`.
 
-Competency questions CQ1–CQ18 are defined in the ontology document (CQ14–CQ18 are new in v1.3
-and have no templates yet).
+Competency questions CQ1–CQ18 are defined in the ontology document. CQ14–CQ18 are new in v1.3;
+their templates are in `pid_graph/topology_queries.py`.
 
 ## 4. Files
 
@@ -155,7 +156,7 @@ and have no templates yet).
 | `reports/` | Generated outputs (git-ignored): `exception_register_<unit>.xlsx`, `graph_<unit>.json`, `load_report_<unit>.json`, explorer, reports |
 | `src/` | Two early stray copies of `db.py` / `check_env.py`; not imported by anything |
 
-Commands are in `README.md`. The usual build:
+Commands are in `README.md`. Add `--pidkg tests\fixtures\pidkg_U-100\graph.json` for the vision layer. The usual build:
 
 ```
 .venv\Scripts\python -m pid_graph --unit U-100 --backend memory --pdf data\U100-PIDS-TX-0057.pdf --transmittal TX-0057
@@ -224,11 +225,15 @@ isolated sheets. T5 flag rate 0.388 and 0.248 against 0.219 for U-100 without a 
 **Plant summary** (`summary_U-100.md`, nothing accepted): header says 152 vision facts are left out; flow BL-100 → L-101 → V-1002 and V-1002 to
 BL-200, BL-103, FLARE-HDR; three index loops (FIC-1004, LIC-1006, PIC-1005); three SIFs; no segment-level flow or drawn loop yet.
 
+**kg_suppression** (`C:\dev\kg_suppression`, `load_pid.py` dry run on `reports\graph_U-100.json` with the vision layer): 27 nodes, 26
+relationships, 17 exceptions, byte-identical to its output from the v1.2 dump; every v1.3 label and relationship is "skipped by design".
+Its tests: 109 passed (without its Neo4j round-trip test).
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 282 collected; 282 passed with Neo4j up on port 7688 (10 Nov 2026); 6 are skipped when Neo4j is down. After Phase 9 it was 271. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 289 collected; 289 passed with Neo4j up on port 7688 (10 Nov 2026, v1.3.0); 6 are skipped when Neo4j is down. At the v1.2 baseline it was 45. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

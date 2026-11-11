@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REQUIRED_DOCS = ["PID_GRAPH_ONTOLOGY_V1_2.md", "PID_GRAPH_DECISIONS.md"]
+REQUIRED_DOCS = ["PID_GRAPH_ONTOLOGY_V1_3.md", "PID_GRAPH_DECISIONS.md"]
 
 
 def main() -> int:

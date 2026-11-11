@@ -1,9 +1,11 @@
-# pid_graph (Neo4j, v1 ontology)
+# pid_graph (Neo4j, ontology v1.3)
 
 Cross-document knowledge graph for the functional-safety layer of a process unit:
 instrument index + P&IDs + C&E, on Neo4j, with a closed schema.
 
-* Schema: `PID_GRAPH_ONTOLOGY_V1_2.md` (8 labels, 15 relationships, provenance on everything; v1 and v1.1 kept for the record)
+* Schema: `PID_GRAPH_ONTOLOGY_V1_3.md` (11 labels, 19 relationships, provenance on everything; v1, v1.1 and v1.2 kept for the record).
+  v1.2 is the register layer (8 labels, 15 relationships); v1.3 adds the vision layer read from the P&IDs.
+* Working rules and known-good answers: `CLAUDE.md`. Upgrade plan and what was built: `PIDKG_UPGRADE.md`
 * Reasoning and decisions: `PID_GRAPH_DECISIONS.md` (sections 10 and 11 are the implementation decisions)
 * Running log for cold pickup: `SESSION_LOG.md`
 
@@ -35,6 +37,69 @@ powershell -ExecutionPolicy Bypass -File scripts\setup_neo4j.ps1
 ```bash
 .venv\Scripts\python -m pytest -q
 ```
+
+## Vision layer (v1.3): segment topology read from the P&IDs
+
+Vision proposes, the instrument index disposes, an engineer accepts. A third-party tool, pid-to-kg
+(`THIRD_PARTY_NOTICES.md`), reads the drawings and writes a `graph.json`; pid_graph decides what is
+allowed in. Every vision fact is loaded `review = pending` and stays invisible to the safety-relevant
+templates, reports and summary until it is accepted in the review register.
+
+```bash
+.venv\Scripts\python -m pid_graph.load_pidkg --graph tests\fixtures\pidkg_U-100\graph.json --pdf data\U100-PIDS-TX-0057.pdf --transmittal TX-0057
+```
+
+is a dry run: it prints what would be loaded, the exceptions and the reconciliation checks, and writes nothing.
+
+```bash
+.venv\Scripts\python -m pid_graph --unit U-100 --backend neo4j --pdf data\U100-PIDS-TX-0057.pdf --transmittal TX-0057 --pidkg tests\fixtures\pidkg_U-100\graph.json
+```
+
+loads the registers and the vision layer, and writes into `reports\`: the exception register (now with
+codes X21-X36), `review_register_U-100.xlsx`, `review_markup_U-100.pdf` and `summary_U-100.md`.
+Without `--pidkg` the graph is v1.2, byte for byte.
+
+To review: open `reports\review_markup_U-100.pdf` beside `reports\review_register_U-100.xlsx`; set
+`review` to `accepted` or `rejected` and put your initials in `reviewer`; run the load again. A rejected
+fact leaves the graph and stays in the register with your reason.
+
+```bash
+.venv\Scripts\python -m pid_graph.topology_queries isolation PT-1001A
+```
+
+```bash
+.venv\Scripts\python -m pid_graph.topology_queries same_pressure PT-1001A --include-pending
+```
+
+```bash
+.venv\Scripts\python -m pid_graph.topology_queries blast_radius XV-1001
+```
+
+```bash
+.venv\Scripts\python -m pid_graph.topology_queries loop_membership PV-1005
+```
+
+```bash
+.venv\Scripts\python -m pid_graph.topology_queries drawing_vs_ce
+```
+
+The first four use accepted facts only; `--include-pending` shows everything under an EXPLORATION ONLY header.
+
+```bash
+.venv\Scripts\python -m pid_graph.summary --unit U-100
+```
+
+```bash
+.venv\Scripts\python -m eval.topology_eval --pidkg-eval
+```
+
+```bash
+.venv\Scripts\python scripts\make_dummy_pdf.py --all
+```
+
+The last rebuilds the synthetic P&ID PDFs and their answer key. Extracting a drawing with pid-to-kg is
+described in `tests\fixtures\pidkg_U-100\RUN.md`; for a plant with no index use
+`load_pidkg --no-master --report-only` (`docs\STRESS_TEST.md`).
 
 ## Seeing the graph
 
@@ -130,15 +195,20 @@ Not yet: `VALID_IN` / `HAS_STATE` (need the suppression design). `COMPENSATES_FO
 
 ```
 pid_graph/
-  ontology.py      closed schema + validators
+  ontology.py      closed schema + validators (v1.3), trust rule T7
   tags.py          canonical tag regex, prefix classification
   records.py       MemoryStore (MERGE semantics, conflicts)
   neo4j_store.py   constraints, wipe-per-unit, batched MERGE, read-back
   db.py            driver from .env
   loaders/         tables.py, titleblock.py, docs.py, index_loader.py, ce_table.py, ce_loader.py,
                    srs_loader.py, lopa_loader.py, curated_loader.py, pid_loader.py
-  reconcile.py     exception register
-  queries.py       parameterised query templates + CLI
+  reconcile.py     exception register (X1-X20; titles for X21-X36)
+  load_pidkg.py    v1.3: pid-to-kg graph.json -> vision layer (dry run, --apply, --no-master --report-only)
+  vision_checks.py v1.3: vision against index, C&E and pid_audit (X30-X36)
+  review.py        v1.3: review register, priority flags, PDF markup
+  topology_queries.py  v1.3: CQ14-CQ18 on Neo4j or the in-memory store
+  summary.py       v1.3: plant summary from trusted facts
+  queries.py       parameterised query templates + CLI (T7 filter)
   mcp_server.py    read-only MCP server over the templates (stdio)
   validate.py      structural checks + CQ sketches
   intake.py        readiness check for a new document (aliases, tag shapes, title-block region)
@@ -147,9 +217,11 @@ pid_graph/
   oos.py           live out-of-service register -> node properties; combined protection status
   pipeline.py      build_store()
   run_all.py       python -m pid_graph
-eval/              gold set + scorer
-tests/             pytest (Phase 1 and Phase 2)
-scripts/           setup_neo4j.ps1, make_dummy_pdf.py, make_dummy_srs_lopa.py
-data/              sample unit documents (dummy, incl. synthetic P&ID PDFs)
-reports/           outputs (git-ignored)
+eval/              gold sets + scorers (score.py for v1.2; topology_eval.py for the vision layer)
+tests/             pytest; fixtures/ holds the frozen v1.2 dump and the frozen pid-to-kg extraction
+scripts/           setup_neo4j.ps1, make_dummy_pdf.py, make_dummy_srs_lopa.py, make_pidkg_discrepancies.py
+data/              sample unit documents (dummy, incl. drawn synthetic P&ID PDFs); data/external/ is git-ignored
+docs/              V1_3_INVENTORY.md, STRESS_TEST.md
+reports/           outputs (git-ignored, except review_register_<unit>.xlsx)
+third_party/       pid-to-kg, cloned and unmodified (git-ignored; THIRD_PARTY_NOTICES.md)
 ```

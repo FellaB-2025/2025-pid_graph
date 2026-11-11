@@ -321,3 +321,16 @@
   run. `tests/test_v13_phase10.py` (11 cases); one Phase 4 test now ignores the dexpiClass pair when it compares v1.2
   nodes. Verified on `neo4j-pidgraph` all-pending and with 72 accepted / 1 rejected; database restored to all-pending
   (and now carries dexpiClass). 282 passed.
+- Phase 11, branch `v1.3/phase-11-close-out`, tag `v1.3.0`: README (v1.3 cheat sheet, layout), CLAUDE.md, ontology
+  v1.3 "As built", decisions section 14 (D-V13-01..11), check_env and MCP text now name v1.3.
+  `tests/test_v13_phase11.py` checks the documents' closed lists against the code. `reports/graph_U-100.json`
+  regenerated with the vision layer (81 / 284); the September files are in `reports/_before_v1.3/`.
+  kg_suppression (`C:\dev\kg_suppression`): `load_pid.py` dry run to a temporary folder gives output byte-identical
+  to that from the v1.2 dump (27 nodes, 26 relationships, 17 exceptions), all v1.3 facts skipped by design; its
+  tests 109 passed without `tests/test_neo4j.py`; nothing in that folder changed. 289 passed here.
+- STATE AT CLOSE: `main` ends at the Phase 0 commit. Branches v1.3/phase-1-ontology ... v1.3/phase-11-close-out are
+  one straight line on top of it; nothing is pushed. Neo4j `neo4j-pidgraph` (7688) holds U-100 with the vision
+  layer, everything pending. `reports/review_register_U-100.xlsx`: 120 facts, none decided.
+- OPEN FOR ALAN: review the register (nothing is usable by the safety templates until accepted); merge the branches
+  to main; set eval pass thresholds; check the stress-test gold files; TT-1003 in `eval/gold_PID-100-001.json`;
+  Python 3.12 for OCR; whether to run the other 23 public sheets.

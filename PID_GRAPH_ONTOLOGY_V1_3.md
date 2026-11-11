@@ -62,6 +62,31 @@ For final element X: its loop, its sensor, and the segment the sensor measures.
 Every drawn `purpose = trip` signal with no matching `INITIATES` / `ACTUATES`, and every C&E cause / effect
 with no drawn trip signal.
 
+### As built (v1.3.0, 10 Nov 2026)
+
+Where the loader (`pid_graph/load_pidkg.py`) had to settle something the table above leaves open:
+
+- **Properties on vision facts**, beside the provenance set: `review`, `confidence`, and `fact_id`, a stable hash of
+  type + endpoints + drawing that the review register matches on. `SIGNAL_TO` may carry `via` and `via_name`: an
+  interlock symbol on the drawing (not an indexed device, so not a node) is collapsed into direct
+  initiator → final element trip signals that name the symbol they passed through.
+- **`dexpiClass`** is on every `InlineItem` and on the `Equipment` / `Instrument` nodes vision saw, with
+  `dexpiClass_source`. It is the only thing the vision loader adds to a v1.2 node.
+- **Segment numbering:** `<line_no>.<k>` with `k` running 1..n over the sheets the line is drawn on. A line with no
+  number gets no `Segment`, because `line_no` is required; the `<doc_no>.<local>.<k>` form is not used.
+- **`ControlLoop.loop_key`** is the first letter and the number (`P-1005`). The index loop number (`PIC-1005`) stays a
+  property of the instrument; the two are compared, not merged.
+- **`MEMBER_OF.role`** maps the tool's `transmitter` / `element` / `switch` to `sensor`; a gauge or indicator has no
+  role in the closed list and is not a member.
+- **Derived `FEEDS`** (equipment to equipment, by walking `FLOWS_TO`) are computed and reported, never written: a
+  direct equipment-to-equipment `FEEDS` would change what "within two `FEEDS` hops" means in the v1.2 templates.
+- **Existing nodes get no vision `SHOWN_ON`.** Relationship identity is (type, start, end, `source_doc`), so it
+  would merge into pid_audit's for the same drawing.
+- **Trust rule T7** has one definition, `ontology.trusted()`: `extracted_by` in `table`, `manual`, `pid_audit`, or
+  `review = accepted`. Every safety-relevant template, report, summary and the explorer read through it.
+- **Exception codes** X21–X29 (loader) and X30–X36 (vision against the registers) join X1–X20 in one register;
+  titles are in `reconcile.TITLES`.
+
 ## 0a. Changes from v1.1 (9 Sep 2026): SRS and LOPA
 
 Forced by three competency questions the safety documents answer and nothing else does.
@@ -290,8 +315,10 @@ ORDER BY depth
 
 CQ1, CQ3, CQ6, CQ7, CQ8 have been run against the loaded U-100 graph
 (`pid_graph/validate.py`); CQ4/CQ5 wait for a suppression design; CQ9/CQ10 are sketched
-here and wired into the validator. CQ14–CQ18 (v1.3) get fixed templates once the segment topology is loaded
-and reviewed; they are not answerable from the v1.2 U-100 graph.
+here and wired into the validator. CQ14–CQ18 (v1.3) have fixed templates in `pid_graph/topology_queries.py`
+(`isolation`, `same_pressure`, `blast_radius`, `loop_membership`, `drawing_vs_ce`), on Neo4j and on the in-memory
+store, verified to agree on U-100. CQ14–CQ17 use accepted facts only, so they answer nothing until the segment
+topology has been reviewed; CQ18 is a consistency check and reads pending facts, saying so.
 
 ## 6. Deliberately out of scope
 
