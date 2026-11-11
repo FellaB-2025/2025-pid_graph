@@ -251,6 +251,9 @@ def main(argv=None) -> int:
     print_scores(ev)
     reports["reconcile"] = rec["summary"]
     reports["eval"] = {k: v for k, v in ev.items()}
+    from .summary import write as write_summary
+    summary_path = write_summary(read_store, a.unit, out)       # trusted facts only (T7); says how many vision facts it left out
+    reports["summary"] = str(summary_path)
     (out / f"load_report_{a.unit}.json").write_text(json.dumps(reports, indent=2, default=str), encoding="utf-8")
     (out / f"eval_{ev['sheet']}.json").write_text(json.dumps(ev, indent=2), encoding="utf-8")
     print(f"\n  reports -> {out}")

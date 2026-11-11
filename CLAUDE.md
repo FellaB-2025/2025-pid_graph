@@ -135,6 +135,7 @@ and have no templates yet).
 | `pid_graph/pipeline.py`, `run_all.py` | `build_store()`; `python -m pid_graph` end to end |
 | `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20; titles for X21–X29) |
 | `pid_graph/load_pidkg.py` | v1.3 vision layer: pid-to-kg `graph.json` → Segment, InlineItem, ControlLoop, FLOWS_TO, SIGNAL_TO, MEMBER_OF, with exceptions X21–X29. Dry run by default; `--apply` to write. In the pipeline: `python -m pid_graph --pidkg <graph.json>` (off by default) |
+| `pid_graph/summary.py` | Plant summary `summary_<unit>.md` from the trusted view only (T7): documents and revisions, flow, instruments, loops, SIFs, alarms, exceptions; states how many vision facts it left out. Rule-based, not model-written. Written by the pipeline into `--out` |
 | `pid_graph/topology_queries.py` | Fixed templates CQ14–CQ18 (`isolation`, `same_pressure`, `blast_radius`, `loop_membership`, `drawing_vs_ce`) over a Neo4j driver or a store; trusted facts only unless `--include-pending`, which is labelled EXPLORATION ONLY |
 | `pid_graph/vision_checks.py` | Vision against the registers: tag regions per sheet, derived flow vs pid_audit, instrument's line, drawn trips vs C&E, fail position, loop membership (exceptions X30–X36). Derived `FEEDS` are reported, never written |
 | `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
@@ -217,11 +218,17 @@ below 0.85 confidence. pid-to-kg's own `eval_kg.py`: tags P 0.913 R 1.0, flow 1.
 vector sheet (allowing one alias) and 81 of 81 on a 150 dpi scan; instrument placement 2 of 5 and 12 of 12; flow not scoreable on
 isolated sheets. T5 flag rate 0.388 and 0.248 against 0.219 for U-100 without a master. Details and caveats in `docs/STRESS_TEST.md`.
 
+**DEXPI class** (informative, with the vision layer on): 17 existing nodes carry `dexpiClass` (V-1002 Vessel; HV-1001 BallValve; 5 OperatedValve;
+10 ProcessInstrumentationFunction) and all 6 InlineItems; none was seen without a class.
+
+**Plant summary** (`summary_U-100.md`, nothing accepted): header says 152 vision facts are left out; flow BL-100 → L-101 → V-1002 and V-1002 to
+BL-200, BL-103, FLARE-HDR; three index loops (FIC-1004, LIC-1006, PIC-1005); three SIFs; no segment-level flow or drawn loop yet.
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 271 collected; 271 passed with Neo4j up on port 7688 (10 Nov 2026); 5 are skipped when Neo4j is down. After Phase 8 it was 258. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 282 collected; 282 passed with Neo4j up on port 7688 (10 Nov 2026); 6 are skipped when Neo4j is down. After Phase 9 it was 271. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

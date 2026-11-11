@@ -17,7 +17,7 @@ def node_key(label: str, key: dict) -> tuple:
 
 # Provenance-like properties that describe where a fact came from, not the fact itself.
 # They never count as property conflicts.
-NOT_A_FACT = set(O.PROVENANCE) | {"source_ref", "source_file", "stub_unit"}
+NOT_A_FACT = set(O.PROVENANCE) | {"source_ref", "source_file", "stub_unit", "dexpiClass_source"}
 
 
 @dataclass

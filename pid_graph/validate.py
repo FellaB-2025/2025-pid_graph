@@ -29,6 +29,10 @@ CHECKS = [
     ("nodes without provenance", "MATCH (n) WHERE n.source_doc IS NULL OR n.extracted_by IS NULL OR n.load_run IS NULL RETURN labels(n)[0] AS label, coalesce(n.tag, n.line_no, n.alarm_id, n.doc_no) AS id", {}),
     ("relationships without provenance", "MATCH ()-[e]->() WHERE e.source_doc IS NULL OR e.extracted_by IS NULL RETURN type(e) AS type, count(*) AS n", {}),
     ("duplicate instrument tags (case/format)", "MATCH (n:Instrument) WITH toUpper(replace(n.tag, '-', '')) AS k, collect(n.tag) AS tags WHERE size(tags) > 1 RETURN k, tags", {}),
+    ("in-line items with no DEXPI class (v1.3, informative)",
+     "MATCH (n:InlineItem) WHERE n.dexpiClass IS NULL RETURN n.item_id AS id, n.kind AS kind, n.source_doc AS drawing ORDER BY id", {}),
+    ("equipment and instruments carrying a DEXPI class from vision (v1.3, informative; those vision saw without one are in the load report)",
+     "MATCH (n) WHERE (n:Equipment OR n:Instrument) AND n.dexpiClass_source IS NOT NULL RETURN labels(n)[0] AS label, n.dexpiClass AS class, count(*) AS n ORDER BY label, class", {}),
     ("stub nodes remaining", "MATCH (n) WHERE n.stub = true RETURN labels(n)[0] AS label, coalesce(n.tag, n.line_no, n.doc_no) AS id, n.source_doc AS referenced_on ORDER BY label, id", {}),
 ]
 

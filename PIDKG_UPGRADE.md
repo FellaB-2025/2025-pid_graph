@@ -343,6 +343,17 @@ As run (10 Nov 2026) — a **pilot**, not the whole of this phase:
 2. `reports/summary_<unit>.md`: equipment-level flow, instruments with locations, loops, SIFs with initiators and final elements, alarms.
    Generated from the governed graph under the T7 filter, with a header stating the unit, document revisions and the count of pending facts left out.
 
+As built (10 Nov 2026):
+- `dexpiClass` is on every `InlineItem`, and on the existing `Equipment` / `Instrument` nodes vision saw, with `dexpiClass_source` naming the drawing it came from.
+  This is the one thing the loader adds to a v1.2 node. Nothing else about the node changes, its own provenance is untouched, and no template or report reads the property.
+  A different class from another sheet is a recorded conflict, never an overwrite. Nodes vision did not see, and boundaries mapped onto stubs, get none.
+- Nodes vision saw with no class are listed by the loader (`no_dexpi_class`, in the load report). `validate.py` has two checks: in-line items with no class, and a
+  count of classes carried by equipment and instruments.
+- `pid_graph/summary.py` writes `summary_<unit>.md`; the pipeline writes it into `--out` on every run. It is built by fixed rules from `records.TrustedView`,
+  not by a model, so the same graph always gives the same text. Sections: source documents and revisions, equipment-level flow (pid_audit, and accepted
+  segment-level flow), instruments and locations, loops (per the index, and as drawn once accepted), SIFs, alarms, open exceptions.
+- Verified on `neo4j-pidgraph`: the summary from Neo4j equals the summary from the in-memory store, with everything pending and with 72 facts accepted / 1 rejected.
+
 ### Phase 11 — Close out
 1. Update `CLAUDE.md` (lists, files, known-good answers), the ontology doc and the README cheat sheet.
 2. `git tag v1.3.0`.

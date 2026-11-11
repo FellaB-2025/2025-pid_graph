@@ -47,7 +47,10 @@ Also: an index instrument that vision did not find on any drawing it is SHOWN_ON
 Tags are normalised with pid_graph's own normaliser (tags.canonical_tag), not pid-to-kg's.
 Every fact written carries extracted_by=pidkg_vision, review=pending (or the decision passed
 in from the review register; a rejected fact is not written), confidence, fact_id and full
-provenance. Existing v1.2 nodes are never created, changed or re-witnessed by this loader.
+provenance. Existing v1.2 nodes are never created or re-witnessed by this loader, and the only
+thing it adds to one is the informative pair dexpiClass / dexpiClass_source (Phase 10): the
+DEXPI class pid-to-kg gave what it saw, and which drawing that came from. A different class
+from another sheet is a recorded conflict, never an overwrite. Nothing reads dexpiClass.
 """
 from __future__ import annotations
 
@@ -280,6 +283,8 @@ def reconcile(pidkg_graph: dict, index: set[str], existing_graph, *, unit: str, 
             extra = {"line_no": ident.rsplit(".", 1)[0], "size": a.get("size") or NOT_STATED, "service": a.get("service") or NOT_STATED}
         elif label == "InlineItem":
             extra = {"kind": n.get("kind") or "other", "normal_position": a.get("normal_position") or NOT_STATED, "indexed": False}
+            if n.get("dexpi_class"):
+                extra["dexpiClass"] = n["dexpi_class"]
         else:
             extra = {"loop_type": a.get("loop_type") or n.get("kind") or NOT_STATED, "variable": a.get("variable") or NOT_STATED}
         p = props(sh, label, ident, "", n.get("confidence"), ref_of(n, sh), unit=unit, **extra)
@@ -455,7 +460,20 @@ def reconcile(pidkg_graph: dict, index: set[str], existing_graph, *, unit: str, 
                      and sheet[p["sheet"]]["doc_no"] == sh["doc_no"]), None)
         if bbox:
             locations.setdefault(f"{label} {ident}", {"doc_no": sh["doc_no"], "page": sh["page"], "bbox": list(bbox)})
-    return {"locations": locations, "pages": {s["doc_no"]: s["page"] for s in sheet.values()},
+    # DEXPI class (informative): onto the existing Equipment / Instrument nodes vision saw, and listed where it gave none.
+    node_props, no_class = [], []
+    for nid, (label, ident) in target.items():
+        n = nodes[nid]
+        if label == "InlineItem" or (label in ("Equipment", "Instrument") and n["type"] in ("Equipment", "Instrument", "Component")):
+            if not n.get("dexpi_class"):
+                no_class.append(f"{label} {ident}")
+            elif label != "InlineItem":
+                node_props.append({"label": label, "key": _k(label, ident),
+                                   "props": {"dexpiClass": n["dexpi_class"], "dexpiClass_source": f"{O.VISION} {home(n)['doc_no']}"}})
+    summary["dexpi_classes"] = len(node_props)
+    summary["no_dexpi_class"] = sorted(no_class)
+    return {"node_props": node_props, "no_dexpi_class": sorted(no_class),
+            "locations": locations, "pages": {s["doc_no"]: s["page"] for s in sheet.values()},
             "nodes": list(out_nodes.values()), "rels": list(out_rels.values()),
             "exceptions": sorted(exceptions, key=lambda x: (int(x["code"][1:]), x["id"])), "conflicts": conflicts,
             "skipped": dict(sorted(skipped.items())), "seen": {t: sorted(d) for t, d in sorted(seen.items())},
@@ -468,6 +486,18 @@ def apply(store: MemoryStore, result: dict) -> dict:
         store.merge_node(n["label"], n["key"], n["props"])
     for r in result["rels"]:
         store.merge_rel(r["type"], r["start_label"], r["start_key"], r["end_label"], r["end_key"], r["props"])
+    for x in result.get("node_props", []):
+        node = store.get_node(x["label"], x["key"])
+        if node is None:
+            continue
+        p, new = node["props"], x["props"]
+        if not p.get("dexpiClass"):
+            p.update(new)                                    # informative only; the node's own provenance is not touched
+        elif p["dexpiClass"] != new["dexpiClass"]:
+            c = Conflict(x["label"], dict(x["key"]), "dexpiClass", str(p["dexpiClass"]), str(new["dexpiClass"]),
+                         str(p.get("dexpiClass_source", "")), new["dexpiClass_source"])
+            if c not in store.conflicts:
+                store.conflicts.append(c)
     have = {json.dumps(c.__dict__, sort_keys=True, default=str) for c in store.conflicts}
     for c in result["conflicts"]:
         if json.dumps(c, sort_keys=True, default=str) not in have:

@@ -350,7 +350,9 @@ def test_dry_run_changes_nothing_and_apply_twice_changes_nothing_more(pidkg):
 def test_v12_part_of_the_graph_is_untouched_by_apply(pidkg):
     res, store = _run(pidkg)
     LP.apply(store, res)
-    v12 = {"nodes": [n for n in store.nodes() if n["label"] not in NEW_LABELS],
+    # Phase 10 adds the informative dexpiClass pair to nodes vision saw; everything else about a v1.2 node is untouched
+    plain = lambda n: {**n, "props": {k: v for k, v in n["props"].items() if k not in ("dexpiClass", "dexpiClass_source")}}
+    v12 = {"nodes": [plain(n) for n in store.nodes() if n["label"] not in NEW_LABELS],
            "rels": [r for r in store.rels() if r["props"].get("extracted_by") != "pidkg_vision"], "conflicts": []}
     assert (json.dumps(v12, indent=1, default=str) + "\n").encode() == V12_DUMP.read_bytes().replace(b"\r\n", b"\n")
 

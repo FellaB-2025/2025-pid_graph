@@ -314,3 +314,10 @@
   Tags agree well (Virden scan 81 of 81); flow is not scoreable on isolated sheets; T5 flag rate 0.388 / 0.248.
 - OPEN for Alan: gold files are not engineer-checked; decide whether to run the other 23 sheets (about 2.5 M tokens);
   no OCR on this machine.
+- Phase 10, branch `v1.3/phase-10-summary`: `dexpiClass` carried onto InlineItems and onto the existing Equipment /
+  Instrument nodes vision saw (with `dexpiClass_source`; informative, read by nothing; a differing class is a conflict);
+  loader lists nodes seen with no class; two `validate.py` checks. `pid_graph/summary.py` writes `summary_<unit>.md`
+  from the trusted view (T7), rule-based, stating how many vision facts were left out; the pipeline writes it on every
+  run. `tests/test_v13_phase10.py` (11 cases); one Phase 4 test now ignores the dexpiClass pair when it compares v1.2
+  nodes. Verified on `neo4j-pidgraph` all-pending and with 72 accepted / 1 rejected; database restored to all-pending
+  (and now carries dexpiClass). 282 passed.
