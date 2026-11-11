@@ -23,16 +23,27 @@ kg_suppression's `load_pid.py`, and the pid-to-kg repository at the pinned commi
 **Not** written from the pid_graph source itself. So file names inside pid_graph are unknown to this plan.
 Phase 0 exists to close that gap. Where this plan and the repo disagree, the repo wins: stop and report.
 
-### Assumed v1.2 baseline (verify in Phase 0)
-- Labels seen in the U-100 dump (7): `Document, Instrument, Line, Equipment, Alarm, SIF, Scenario`
-- Relationship types seen (12): `SHOWN_ON, INSTALLED_ON, MEASURES, FEEDS, PROTECTS, INITIATES, CREDITS, ACTUATES,
-  GENERATES, THREATENS, COMPENSATES_FOR, RAISES`
+**Phase 0 was run on 10 Nov 2026** and this file was corrected against the repo the same day: baseline, competency-question
+numbers, vocabulary, the anchoring and pid_audit assumptions, and the review register location. The findings and the
+remaining differences are in `docs/V1_3_INVENTORY.md`.
+
+### v1.2 baseline (verified in Phase 0)
+The baseline is the **v1.2 schema** as stated in `README.md`, `PID_GRAPH_ONTOLOGY_V1_2.md` and `pid_graph/ontology.py` —
+not the set of labels that happen to appear in the U-100 dump.
+- Labels (8): `Instrument, Equipment, Line, SIF, Alarm, State, Document, Scenario`
+- Relationships (15): `MEASURES, INSTALLED_ON, FEEDS, INITIATES, ACTUATES, PROTECTS, RAISES, CASCADES_TO, GENERATES,
+  VALID_IN, HAS_STATE, COMPENSATES_FOR, CREDITS, THREATENS, SHOWN_ON`
+- The U-100 dump shows only 7 labels and 12 relationships, because nothing in the dummy documents produces `State`,
+  `CASCADES_TO`, `VALID_IN` or `HAS_STATE`. All four are in the closed schema and keep their v1.2 meaning.
 - Dump shape: `{"nodes": [{label, key, props}], "rels": [{type, start_label, start_key, end_label, end_key, props}], "conflicts": []}`
-- Provenance on every node and rel: `source_doc, source_rev, source_sheet, extracted_by, load_run, source_ref`
-  (`extracted_by` is one of `table`, `manual`, `pid_audit` today); nodes also carry `stub`
-- Topology today is line-level: `FEEDS` Equipment→Line→Equipment from `pid_audit_U100_topology.csv`, with a `confidence`
+- Provenance on every node and relationship: `source_doc, source_rev, source_sheet, extracted_by, load_run, source_ref`
+  (`extracted_by` is one of `pid_audit`, `llm`, `manual`, `table`; U-100 uses `table`, `manual` and `pid_audit`); nodes also carry `stub`
+- Topology today is line-level: `FEEDS` Equipment→Line→Equipment from `data/pid_audit_U100_topology.csv`, with a `confidence`
 - Valves are `Instrument` with a `role` (`final_element`, `manual_valve`, …)
 - Ontology document: `PID_GRAPH_ONTOLOGY_V1_2.md`
+- Competency questions CQ1–CQ13 already exist (CQ9–CQ10 from v1.1, CQ11–CQ13 from v1.2)
+- **Not in the repo** (Phase 0 finding): CFIHOS / QUDT reference-data anchoring, and pid_audit itself. Only pid_audit's
+  topology export format is known, from the dummy CSV. There is no text-layer tag extraction and no PDF markup code.
 
 ### Rules for this build
 1. One phase = one commit. Tests first. `python -m pytest -q` green before every commit.
@@ -56,15 +67,18 @@ Phase 0 exists to close that gap. Where this plan and the repo disagree, the rep
 | Reconciliation + exception register + `conflicts` | Instrument tap located on an exact segment |
 | C&E, SRS, LOPA layers; `COMPENSATES_FOR` curation | Flow direction marked `shown` or `inferred` |
 | Provenance properties on every fact | `unreadable` list instead of guessing |
-| CFIHOS / QUDT reference-data anchoring | Off-page connector pairing across sheets |
+| Title-block reader: drawing number + revision per sheet | Off-page connector pairing across sheets |
 | Fixed Cypher templates for safety-relevant queries | Drawn signal lines and ISA-loop grouping |
 | Gold-set eval, tagged baselines | Page classification, tiling, scan enhancement, OCR hints |
-| pid_audit text-layer tags + PDF markup | Confidence scale (0.95 / 0.85 / 0.7 / 0.5), DEXPI class, LLM plant summary |
+| pid_audit topology export (CSV) as the v1.2 `FEEDS` source | Confidence scale (0.95 / 0.85 / 0.7 / 0.5), DEXPI class, LLM plant summary |
 
 Deliberately **not** adopted:
-- Their derived `TRIPS` and `ACTUATES` edges. In pid_graph, SIF logic comes from the C&E and SRS only. A drawn trip signal is
+- Their derived `TRIPS` and `ACTUATES` relationships. In pid_graph, SIF logic comes from the C&E and SRS only. A drawn trip signal is
   used as a *cross-check* against the C&E (Phase 6), never as a source of `INITIATES` / `ACTUATES`.
 - Tag-as-id merging without a master list. The index still decides which tagged nodes exist.
+- Their `CASCADES_TO` and their state-like items (anything resembling `HAS_STATE` / `State`). pid_graph v1.2 already owns
+  those names with a different meaning: `CASCADES_TO` is SIF → SIF ESD hierarchy from the C&E, and `HAS_STATE` / `VALID_IN`
+  are reserved for the suppression design. pid-to-kg's are **not mapped** onto ours. Skipped and counted.
 - DuckDB as the store. pid_graph keeps its own backends; pid-to-kg's `graph.json` is read as an input file only.
 
 ---
@@ -72,6 +86,8 @@ Deliberately **not** adopted:
 ## 2. Ontology v1.3 (additive)
 
 Write `PID_GRAPH_ONTOLOGY_V1_3.md` as v1.2 plus the items below. Nothing in v1.2 is removed or renamed.
+Labels 8 → 11; relationships 15 → 19. Checked in Phase 0: none of the 3 new labels or 4 new relationships clashes with a
+v1.2 name.
 
 ### 2.1 New labels (3)
 
@@ -88,35 +104,36 @@ Rules:
 - Off-page connectors are **not** nodes. A paired connector becomes one `FLOWS_TO` with `off_page=true`. An unpaired one is an exception.
 - Battery limits and headers stay `Equipment` as in v1.2 (`BL-100`, `FLARE-HDR`). pid-to-kg `Boundary` nodes map onto them by name, else exception.
 
-### 2.2 New relationship types (4)
+### 2.2 New relationships (4)
 
-| Type | From → To | Props |
+| Relationship | From → To | Props |
 |---|---|---|
 | `SEGMENT_OF` | Segment → Line | — |
 | `FLOWS_TO` | Segment / Equipment / Instrument (in-line or valve) / InlineItem → same set | `flow_direction` (`shown`/`inferred`), `off_page`, `confidence`, `review` |
 | `SIGNAL_TO` | Instrument → Instrument / Equipment | `signal_type`, `purpose` (`control`, `measurement`, `trip`, `alarm`, `status`, `unknown`), `confidence`, `review` |
 | `MEMBER_OF` | Instrument → ControlLoop | `role` (`sensor`, `controller`, `relay`, `final_element`) |
 
-### 2.3 Existing types with a wider range
-- `MEASURES`: Instrument → **Segment** now allowed, alongside the v1.2 Instrument → Line / Equipment. The index-sourced Line edge stays;
-  the Segment edge is added beside it with its own provenance.
+### 2.3 Existing relationships with a wider range
+- `MEASURES`: Instrument → **Segment** now allowed, alongside the v1.2 Instrument → Line / Equipment. The index-sourced Line relationship stays;
+  the Segment relationship is added beside it with its own provenance.
 - `INSTALLED_ON`: Instrument (valve) → **Segment** allowed, same rule.
 - `FEEDS`: unchanged. A second, **derived** `FEEDS` set is computed by walking `FLOWS_TO` (props `derived=true`, `via_lines`), and is
-  compared against the v1.2 `FEEDS` from `pid_audit_*_topology.csv` in Phase 6. Disagreement is a `conflict`, never a silent overwrite.
+  compared against the v1.2 `FEEDS` from `data/pid_audit_*_topology.csv` in Phase 6. Disagreement is a `conflict`, never a silent overwrite.
 
 ### 2.4 New provenance values and the review property
 - `extracted_by="pidkg_vision"` on everything this loader writes. `source_ref` = `<pdf>:p<page>:bbox=<x0,y0,x1,y1>`.
 - `confidence` carried through unchanged from pid-to-kg.
 - `review` ∈ `pending | accepted | rejected`. Default `pending` for every `pidkg_vision` fact.
-- `dexpiClass` on Equipment / Instrument / InlineItem, beside the existing CFIHOS `refClass`. Informative only.
+- `dexpiClass` on Equipment / Instrument / InlineItem, as a standalone property. Informative only. (There is no CFIHOS
+  `refClass` or any other reference-data anchoring in the repo to sit beside; none is built by this plan.)
 
-### 2.5 New competency questions (add to the existing eight)
-- CQ9 **Isolation**: which valves (tagged or not) sit between instrument X's tap and the next equipment, each way?
-- CQ10 **Same-pressure-system candidates**: which other instruments sense a segment reachable from sensor X without crossing a
+### 2.5 New competency questions (add to the existing thirteen, CQ1–CQ13)
+- CQ14 **Isolation**: which valves (tagged or not) sit between instrument X's tap and the next equipment, each way?
+- CQ15 **Same-pressure-system candidates**: which other instruments sense a segment reachable from sensor X without crossing a
   closed-in-normal-operation or actuated valve? (Feeds the compensating-measure *candidate* list. Curation stays manual.)
-- CQ11 **MOC blast radius**: everything downstream of valve or segment X up to the next equipment, and every loop and SIF that touches it.
-- CQ12 **Loop membership**: for final element X — its loop, its sensor, and the segment the sensor measures.
-- CQ13 **Drawing vs C&E**: every drawn `purpose=trip` signal with no matching `INITIATES`/`ACTUATES`, and every C&E cause/effect
+- CQ16 **MOC blast radius**: everything downstream of valve or segment X up to the next equipment, and every loop and SIF that touches it.
+- CQ17 **Loop membership**: for final element X — its loop, its sensor, and the segment the sensor measures.
+- CQ18 **Drawing vs C&E**: every drawn `purpose=trip` signal with no matching `INITIATES`/`ACTUATES`, and every C&E cause/effect
   with no drawn trip signal.
 
 ---
@@ -127,17 +144,22 @@ Rules:
 |---|---|
 | T1 | Index is master. A tagged pid-to-kg node whose normalised tag is not in the index → exception `on P&ID (vision), not in index`. No node. |
 | T2 | Index tag never seen by vision on any sheet it is `SHOWN_ON` → exception `in index, not found on P&ID (vision)`. |
-| T3 | Three-way tag check per sheet: index ∩ pid_audit text layer ∩ vision. Report each of the seven regions; only the centre is clean. |
+| T3 | Tag check per sheet: index vs vision only (pid_audit's text-layer tags are not available in this repo). Report the three regions — both, index only, vision only; only "both" is clean. |
 | T4 | Every `pidkg_vision` fact is written with `review=pending`. |
-| T5 | Auto-flag for priority review: `confidence < 0.85`, `flow_direction=inferred`, `off_page=true`, any edge touching an `InlineItem`. |
+| T5 | Auto-flag for priority review: `confidence < 0.85`, `flow_direction=inferred`, `off_page=true`, any relationship touching an `InlineItem`. |
 | T6 | Items in pid-to-kg's `unreadable` list and every pid-to-kg QA `error` / `warning` → one exception row each. Never a node. |
 | T7 | **Safety-relevant Cypher templates traverse only facts where `extracted_by IN ['table','manual','pid_audit'] OR review='accepted'`.** Exploratory templates may use `pending` facts, and must say so in their output header. |
 | T8 | A `rejected` fact stays in the review register (with reviewer and reason) and is removed from the graph on the next load. |
 
-Review register: `registers/topology_review_<unit>.csv`, one row per `pidkg_vision` edge and node —
+Review register: `reports/review_register_<unit>.xlsx`, beside `reports/exception_register_<unit>.xlsx` and in the same
+format (openpyxl workbook; a `Summary` sheet of metric / value, then a `Review` sheet with a bold header row). One row per
+`pidkg_vision` relationship and node —
 `fact_id, type, from, to, sheet, bbox, confidence, flags, review, reviewer, reviewed_on, comment`.
 The loader reads it back on every run, so a decision survives a re-extraction (match on `fact_id` = stable hash of type + endpoints + sheet).
-Also emit the pid_audit-style colour-coded PDF markup for pending facts, so review is done on the drawing, not in a spreadsheet alone.
+Unlike the exception register it is an input as well as an output: it is never overwritten blind, and it is the one file in
+`reports/` that is committed (`.gitignore` makes the exception for `reports/review_register_*.xlsx`).
+Also emit a colour-coded PDF markup of pending facts, so review is done on the drawing, not in a spreadsheet alone.
+The markup is written fresh with PyMuPDF in Phase 5; there is no pid_audit markup code to re-use.
 
 ---
 
@@ -145,7 +167,7 @@ Also emit the pid_audit-style colour-coded PDF markup for pending facts, so revi
 
 ### Phase 0 — Inventory and baseline (no code changes)
 1. Read `CLAUDE.md`, `PID_GRAPH_ONTOLOGY_V1_2.md`, the decisions doc and the loaders.
-2. Run the tests and the U-100 build. Confirm the dump matches the "assumed baseline" above (labels, types, provenance keys).
+2. Run the tests and the U-100 build. Confirm the dump matches the baseline above (labels, relationships, provenance keys).
 3. `git tag v1.2-baseline`.
 4. Write `docs/V1_3_INVENTORY.md`: actual file names for the loaders, the exception register, the Cypher templates, the eval and the gold set; any difference from this plan's assumptions.
 5. **Stop and report if a label or relationship in section 2 already exists with a different meaning.**
@@ -154,8 +176,8 @@ Done when: tag exists, inventory committed, tests green.
 
 ### Phase 1 — Ontology v1.3 on paper and in the validators
 1. `PID_GRAPH_ONTOLOGY_V1_3.md` (section 2). Update the closed lists in `CLAUDE.md`.
-2. Extend the schema/validators: 3 labels, 4 types, widened ranges, `review`, the `InlineItem` safety-edge ban.
-3. Tests: a made-up five-node graph per new label/type; a test that an `InlineItem` on an `INITIATES` edge is refused.
+2. Extend the schema/validators: 3 labels, 4 relationships, widened ranges, `review`, the `InlineItem` safety-relationship ban.
+3. Tests: a made-up five-node graph per new label/relationship; a test that an `InlineItem` on an `INITIATES` relationship is refused.
 
 Done when: v1.2 dump unchanged byte-for-byte; new validators tested.
 
@@ -197,7 +219,7 @@ A pure `reconcile(pidkg_graph, index, existing_graph) -> {nodes, rels, exception
 | `SIGNAL_TO` | `SIGNAL_TO` |
 | `MEMBER_OF` | `MEMBER_OF` |
 | `FEEDS` (derived) | not loaded; pid_graph derives its own in Phase 6 |
-| `ACTUATES`, `TRIPS`, `CASCADES_TO`, `PART_OF` | skipped by design; counted. `TRIPS` is kept in memory for the Phase 6 cross-check |
+| `ACTUATES`, `TRIPS`, `CASCADES_TO`, `PART_OF`, any state-like node or relationship | skipped by design; counted. Never mapped onto pid_graph's own `ACTUATES`, `CASCADES_TO`, `HAS_STATE` or `State`. `TRIPS` is kept in memory for the Phase 6 cross-check |
 | `issues`, per-sheet `unreadable` | exception rows (T6) |
 
 Also: normalise tags with pid_graph's own normaliser, not theirs; idempotent `--apply`; every written fact gets
@@ -207,28 +229,28 @@ Tests: on the Phase 3 fixture — every row of the table above has a case; count
 running `--apply` twice changes nothing; with the loader off the v1.2 dump is byte-identical.
 
 ### Phase 5 — Review register, gate and markup
-1. Write/read `registers/topology_review_<unit>.csv` (section 3). Priority flags per T5.
-2. PDF markup of pending facts (re-use pid_audit's markup code): green accepted, amber pending, red rejected / exception.
+1. Write/read `reports/review_register_<unit>.xlsx` (section 3). Priority flags per T5.
+2. PDF markup of pending facts, written fresh with PyMuPDF (already a dependency; nothing to re-use): green accepted, amber pending, red rejected / exception.
 3. Add the T7 filter to every safety-relevant template. Test: a `pending` segment is invisible to a safety template and visible to an exploratory one.
 
 ### Phase 6 — Reconciliation checks (the part neither tool has alone)
 Each check writes rows to the exception register or `conflicts`, with both sources named:
-1. Three-way tag check (T3).
-2. Derived `FEEDS` (walk `FLOWS_TO`) vs v1.2 `FEEDS` from `pid_audit_*_topology.csv`.
+1. Tag check, index vs vision (T3).
+2. Derived `FEEDS` (walk `FLOWS_TO`) vs v1.2 `FEEDS` from `data/pid_audit_*_topology.csv`.
 3. Instrument's Line per the index vs the Line of the Segment vision placed it on.
-4. Drawn trip signals vs C&E `INITIATES` / `ACTUATES` (CQ13).
+4. Drawn trip signals vs C&E `INITIATES` / `ACTUATES` (CQ18).
 5. Valve fail position / actuator as drawn vs the index remarks (e.g. "Fail open").
 6. Loop membership from drawn signals vs the index `loop` column.
 
 Test fixture: a hand-edited copy of the Phase 3 `graph.json` with exactly one of each discrepancy, in the style of kg_suppression's `ce_chart_K101_rev_B.csv`.
 
-### Phase 7 — Cypher templates for CQ9–CQ13
+### Phase 7 — Cypher templates for CQ14–CQ18
 Fixed, parameterised templates plus the memory-backend equivalents, each with a test asserting both backends agree on U-100.
-CQ10 output is headed "candidates for curation — not compensating measures" and never writes `COMPENSATES_FOR`.
+CQ15 output is headed "candidates for curation — not compensating measures" and never writes `COMPENSATES_FOR`.
 
 ### Phase 8 — Eval
 1. Extend the U-100 gold set: every Segment-level instrument placement, every equipment-level flow pair, every loop and its members.
-2. `eval/topology_eval.py`: precision / recall for tags, flow edges and loops; instrument-placement accuracy; share of facts flagged by T5;
+2. `eval/topology_eval.py`: precision / recall for tags, flow relationships and loops; instrument-placement accuracy; share of facts flagged by T5;
    review workload (pending count per sheet).
 3. Also run pid-to-kg's own `scripts/eval_kg.py` against a gold file in its format, so the two scores can be compared.
 4. Record the baseline numbers in `CLAUDE.md`. No pass threshold is set in this plan: Alan sets it after seeing the first run.
@@ -242,7 +264,7 @@ CQ10 output is headed "candidates for curation — not compensating measures" an
    original owners' terms. Commit only the scores and a short `docs/STRESS_TEST.md`.
 
 ### Phase 10 — DEXPI class and plant summary
-1. Carry `dexpi_class` into `dexpiClass` (section 2.4). Extend the anchoring check to list nodes with a CFIHOS class and no DEXPI class, and the reverse.
+1. Carry `dexpi_class` into `dexpiClass` (section 2.4) as a standalone property. There is no anchoring check to extend: add one validator check listing Equipment / Instrument / InlineItem nodes seen by vision with no `dexpiClass`.
 2. `reports/summary_<unit>.md`: equipment-level flow, instruments with locations, loops, SIFs with initiators and final elements, alarms.
    Generated from the governed graph under the T7 filter, with a header stating the unit, document revisions and the count of pending facts left out.
 
@@ -251,14 +273,14 @@ CQ10 output is headed "candidates for curation — not compensating measures" an
 2. `git tag v1.3.0`.
 3. Regenerate `reports/graph_U-100.json` and confirm kg_suppression still passes against it:
    `cd ..\..\kg_suppression ; python load_pid.py ..\ai-engineering-tools\pid_graph\reports\graph_U-100.json ; python -m pytest -q`
-   Its `load_pid.py` skips unknown labels and relationship types by design (they are counted under "skipped by design"), so the new
+   Its `load_pid.py` skips unknown labels and relationships by design (they are counted under "skipped by design"), so the new
    `Segment`, `InlineItem`, `ControlLoop`, `FLOWS_TO`, `SIGNAL_TO`, `MEMBER_OF`, `SEGMENT_OF` and Segment-level `MEASURES` should arrive as skips. Confirm that, do not assume it.
 
 ### Later (separate plan, not this build)
 - kg_suppression: use accepted Segment topology to *propose* the `MEASURES` Instrument→Equipment rows that today come back as
   "measures a Line only" exceptions. Proposals to a review CSV, never straight to `nodes.csv` / `edges.csv`.
 - soe_recon: `FLOWS_TO` order as a plausibility check on causal chains.
-- Compensating-measure candidate ranking from CQ10 plus alarm priority and setpoint margin.
+- Compensating-measure candidate ranking from CQ15 plus alarm priority and setpoint margin.
 
 ---
 
