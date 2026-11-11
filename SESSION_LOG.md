@@ -334,3 +334,6 @@
 - OPEN FOR ALAN: review the register (nothing is usable by the safety templates until accepted); merge the branches
   to main; set eval pass thresholds; check the stress-test gold files; TT-1003 in `eval/gold_PID-100-001.json`;
   Python 3.12 for OCR; whether to run the other 23 public sheets.
+- 2026-11-10, after the tag: `main` fast-forwarded to `v1.3.0` at Alan's request (a8c4aa0); 289 passed on main.
+  The "main ends at the Phase 0 commit" notes above and in PIDKG_UPGRADE.md Phase 11 describe the state before
+  this. The phase branches are still there and can be deleted. Nothing is pushed; there is no remote.
