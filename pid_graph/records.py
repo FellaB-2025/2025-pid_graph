@@ -41,6 +41,8 @@ class MemoryStore:
     def merge_node(self, label: str, key: dict, props: dict, *, stub: bool = False) -> None:
         O.check_key(label, key)
         O.check_provenance(props, f"{label} {key}")
+        O.check_review(props, f"{label} {key}")
+        O.check_node_props(label, props)
         clean = {k: v for k, v in props.items() if v not in (None, "")}
         nk = node_key(label, key)
         if nk not in self._nodes:
@@ -69,6 +71,8 @@ class MemoryStore:
         O.check_key(start_label, start_key)
         O.check_key(end_label, end_key)
         O.check_provenance(props, f"{rel} {start_key}->{end_key}")
+        O.check_review(props, f"{rel} {start_key}->{end_key}")
+        O.check_rel_props(rel, props)
         sk, ek = node_key(start_label, start_key), node_key(end_label, end_key)
         if sk not in self._nodes or ek not in self._nodes:
             raise KeyError(f"{rel}: endpoint missing in store: {sk if sk not in self._nodes else ek}")

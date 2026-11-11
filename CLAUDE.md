@@ -49,11 +49,13 @@ documents are ever added.
 13. **Never commit** `.env`, credentials, `work/`, `third_party/`, `data/external/` or anything in
     `reports/` other than the review register.
 
-## 3. Closed lists (ontology v1.2)
+## 3. Closed lists (ontology v1.3)
 
-Source of truth: `PID_GRAPH_ONTOLOGY_V1_2.md`, transcribed in `pid_graph/ontology.py`.
+Source of truth: `PID_GRAPH_ONTOLOGY_V1_3.md`, transcribed in `pid_graph/ontology.py`. v1.3 is v1.2
+plus the rows marked v1.3; nothing in v1.2 changed meaning. The v1.3 rows are in the schema and the
+validators only: no loader writes them until Phase 4 of `PIDKG_UPGRADE.md`.
 
-### Labels (8)
+### Labels (11)
 
 | Label | Key |
 |---|---|
@@ -65,15 +67,18 @@ Source of truth: `PID_GRAPH_ONTOLOGY_V1_2.md`, transcribed in `pid_graph/ontolog
 | `State` | `state_id` |
 | `Document` | `doc_no` + `rev` (`doc_key = doc_no|rev` carries the constraint) |
 | `Scenario` | `scenario_id` |
+| `Segment` (v1.3) | `segment_id` (`<line_no>.<k>`); requires `line_no`, `size`, `service`, `review` |
+| `InlineItem` (v1.3) | `item_id` (`<doc_no>.<local>`); requires `kind`, `normal_position`, `indexed = false`, `review` |
+| `ControlLoop` (v1.3) | `loop_key`; requires `loop_type`, `variable`, `review` |
 
 `State` is in the schema but no loader writes it yet (waits for the suppression design).
 
-### Relationships (15)
+### Relationships (19)
 
 | Relationship | Direction |
 |---|---|
-| `MEASURES` | Instrument → Line / Equipment |
-| `INSTALLED_ON` | Instrument → Line / Equipment |
+| `MEASURES` | Instrument → Line / Equipment / Segment (Segment: v1.3) |
+| `INSTALLED_ON` | Instrument → Line / Equipment / Segment (Segment: v1.3) |
 | `FEEDS` | Line / Equipment → Line / Equipment |
 | `INITIATES` | Instrument → SIF |
 | `ACTUATES` | SIF → Instrument |
@@ -87,20 +92,30 @@ Source of truth: `PID_GRAPH_ONTOLOGY_V1_2.md`, transcribed in `pid_graph/ontolog
 | `CREDITS` | Scenario → SIF / Alarm / Instrument |
 | `THREATENS` | Scenario → Equipment / Line |
 | `SHOWN_ON` | any → Document |
+| `SEGMENT_OF` (v1.3) | Segment → Line |
+| `FLOWS_TO` (v1.3) | Segment / Equipment / Instrument / InlineItem → same set |
+| `SIGNAL_TO` (v1.3) | Instrument → Instrument / Equipment |
+| `MEMBER_OF` (v1.3) | Instrument → ControlLoop |
 
 `CASCADES_TO`, `VALID_IN` and `HAS_STATE` are in the schema but have no instances in U-100.
 
-Other closed values: `extracted_by` ∈ `pid_audit, llm, manual, table`; `Document.doc_type` ∈
-`PID, CE, IDX, CUR, SRS, LOPA`; unknown revision = `UNKNOWN`.
+An `InlineItem` can never start or end `INITIATES`, `ACTUATES`, `PROTECTS`, `CREDITS`,
+`COMPENSATES_FOR` or `GENERATES`; the validator refuses it.
 
-Competency questions CQ1–CQ13 are defined in the ontology document. The v1.3 upgrade adds
-CQ14–CQ18 (`PIDKG_UPGRADE.md`).
+Other closed values: `extracted_by` ∈ `pid_audit, llm, manual, table, pidkg_vision`;
+`review` ∈ `pending, accepted, rejected` (required on every `pidkg_vision` fact);
+`FLOWS_TO.flow_direction` ∈ `shown, inferred`; `SIGNAL_TO.purpose` ∈ `control, measurement, trip,
+alarm, status, unknown`; `MEMBER_OF.role` ∈ `sensor, controller, relay, final_element`;
+`Document.doc_type` ∈ `PID, CE, IDX, CUR, SRS, LOPA`; unknown revision = `UNKNOWN`.
+
+Competency questions CQ1–CQ18 are defined in the ontology document (CQ14–CQ18 are new in v1.3
+and have no templates yet).
 
 ## 4. Files
 
 | Path | What it is |
 |---|---|
-| `PID_GRAPH_ONTOLOGY_V1_2.md` | The closed schema and competency questions (v1 and v1.1 kept for the record) |
+| `PID_GRAPH_ONTOLOGY_V1_3.md` | The closed schema and competency questions (v1, v1.1 and v1.2 kept for the record) |
 | `PID_GRAPH_DECISIONS.md` | Reasoning and numbered decisions (D-P1-xx … D-P4-xx) |
 | `SESSION_LOG.md` | Running log for cold pickup |
 | `PIDKG_UPGRADE.md` | Plan for v1.2 → v1.3 (segment topology + vision extraction) |
@@ -119,7 +134,7 @@ CQ14–CQ18 (`PIDKG_UPGRADE.md`).
 | `pid_graph/explorer.py` | Self-contained HTML explorer with in-page assessments |
 | `pid_graph/report.py`, `oos.py` | Engineer reports (md + docx); out-of-service register |
 | `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set |
-| `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py` |
+| `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py`, `test_v13_phase1.py`; `tests/fixtures/graph_U-100_v1_2.json` is the frozen v1.2 dump |
 | `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py` |
 | `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/` |
 | `reports/` | Generated outputs (git-ignored): `exception_register_<unit>.xlsx`, `graph_<unit>.json`, `load_report_<unit>.json`, explorer, reports |
@@ -136,8 +151,10 @@ Commands are in `README.md`. The usual build:
 Re-verified on 10 Nov 2026 with the memory backend unless marked *(log)*, which means taken
 from `SESSION_LOG.md` (Neo4j, 9 Sep 2026) and not re-run.
 
-**Tests:** 45 collected; 41 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
-tests). The session log says 44.
+**Tests:** 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
+`test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
+it byte for byte with the frozen fixture.
 
 **Build** (command above): 49 nodes, 164 relationships, 0 conflicts. Identical to
 `reports/graph_U-100.json` apart from the `load_run` timestamp.

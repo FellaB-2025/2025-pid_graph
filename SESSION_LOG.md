@@ -220,3 +220,17 @@
   get the next OOS-<year>-NNN id. The sample register was reset to its two active demo entries after testing
   (the user had closed OOS-2026-042 themselves while trying the close command).
 - Vocabulary rule D-P4-06 applied: node/relationship on engineering surfaces, element on the handover page.
+
+## 2026-11-10 - Session 5 (Claude Code): v1.3 upgrade, Phases 0 and 1
+- Phase 0 (`PIDKG_UPGRADE.md`): git initialised, v1.2 as found tagged `v1.2-baseline`; `CLAUDE.md` and
+  `docs/V1_3_INVENTORY.md` written; plan corrected against the repo (CQ14-CQ18, 8 labels / 15 relationships
+  baseline, no anchoring or pid_audit code, review register in `reports/`). 41 passed, 4 skipped (Neo4j down).
+- Phase 1, branch `v1.3/phase-1-ontology`: `PID_GRAPH_ONTOLOGY_V1_3.md`; `ontology.py` gains Segment, InlineItem,
+  ControlLoop, SEGMENT_OF, FLOWS_TO, SIGNAL_TO, MEMBER_OF, Segment in the range of MEASURES / INSTALLED_ON,
+  `pidkg_vision`, `review`, required properties of the new labels, closed values on the new relationships and
+  the InlineItem safety-relationship ban; `records.py` calls the new checks; MCP `schema_reference` lists the
+  new relationships. `tests/test_v13_phase1.py` (88 cases) plus the frozen dump
+  `tests/fixtures/graph_U-100_v1_2.json`: the U-100 build is byte-identical to v1.2. 129 passed, 4 skipped.
+- Not verified: the 4 Neo4j tests (Neo4j not running). `ensure_schema` will create three more uniqueness
+  constraints (segment_id, item_id, loop_key) on the next neo4j run.
+- Open before Phase 3: the synthetic P&ID PDFs have no drawing graphics (inventory section 7, item 1).

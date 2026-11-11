@@ -220,9 +220,16 @@ def schema_reference() -> dict:
                "COMPENSATES_FOR": "Alarm -> SIF: curated compensating measure (engineering judgement only)",
                "CREDITS": "Scenario -> SIF/Alarm/Instrument: LOPA credits this layer (ipl_type, pfd; required_rrf/required_sil for the SIF) (v1.2)",
                "THREATENS": "Scenario -> Equipment/Line: what the LOPA scenario endangers (v1.2)",
-               "SHOWN_ON": "any -> Document: provenance as a traversable edge; identity includes source_doc"}
+               "SHOWN_ON": "any -> Document: provenance as a traversable edge; identity includes source_doc",
+               "SEGMENT_OF": "Segment -> Line: the segment is a stretch of this line (v1.3)",
+               "FLOWS_TO": "Segment/Equipment/Instrument/InlineItem -> same set: process flow at segment level "
+                           "(flow_direction shown/inferred, off_page, confidence, review) (v1.3)",
+               "SIGNAL_TO": "Instrument -> Instrument/Equipment: drawn signal line (signal_type, purpose, confidence, review); "
+                            "a cross-check only, never a source of INITIATES / ACTUATES (v1.3)",
+               "MEMBER_OF": "Instrument -> ControlLoop: loop membership (role) (v1.3)"}
     return {"labels": {l: list(k) for l, k in O.KEYS.items()}, "relationships": meaning,
             "provenance": list(O.PROVENANCE) + ["source_ref"], "extracted_by": list(O.EXTRACTED_BY),
+            "review": list(O.REVIEW),
             "document_types": list(O.DOC_TYPES), "exception_codes": TITLES}
 
 

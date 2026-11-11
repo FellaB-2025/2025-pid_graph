@@ -1,0 +1,4355 @@
+{
+ "nodes": [
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "doc_type": "PID",
+    "title": "FEED GAS INLET - INLET KO DRUM V-1002",
+    "unit": "U-100",
+    "file": "U100-PIDS-TX-0057.pdf",
+    "pages": [
+     2
+    ],
+    "sheets": 1,
+    "transmittal": "TX-0057",
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "source_sheet": "page 2",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-PIDS-TX-0057.pdf:p2",
+    "stub": false
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "doc_type": "PID",
+    "title": "FEED GAS INLET - PRESSURE CONTROL AND EXPORT",
+    "unit": "U-100",
+    "file": "U100-PIDS-TX-0057.pdf",
+    "pages": [
+     3
+    ],
+    "sheets": 1,
+    "transmittal": "TX-0057",
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "source_sheet": "page 3",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-PIDS-TX-0057.pdf:p3",
+    "stub": false
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "PID-100-003",
+    "rev": "A"
+   },
+   "props": {
+    "doc_type": "PID",
+    "title": "FEED GAS INLET - UTILITY CONNECTIONS",
+    "unit": "U-100",
+    "file": "U100-PIDS-TX-0057.pdf",
+    "pages": [
+     4
+    ],
+    "sheets": 1,
+    "transmittal": "TX-0057",
+    "source_doc": "PID-100-003",
+    "source_rev": "A",
+    "source_sheet": "page 4",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-PIDS-TX-0057.pdf:p4",
+    "stub": false
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "doc_type": "IDX",
+    "title": "Instrument index U100-INST-INDEX",
+    "unit": "U-100",
+    "file": "U100-INST-INDEX-Rev-B.xlsx",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PT-1001A"
+   },
+   "props": {
+    "type": "PT",
+    "role": "sensor",
+    "service": "Feed gas inlet pressure (SIS) - A",
+    "instrument_type": "Pressure transmitter",
+    "range": "0-100",
+    "units": "barg",
+    "io_type": "4-20 mA HART",
+    "system": "SIS",
+    "remarks": "2oo3 with PT-1001B/C",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:5",
+    "stub": false
+   }
+  },
+  {
+   "label": "Line",
+   "key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:5",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PT-1001B"
+   },
+   "props": {
+    "type": "PT",
+    "role": "sensor",
+    "service": "Feed gas inlet pressure (SIS) - B",
+    "instrument_type": "Pressure transmitter",
+    "range": "0-100",
+    "units": "barg",
+    "io_type": "4-20 mA HART",
+    "system": "SIS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:6",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PT-1001C"
+   },
+   "props": {
+    "type": "PT",
+    "role": "sensor",
+    "service": "Feed gas inlet pressure (SIS) - C",
+    "instrument_type": "Pressure transmitter",
+    "range": "0-100",
+    "units": "barg",
+    "io_type": "4-20 mA HART",
+    "system": "SIS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:7",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PT-1005"
+   },
+   "props": {
+    "type": "PT",
+    "role": "sensor",
+    "service": "Feed gas pressure control",
+    "instrument_type": "Pressure transmitter",
+    "range": "0-100",
+    "units": "barg",
+    "io_type": "4-20 mA HART",
+    "system": "BPCS",
+    "loop": "PIC-1005",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:8",
+    "stub": false
+   }
+  },
+  {
+   "label": "Line",
+   "key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:8",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PV-1005"
+   },
+   "props": {
+    "type": "PV",
+    "role": "final_element",
+    "service": "Feed gas pressure control valve",
+    "instrument_type": "Control valve",
+    "io_type": "4-20 mA",
+    "system": "BPCS",
+    "loop": "PIC-1005",
+    "remarks": "Fail open",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:9",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "LT-1002A"
+   },
+   "props": {
+    "type": "LT",
+    "role": "sensor",
+    "service": "Inlet KO drum level (SIS) - A",
+    "instrument_type": "Level transmitter (GWR)",
+    "range": "0-2000",
+    "units": "mm",
+    "io_type": "4-20 mA HART",
+    "system": "SIS",
+    "remarks": "2oo3 with LT-1002B/C",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:10",
+    "stub": false
+   }
+  },
+  {
+   "label": "Equipment",
+   "key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:10",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "LT-1002B"
+   },
+   "props": {
+    "type": "LT",
+    "role": "sensor",
+    "service": "Inlet KO drum level (SIS) - B",
+    "instrument_type": "Level transmitter (GWR)",
+    "range": "0-2000",
+    "units": "mm",
+    "io_type": "4-20 mA HART",
+    "system": "SIS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:11",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "LT-1006"
+   },
+   "props": {
+    "type": "LT",
+    "role": "sensor",
+    "service": "Inlet KO drum level control",
+    "instrument_type": "Level transmitter (DP)",
+    "range": "0-2000",
+    "units": "mm",
+    "io_type": "4-20 mA HART",
+    "system": "BPCS",
+    "loop": "LIC-1006",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:12",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "LV-1006"
+   },
+   "props": {
+    "type": "LV",
+    "role": "final_element",
+    "service": "Inlet KO drum level control valve",
+    "instrument_type": "Control valve",
+    "io_type": "4-20 mA",
+    "system": "BPCS",
+    "loop": "LIC-1006",
+    "remarks": "Fail close",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:13",
+    "stub": false
+   }
+  },
+  {
+   "label": "Line",
+   "key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:13",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "TT-1003"
+   },
+   "props": {
+    "type": "TT",
+    "role": "sensor",
+    "service": "Feed gas inlet temperature",
+    "instrument_type": "Temperature transmitter",
+    "range": "-50 to 150",
+    "units": "degC",
+    "io_type": "4-20 mA HART",
+    "system": "BPCS",
+    "remarks": "Indication only",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:14",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "FT-1004"
+   },
+   "props": {
+    "type": "FT",
+    "role": "sensor",
+    "service": "Feed gas inlet flow",
+    "instrument_type": "Ultrasonic flowmeter",
+    "range": "0-500",
+    "units": "t/h",
+    "io_type": "4-20 mA HART",
+    "system": "BPCS",
+    "loop": "FIC-1004",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:15",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "XV-1001"
+   },
+   "props": {
+    "type": "XV",
+    "role": "final_element",
+    "service": "Feed gas inlet ESD valve",
+    "instrument_type": "ESD ball valve",
+    "io_type": "24 VDC solenoid",
+    "system": "SIS",
+    "remarks": "Fail close, partial stroke test",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:16",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "XV-1002"
+   },
+   "props": {
+    "type": "XV",
+    "role": "final_element",
+    "service": "Inlet KO drum liquid outlet ESD valve",
+    "instrument_type": "ESD ball valve",
+    "io_type": "24 VDC solenoid",
+    "system": "SIS",
+    "remarks": "Fail close",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:17",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "BDV-1001"
+   },
+   "props": {
+    "type": "BDV",
+    "role": "final_element",
+    "service": "Inlet KO drum blowdown valve",
+    "instrument_type": "Blowdown valve",
+    "io_type": "24 VDC solenoid",
+    "system": "SIS",
+    "remarks": "Fail open",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:18",
+    "stub": false
+   }
+  },
+  {
+   "label": "Line",
+   "key": {
+    "line_no": "L-104"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:18",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "HV-1001"
+   },
+   "props": {
+    "type": "HV",
+    "role": "manual_valve",
+    "service": "Feed gas inlet manual isolation valve",
+    "instrument_type": "Manual ball valve",
+    "system": "LOCAL",
+    "remarks": "Upstream of XV-1001",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:19",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PI-1001"
+   },
+   "props": {
+    "type": "PI",
+    "role": "local_indicator",
+    "service": "Feed gas inlet pressure gauge",
+    "instrument_type": "Pressure gauge",
+    "range": "0-100",
+    "units": "barg",
+    "system": "LOCAL",
+    "remarks": "Local indication",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:20",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "LG-1002"
+   },
+   "props": {
+    "type": "LG",
+    "role": "local_indicator",
+    "service": "Inlet KO drum level gauge",
+    "instrument_type": "Magnetic level gauge",
+    "range": "0-2000",
+    "units": "mm",
+    "system": "LOCAL",
+    "remarks": "Local indication",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:21",
+    "stub": false
+   }
+  },
+  {
+   "label": "Alarm",
+   "key": {
+    "alarm_id": "PT-1001A.PAH"
+   },
+   "props": {
+    "alarm_tag": "PAH-1001",
+    "alarm_type": "PAH",
+    "setpoint": "62 barg",
+    "priority": "High",
+    "description": "Feed gas high pressure pre-alarm",
+    "system": "BPCS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:5",
+    "stub": false
+   }
+  },
+  {
+   "label": "Alarm",
+   "key": {
+    "alarm_id": "PT-1005.PAH"
+   },
+   "props": {
+    "alarm_tag": "PAH-1005",
+    "alarm_type": "PAH",
+    "setpoint": "60 barg",
+    "priority": "Medium",
+    "description": "Feed gas pressure high",
+    "system": "BPCS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:6",
+    "stub": false
+   }
+  },
+  {
+   "label": "Alarm",
+   "key": {
+    "alarm_id": "LT-1006.LAH"
+   },
+   "props": {
+    "alarm_tag": "LAH-1006",
+    "alarm_type": "LAH",
+    "setpoint": "75 %",
+    "priority": "High",
+    "description": "Inlet KO drum high level",
+    "system": "BPCS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:7",
+    "stub": false
+   }
+  },
+  {
+   "label": "Alarm",
+   "key": {
+    "alarm_id": "LT-1006.LAL"
+   },
+   "props": {
+    "alarm_tag": "LAL-1006",
+    "alarm_type": "LAL",
+    "setpoint": "15 %",
+    "priority": "Low",
+    "description": "Inlet KO drum low level",
+    "system": "BPCS",
+    "unit": "U-100",
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:8",
+    "stub": false
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "doc_type": "CE",
+    "title": "Cause & effect chart U100-CE-CHART",
+    "unit": "U-100",
+    "file": "U100-CE-CHART-Rev-A.xlsx",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx",
+    "stub": false
+   }
+  },
+  {
+   "label": "SIF",
+   "key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "description": "Feed gas high pressure protection of inlet KO drum",
+    "sil": "2",
+    "logic_solver": "SIS-LS-100",
+    "voting": "2oo3",
+    "unit": "U-100",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11",
+    "stub": false,
+    "functional_description": "On feed gas high-high pressure, close XV-1001 and open BDV-1001 to protect V-1002",
+    "hazard": "Overpressure of inlet KO drum V-1002; loss of containment",
+    "sil_srs": "2",
+    "rrf_target": "250",
+    "pfd_target": "0.004",
+    "demand_mode": "Low demand",
+    "safe_state": "XV-1001 closed, BDV-1001 open",
+    "process_safety_time": "120 s",
+    "response_time": "30 s",
+    "setpoint_srs": "65 barg",
+    "sensor_architecture": "2oo3 PT",
+    "fe_architecture": "1oo2 (XV-1001 or BDV-1001)",
+    "proof_test_interval": "12 months",
+    "bypass_conditions": "Bypass permitted for testing only, one channel at a time, with PAH-1005 confirmed active; max 8 h",
+    "manual_shutdown": "HS-1001 on panel",
+    "reset": "Manual, after cause cleared",
+    "logic_solver_srs": "SIS-LS-100",
+    "srs_ref": "U100-SRS-001-Rev-B.xlsx:1:5"
+   }
+  },
+  {
+   "label": "Alarm",
+   "key": {
+    "alarm_id": "PAHH-1001"
+   },
+   "props": {
+    "alarm_tag": "PAHH-1001",
+    "alarm_type": "PAHH",
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C14",
+    "stub": true
+   }
+  },
+  {
+   "label": "SIF",
+   "key": {
+    "sif_id": "SIF-100-02"
+   },
+   "props": {
+    "description": "Inlet KO drum high level - liquid carry-over protection",
+    "sil": "1",
+    "logic_solver": "SIS-LS-100",
+    "voting": "2oo3",
+    "unit": "U-100",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11",
+    "stub": false,
+    "functional_description": "On inlet KO drum high-high level, close XV-1001 and XV-1002 to prevent liquid carry-over",
+    "hazard": "Liquid carry-over to compressor; equipment damage",
+    "sil_srs": "1",
+    "rrf_target": "25",
+    "pfd_target": "0.04",
+    "demand_mode": "Low demand",
+    "safe_state": "XV-1001 closed, XV-1002 closed",
+    "process_safety_time": "300 s",
+    "response_time": "60 s",
+    "setpoint_srs": "1750 mm",
+    "sensor_architecture": "2oo3 LT",
+    "fe_architecture": "1oo2 (XV-1001 or XV-1002)",
+    "proof_test_interval": "12 months",
+    "bypass_conditions": "Bypass permitted with LAH-1006 confirmed active and operator on watch; max 4 h",
+    "manual_shutdown": "HS-1001 on panel",
+    "reset": "Manual",
+    "logic_solver_srs": "SIS-LS-100",
+    "srs_ref": "U100-SRS-001-Rev-B.xlsx:1:6"
+   }
+  },
+  {
+   "label": "SIF",
+   "key": {
+    "sif_id": "SIF-100-03"
+   },
+   "props": {
+    "description": "Feed gas low pressure - reverse flow protection",
+    "sil": "1",
+    "logic_solver": "SIS-LS-100",
+    "voting": "1oo1",
+    "unit": "U-100",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11",
+    "stub": false,
+    "functional_description": "On feed gas low-low pressure (reverse flow), close XV-1001",
+    "hazard": "Reverse flow from V-1002 to battery limit",
+    "sil_srs": "1",
+    "rrf_target": "15",
+    "pfd_target": "0.06",
+    "demand_mode": "Low demand",
+    "safe_state": "XV-1001 closed",
+    "process_safety_time": "60 s",
+    "response_time": "20 s",
+    "setpoint_srs": "5 barg",
+    "sensor_architecture": "1oo1 PT",
+    "fe_architecture": "1oo1 (XV-1001)",
+    "proof_test_interval": "12 months",
+    "bypass_conditions": "No bypass without a temporary low-pressure alarm configured; max 2 h",
+    "manual_shutdown": "HS-1001 on panel",
+    "reset": "Manual",
+    "logic_solver_srs": "SIS-LS-100",
+    "srs_ref": "U100-SRS-001-Rev-B.xlsx:1:7"
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PT-1001D"
+   },
+   "props": {
+    "type": "PT",
+    "role": "sensor",
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11",
+    "stub": true
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "U100-SRS-001",
+    "rev": "B"
+   },
+   "props": {
+    "doc_type": "SRS",
+    "title": "Safety requirements specification U100-SRS-001",
+    "unit": "U-100",
+    "file": "U100-SRS-001-Rev-B.xlsx",
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx",
+    "stub": false
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "U100-LOPA-001",
+    "rev": "A"
+   },
+   "props": {
+    "doc_type": "LOPA",
+    "title": "Layer of protection analysis U100-LOPA-001",
+    "unit": "U-100",
+    "file": "U100-LOPA-001-Rev-A.xlsx",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx",
+    "stub": false
+   }
+  },
+  {
+   "label": "Scenario",
+   "key": {
+    "scenario_id": "S-100-01"
+   },
+   "props": {
+    "initiating_event": "PIC-1005 / PV-1005 fails open on upstream pressure surge",
+    "ie_frequency": "0.1",
+    "consequence": "Overpressure of V-1002 above design; loss of containment",
+    "severity": "Cat 4",
+    "tolerable_frequency": "1e-05",
+    "conditional_modifiers": "Probability of ignition 0.5",
+    "required_rrf": "200",
+    "required_sil": "2",
+    "notes": "PSV-1001 also credited; SIF sized for residual",
+    "unit": "U-100",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:5",
+    "stub": false
+   }
+  },
+  {
+   "label": "Scenario",
+   "key": {
+    "scenario_id": "S-100-02"
+   },
+   "props": {
+    "initiating_event": "LIC-1006 / LV-1006 fails closed; slug from upstream",
+    "ie_frequency": "0.2",
+    "consequence": "Liquid carry-over to K-201 compressor",
+    "severity": "Cat 3",
+    "tolerable_frequency": "0.0001",
+    "conditional_modifiers": "-",
+    "required_rrf": "100",
+    "required_sil": "2",
+    "notes": "Required RRF 100 puts the SIF at SIL 2",
+    "unit": "U-100",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:6",
+    "stub": false
+   }
+  },
+  {
+   "label": "Scenario",
+   "key": {
+    "scenario_id": "S-100-03"
+   },
+   "props": {
+    "initiating_event": "Upstream depressurisation; reverse flow from V-1002",
+    "ie_frequency": "0.05",
+    "consequence": "Reverse flow to battery limit",
+    "severity": "Cat 2",
+    "tolerable_frequency": "0.001",
+    "conditional_modifiers": "-",
+    "required_rrf": "10",
+    "required_sil": "1",
+    "unit": "U-100",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:7",
+    "stub": false
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "PSV-1001"
+   },
+   "props": {
+    "type": "PSV",
+    "role": "unknown",
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "IPLs",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:IPLs:7",
+    "stub": true
+   }
+  },
+  {
+   "label": "Document",
+   "key": {
+    "doc_no": "COMPENSATING-MEASURES-U-100",
+    "rev": "2026-09-09"
+   },
+   "props": {
+    "doc_type": "CUR",
+    "title": "Curated compensating measures",
+    "unit": "U-100",
+    "file": "compensating_measures_U-100.csv",
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv",
+    "stub": false
+   }
+  },
+  {
+   "label": "Equipment",
+   "key": {
+    "tag": "BL-100"
+   },
+   "props": {
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": true
+   }
+  },
+  {
+   "label": "Equipment",
+   "key": {
+    "tag": "BL-200"
+   },
+   "props": {
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:16",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": true
+   }
+  },
+  {
+   "label": "Equipment",
+   "key": {
+    "tag": "BL-103"
+   },
+   "props": {
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:19",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": true
+   }
+  },
+  {
+   "label": "Equipment",
+   "key": {
+    "tag": "FLARE-HDR"
+   },
+   "props": {
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:21",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": true
+   }
+  },
+  {
+   "label": "Instrument",
+   "key": {
+    "tag": "FT-1006"
+   },
+   "props": {
+    "type": "FT",
+    "role": "sensor",
+    "unit": "U-100",
+    "stub_unit": "U-100",
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": true
+   }
+  },
+  {
+   "label": "Line",
+   "key": {
+    "line_no": "L-105"
+   },
+   "props": {
+    "unit": "U-100",
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv",
+    "stub": false
+   }
+  }
+ ],
+ "rels": [
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:5"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:5"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:5"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:6"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:6"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:6"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:7"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:7"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:7"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:8"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:8"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:8"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PV-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:9"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PV-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:9"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PV-1005"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:9"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:10"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:10"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:10"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:11"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:11"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:11"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:12"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:12"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:12"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LV-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:13"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LV-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:13"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LV-1006"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:13"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "TT-1003"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:14"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "TT-1003"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:14"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "TT-1003"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:14"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1004"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:15"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1004"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:15"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1004"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:15"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:16"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:16"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:16"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:17"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:17"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:17"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:18"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:18"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-104"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:18"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "HV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:19"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "HV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:19"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "HV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:19"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PI-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:20"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PI-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:20"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PI-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:20"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LG-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:21"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LG-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:21"
+   }
+  },
+  {
+   "type": "MEASURES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LG-1002"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Instrument Index",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Instrument Index:21"
+   }
+  },
+  {
+   "type": "GENERATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "PT-1001A.PAH"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:5"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "PT-1001A.PAH"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:5"
+   }
+  },
+  {
+   "type": "GENERATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "PT-1005.PAH"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:6"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "PT-1005.PAH"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:6"
+   }
+  },
+  {
+   "type": "GENERATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "LT-1006.LAH"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:7"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "LT-1006.LAH"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:7"
+   }
+  },
+  {
+   "type": "GENERATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "LT-1006.LAL"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:8"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "LT-1006.LAL"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-INST-INDEX",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-INST-INDEX",
+    "source_rev": "B",
+    "source_sheet": "Alarm Register",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-INST-INDEX-Rev-B.xlsx:Alarm Register:8"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11",
+    "voting": "2oo3",
+    "setpoint": "68 barg",
+    "cause_description": "Feed gas pressure high-high"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11"
+   }
+  },
+  {
+   "type": "ACTUATES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "XV-1001"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11",
+    "action": "Close"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C11"
+   }
+  },
+  {
+   "type": "ACTUATES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "BDV-1001"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C13",
+    "action": "Open"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C13"
+   }
+  },
+  {
+   "type": "RAISES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "PAHH-1001"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C14",
+    "action": "Alarm"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "PAHH-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R7C14"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R8C11",
+    "voting": "2oo3",
+    "setpoint": "68 barg",
+    "cause_description": "Feed gas pressure high-high"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R8C11"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R9C11",
+    "voting": "2oo3",
+    "setpoint": "68 barg",
+    "cause_description": "Feed gas pressure high-high"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R9C11"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11",
+    "voting": "2oo3",
+    "setpoint": "1750 mm",
+    "cause_description": "Inlet KO drum level high-high"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11"
+   }
+  },
+  {
+   "type": "ACTUATES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "XV-1001"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C11",
+    "action": "Close"
+   }
+  },
+  {
+   "type": "ACTUATES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "XV-1002"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C12",
+    "action": "Close"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R10C12"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R11C11",
+    "voting": "2oo3",
+    "setpoint": "1750 mm",
+    "cause_description": "Inlet KO drum level high-high"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R11C11"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11"
+   }
+  },
+  {
+   "type": "INITIATES",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001D"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11",
+    "voting": "1oo1",
+    "setpoint": "5 barg",
+    "cause_description": "Feed gas pressure low-low (reverse flow)"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001D"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-CE-CHART",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11"
+   }
+  },
+  {
+   "type": "ACTUATES",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "XV-1001"
+   },
+   "props": {
+    "source_doc": "U100-CE-CHART",
+    "source_rev": "A",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-CE-CHART-Rev-A.xlsx:CE-100:R12C11",
+    "action": "Close"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-SRS-001",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:5"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:5"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-SRS-001",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:6"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:6"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-SRS-001",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:7"
+   }
+  },
+  {
+   "type": "PROTECTS",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-SRS-001",
+    "source_rev": "B",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-SRS-001-Rev-B.xlsx:1:7"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-01"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-LOPA-001",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:5"
+   }
+  },
+  {
+   "type": "THREATENS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-01"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:5"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-01"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "ipl_type": "SIF",
+    "required_rrf": 200.0,
+    "required_sil": "2",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:5",
+    "pfd": 0.005,
+    "credit_description": "High-high pressure trip"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-02"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-LOPA-001",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:6"
+   }
+  },
+  {
+   "type": "THREATENS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-02"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:6"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-02"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "props": {
+    "ipl_type": "SIF",
+    "required_rrf": 100.0,
+    "required_sil": "2",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:6",
+    "pfd": 0.01,
+    "credit_description": "High-high level trip"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-03"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "U100-LOPA-001",
+    "rev": "A"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:7"
+   }
+  },
+  {
+   "type": "THREATENS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-03"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:7"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-03"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-03"
+   },
+   "props": {
+    "ipl_type": "SIF",
+    "required_rrf": 10.0,
+    "required_sil": "1",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "Scenarios",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:Scenarios:7",
+    "pfd": 0.1,
+    "credit_description": "Low-low pressure trip"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-01"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "PT-1001A.PAH"
+   },
+   "props": {
+    "ipl_type": "Alarm + operator response",
+    "pfd": 0.1,
+    "credit_description": "High pressure alarm, operator closes HV-1001",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "IPLs",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:IPLs:6"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-01"
+   },
+   "end_label": "Instrument",
+   "end_key": {
+    "tag": "PSV-1001"
+   },
+   "props": {
+    "ipl_type": "Relief",
+    "pfd": 0.01,
+    "credit_description": "Relief valve on V-1002 to flare",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "IPLs",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:IPLs:7"
+   }
+  },
+  {
+   "type": "CREDITS",
+   "start_label": "Scenario",
+   "start_key": {
+    "scenario_id": "S-100-02"
+   },
+   "end_label": "Alarm",
+   "end_key": {
+    "alarm_id": "LT-1006.LAH"
+   },
+   "props": {
+    "ipl_type": "Alarm + operator response",
+    "pfd": 0.1,
+    "credit_description": "High level alarm, operator reduces feed",
+    "source_doc": "U100-LOPA-001",
+    "source_rev": "A",
+    "source_sheet": "IPLs",
+    "extracted_by": "table",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "U100-LOPA-001-Rev-A.xlsx:IPLs:9"
+   }
+  },
+  {
+   "type": "COMPENSATES_FOR",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "PT-1005.PAH"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv:2",
+    "rank": 1,
+    "basis": "independent_bpcs",
+    "conditions": "Valid while PT-1005 / PIC-1005 are in service and PV-1005 is not isolated. Confirm alarm is not shelved or suppressed before relying on it.",
+    "rationale": "SIF-100-01 trips at 68 barg on PT-1001A/B/C (SIS, L-101). PT-1005 is a BPCS pressure transmitter on L-102 immediately downstream of V-1002, the protected vessel, two process hops from the SIS sensors: same pressure system, separate transmitter, separate system. Its PAH at 60 barg (Medium) annunciates 8 barg below the trip point, giving operations time to act. Independent of any single bypassed SIS element. Recommend raising PAH-1005 priority to High for the duration of a bypass.",
+    "curated_by": "AB",
+    "curated_on": "2026-09-09"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "COMPENSATING-MEASURES-U-100",
+    "rev": "2026-09-09"
+   },
+   "props": {
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv:2"
+   }
+  },
+  {
+   "type": "COMPENSATES_FOR",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "PT-1001A.PAH"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-01"
+   },
+   "props": {
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv:3",
+    "rank": 2,
+    "basis": "shares_sif_sensor",
+    "conditions": "Only while PT-1001A itself is in service. NOT a compensating measure when PT-1001A is the bypassed element or when the bypass is applied at the input of the logic solver for channel A.",
+    "rationale": "PAH-1001 at 62 barg (High) is derived from PT-1001A, one of the SIF's own 2oo3 initiators (register X11). It is a useful pre-alarm when the bypass is on PT-1001B, PT-1001C, XV-1001 or BDV-1001, because the sensor keeps working; it shares a failure mode with the SIF and is therefore ranked second, behind the independent BPCS measurement.",
+    "curated_by": "AB",
+    "curated_on": "2026-09-09"
+   }
+  },
+  {
+   "type": "COMPENSATES_FOR",
+   "start_label": "Alarm",
+   "start_key": {
+    "alarm_id": "LT-1006.LAH"
+   },
+   "end_label": "SIF",
+   "end_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "props": {
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv:4",
+    "rank": 1,
+    "basis": "independent_bpcs",
+    "conditions": "Valid while LT-1006 / LIC-1006 are in service and LV-1006 is available. Confirm alarm is not shelved.",
+    "rationale": "SIF-100-02 trips at 1750 mm (87.5 % of the 0-2000 mm span) on LT-1002A/B (SIS, GWR, on V-1002). LT-1006 is the BPCS DP level transmitter on the same vessel, on the LIC-1006 control loop, independent of the SIS transmitters. Its LAH at 75 % (High) annunciates 12.5 % of span before the trip. LIC-1006 also acts on LV-1006 to bring level down, so the operator has both an alarm and a control response. LG-1002 (magnetic gauge, local) is a field cross-check only, not a compensating measure in its own right.",
+    "curated_by": "AB",
+    "curated_on": "2026-09-09"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "SIF",
+   "start_key": {
+    "sif_id": "SIF-100-02"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "COMPENSATING-MEASURES-U-100",
+    "rev": "2026-09-09"
+   },
+   "props": {
+    "source_doc": "COMPENSATING-MEASURES-U-100",
+    "source_rev": "2026-09-09",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "compensating_measures_U-100.csv:4"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "HV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.95
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "BL-100"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.95
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "BL-100"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "HV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-101"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:2",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:3",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.95
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "manual",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:3",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:4",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.93
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:4",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:5",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.93
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:5",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:6",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.93
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1001C"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:6",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PI-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:7",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.91
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PI-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:7",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1004"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-101"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:8",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1004"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:8",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LG-1002"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:9",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.87
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:9",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LG-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:9",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-101"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:10",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.94
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:11",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.88
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002A"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:11",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:12",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.88
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1002B"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:12",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "V-1002"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:13",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.88
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LT-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:13",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:14",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:14",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:14",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PT-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:14",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-102"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:14",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PV-1005"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-102"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:15",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.92
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "PV-1005"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:15",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-102"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "BL-200"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:16",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.92
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "BL-200"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:16",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LV-1006"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:17",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.91
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:17",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.91
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "LV-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:17",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-103"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:17",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-103"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:18",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.91
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "XV-1002"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:18",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-103"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "BL-103"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:19",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.89
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "BL-103"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:19",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-104"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:20",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-104"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:20",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "BDV-1001"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:20",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-104"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:20",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-104"
+   },
+   "end_label": "Equipment",
+   "end_key": {
+    "tag": "FLARE-HDR"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:21",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.9
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "FLARE-HDR"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-001",
+    "rev": "D"
+   },
+   "props": {
+    "source_doc": "PID-100-001",
+    "source_rev": "D",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:21",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "INSTALLED_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1006"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-105"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.61
+   }
+  },
+  {
+   "type": "FEEDS",
+   "start_label": "Equipment",
+   "start_key": {
+    "tag": "V-1002"
+   },
+   "end_label": "Line",
+   "end_key": {
+    "line_no": "L-105"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv",
+    "confidence": 0.61
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Instrument",
+   "start_key": {
+    "tag": "FT-1006"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  },
+  {
+   "type": "SHOWN_ON",
+   "start_label": "Line",
+   "start_key": {
+    "line_no": "L-105"
+   },
+   "end_label": "Document",
+   "end_key": {
+    "doc_no": "PID-100-002",
+    "rev": "B"
+   },
+   "props": {
+    "source_doc": "PID-100-002",
+    "source_rev": "B",
+    "extracted_by": "pid_audit",
+    "load_run": "TX-0057-BASELINE",
+    "source_ref": "pid_audit_U100_topology.csv:22",
+    "source_file": "pid_audit_U100_topology.csv"
+   }
+  }
+ ],
+ "conflicts": []
+}
