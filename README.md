@@ -43,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File scripts\setup_neo4j.ps1
 ```
 
 writes `reports\explorer_U-100.html`, a self-contained interactive picture of the live graph (double-click to
-open; no login). Neo4j Browser at http://localhost:7474 is the live alternative; set each label's caption to its
+open; no login). Neo4j Browser at http://localhost:7475 is the live alternative; set each label's caption to its
 key property (tag, sif_id, alarm_id, line_no, doc_no) once, via the label pill above a result.
 
 ## Reports for engineers
@@ -98,7 +98,7 @@ and writes `reports/graph_U-100.json`; `--backend neo4j` creates constraints, wi
 MERGEs, and reads back from the database for reconcile and eval. `--pdf` reads drawing revisions
 from the per-unit P&ID PDF's title blocks and diffs them against the graph before loading.
 Connection details come from `.env` (see `.env.example`). `scripts\setup_neo4j.ps1` creates or
-starts the `neo4j-kg` container from those details.
+starts pid_graph's own container, `neo4j-pidgraph` (bolt 7688, browser http://localhost:7475), from those details. It must not share a database with another project: Neo4j Community holds one database per container, and kg_suppression uses `neo4j-kg` on 7687.
 
 ## Pipeline
 

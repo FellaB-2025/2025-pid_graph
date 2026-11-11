@@ -263,7 +263,7 @@ As built (10 Nov 2026), `pid_graph/review.py`:
   write that a template names (`MEASURES`, `INSTALLED_ON`, `SHOWN_ON`), to every variable-length path, and to the nodes reached, in `queries.py` and
   in the report queries. Types vision can never write (`INITIATES`, `ACTUATES`, `PROTECTS`, `GENERATES`, `COMPENSATES_FOR`, `CREDITS`, `RAISES`,
   `CASCADES_TO`) are not filtered. `records.TrustedView` is the same gate over either store; the explorer is built from it unless `--include-pending`.
-- Not verified against a live Neo4j: the edited Cypher is checked statically and through `TrustedView` on the memory store only.
+- Verified against a live Neo4j on 10 Nov 2026 (pid_graph's own container, `neo4j-pidgraph`, bolt 7688): with every vision fact pending, all four templates return exactly the v1.2 answers; with one Segment and one `MEASURES` accepted, only those two facts appear. That run found one defect, now fixed and tested: a `Segment` carries `line_no`, so a query that looked a node up by `line_no` matched an accepted Segment as if it were the Line. Queries now say `:Line`, and name a Segment by its `segment_id`.
 
 ### Phase 6 — Reconciliation checks (the part neither tool has alone)
 Each check writes rows to the exception register or `conflicts`, with both sources named:

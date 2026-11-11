@@ -334,3 +334,13 @@ def test_pipeline_writes_register_and_markup_and_reads_decisions_back(tmp_path):
     assert reviews["accepted"] == 1 and reviews["pending"] == sum(reviews.values()) - 1
     rep = json.loads((tmp_path / "load_report_U-100.json").read_text(encoding="utf-8"))
     assert rep["review"]["accepted"] == 1 and rep["review"]["problems"] == []
+
+
+def test_no_query_finds_a_line_by_a_property_segments_share():
+    """A Segment carries line_no too (its line). A query that looks a node up by line_no must say :Line,
+    or an accepted Segment is matched as if it were the line (found on the first run against Neo4j, 10 Nov 2026)."""
+    for name in ("queries.py", "mcp_server.py", "report.py", "oos.py"):
+        src = (ROOT / "pid_graph" / name).read_text(encoding="utf-8")
+        for m in re.finditer(r"(\(\w+:Line AND )?\w+\.line_no = \$", src):
+            assert m.group(1), f"{name}: node matched on line_no without the Line label: ...{src[max(0, m.start() - 40):m.end()]}"
+    assert "x.segment_id = $id" in Q.Q_MOC and "a.segment_id" in Q.Q_MOC

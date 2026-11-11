@@ -268,3 +268,19 @@
   lookup tools may show pending facts. `tests/test_v13_phase5.py` (17 cases). 200 passed, 4 skipped.
 - NOT VERIFIED: the edited Cypher in `queries.py` and `report.py` has not been run against Neo4j (not running).
   First thing to do when Neo4j is up: `python -m pytest -q` (4 Neo4j tests) and one of each template.
+- Neo4j verification (same branch, second commit). The shared container `neo4j-kg` (7687) turned out to hold the
+  kg_suppression graph (K-101; 35 nodes) and no U-100 data, so nothing was loaded into it. pid_graph now has its
+  own container `neo4j-pidgraph` (bolt 7688, browser 7475, volume neo4j-pidgraph-data); `scripts/setup_neo4j.ps1`
+  takes NEO4J_CONTAINER / NEO4J_URI / NEO4J_HTTP_PORT, refuses another container's ports and waits for a real
+  connection; `check_env` and `.env.example` follow.
+- Results on 7688: v1.2 load 49 / 164; vision layer 81 / 284, 11 constraints, structural checks clean. All
+  pending: four templates identical to v1.2 answers. Segment L-101.3 + PT-1001A MEASURES accepted in a scratch
+  register: only those appear (moc_impact, trip, shelve_impact, CM register, trip pack). Reports and explorer run.
+  Database left with the vision layer loaded and nothing accepted.
+- Defect found and fixed: queries matched nodes on `line_no`, which a Segment also carries; an accepted Segment
+  was matched as the Line (duplicate moc_impact rows, shown as "L-101"). Now `(x:Line AND x.line_no = $id)` and
+  `segment_id` in the id / measures columns; regression test in `tests/test_v13_phase5.py`.
+- OPEN, needs Alan: `.env` still has NEO4J_URI=bolt://localhost:7687. Until it says 7688, `tests/test_mcp_smoke.py`
+  fails (the MCP server it starts reads `.env`) and the pid_graph MCP server in Claude Code talks to kg_suppression's
+  database. With NEO4J_URI=bolt://localhost:7688 in the environment: 204 passed, 1 failed (that test); the same
+  test body passes when the server is given the environment.

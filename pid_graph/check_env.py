@@ -29,11 +29,16 @@ def main() -> int:
     docker = shutil.which("docker")
     print(f"[{'OK' if docker else 'MISSING'}] docker CLI -> {docker}")
     if docker:
-        out = subprocess.run([docker, "ps", "--filter", "name=neo4j-kg", "--format", "{{.Names}} {{.Status}}"],
+        import os
+        from dotenv import load_dotenv
+        load_dotenv(ROOT / ".env")
+        # pid_graph has its own container; it must not share a database with another project (scripts/setup_neo4j.ps1)
+        name = os.getenv("NEO4J_CONTAINER", "neo4j-pidgraph")
+        out = subprocess.run([docker, "ps", "--filter", f"name=^{name}$", "--format", "{{.Names}} {{.Status}}"],
                              capture_output=True, text=True)
-        running = "neo4j-kg" in out.stdout
+        running = name in out.stdout
         neo_ok &= running
-        print(f"[{'OK' if running else 'NOT RUNNING'}] container neo4j-kg -> {out.stdout.strip() or '(not found)'}")
+        print(f"[{'OK' if running else 'NOT RUNNING'}] container {name} -> {out.stdout.strip() or '(not found)'}")
     else:
         neo_ok = False
     if env_ok and docker:

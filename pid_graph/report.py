@@ -47,7 +47,7 @@ def gather_unit(driver, unit: str) -> dict:
     sifs = _run(driver, """
         MATCH (s:SIF) WHERE s.unit = $unit OR $unit = ''
         OPTIONAL MATCH (i:Instrument)-[ini:INITIATES]->(s) OPTIONAL MATCH (i)-[mm:MEASURES]->(m) WHERE __T7_MM__ AND __T7_M__
-        WITH s, i, ini, collect(DISTINCT coalesce(m.tag, m.line_no)) AS measures
+        WITH s, i, ini, collect(DISTINCT coalesce(m.tag, m.segment_id, m.line_no)) AS measures
         WITH s, collect(DISTINCT CASE WHEN i IS NULL THEN NULL ELSE {tag: i.tag, service: i.service, system: i.system,
              voting: ini.voting, setpoint: ini.setpoint, cause: ini.cause_description, measures: measures,
              stub: coalesce(i.stub, false), source: ini.source_doc + ' rev ' + ini.source_rev} END) AS initiators
@@ -274,7 +274,7 @@ def trip_pack_markdown(driver, data: dict, sif_id: str, status: dict) -> str:
                        "RETURN a.alarm_id AS alarm, i.tag AS on, a.setpoint AS sp, a.priority AS pri ORDER BY alarm", sif=s["sif"])
     nearby = _run(driver, "MATCH (i:Instrument)-[:INITIATES]->(:SIF {sif_id: $sif}) MATCH (i)-[m1:MEASURES]->(loc)<-[m2:MEASURES]-(o:Instrument) "
                           "WHERE " + Q.trusted_rel("m1") + " AND " + Q.trusted_rel("m2") + " AND " + Q.trusted_rel("loc") + " AND NOT (o)-[:INITIATES]->(:SIF {sif_id: $sif}) AND NOT coalesce(o.stub, false) MATCH (o)-[:GENERATES]->(a:Alarm) "
-                          "RETURN DISTINCT a.alarm_id AS alarm, o.tag AS device, o.system AS system, coalesce(loc.tag, loc.line_no) AS at, a.setpoint AS sp ORDER BY alarm", sif=s["sif"])
+                          "RETURN DISTINCT a.alarm_id AS alarm, o.tag AS device, o.system AS system, coalesce(loc.tag, loc.segment_id, loc.line_no) AS at, a.setpoint AS sp ORDER BY alarm", sif=s["sif"])
     casc = _run(driver, "MATCH (s:SIF {sif_id: $sif}) OPTIONAL MATCH (s)-[:CASCADES_TO]->(t:SIF) OPTIONAL MATCH (u:SIF)-[:CASCADES_TO]->(s) "
                         "RETURN collect(DISTINCT t.sif_id) AS to, collect(DISTINCT u.sif_id) AS frm", sif=s["sif"])[0]
     L = [f"# Trip Investigation Pack - {s['sif']}", "",

@@ -70,7 +70,7 @@ def _read(cypher: str, **params) -> list[dict]:
 
 
 def _ident(n: dict) -> str:
-    return n.get("tag") or n.get("line_no") or n.get("alarm_id") or n.get("sif_id") or n.get("state_id") or \
+    return n.get("tag") or n.get("segment_id") or n.get("item_id") or n.get("loop_key") or n.get("line_no") or n.get("alarm_id") or n.get("sif_id") or n.get("state_id") or \
         (f"{n.get('doc_no')} rev {n.get('rev')}" if n.get("doc_no") else "?")
 
 
@@ -93,7 +93,7 @@ def find(query: str, label: str | None = None, limit: int = 25) -> list[dict]:
         return [{"error": f"label must be one of {O.LABELS}"}]
     lab = f":{label}" if label else ""
     rows = _read(f"MATCH (n{lab}) WITH n, labels(n)[0] AS label, "
-                 "coalesce(n.tag, n.line_no, n.alarm_id, n.sif_id, n.state_id, n.doc_no, '') AS id, "
+                 "coalesce(n.tag, n.segment_id, n.item_id, n.loop_key, n.line_no, n.alarm_id, n.sif_id, n.state_id, n.doc_no, '') AS id, "
                  "coalesce(n.service, n.description, n.title, '') AS text "
                  "WHERE toLower(id) CONTAINS toLower($q) OR toLower(text) CONTAINS toLower($q) "
                  "RETURN label, id, text, n.unit AS unit, coalesce(n.stub, false) AS stub "
@@ -106,14 +106,14 @@ def find(query: str, label: str | None = None, limit: int = 25) -> list[dict]:
                          "provenance, and any exception-register entries against it.")
 def describe(identifier: str) -> dict:
     ident = identifier.upper().strip()
-    nodes = _read("MATCH (n) WHERE n.tag = $id OR n.line_no = $id OR n.alarm_id = $id OR n.sif_id = $id "
+    nodes = _read("MATCH (n) WHERE n.tag = $id OR (n:Line AND n.line_no = $id) OR n.segment_id = $id OR n.item_id = $id OR n.loop_key = $id OR n.alarm_id = $id OR n.sif_id = $id "
                   "OR n.state_id = $id OR n.doc_no = $id RETURN labels(n)[0] AS label, properties(n) AS p", id=ident)
     if not nodes:
         hint = find(ident.split("-")[0] if "-" in ident else ident, limit=5)
         return {"identifier": ident, "error": "not in graph", "suggestions": [h["id"] for h in hint]}
     out = []
     for n in nodes:
-        edges = _read("MATCH (n) WHERE n.tag = $id OR n.line_no = $id OR n.alarm_id = $id OR n.sif_id = $id "
+        edges = _read("MATCH (n) WHERE n.tag = $id OR (n:Line AND n.line_no = $id) OR n.segment_id = $id OR n.item_id = $id OR n.loop_key = $id OR n.alarm_id = $id OR n.sif_id = $id "
                       "OR n.state_id = $id OR n.doc_no = $id "
                       "MATCH (n)-[e]-(m) RETURN type(e) AS type, startNode(e) = n AS outgoing, labels(m)[0] AS other_label, "
                       "properties(m) AS other, properties(e) AS props ORDER BY type, outgoing", id=ident)

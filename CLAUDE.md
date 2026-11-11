@@ -229,3 +229,8 @@ miss is TT-1003 and its `INSTALLED_ON` L-101, deliberately absent from the extra
 - With the sample out-of-service register applied: SIF-100-01 DEGRADED (2 valid measures),
   SIF-100-02 DEGRADED with no valid measure (LT-1006.LAH shelved), SIF-100-03 DEFEATED.
 - Neo4j and memory backends give the same counts.
+
+**Neo4j** (re-verified 10 Nov 2026 on `neo4j-pidgraph`, bolt 7688): v1.2 load 49 nodes / 164 relationships; with the vision
+layer 81 / 284 and 11 uniqueness constraints. Every answer under *Queries* above was reproduced. With all vision facts
+pending the four templates give exactly the v1.2 answers. pid_graph has its own container; `neo4j-kg` (7687) belongs to
+kg_suppression and must not be loaded from here. `.env` must say `NEO4J_URI=bolt://localhost:7688`.

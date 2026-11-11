@@ -119,10 +119,10 @@ MATCH (o:Instrument)-[m1:MEASURES]->(near)
 OPTIONAL MATCH (o)-[:GENERATES]->(al:Alarm)
 WITH s, o, near,
      collect(DISTINCT CASE WHEN near = pl THEN 'same location as SIF sensor / protected item'
-                           ELSE 'within 2 process hops of ' + coalesce(pl.tag, pl.line_no) END) AS relations,
+                           ELSE 'within 2 process hops of ' + coalesce(pl.tag, pl.segment_id, pl.line_no) END) AS relations,
      collect(DISTINCT al.alarm_id + ' @ ' + coalesce(al.setpoint, '?') + ' (' + coalesce(al.priority, '?') + ')') AS alarms
 RETURN s.sif_id AS sif, o.tag AS device, o.system AS system, o.role AS role, o.service AS service,
-       coalesce(near.tag, near.line_no) AS at, relations, alarms,
+       coalesce(near.tag, near.segment_id, near.line_no) AS at, relations, alarms,
        CASE WHEN size(alarms) > 0 THEN 'DCS alarm to operations - recommended'
             WHEN o.role = 'local_indicator' THEN 'field reading only - manual rounds at a defined interval'
             ELSE 'signal without alarm - trend / temporary alarm' END AS how_operations_sees_it
@@ -146,7 +146,7 @@ OPTIONAL MATCH (a)-[:VALID_IN]->(st:State)
 OPTIONAL MATCH (rs:SIF)-[:RAISES]->(a)
 RETURN a.alarm_id AS alarm, a.alarm_tag AS alarm_tag, a.alarm_type AS type, a.setpoint AS setpoint,
        a.priority AS priority, a.description AS description, i.tag AS source, i.type AS variable,
-       collect(DISTINCT coalesce(loc.tag, loc.line_no)) AS measures,
+       collect(DISTINCT coalesce(loc.tag, loc.segment_id, loc.line_no)) AS measures,
        collect(DISTINCT s.sif_id) AS sifs_on_same_sensor,
        collect(DISTINCT cs.sif_id) AS is_compensating_measure_for,
        collect(DISTINCT rs.sif_id) AS announces_trip_of,
@@ -163,7 +163,7 @@ MATCH (o:Instrument)-[m1:MEASURES]->(near)
   WHERE T7(m1) AND o.tag <> i.tag AND left(o.type, 1) = left(i.type, 1) AND NOT coalesce(o.stub, false)
 OPTIONAL MATCH (o)-[:GENERATES]->(oa:Alarm)
 OPTIONAL MATCH (o)-[:INITIATES]->(os:SIF)
-RETURN coalesce(near.tag, near.line_no) AS at,
+RETURN coalesce(near.tag, near.segment_id, near.line_no) AS at,
        CASE WHEN near = loc THEN 'same location' ELSE 'within 2 process hops' END AS relation,
        o.tag AS other_device, o.system AS system,
        collect(DISTINCT oa.alarm_id + ' @ ' + coalesce(oa.setpoint, '?')) AS other_alarms,
@@ -173,12 +173,12 @@ ORDER BY relation, at, other_device
 Q_SHELVE_COVER = _gate(Q_SHELVE_COVER)
 
 Q_MOC = """
-MATCH (x) WHERE x.tag = $id OR x.line_no = $id OR x.alarm_id = $id OR x.sif_id = $id
+MATCH (x) WHERE x.tag = $id OR (x:Line AND x.line_no = $id) OR x.segment_id = $id OR x.alarm_id = $id OR x.sif_id = $id
 MATCH p = (x)-[:%s*..%d]-(a)
   WHERE T7PATH(p)
 WITH x, a, min(length(p)) AS hops
 OPTIONAL MATCH (a)-[so:SHOWN_ON]->(d:Document) WHERE T7(so)
-RETURN labels(a)[0] AS label, coalesce(a.tag, a.line_no, a.alarm_id, a.sif_id) AS id,
+RETURN labels(a)[0] AS label, coalesce(a.tag, a.segment_id, a.line_no, a.alarm_id, a.sif_id) AS id,
        coalesce(a.service, a.description, '') AS description, hops,
        collect(DISTINCT d.doc_no + ' rev ' + d.rev) AS documents
 ORDER BY hops, label, id
@@ -189,7 +189,7 @@ Q_TRIP = """
 MATCH (s:SIF {sif_id: $sif})
 OPTIONAL MATCH (i:Instrument)-[ini:INITIATES]->(s)
 OPTIONAL MATCH (i)-[m0:MEASURES]->(loc) WHERE T7(m0) AND T7(loc)
-WITH s, i, ini, collect(DISTINCT coalesce(loc.tag, loc.line_no)) AS measures
+WITH s, i, ini, collect(DISTINCT coalesce(loc.tag, loc.segment_id, loc.line_no)) AS measures
 WITH s, collect(DISTINCT {tag: i.tag, service: i.service, voting: ini.voting, setpoint: ini.setpoint,
                           cause: ini.cause_description, measures: measures, stub: coalesce(i.stub, false)}) AS initiators
 OPTIONAL MATCH (s)-[a:ACTUATES]->(fe:Instrument)
