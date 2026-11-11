@@ -46,7 +46,7 @@ def _store(driver):
 def gather_unit(driver, unit: str) -> dict:
     sifs = _run(driver, """
         MATCH (s:SIF) WHERE s.unit = $unit OR $unit = ''
-        OPTIONAL MATCH (i:Instrument)-[ini:INITIATES]->(s) OPTIONAL MATCH (i)-[:MEASURES]->(m)
+        OPTIONAL MATCH (i:Instrument)-[ini:INITIATES]->(s) OPTIONAL MATCH (i)-[mm:MEASURES]->(m) WHERE __T7_MM__ AND __T7_M__
         WITH s, i, ini, collect(DISTINCT coalesce(m.tag, m.line_no)) AS measures
         WITH s, collect(DISTINCT CASE WHEN i IS NULL THEN NULL ELSE {tag: i.tag, service: i.service, system: i.system,
              voting: ini.voting, setpoint: ini.setpoint, cause: ini.cause_description, measures: measures,
@@ -69,7 +69,7 @@ def gather_unit(driver, unit: str) -> dict:
              collect(DISTINCT CASE WHEN sc IS NULL THEN NULL ELSE {scenario: sc.scenario_id, initiating_event: sc.initiating_event,
              ie_frequency: sc.ie_frequency, consequence: sc.consequence, severity: sc.severity, tolerable_frequency: sc.tolerable_frequency,
              required_rrf: cr.required_rrf, required_sil: cr.required_sil, notes: sc.notes, source: sc.source_doc + ' rev ' + sc.source_rev} END) AS scenarios
-        OPTIONAL MATCH (s)-[:SHOWN_ON]->(d:Document)
+        OPTIONAL MATCH (s)-[so:SHOWN_ON]->(d:Document) WHERE __T7_SO__
         RETURN s.sif_id AS sif, s.sil AS sil, s.description AS description, s.logic_solver AS logic_solver, s.unit AS unit,
                [x IN initiators WHERE x IS NOT NULL] AS initiators, [x IN final_elements WHERE x IS NOT NULL] AS final_elements,
                protects, [x IN raises WHERE x IS NOT NULL] AS raises, [x IN measures WHERE x IS NOT NULL] AS measures,
@@ -80,7 +80,7 @@ def gather_unit(driver, unit: str) -> dict:
                 bypass_conditions: s.bypass_conditions, manual_shutdown: s.manual_shutdown, reset: s.reset, hazard: s.hazard,
                 functional_description: s.functional_description, srs_ref: s.srs_ref} AS srs,
                collect(DISTINCT d.doc_no + ' rev ' + d.rev) AS documents
-        ORDER BY sif""", unit=unit)
+        ORDER BY sif""".replace("__T7_MM__", Q.trusted_rel("mm")).replace("__T7_M__", Q.trusted_rel("m")).replace("__T7_SO__", Q.trusted_rel("so")), unit=unit)
     ipls = _run(driver, "MATCH (sc:Scenario)-[c:CREDITS]->(ipl) RETURN sc.scenario_id AS scenario, labels(ipl)[0] AS layer, "
                         "coalesce(ipl.sif_id, ipl.alarm_id, ipl.tag) AS id, c.ipl_type AS ipl_type, c.pfd AS pfd, c.credit_description AS basis, "
                         "coalesce(ipl.stub, false) AS stub ORDER BY scenario, layer, id")
@@ -272,8 +272,8 @@ def trip_pack_markdown(driver, data: dict, sif_id: str, status: dict) -> str:
     state = lambda ident: (f"{oos[ident]['kind']} {oos[ident]['oos_id']}" if ident in oos else "in service")
     pre = _run(driver, "MATCH (i:Instrument)-[:INITIATES]->(:SIF {sif_id: $sif}) MATCH (i)-[:GENERATES]->(a:Alarm) "
                        "RETURN a.alarm_id AS alarm, i.tag AS on, a.setpoint AS sp, a.priority AS pri ORDER BY alarm", sif=s["sif"])
-    nearby = _run(driver, "MATCH (i:Instrument)-[:INITIATES]->(:SIF {sif_id: $sif}) MATCH (i)-[:MEASURES]->(loc)<-[:MEASURES]-(o:Instrument) "
-                          "WHERE NOT (o)-[:INITIATES]->(:SIF {sif_id: $sif}) AND NOT coalesce(o.stub, false) MATCH (o)-[:GENERATES]->(a:Alarm) "
+    nearby = _run(driver, "MATCH (i:Instrument)-[:INITIATES]->(:SIF {sif_id: $sif}) MATCH (i)-[m1:MEASURES]->(loc)<-[m2:MEASURES]-(o:Instrument) "
+                          "WHERE " + Q.trusted_rel("m1") + " AND " + Q.trusted_rel("m2") + " AND " + Q.trusted_rel("loc") + " AND NOT (o)-[:INITIATES]->(:SIF {sif_id: $sif}) AND NOT coalesce(o.stub, false) MATCH (o)-[:GENERATES]->(a:Alarm) "
                           "RETURN DISTINCT a.alarm_id AS alarm, o.tag AS device, o.system AS system, coalesce(loc.tag, loc.line_no) AS at, a.setpoint AS sp ORDER BY alarm", sif=s["sif"])
     casc = _run(driver, "MATCH (s:SIF {sif_id: $sif}) OPTIONAL MATCH (s)-[:CASCADES_TO]->(t:SIF) OPTIONAL MATCH (u:SIF)-[:CASCADES_TO]->(s) "
                         "RETURN collect(DISTINCT t.sif_id) AS to, collect(DISTINCT u.sif_id) AS frm", sif=s["sif"])[0]

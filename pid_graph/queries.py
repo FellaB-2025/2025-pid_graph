@@ -31,6 +31,31 @@ logging.getLogger("neo4j.notifications").setLevel(logging.ERROR)
 VOTING_RE = re.compile(r"(\d+)\s*oo\s*(\d+)", re.I)
 IMPACT_RELS = "MEASURES|INSTALLED_ON|FEEDS|INITIATES|ACTUATES|PROTECTS|GENERATES"
 
+# ---- Trust rule T7 (ontology v1.3) ----------------------------------------------
+# A safety-relevant template traverses only facts that came from a register, a curated entry or
+# pid_audit, or that an engineer has accepted. Vision facts (extracted_by = pidkg_vision) are
+# written review = pending and stay invisible here until accepted in the review register.
+# The filter is written on every relationship type the vision loader can write (MEASURES,
+# INSTALLED_ON, SHOWN_ON; it also writes SEGMENT_OF, FLOWS_TO, SIGNAL_TO and MEMBER_OF, which no
+# template below names) and on every variable-length path. The other types (INITIATES, ACTUATES,
+# PROTECTS, GENERATES, COMPENSATES_FOR, CREDITS, RAISES, CASCADES_TO) can never be vision facts:
+# the loader does not write them and the validator refuses an InlineItem on them.
+# Python form of the same rule: ontology.trusted(); tests/test_v13_phase5.py checks both.
+EXPLORATORY_NOTE = ("exploration only; may include pidkg_vision facts with review=pending or rejected; "
+                    "not a source for safety-relevant answers")
+
+
+def trusted_rel(var: str) -> str:
+    """The T7 predicate in Cypher for one relationship (or node) variable."""
+    return f"({var}.extracted_by IN ['table', 'manual', 'pid_audit'] OR {var}.review = 'accepted')"
+
+
+def _gate(cypher: str) -> str:
+    """Expand T7(x) and T7PATH(p) in a template. T7PATH covers every relationship and node of a path."""
+    cypher = re.sub(r"T7PATH\((\w+)\)", lambda m: f"all(r_ IN relationships({m.group(1)}) WHERE {trusted_rel('r_')}) "
+                                                  f"AND all(n_ IN nodes({m.group(1)}) WHERE {trusted_rel('n_')})", cypher)
+    return re.sub(r"T7\((\w+)\)", lambda m: trusted_rel(m.group(1)), cypher)
+
 # ---- Cypher templates ---------------------------------------------------------
 
 Q_AS_INITIATOR = """
@@ -82,14 +107,14 @@ RETURN a.alarm_id AS alarm, a.setpoint AS setpoint, a.priority AS priority
 # generate are what operations would watch. COMPENSATES_FOR stays curated-only.
 Q_CANDIDATE_COMPENSATION = """
 MATCH (x:Instrument {tag: $tag})-[:INITIATES]->(s:SIF)
-OPTIONAL MATCH (x)-[:MEASURES]->(loc)
+OPTIONAL MATCH (x)-[m0:MEASURES]->(loc) WHERE T7(m0) AND T7(loc)
 OPTIONAL MATCH (s)-[:PROTECTS]->(p)
 WITH x, s, [n IN collect(DISTINCT loc) + collect(DISTINCT p) WHERE n IS NOT NULL] AS places
 UNWIND places AS pl
-MATCH (pl)-[:FEEDS*0..2]-(near)
+MATCH fp = (pl)-[:FEEDS*0..2]-(near) WHERE T7PATH(fp)
 WITH DISTINCT x, s, pl, near
-MATCH (o:Instrument)-[:MEASURES]->(near)
-  WHERE o.tag <> x.tag AND left(o.type, 1) = left(x.type, 1) AND NOT coalesce(o.stub, false)
+MATCH (o:Instrument)-[m1:MEASURES]->(near)
+  WHERE T7(m1) AND o.tag <> x.tag AND left(o.type, 1) = left(x.type, 1) AND NOT coalesce(o.stub, false)
     AND toUpper(coalesce(o.system, '')) <> 'SIS' AND NOT (o)-[:INITIATES]->(s)
 OPTIONAL MATCH (o)-[:GENERATES]->(al:Alarm)
 WITH s, o, near,
@@ -103,6 +128,7 @@ RETURN s.sif_id AS sif, o.tag AS device, o.system AS system, o.role AS role, o.s
             ELSE 'signal without alarm - trend / temporary alarm' END AS how_operations_sees_it
 ORDER BY sif, size(alarms) DESC, device
 """
+Q_CANDIDATE_COMPENSATION = _gate(Q_CANDIDATE_COMPENSATION)
 
 Q_SIBLING_ALARMS = """
 MATCH (x:Instrument {tag: $tag})-[:INITIATES]->(s:SIF)<-[:INITIATES]-(sib:Instrument)-[:GENERATES]->(a:Alarm)
@@ -113,7 +139,7 @@ RETURN s.sif_id AS sif, sib.tag AS sensor, a.alarm_id AS alarm, a.setpoint AS se
 
 Q_SHELVE = """
 MATCH (a:Alarm {alarm_id: $alarm_id})<-[:GENERATES]-(i:Instrument)
-OPTIONAL MATCH (i)-[:MEASURES]->(loc)
+OPTIONAL MATCH (i)-[m0:MEASURES]->(loc) WHERE T7(m0) AND T7(loc)
 OPTIONAL MATCH (i)-[:INITIATES]->(s:SIF)
 OPTIONAL MATCH (a)-[:COMPENSATES_FOR]->(cs:SIF)
 OPTIONAL MATCH (a)-[:VALID_IN]->(st:State)
@@ -126,13 +152,15 @@ RETURN a.alarm_id AS alarm, a.alarm_tag AS alarm_tag, a.alarm_type AS type, a.se
        collect(DISTINCT rs.sif_id) AS announces_trip_of,
        collect(DISTINCT st.state_id) AS valid_in_states
 """
+Q_SHELVE = _gate(Q_SHELVE)
 
 Q_SHELVE_COVER = """
-MATCH (a:Alarm {alarm_id: $alarm_id})<-[:GENERATES]-(i:Instrument)-[:MEASURES]->(loc)
-MATCH (loc)-[:FEEDS*0..2]-(near)
+MATCH (a:Alarm {alarm_id: $alarm_id})<-[:GENERATES]-(i:Instrument)-[m0:MEASURES]->(loc)
+  WHERE T7(m0) AND T7(loc)
+MATCH fp = (loc)-[:FEEDS*0..2]-(near) WHERE T7PATH(fp)
 WITH DISTINCT i, loc, near
-MATCH (o:Instrument)-[:MEASURES]->(near)
-  WHERE o.tag <> i.tag AND left(o.type, 1) = left(i.type, 1) AND NOT coalesce(o.stub, false)
+MATCH (o:Instrument)-[m1:MEASURES]->(near)
+  WHERE T7(m1) AND o.tag <> i.tag AND left(o.type, 1) = left(i.type, 1) AND NOT coalesce(o.stub, false)
 OPTIONAL MATCH (o)-[:GENERATES]->(oa:Alarm)
 OPTIONAL MATCH (o)-[:INITIATES]->(os:SIF)
 RETURN coalesce(near.tag, near.line_no) AS at,
@@ -142,22 +170,25 @@ RETURN coalesce(near.tag, near.line_no) AS at,
        collect(DISTINCT os.sif_id) AS sifs_still_covering
 ORDER BY relation, at, other_device
 """
+Q_SHELVE_COVER = _gate(Q_SHELVE_COVER)
 
 Q_MOC = """
 MATCH (x) WHERE x.tag = $id OR x.line_no = $id OR x.alarm_id = $id OR x.sif_id = $id
 MATCH p = (x)-[:%s*..%d]-(a)
+  WHERE T7PATH(p)
 WITH x, a, min(length(p)) AS hops
-OPTIONAL MATCH (a)-[:SHOWN_ON]->(d:Document)
+OPTIONAL MATCH (a)-[so:SHOWN_ON]->(d:Document) WHERE T7(so)
 RETURN labels(a)[0] AS label, coalesce(a.tag, a.line_no, a.alarm_id, a.sif_id) AS id,
        coalesce(a.service, a.description, '') AS description, hops,
        collect(DISTINCT d.doc_no + ' rev ' + d.rev) AS documents
 ORDER BY hops, label, id
 """
+Q_MOC = _gate(Q_MOC)
 
 Q_TRIP = """
 MATCH (s:SIF {sif_id: $sif})
 OPTIONAL MATCH (i:Instrument)-[ini:INITIATES]->(s)
-OPTIONAL MATCH (i)-[:MEASURES]->(loc)
+OPTIONAL MATCH (i)-[m0:MEASURES]->(loc) WHERE T7(m0) AND T7(loc)
 WITH s, i, ini, collect(DISTINCT coalesce(loc.tag, loc.line_no)) AS measures
 WITH s, collect(DISTINCT {tag: i.tag, service: i.service, voting: ini.voting, setpoint: ini.setpoint,
                           cause: ini.cause_description, measures: measures, stub: coalesce(i.stub, false)}) AS initiators
@@ -170,12 +201,13 @@ WITH s, initiators, final_elements, protects,
      collect(DISTINCT {alarm: ra.alarm_id, alarm_tag: ra.alarm_tag, in_register: NOT coalesce(ra.stub, false)}) AS raises
 OPTIONAL MATCH (s)-[:CASCADES_TO]->(cs:SIF)
 WITH s, initiators, final_elements, protects, raises, collect(DISTINCT cs.sif_id) AS cascades_to
-OPTIONAL MATCH (s)-[:SHOWN_ON]->(d:Document)
+OPTIONAL MATCH (s)-[so:SHOWN_ON]->(d:Document) WHERE T7(so)
 RETURN s.sif_id AS sif, s.sil AS sil, s.description AS description, s.logic_solver AS logic_solver,
        initiators, final_elements, protects,
        [x IN raises WHERE x.alarm IS NOT NULL] AS announced_by_alarms, cascades_to,
        collect(DISTINCT d.doc_no + ' rev ' + d.rev) AS documents
 """
+Q_TRIP = _gate(Q_TRIP)
 
 
 # ---- Python wrappers ----------------------------------------------------------

@@ -443,8 +443,20 @@ svg.addEventListener('click', () => setButtons(null, null));
 """
 
 
-def build(store, unit: str, load_run: str) -> str:
+def build(store, unit: str, load_run: str, include_pending: bool = False) -> str:
+    """The in-page assessments are safety-relevant surfaces, so by default the page is built from the
+    trusted view (trust rule T7): pending and rejected vision facts are left out. include_pending=True
+    shows everything and says so; use it to look at the vision layer, not to assess anything."""
     from . import ontology as O
+    from .records import TrustedView
+    view = TrustedView(store)
+    hidden = view.left_out()
+    hidden_n = hidden["nodes"] + hidden["rels"]
+    if include_pending:
+        gate_note = f" - EXPLORATION: includes {hidden_n} pending / rejected vision facts; not for assessments" if hidden_n else ""
+    else:
+        gate_note = f" - {hidden_n} pending vision facts left out (trust rule T7)" if hidden_n else ""
+        store = view
     nodes, index = [], {}
     for n in store.nodes():
         key = tuple(str(n["key"][k]) for k in O.KEYS[n["label"]])
@@ -470,7 +482,7 @@ def build(store, unit: str, load_run: str) -> str:
     html = (TEMPLATE.replace("__UNIT__", unit).replace("__NODES__", str(len(nodes))).replace("__EDGES__", str(len(edges)))
             .replace("__LOADRUN__", load_run).replace("__COLORS__", json.dumps(COLORS))
             .replace("__DATA__", json.dumps({"unit": unit, "nodes": nodes, "edges": edges, "documents": documents,
-                                              "exceptions": exceptions, "generated": datetime.now().strftime("%Y-%m-%d %H:%M")}, default=str)))
+                                              "exceptions": exceptions, "generated": datetime.now().strftime("%Y-%m-%d %H:%M") + gate_note}, default=str)))
     return html
 
 
@@ -510,6 +522,8 @@ def main(argv=None) -> int:
     ap.add_argument("--unit", default="U-100")
     ap.add_argument("--backend", choices=["neo4j", "memory"], default="neo4j")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--include-pending", action="store_true",
+                    help="exploration only: also show vision facts that are review=pending or rejected")
     a = ap.parse_args(argv)
     if a.backend == "neo4j":
         from .db import DATABASE, get_driver
@@ -518,7 +532,7 @@ def main(argv=None) -> int:
         try:
             store = Neo4jStore(d, DATABASE)
             runs = sorted({n["props"].get("load_run", "") for n in store.nodes()})
-            html = build(store, a.unit, runs[-1] if runs else "")
+            html = build(store, a.unit, runs[-1] if runs else "", include_pending=a.include_pending)
         finally:
             d.close()
     else:
@@ -526,7 +540,7 @@ def main(argv=None) -> int:
         store, _ = build_store(unit=a.unit, index=ROOT / "data" / "U100-INST-INDEX-Rev-B.xlsx", ce=ROOT / "data" / "U100-CE-CHART-Rev-A.xlsx",
                                topology=ROOT / "data" / "pid_audit_U100_topology.csv", load_run=new_load_run("explorer"),
                                curated=ROOT / "data" / "curated" / "compensating_measures_U-100.csv")
-        html = build(store, a.unit, "memory")
+        html = build(store, a.unit, "memory", include_pending=a.include_pending)
     out = Path(a.out) if a.out else ROOT / "reports" / f"explorer_{a.unit}.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")

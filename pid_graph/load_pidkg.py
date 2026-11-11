@@ -445,7 +445,16 @@ def reconcile(pidkg_graph: dict, index: set[str], existing_graph, *, unit: str, 
                "rels": len(out_rels), "rels_by_type": dict(sorted(by_rel.items())),
                "exceptions": len(exceptions), "exceptions_by_code": dict(sorted(by_code.items())),
                "conflicts": len(conflicts), "skipped": dict(sorted(skipped.items())), "drawn_trips": len(drawn_trips)}
-    return {"nodes": list(out_nodes.values()), "rels": list(out_rels.values()),
+    # Where vision saw each mapped thing, for the review markup: "Label ident" -> drawing, page, bbox (0..1 of the page).
+    locations: dict[str, dict] = {}
+    for nid, (label, ident) in target.items():
+        n, sh = nodes[nid], home(nodes[nid])
+        bbox = next((p.get("bbox") for p in n.get("provenance", []) if p.get("bbox") and p.get("sheet") in sheet
+                     and sheet[p["sheet"]]["doc_no"] == sh["doc_no"]), None)
+        if bbox:
+            locations.setdefault(f"{label} {ident}", {"doc_no": sh["doc_no"], "page": sh["page"], "bbox": list(bbox)})
+    return {"locations": locations, "pages": {s["doc_no"]: s["page"] for s in sheet.values()},
+            "nodes": list(out_nodes.values()), "rels": list(out_rels.values()),
             "exceptions": sorted(exceptions, key=lambda x: (int(x["code"][1:]), x["id"])), "conflicts": conflicts,
             "skipped": dict(sorted(skipped.items())), "seen": {t: sorted(d) for t, d in sorted(seen.items())},
             "drawn_trips": drawn_trips, "summary": summary}

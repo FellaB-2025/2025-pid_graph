@@ -116,3 +116,42 @@ class MemoryStore:
     def to_dict(self) -> dict:
         return {"nodes": self.nodes(), "rels": self.rels(),
                 "conflicts": [c.__dict__ for c in self.conflicts]}
+
+
+class TrustedView:
+    """Read-only view of a store holding only what trust rule T7 lets a safety-relevant answer use:
+    nodes that are trusted, and trusted relationships between two trusted nodes (ontology.trusted).
+    Works over MemoryStore or Neo4jStore; same read methods, so reconcile, reports and the explorer can take it."""
+
+    def __init__(self, store):
+        self._store = store
+        self._ok = {node_key(n["label"], n["key"]) for n in store.nodes() if O.trusted(n["props"])}
+
+    def nodes(self, label: str | None = None) -> list[dict]:
+        return [n for n in self._store.nodes(label) if node_key(n["label"], n["key"]) in self._ok]
+
+    def rels(self, rel: str | None = None) -> list[dict]:
+        return [r for r in self._store.rels(rel) if O.trusted(r["props"])
+                and node_key(r["start_label"], r["start_key"]) in self._ok and node_key(r["end_label"], r["end_key"]) in self._ok]
+
+    def get_node(self, label: str, key: dict) -> dict | None:
+        k = node_key(label, key)
+        return next((n for n in self._store.nodes(label) if node_key(n["label"], n["key"]) == k), None) if k in self._ok else None
+
+    @property
+    def conflicts(self):
+        return self._store.conflicts
+
+    def counts(self) -> dict:
+        by_label: dict[str, int] = {}
+        for n in self.nodes():
+            by_label[n["label"]] = by_label.get(n["label"], 0) + 1
+        by_rel: dict[str, int] = {}
+        for r in self.rels():
+            by_rel[r["type"]] = by_rel.get(r["type"], 0) + 1
+        return {"nodes": sum(by_label.values()), "rels": sum(by_rel.values()),
+                "by_label": dict(sorted(by_label.items())), "by_rel": dict(sorted(by_rel.items()))}
+
+    def left_out(self) -> dict:
+        """How many facts the view hides (pending or rejected vision facts, and anything hanging off them)."""
+        return {"nodes": len(self._store.nodes()) - len(self.nodes()), "rels": len(self._store.rels()) - len(self.rels())}

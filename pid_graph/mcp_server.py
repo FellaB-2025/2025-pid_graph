@@ -45,7 +45,14 @@ is a heuristic shortlist, never a conclusion - say so when you quote it. Every n
 provenance (source_doc, source_rev, extracted_by, load_run, source_ref); quote it when the user needs
 to know why the graph believes something. The exception register (exceptions tool) lists where the
 documents disagree or are incomplete - check it before relying on a tag. If a tag is not in the graph,
-say so; do not invent connections. The graph is read-only here."""
+say so; do not invent connections. The graph is read-only here.
+
+Ontology v1.3 adds a vision layer read from the P&IDs: Segment, InlineItem and ControlLoop nodes;
+SEGMENT_OF, FLOWS_TO, SIGNAL_TO and MEMBER_OF relationships. Every such fact has
+extracted_by=pidkg_vision and a review property. Until an engineer accepts it in the review register
+it is review=pending: the four fixed templates ignore it, but find, describe, documents and
+read_cypher DO show it. When you quote a fact from those tools, check its review value and say so if
+it is pending. Never base a safety-relevant statement on a pending or rejected fact."""
 
 server = MCPServer(name="pid_graph", version="0.2.0", instructions=INSTRUCTIONS)
 _state: dict = {"driver": None}
@@ -248,7 +255,7 @@ def read_cypher(cypher: str) -> dict:
         rows = _read(cypher)          # execute_read: the database itself rejects writes here
     except Exception as exc:  # noqa: BLE001
         return {"error": str(exc)}
-    return {"count": len(rows[:200]), "rows": rows[:200], "note": "exploration only; not a source for safety-relevant answers"}
+    return {"note": Q.EXPLORATORY_NOTE, "count": len(rows[:200]), "rows": rows[:200]}
 
 
 # ---- Entry point ------------------------------------------------------------------------

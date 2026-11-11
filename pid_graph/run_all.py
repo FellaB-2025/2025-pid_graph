@@ -157,12 +157,28 @@ def main(argv=None) -> int:
     pidkg = None
     if a.pidkg:
         banner(3, "Load pid-to-kg vision extraction -> Segment, InlineItem, ControlLoop (v1.3; every fact review=pending)")
+        from . import review as RV
         from .load_pidkg import apply as pidkg_apply, index_tags, print_report, reconcile as pidkg_reconcile
+        # The review register is an input: read the engineer's decisions first, then write it back.
+        reg_path = out / f"review_register_{a.unit}.xlsx"
+        register, problems = RV.read_register(reg_path)
         pidkg = pidkg_reconcile(json.loads(Path(a.pidkg).read_text(encoding="utf-8")), index_tags(store), store,
-                                unit=a.unit, load_run=load_run)
+                                unit=a.unit, load_run=load_run, review=RV.decisions(register))
         print_report(pidkg)
         pidkg_apply(store, pidkg)
         reports["pidkg"] = pidkg["summary"]
+        RV.write_register(pidkg, reg_path, unit=a.unit, previous=register)
+        rs = RV.summarise(RV.merged_rows(pidkg, register), a.unit)
+        reports["review"] = {"register": str(reg_path), **{k: rs[k] for k in ("facts", "pending", "accepted", "rejected", "pending_priority")},
+                             "problems": problems}
+        print(f"  review register: {rs['facts']} facts - pending {rs['pending']} ({rs['pending_priority']} priority), "
+              f"accepted {rs['accepted']}, rejected {rs['rejected']} -> {reg_path}")
+        for p in problems:
+            print(f"    REVIEW PROBLEM {p}")
+        if a.pdf:
+            mk = RV.markup(a.pdf, pidkg, out / f"review_markup_{a.unit}.pdf", register=register)
+            reports["review"]["markup"] = str(mk)
+            print(f"  review markup -> {mk}")
     counts = store.counts()
     reports["counts"] = counts
     print(f"  store: {counts['nodes']} nodes {counts['by_label']}")

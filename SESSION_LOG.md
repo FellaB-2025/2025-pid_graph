@@ -261,3 +261,10 @@
   flag text; Equipment master = non-stub Equipment in the graph. On U-100: +32 nodes, +120 relationships, all
   review=pending, 15 new exceptions, 0 conflicts. `tests/test_v13_phase4.py` (25 cases). 183 passed, 4 skipped.
 - Not verified: Neo4j write of the new labels (Neo4j not running). `--no-master --report-only` (Phase 9) not built.
+- Phase 5, branch `v1.3/phase-5-review`: `pid_graph/review.py` (review register read / write-back, T5 flags, PDF
+  markup), `reports/review_register_U-100.xlsx` committed (120 facts, all pending, 20 priority), T7 gate as
+  `ontology.trusted()` / `queries.trusted_rel()` / `records.TrustedView`, applied in `queries.py`, `report.py`
+  and the explorer (`--include-pending` to see everything). MCP instructions and `read_cypher` note say that
+  lookup tools may show pending facts. `tests/test_v13_phase5.py` (17 cases). 200 passed, 4 skipped.
+- NOT VERIFIED: the edited Cypher in `queries.py` and `report.py` has not been run against Neo4j (not running).
+  First thing to do when Neo4j is up: `python -m pytest -q` (4 Neo4j tests) and one of each template.

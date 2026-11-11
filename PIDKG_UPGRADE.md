@@ -251,6 +251,20 @@ running `--apply` twice changes nothing; with the loader off the v1.2 dump is by
 2. PDF markup of pending facts, written fresh with PyMuPDF (already a dependency; nothing to re-use): green accepted, amber pending, red rejected / exception.
 3. Add the T7 filter to every safety-relevant template. Test: a `pending` segment is invisible to a safety template and visible to an exploratory one.
 
+As built (10 Nov 2026), `pid_graph/review.py`:
+- Register columns are the twelve of section 3 plus `detail` (what the fact says). The `SHOWN_ON` of a new node is not a row; it follows
+  the node's decision. A decision counts only with a closed value **and a named reviewer**; otherwise it is reported and the fact stays pending.
+- The pipeline (`python -m pid_graph --pidkg ...`) reads the register in `--out`, passes the decisions to the loader, writes the register back
+  (unchanged content is not rewritten) and, when `--pdf` is given, writes `review_markup_<unit>.pdf` beside it. `reports/review_register_U-100.xlsx` is committed.
+- Markup: boxes for InlineItems, for instruments with a segment-level `MEASURES` and for exceptions; a line per Segment between the two located
+  things it joins, coloured by the worst of the segment and its two `FLOWS_TO`; a thin dashed line per `SIGNAL_TO`. `MEMBER_OF` and `SEGMENT_OF` have
+  no place on the sheet and are reviewed in the register only. Positions come from pid-to-kg's bounding boxes and are approximate. The source PDF is never modified.
+- T7 has one definition in two forms: `ontology.trusted()` and `queries.trusted_rel()`. It is applied to every relationship type the vision loader can
+  write that a template names (`MEASURES`, `INSTALLED_ON`, `SHOWN_ON`), to every variable-length path, and to the nodes reached, in `queries.py` and
+  in the report queries. Types vision can never write (`INITIATES`, `ACTUATES`, `PROTECTS`, `GENERATES`, `COMPENSATES_FOR`, `CREDITS`, `RAISES`,
+  `CASCADES_TO`) are not filtered. `records.TrustedView` is the same gate over either store; the explorer is built from it unless `--include-pending`.
+- Not verified against a live Neo4j: the edited Cypher is checked statically and through `TrustedView` on the memory store only.
+
 ### Phase 6 — Reconciliation checks (the part neither tool has alone)
 Each check writes rows to the exception register or `conflicts`, with both sources named:
 1. Tag check, index vs vision (T3).

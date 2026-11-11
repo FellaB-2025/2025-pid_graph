@@ -83,6 +83,14 @@ EXTRACTED_BY = ("pid_audit", "llm", "manual", "table", "pidkg_vision")   # v1.3:
 VISION = "pidkg_vision"
 # v1.3: every pidkg_vision fact carries a review state; default pending (trust rule T4).
 REVIEW = ("pending", "accepted", "rejected")
+# v1.3 trust rule T7: what a safety-relevant template may traverse. A fact from one of these
+# sources, or any fact an engineer has accepted. The Cypher form is queries.trusted_rel().
+TRUSTED_EXTRACTED_BY = ("table", "manual", "pid_audit")
+
+
+def trusted(props: dict) -> bool:
+    """T7: extracted_by IN ['table', 'manual', 'pid_audit'] OR review = 'accepted'."""
+    return props.get("extracted_by") in TRUSTED_EXTRACTED_BY or props.get("review") == "accepted"
 DOC_TYPES = ("PID", "CE", "IDX", "CUR", "SRS", "LOPA")   # CUR: curated register (D-P2-10); SRS/LOPA: v1.2
 UNKNOWN_REV = "UNKNOWN"   # decision D-P1-03: revision not stated by the referencing document
 

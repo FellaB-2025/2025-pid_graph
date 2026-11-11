@@ -48,6 +48,12 @@ documents are ever added.
     edited to make it pass.
 13. **Never commit** `.env`, credentials, `work/`, `third_party/`, `data/external/` or anything in
     `reports/` other than the review register.
+14. **Trust rule T7.** A safety-relevant template, report or in-page assessment uses only trusted
+    facts: `extracted_by` in `table, manual, pid_audit`, or `review = accepted`. One definition, two
+    forms: `ontology.trusted()` and `queries.trusted_rel()`; `records.TrustedView` applies it to a
+    store. Any new Cypher over `MEASURES`, `INSTALLED_ON`, `SHOWN_ON`, `SEGMENT_OF`, `FLOWS_TO`,
+    `SIGNAL_TO`, `MEMBER_OF` or a variable-length path must carry it (a test checks `queries.py`
+    and `report.py`). Exploratory output says that it may include pending facts.
 
 ## 3. Closed lists (ontology v1.3)
 
@@ -128,6 +134,8 @@ and have no templates yet).
 | `pid_graph/pipeline.py`, `run_all.py` | `build_store()`; `python -m pid_graph` end to end |
 | `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20; titles for X21–X29) |
 | `pid_graph/load_pidkg.py` | v1.3 vision layer: pid-to-kg `graph.json` → Segment, InlineItem, ControlLoop, FLOWS_TO, SIGNAL_TO, MEMBER_OF, with exceptions X21–X29. Dry run by default; `--apply` to write. In the pipeline: `python -m pid_graph --pidkg <graph.json>` (off by default) |
+| `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
+| `reports/review_register_U-100.xlsx` | The one committed file in `reports/`: the engineer's accept / reject decisions on vision facts |
 | `tests/fixtures/pidkg_U-100/` | Frozen pid-to-kg extraction of the synthetic P&IDs (`graph.json`, `qa_report.md`, `extract/`, `RUN.md`) |
 | `pid_graph/queries.py` | Fixed Cypher templates: `out_of_service`, `shelve_impact`, `moc_impact`, `trip` (Neo4j only) |
 | `pid_graph/validate.py` | Structural checks + CQ sketches on the live graph |
@@ -169,7 +177,11 @@ on loop F-1004), X29 ×2 (I-1, I-2). Ten drawn trip signals: PT-1001A/B/C → XV
 via I-1; LT-1002A/B → XV-1001 and XV-1002 via I-2. With `--pidkg` off the graph is v1.2,
 byte for byte.
 
-**Tests:** 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
+(T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
+vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
+
+**Tests:** 204 collected; 200 passed, 4 skipped with Neo4j down. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.
