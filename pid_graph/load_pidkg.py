@@ -374,7 +374,9 @@ def reconcile(pidkg_graph: dict, index: set[str], existing_graph, *, unit: str, 
             sh = edge_sheet(e, s, t)
             if s in target and t in target and sh:
                 purpose = a.get("purpose") if a.get("purpose") in O.SIGNAL_PURPOSES else "unknown"
-                add_rel("SIGNAL_TO", target[s], target[t], sh, e.get("confidence"), signal_type=a.get("signal_type") or NOT_STATED, purpose=purpose)
+                ok = add_rel("SIGNAL_TO", target[s], target[t], sh, e.get("confidence"), signal_type=a.get("signal_type") or NOT_STATED, purpose=purpose)
+                if ok and purpose == "trip":                 # a trip drawn straight from initiator to final element
+                    drawn_trips.append({"from": target[s][1], "to": target[t][1], "via": "", "via_name": "", "sheet": sh["doc_no"]})
             else:
                 skip("SIGNAL_TO: an end is not loaded")
         elif typ == "MEMBER_OF":
@@ -511,6 +513,8 @@ def main(argv=None) -> int:
     result = reconcile(graph, index_tags(store), store, unit=a.unit, load_run=load_run)
     print(f"load_pidkg {'APPLY' if a.apply else 'DRY RUN (nothing written; --apply to write)'}  unit {a.unit}  load_run {load_run}")
     print_report(result)
+    from . import vision_checks as VC
+    VC.print_report(VC.run(graph, result, store, index_tags(store)))
     if a.apply:
         apply(store, result)
         out = Path(a.out)

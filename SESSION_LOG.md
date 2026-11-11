@@ -286,3 +286,9 @@
   test body passes when the server is given the environment.
 - `.env` now points at `bolt://localhost:7688` (changed at Alan's request; the file is git-ignored). With no
   overrides: environment check OK, 205 passed, 0 skipped, 0 failed. The open item above is closed.
+- Phase 6, branch `v1.3/phase-6-checks`: `pid_graph/vision_checks.py` (six reconciliation checks, exceptions
+  X30-X36, tag regions per sheet, derived FEEDS reported and not written), wired into `run_all --pidkg` and the
+  `load_pidkg` dry run. Fixture `tests/fixtures/pidkg_U-100/graph_discrepancies.json` (one planted discrepancy per
+  check, `scripts/make_pidkg_discrepancies.py`, `DISCREPANCIES.md`). Loader: a trip drawn without an interlock
+  symbol is now in `drawn_trips` too. Real U-100: X30 XV-1002, X34 SIF-100-03. `tests/test_v13_phase6.py`
+  (27 cases). 232 passed, Neo4j up.

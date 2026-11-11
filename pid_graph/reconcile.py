@@ -57,6 +57,14 @@ TITLES = {
     "X27": "pid-to-kg QA issue or unreadable item",
     "X28": "Vision fact cannot be represented",
     "X29": "Interlock symbol collapsed into direct trip signals",
+    # v1.3: raised by vision_checks.py (vision against the registers)
+    "X30": "Index drawing reference disagrees with vision",
+    "X31": "Flow derived from vision disagrees with pid_audit",
+    "X32": "Instrument's line disagrees between index and vision",
+    "X33": "Drawn trip signal has no cause and effect in the C&E",
+    "X34": "C&E cause and effect has no drawn trip signal",
+    "X35": "Valve fail position or actuator as drawn disagrees with the index",
+    "X36": "Loop membership as drawn disagrees with the index",
 }
 EXTRACTED = ("pid_audit", "manual", "llm")
 

@@ -167,6 +167,12 @@ def main(argv=None) -> int:
         print_report(pidkg)
         pidkg_apply(store, pidkg)
         reports["pidkg"] = pidkg["summary"]
+        # Vision against the registers (Phase 6): findings join the exception register with the loader's own.
+        from . import vision_checks as VC
+        checks = VC.run(json.loads(Path(a.pidkg).read_text(encoding="utf-8")), pidkg, store, index_tags(store))
+        VC.print_report(checks)
+        reports["vision_checks"] = checks["summary"]
+        pidkg["exceptions"] = pidkg["exceptions"] + checks["exceptions"]
         RV.write_register(pidkg, reg_path, unit=a.unit, previous=register)
         rs = RV.summarise(RV.merged_rows(pidkg, register), a.unit)
         reports["review"] = {"register": str(reg_path), **{k: rs[k] for k in ("facts", "pending", "accepted", "rejected", "pending_priority")},

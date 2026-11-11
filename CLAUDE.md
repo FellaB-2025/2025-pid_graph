@@ -134,6 +134,7 @@ and have no templates yet).
 | `pid_graph/pipeline.py`, `run_all.py` | `build_store()`; `python -m pid_graph` end to end |
 | `pid_graph/reconcile.py` | Coverage + exception register (codes X1–X20; titles for X21–X29) |
 | `pid_graph/load_pidkg.py` | v1.3 vision layer: pid-to-kg `graph.json` → Segment, InlineItem, ControlLoop, FLOWS_TO, SIGNAL_TO, MEMBER_OF, with exceptions X21–X29. Dry run by default; `--apply` to write. In the pipeline: `python -m pid_graph --pidkg <graph.json>` (off by default) |
+| `pid_graph/vision_checks.py` | Vision against the registers: tag regions per sheet, derived flow vs pid_audit, instrument's line, drawn trips vs C&E, fail position, loop membership (exceptions X30–X36). Derived `FEEDS` are reported, never written |
 | `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
 | `reports/review_register_U-100.xlsx` | The one committed file in `reports/`: the engineer's accept / reject decisions on vision facts |
 | `tests/fixtures/pidkg_U-100/` | Frozen pid-to-kg extraction of the synthetic P&IDs (`graph.json`, `qa_report.md`, `extract/`, `RUN.md`) |
@@ -177,11 +178,16 @@ on loop F-1004), X29 ×2 (I-1, I-2). Ten drawn trip signals: PT-1001A/B/C → XV
 via I-1; LT-1002A/B → XV-1001 and XV-1002 via I-2. With `--pidkg` off the graph is v1.2,
 byte for byte.
 
+**Vision checks** (same build): two findings - X30 XV-1002 (index says PID-100-002, vision found it on PID-100-001) and X34
+SIF-100-03 (the C&E has PT-1001D closing XV-1001; no such trip is drawn). 37 exceptions in all with the vision layer on.
+Tag check: PID-100-001 both 13, index only TT-1003, vision only FIC-1004, LIC-1006, XV-1002; PID-100-002 both 2, index only
+XV-1002, vision only FT-1006, PIC-1005. Derived flow agrees with pid_audit on L-101, L-102, L-103 and L-104.
+
 **Review register** (U-100, nothing decided yet): 120 facts, all pending, 20 of them priority
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 205 collected; 205 passed with Neo4j up on port 7688 (10 Nov 2026); 201 passed, 4 skipped with Neo4j down. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 232 collected; 232 passed with Neo4j up on port 7688 (10 Nov 2026); 4 are skipped when Neo4j is down. After Phase 5 it was 205. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

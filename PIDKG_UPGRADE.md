@@ -276,6 +276,19 @@ Each check writes rows to the exception register or `conflicts`, with both sourc
 
 Test fixture: a hand-edited copy of the Phase 3 `graph.json` with exactly one of each discrepancy, in the style of kg_suppression's `ce_chart_K101_rev_B.csv`.
 
+As built (10 Nov 2026), `pid_graph/vision_checks.py`:
+- Findings are exception rows X30–X36, each naming both sources: X30 index drawing reference vs vision, X31 flow vs pid_audit, X32 instrument's line,
+  X33 drawn trip not in the C&E, X34 C&E cause and effect not drawn, X35 fail position or actuator, X36 loop membership. Check 1's other two regions are
+  the loader's X21 and X22; the per-sheet table of all three regions is in the load report (`vision_checks.tag_check`) and printed.
+- **Derived `FEEDS` are computed and reported, not written to the graph.** An equipment-to-equipment `FEEDS` would shorten the "within two `FEEDS` hops"
+  of the v1.2 templates, and rule 2 says no v1.2 relationship changes meaning. Section 2.3 is read accordingly: the derived set is in the load report
+  (`vision_checks.derived_feeds`, with `derived`, `via_lines`, `via_items`, `off_page` and the worst `review` on the path).
+- The comparison with pid_audit is per line, on equipment pairs. A pid_audit `FEEDS` that reaches a line and no equipment beyond it (L-105) is not a pair and is not compared.
+- X36 is raised only where vision puts the instrument in a loop other than the index's; an instrument vision puts in no loop is not flagged.
+- The checks read vision facts whatever their review state. They are how a reviewer finds what to accept or reject, not a safety-relevant answer.
+- The fixture is `tests/fixtures/pidkg_U-100/graph_discrepancies.json`, made by `scripts/make_pidkg_discrepancies.py` (six edits, listed in `DISCREPANCIES.md`).
+- On the real U-100 extraction the checks give two findings: X30 XV-1002 and X34 SIF-100-03 (PT-1001D → XV-1001 is in the C&E and not drawn).
+
 ### Phase 7 — Cypher templates for CQ14–CQ18
 Fixed, parameterised templates plus the memory-backend equivalents, each with a test asserting both backends agree on U-100.
 CQ15 output is headed "candidates for curation — not compensating measures" and never writes `COMPENSATES_FOR`.

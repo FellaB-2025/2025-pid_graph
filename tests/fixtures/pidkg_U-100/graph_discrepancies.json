@@ -1,0 +1,4182 @@
+{
+ "schema_version": "1.0",
+ "generator": "pid-to-kg 0.1.0",
+ "generated_at": "2026-11-11T02:02:52+00:00",
+ "plant": {
+  "id": "u-100-feed-gas-inlet-dummy",
+  "name": "U-100 Feed Gas Inlet (dummy)",
+  "source_file": "U100-PIDS-TX-0057.pdf",
+  "sheets": [
+   "SHEET:PID-100-001",
+   "SHEET:PID-100-002",
+   "SHEET:PID-100-003"
+  ]
+ },
+ "nodes": [
+  {
+   "id": "SHEET:PID-100-001",
+   "type": "Sheet",
+   "label": "PID-100-001",
+   "name": "FEED GAS INLET - INLET KO DRUM V-1002",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 1.0,
+   "attributes": {
+    "page": 2,
+    "drawing_number": "PID-100-001",
+    "title": "FEED GAS INLET - INLET KO DRUM V-1002",
+    "revision": "D",
+    "drawing_type": "pid",
+    "issue_status": null,
+    "notes": [
+     "Project line in title block: DUMMY LNG PROJECT - UNIT 100 FEED GAS INLET. SHEET 1 OF 1. SCALE: NTS.",
+     "1. I-1 = SIF-100-01: PT-1001A/B/C HIGH-HIGH (2oo3) CLOSES XV-1001 AND OPENS BDV-1001.",
+     "2. I-2 = SIF-100-02: LT-1002A/B HIGH-HIGH (2oo3) CLOSES XV-1001 AND XV-1002.",
+     "3. LO = LOCKED OPEN. FC / FO = FAIL CLOSED / FAIL OPEN.",
+     "4. DASHED LINES ARE ELECTRICAL SIGNALS. SQUARED BUBBLES ARE DCS FUNCTIONS.",
+     "5. DUMMY DATA - NOT A REAL FACILITY."
+    ],
+    "tiles_reviewed": [
+     "r1c1",
+     "r1c2",
+     "r1c3",
+     "r1c4",
+     "r2c1",
+     "r2c2",
+     "r2c3",
+     "r2c4",
+     "r3c1",
+     "r3c2",
+     "r3c3",
+     "r3c4"
+    ],
+    "unreadable": []
+   },
+   "provenance": []
+  },
+  {
+   "id": "V-1002",
+   "type": "Equipment",
+   "label": "V-1002",
+   "tag": "V-1002",
+   "kind": "vessel",
+   "name": "INLET KO DRUM",
+   "dexpi_class": "Vessel",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.638,
+      0.28,
+      0.723,
+      0.565
+     ],
+     "source": "vision",
+     "local_id": "V-1002"
+    }
+   ]
+  },
+  {
+   "id": "HV-1001",
+   "type": "Component",
+   "label": "HV-1001",
+   "tag": "HV-1001",
+   "kind": "ball_valve",
+   "dexpi_class": "BallValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.2,
+      0.38,
+      0.22,
+      0.42
+     ],
+     "source": "vision",
+     "local_id": "HV-1001"
+    }
+   ]
+  },
+  {
+   "id": "XV-1001",
+   "type": "Component",
+   "label": "XV-1001",
+   "tag": "XV-1001",
+   "kind": "on_off_valve",
+   "dexpi_class": "OperatedValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "actuator": "solenoid",
+    "fail_position": "FC",
+    "isa_letters": "XV",
+    "variable": "unclassified",
+    "role": "final_element",
+    "loop_key": "X-1001"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.26,
+      0.35,
+      0.28,
+      0.42
+     ],
+     "source": "vision",
+     "local_id": "XV-1001"
+    }
+   ]
+  },
+  {
+   "id": "BDV-1001",
+   "type": "Component",
+   "label": "BDV-1001",
+   "tag": "BDV-1001",
+   "kind": "on_off_valve",
+   "dexpi_class": "OperatedValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "actuator": "solenoid",
+    "fail_position": "FO",
+    "isa_letters": "BDV",
+    "variable": "differential burner/flame",
+    "role": "final_element",
+    "loop_key": "B-1001"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.535,
+      0.072,
+      0.557,
+      0.125
+     ],
+     "source": "vision",
+     "local_id": "BDV-1001"
+    }
+   ]
+  },
+  {
+   "id": "P02.V1",
+   "type": "Component",
+   "label": "gate valve",
+   "kind": "gate_valve",
+   "dexpi_class": "GateValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual",
+    "normal_position": "open"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.607,
+      0.1,
+      0.627,
+      0.125
+     ],
+     "source": "vision",
+     "local_id": "V1"
+    }
+   ]
+  },
+  {
+   "id": "LV-1006",
+   "type": "Component",
+   "label": "LV-1006",
+   "tag": "LV-1006",
+   "kind": "control_valve",
+   "dexpi_class": "OperatedValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "actuator": "pneumatic",
+    "fail_position": "FO",
+    "isa_letters": "LV",
+    "variable": "level",
+    "role": "final_element",
+    "loop_key": "L-1006"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.728,
+      0.63,
+      0.75,
+      0.675
+     ],
+     "source": "vision",
+     "local_id": "LV-1006"
+    }
+   ]
+  },
+  {
+   "id": "XV-1002",
+   "type": "Component",
+   "label": "XV-1002",
+   "tag": "XV-1002",
+   "kind": "on_off_valve",
+   "dexpi_class": "OperatedValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "actuator": "solenoid",
+    "fail_position": "FC",
+    "isa_letters": "XV",
+    "variable": "unclassified",
+    "role": "final_element",
+    "loop_key": "X-1002"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.787,
+      0.625,
+      0.808,
+      0.675
+     ],
+     "source": "vision",
+     "local_id": "XV-1002"
+    }
+   ]
+  },
+  {
+   "id": "P02.V2",
+   "type": "Component",
+   "label": "check valve",
+   "kind": "check_valve",
+   "dexpi_class": "CheckValve",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.85,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.843,
+      0.655,
+      0.862,
+      0.675
+     ],
+     "source": "vision",
+     "local_id": "V2"
+    }
+   ]
+  },
+  {
+   "id": "PT-1001A",
+   "type": "Instrument",
+   "label": "PT-1001A",
+   "tag": "PT-1001A",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "PT",
+    "variable": "pressure",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "P-1001"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.313,
+      0.283,
+      0.341,
+      0.323
+     ],
+     "source": "vision",
+     "local_id": "PT-1001A"
+    }
+   ]
+  },
+  {
+   "id": "PT-1001B",
+   "type": "Instrument",
+   "label": "PT-1001B",
+   "tag": "PT-1001B",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "PT",
+    "variable": "pressure",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "P-1001"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.363,
+      0.283,
+      0.392,
+      0.323
+     ],
+     "source": "vision",
+     "local_id": "PT-1001B"
+    }
+   ]
+  },
+  {
+   "id": "PT-1001C",
+   "type": "Instrument",
+   "label": "PT-1001C",
+   "tag": "PT-1001C",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "PT",
+    "variable": "pressure",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "P-1001"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.414,
+      0.283,
+      0.442,
+      0.323
+     ],
+     "source": "vision",
+     "local_id": "PT-1001C"
+    }
+   ]
+  },
+  {
+   "id": "FT-1004",
+   "type": "Instrument",
+   "label": "FT-1004",
+   "tag": "FT-1004",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "FT",
+    "variable": "flow",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "F-1004",
+    "inline": true
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.531,
+      0.372,
+      0.561,
+      0.413
+     ],
+     "source": "vision",
+     "local_id": "FT-1004"
+    }
+   ]
+  },
+  {
+   "id": "FIC-1004",
+   "type": "Instrument",
+   "label": "FIC-1004",
+   "tag": "FIC-1004",
+   "kind": "controller",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "dcs",
+    "isa_letters": "FIC",
+    "variable": "flow",
+    "functions": [
+     "indicate",
+     "control"
+    ],
+    "role": "controller",
+    "loop_key": "F-1004"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.531,
+      0.235,
+      0.561,
+      0.276
+     ],
+     "source": "vision",
+     "local_id": "FIC-1004"
+    }
+   ]
+  },
+  {
+   "id": "I-1",
+   "type": "Instrument",
+   "label": "I-1",
+   "tag": "I-1",
+   "kind": "other",
+   "name": "SIF-100-01",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.85,
+   "attributes": {
+    "location": "sis",
+    "isa_letters": "I",
+    "variable": "current",
+    "role": "other",
+    "loop_key": "I-1"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.365,
+      0.185,
+      0.39,
+      0.22
+     ],
+     "source": "vision",
+     "local_id": "I-1"
+    }
+   ]
+  },
+  {
+   "id": "I-2",
+   "type": "Instrument",
+   "label": "I-2",
+   "tag": "I-2",
+   "kind": "other",
+   "name": "SIF-100-02",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.85,
+   "attributes": {
+    "location": "sis",
+    "isa_letters": "I",
+    "variable": "current",
+    "role": "other",
+    "loop_key": "I-2"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.898,
+      0.395,
+      0.924,
+      0.43
+     ],
+     "source": "vision",
+     "local_id": "I-2"
+    }
+   ]
+  },
+  {
+   "id": "LG-1002",
+   "type": "Instrument",
+   "label": "LG-1002",
+   "tag": "LG-1002",
+   "kind": "gauge",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "LG",
+    "variable": "level",
+    "functions": [
+     "glass/gauge"
+    ],
+    "role": "gauge",
+    "loop_key": "L-1002"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.775,
+      0.295,
+      0.803,
+      0.335
+     ],
+     "source": "vision",
+     "local_id": "LG-1002"
+    }
+   ]
+  },
+  {
+   "id": "LT-1002A",
+   "type": "Instrument",
+   "label": "LT-1002A",
+   "tag": "LT-1002A",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "LT",
+    "variable": "level",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "L-1002"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.775,
+      0.36,
+      0.803,
+      0.4
+     ],
+     "source": "vision",
+     "local_id": "LT-1002A"
+    }
+   ]
+  },
+  {
+   "id": "LT-1002B",
+   "type": "Instrument",
+   "label": "LT-1002B",
+   "tag": "LT-1002B",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "LT",
+    "variable": "level",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "L-1002"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.775,
+      0.425,
+      0.803,
+      0.465
+     ],
+     "source": "vision",
+     "local_id": "LT-1002B"
+    }
+   ]
+  },
+  {
+   "id": "LT-1006",
+   "type": "Instrument",
+   "label": "LT-1006",
+   "tag": "LT-1006",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "LT",
+    "variable": "level",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "L-1006"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.775,
+      0.503,
+      0.803,
+      0.543
+     ],
+     "source": "vision",
+     "local_id": "LT-1006"
+    }
+   ]
+  },
+  {
+   "id": "LIC-1006",
+   "type": "Instrument",
+   "label": "LIC-1006",
+   "tag": "LIC-1006",
+   "kind": "controller",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "dcs",
+    "isa_letters": "LIC",
+    "variable": "level",
+    "functions": [
+     "indicate",
+     "control"
+    ],
+    "role": "controller",
+    "loop_key": "L-1006"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.85,
+      0.502,
+      0.88,
+      0.544
+     ],
+     "source": "vision",
+     "local_id": "LIC-1006"
+    }
+   ]
+  },
+  {
+   "id": "P02.OPC1",
+   "type": "OffPageConnector",
+   "label": "TO PID-100-002 / L-102",
+   "name": "TO PID-100-002 / L-102",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "out",
+    "other_drawing": "PID-100-002",
+    "line_number": "L-102",
+    "linked_to": "P03.OPC1"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.885,
+      0.187,
+      0.959,
+      0.217
+     ],
+     "source": "vision",
+     "local_id": "OPC1"
+    }
+   ]
+  },
+  {
+   "id": "P02.OPC2",
+   "type": "OffPageConnector",
+   "label": "TO PID-100-002 / L-105",
+   "name": "TO PID-100-002 / L-105",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "out",
+    "other_drawing": "PID-100-002",
+    "line_number": "L-105",
+    "linked_to": "P03.OPC2"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.885,
+      0.124,
+      0.959,
+      0.156
+     ],
+     "source": "vision",
+     "local_id": "OPC2"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:FEED GAS FROM BL-100",
+   "type": "Boundary",
+   "label": "FEED GAS FROM BL-100",
+   "name": "FEED GAS FROM BL-100",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "source"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.05,
+      0.376,
+      0.123,
+      0.409
+     ],
+     "source": "vision",
+     "local_id": "B1"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:BLOWDOWN TO FLARE-HDR",
+   "type": "Boundary",
+   "label": "BLOWDOWN TO BL-200",
+   "name": "BLOWDOWN TO BL-200",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.427,
+      0.097,
+      0.5,
+      0.129
+     ],
+     "source": "vision",
+     "local_id": "B2"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:LIQUID TO BL-103",
+   "type": "Boundary",
+   "label": "LIQUID TO BL-103",
+   "name": "LIQUID TO BL-103",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "bbox": [
+      0.89,
+      0.649,
+      0.962,
+      0.681
+     ],
+     "source": "vision",
+     "local_id": "B3"
+    }
+   ]
+  },
+  {
+   "id": "SHEET:PID-100-002",
+   "type": "Sheet",
+   "label": "PID-100-002",
+   "name": "FEED GAS INLET - PRESSURE CONTROL AND EXPORT",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 1.0,
+   "attributes": {
+    "page": 3,
+    "drawing_number": "PID-100-002",
+    "title": "FEED GAS INLET - PRESSURE CONTROL AND EXPORT",
+    "revision": "B",
+    "drawing_type": "pid",
+    "issue_status": null,
+    "notes": [
+     "Project line in title block: DUMMY LNG PROJECT - UNIT 100 FEED GAS INLET. SHEET 1 OF 1. SCALE: NTS.",
+     "1. FC / FO = FAIL CLOSED / FAIL OPEN.",
+     "2. DASHED LINES ARE ELECTRICAL SIGNALS. SQUARED BUBBLES ARE DCS FUNCTIONS.",
+     "3. DUMMY DATA - NOT A REAL FACILITY."
+    ],
+    "tiles_reviewed": [
+     "r1c1",
+     "r1c2",
+     "r1c3",
+     "r1c4",
+     "r2c1",
+     "r2c2",
+     "r2c3",
+     "r2c4",
+     "r3c1",
+     "r3c2",
+     "r3c3",
+     "r3c4"
+    ],
+    "unreadable": []
+   },
+   "provenance": []
+  },
+  {
+   "id": "P03.V1",
+   "type": "Component",
+   "label": "gate valve",
+   "kind": "gate_valve",
+   "dexpi_class": "GateValve",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.327,
+      0.383,
+      0.345,
+      0.402
+     ],
+     "source": "vision",
+     "local_id": "V1"
+    }
+   ]
+  },
+  {
+   "id": "P03.R1",
+   "type": "Component",
+   "label": "reducer",
+   "kind": "reducer",
+   "dexpi_class": "PipeReducer",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.85,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.387,
+      0.383,
+      0.402,
+      0.402
+     ],
+     "source": "vision",
+     "local_id": "R1"
+    }
+   ]
+  },
+  {
+   "id": "PV-1005",
+   "type": "Component",
+   "label": "PV-1005",
+   "tag": "PV-1005",
+   "kind": "control_valve",
+   "dexpi_class": "OperatedValve",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "actuator": "pneumatic",
+    "fail_position": "FO",
+    "isa_letters": "PV",
+    "variable": "pressure",
+    "role": "final_element",
+    "loop_key": "P-1005"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.444,
+      0.357,
+      0.463,
+      0.425
+     ],
+     "source": "vision",
+     "local_id": "PV-1005"
+    }
+   ]
+  },
+  {
+   "id": "P03.R2",
+   "type": "Component",
+   "label": "reducer",
+   "kind": "reducer",
+   "dexpi_class": "PipeReducer",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.85,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.505,
+      0.383,
+      0.52,
+      0.402
+     ],
+     "source": "vision",
+     "local_id": "R2"
+    }
+   ]
+  },
+  {
+   "id": "P03.V2",
+   "type": "Component",
+   "label": "gate valve",
+   "kind": "gate_valve",
+   "dexpi_class": "GateValve",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.562,
+      0.383,
+      0.58,
+      0.402
+     ],
+     "source": "vision",
+     "local_id": "V2"
+    }
+   ]
+  },
+  {
+   "id": "PT-1005",
+   "type": "Instrument",
+   "label": "PT-1005",
+   "tag": "PT-1005",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "PT",
+    "variable": "pressure",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "P-1005"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.229,
+      0.283,
+      0.258,
+      0.323
+     ],
+     "source": "vision",
+     "local_id": "PT-1005"
+    }
+   ]
+  },
+  {
+   "id": "PIC-1005",
+   "type": "Instrument",
+   "label": "PIC-1005",
+   "tag": "PIC-1005",
+   "kind": "controller",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "dcs",
+    "isa_letters": "PIC",
+    "variable": "pressure",
+    "functions": [
+     "indicate",
+     "control"
+    ],
+    "role": "controller",
+    "loop_key": "P-1005"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.338,
+      0.187,
+      0.368,
+      0.229
+     ],
+     "source": "vision",
+     "local_id": "PIC-1005"
+    }
+   ]
+  },
+  {
+   "id": "FT-1006",
+   "type": "Instrument",
+   "label": "FT-1006",
+   "tag": "FT-1006",
+   "kind": "transmitter",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "location": "field",
+    "isa_letters": "FT",
+    "variable": "flow",
+    "functions": [
+     "transmit"
+    ],
+    "role": "transmitter",
+    "loop_key": "F-1006",
+    "inline": true
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.271,
+      0.597,
+      0.3,
+      0.638
+     ],
+     "source": "vision",
+     "local_id": "FT-1006"
+    }
+   ]
+  },
+  {
+   "id": "P03.OPC1",
+   "type": "OffPageConnector",
+   "label": "FROM PID-100-001 / V-1002 L-102",
+   "name": "FROM PID-100-001 / V-1002 L-102",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "in",
+    "other_drawing": "PID-100-001",
+    "other_item": "V-1002",
+    "line_number": "L-102",
+    "linked_from": "P02.OPC1"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.05,
+      0.376,
+      0.123,
+      0.409
+     ],
+     "source": "vision",
+     "local_id": "OPC1"
+    }
+   ]
+  },
+  {
+   "id": "P03.OPC2",
+   "type": "OffPageConnector",
+   "label": "FROM PID-100-001 / V-1002 L-105",
+   "name": "FROM PID-100-001 / V-1002 L-105",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "in",
+    "other_drawing": "PID-100-001",
+    "other_item": "V-1002",
+    "line_number": "L-105",
+    "linked_from": "P02.OPC2"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.05,
+      0.602,
+      0.123,
+      0.634
+     ],
+     "source": "vision",
+     "local_id": "OPC2"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:FEED GAS TO BL-200",
+   "type": "Boundary",
+   "label": "FEED GAS TO BL-200",
+   "name": "FEED GAS TO BL-200",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.756,
+      0.376,
+      0.828,
+      0.409
+     ],
+     "source": "vision",
+     "local_id": "B1"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:FUTURE FUEL GAS",
+   "type": "Boundary",
+   "label": "FUTURE FUEL GAS",
+   "name": "FUTURE FUEL GAS",
+   "status": "future",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "bbox": [
+      0.47,
+      0.602,
+      0.542,
+      0.634
+     ],
+     "source": "vision",
+     "local_id": "B2"
+    }
+   ]
+  },
+  {
+   "id": "SHEET:PID-100-003",
+   "type": "Sheet",
+   "label": "PID-100-003",
+   "name": "FEED GAS INLET - UTILITY CONNECTIONS",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 1.0,
+   "attributes": {
+    "page": 4,
+    "drawing_number": "PID-100-003",
+    "title": "FEED GAS INLET - UTILITY CONNECTIONS",
+    "revision": "A",
+    "drawing_type": "pid",
+    "issue_status": null,
+    "notes": [
+     "Project line in title block: DUMMY LNG PROJECT - UNIT 100 FEED GAS INLET. SHEET 1 OF 1. SCALE: NTS.",
+     "1. UTILITY LINES ARE NOT NUMBERED ON THIS SHEET.",
+     "2. DUMMY DATA - NOT A REAL FACILITY."
+    ],
+    "tiles_reviewed": [
+     "r1c1",
+     "r1c2",
+     "r1c3",
+     "r1c4",
+     "r2c1",
+     "r2c2",
+     "r2c3",
+     "r2c4",
+     "r3c1",
+     "r3c2",
+     "r3c3",
+     "r3c4"
+    ],
+    "unreadable": []
+   },
+   "provenance": []
+  },
+  {
+   "id": "P04.V1",
+   "type": "Component",
+   "label": "gate valve",
+   "kind": "gate_valve",
+   "dexpi_class": "GateValve",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.293,
+      0.347,
+      0.311,
+      0.366
+     ],
+     "source": "vision",
+     "local_id": "V1"
+    }
+   ]
+  },
+  {
+   "id": "P04.S1",
+   "type": "Component",
+   "label": "strainer",
+   "kind": "strainer",
+   "dexpi_class": "Strainer",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.8,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.378,
+      0.349,
+      0.397,
+      0.377
+     ],
+     "source": "vision",
+     "local_id": "S1"
+    }
+   ]
+  },
+  {
+   "id": "P04.V2",
+   "type": "Component",
+   "label": "gate valve",
+   "kind": "gate_valve",
+   "dexpi_class": "GateValve",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.9,
+   "attributes": {
+    "actuator": "manual"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.293,
+      0.537,
+      0.311,
+      0.556
+     ],
+     "source": "vision",
+     "local_id": "V2"
+    }
+   ]
+  },
+  {
+   "id": "P04.V3",
+   "type": "Component",
+   "label": "check valve",
+   "kind": "check_valve",
+   "dexpi_class": "CheckValve",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.85,
+   "attributes": {},
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.377,
+      0.537,
+      0.396,
+      0.556
+     ],
+     "source": "vision",
+     "local_id": "V3"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:INSTRUMENT AIR HEADER",
+   "type": "Boundary",
+   "label": "INSTRUMENT AIR HEADER",
+   "name": "INSTRUMENT AIR HEADER",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "source"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.092,
+      0.342,
+      0.165,
+      0.372
+     ],
+     "source": "vision",
+     "local_id": "B1"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:INSTRUMENT AIR USERS",
+   "type": "Boundary",
+   "label": "INSTRUMENT AIR USERS",
+   "name": "INSTRUMENT AIR USERS",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.587,
+      0.342,
+      0.66,
+      0.372
+     ],
+     "source": "vision",
+     "local_id": "B2"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:NITROGEN HEADER",
+   "type": "Boundary",
+   "label": "NITROGEN HEADER",
+   "name": "NITROGEN HEADER",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "source"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.092,
+      0.531,
+      0.165,
+      0.562
+     ],
+     "source": "vision",
+     "local_id": "B3"
+    }
+   ]
+  },
+  {
+   "id": "BOUNDARY:NITROGEN UTILITY STATION",
+   "type": "Boundary",
+   "label": "NITROGEN UTILITY STATION",
+   "name": "NITROGEN UTILITY STATION",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "direction": "sink"
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "bbox": [
+      0.587,
+      0.531,
+      0.66,
+      0.562
+     ],
+     "source": "vision",
+     "local_id": "B4"
+    }
+   ]
+  },
+  {
+   "id": "P02.L1.1",
+   "type": "PipeSegment",
+   "label": "L-101 [1/4]",
+   "tag": "L-101",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-101",
+    "size": "12\"",
+    "service": "FEED GAS",
+    "segment": 1,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P02.L1.2",
+   "type": "PipeSegment",
+   "label": "L-101 [2/4]",
+   "tag": "L-101",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-101",
+    "size": "12\"",
+    "service": "FEED GAS",
+    "segment": 2,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P02.L1.3",
+   "type": "PipeSegment",
+   "label": "L-101 [3/4]",
+   "tag": "L-101",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-101",
+    "size": "12\"",
+    "service": "FEED GAS",
+    "segment": 3,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P02.L1.4",
+   "type": "PipeSegment",
+   "label": "L-101 [4/4]",
+   "tag": "L-101",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-101",
+    "size": "12\"",
+    "service": "FEED GAS",
+    "segment": 4,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P02.L2.1",
+   "type": "PipeSegment",
+   "label": "L-102",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 1,
+    "segments": 1
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "P02.L3.1",
+   "type": "PipeSegment",
+   "label": "L-103 [1/4]",
+   "tag": "L-103",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L3",
+    "line_number": "L-103",
+    "size": "3\"",
+    "service": "LIQUID",
+    "segment": 1,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L3"
+    }
+   ]
+  },
+  {
+   "id": "P02.L3.2",
+   "type": "PipeSegment",
+   "label": "L-103 [2/4]",
+   "tag": "L-103",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L3",
+    "line_number": "L-103",
+    "size": "3\"",
+    "service": "LIQUID",
+    "segment": 2,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L3"
+    }
+   ]
+  },
+  {
+   "id": "P02.L3.3",
+   "type": "PipeSegment",
+   "label": "L-103 [3/4]",
+   "tag": "L-103",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L3",
+    "line_number": "L-103",
+    "size": "3\"",
+    "service": "LIQUID",
+    "segment": 3,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L3"
+    }
+   ]
+  },
+  {
+   "id": "P02.L3.4",
+   "type": "PipeSegment",
+   "label": "L-103 [4/4]",
+   "tag": "L-103",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L3",
+    "line_number": "L-103",
+    "size": "3\"",
+    "service": "LIQUID",
+    "segment": 4,
+    "segments": 4
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L3"
+    }
+   ]
+  },
+  {
+   "id": "P02.L4.1",
+   "type": "PipeSegment",
+   "label": "L-104 [1/3]",
+   "tag": "L-104",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L4",
+    "line_number": "L-104",
+    "size": "6\"",
+    "service": "BLOWDOWN",
+    "segment": 1,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L4"
+    }
+   ]
+  },
+  {
+   "id": "P02.L4.2",
+   "type": "PipeSegment",
+   "label": "L-104 [2/3]",
+   "tag": "L-104",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L4",
+    "line_number": "L-104",
+    "size": "6\"",
+    "service": "BLOWDOWN",
+    "segment": 2,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L4"
+    }
+   ]
+  },
+  {
+   "id": "P02.L4.3",
+   "type": "PipeSegment",
+   "label": "L-104 [3/3]",
+   "tag": "L-104",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L4",
+    "line_number": "L-104",
+    "size": "6\"",
+    "service": "BLOWDOWN",
+    "segment": 3,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L4"
+    }
+   ]
+  },
+  {
+   "id": "P02.L5.1",
+   "type": "PipeSegment",
+   "label": "L-105",
+   "tag": "L-105",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L5",
+    "line_number": "L-105",
+    "size": "2\"",
+    "service": "FUEL GAS",
+    "segment": 1,
+    "segments": 1
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-001",
+     "page": 2,
+     "source": "vision",
+     "local_id": "L5"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.1",
+   "type": "PipeSegment",
+   "label": "L-102 [1/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 1,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.2",
+   "type": "PipeSegment",
+   "label": "L-102 [2/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 2,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.3",
+   "type": "PipeSegment",
+   "label": "L-102 [3/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 3,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.4",
+   "type": "PipeSegment",
+   "label": "L-102 [4/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 4,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.5",
+   "type": "PipeSegment",
+   "label": "L-102 [5/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 5,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L1.6",
+   "type": "PipeSegment",
+   "label": "L-102 [6/6]",
+   "tag": "L-102",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "line_number": "L-102",
+    "size": "10\"",
+    "service": "FEED GAS",
+    "segment": 6,
+    "segments": 6
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P03.L2.1",
+   "type": "PipeSegment",
+   "label": "L-105 [1/2]",
+   "tag": "L-105",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "line_number": "L-105",
+    "size": "2\"",
+    "service": "FUEL GAS",
+    "segment": 1,
+    "segments": 2
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "P03.L2.2",
+   "type": "PipeSegment",
+   "label": "L-105 [2/2]",
+   "tag": "L-105",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "line_number": "L-105",
+    "size": "2\"",
+    "service": "FUEL GAS",
+    "segment": 2,
+    "segments": 2
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-002",
+     "page": 3,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "P04.L1.1",
+   "type": "PipeSegment",
+   "label": "L1 [1/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "size": "1\"",
+    "service": "INSTRUMENT AIR",
+    "segment": 1,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P04.L1.2",
+   "type": "PipeSegment",
+   "label": "L1 [2/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "size": "1\"",
+    "service": "INSTRUMENT AIR",
+    "segment": 2,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P04.L1.3",
+   "type": "PipeSegment",
+   "label": "L1 [3/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L1",
+    "size": "1\"",
+    "service": "INSTRUMENT AIR",
+    "segment": 3,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L1"
+    }
+   ]
+  },
+  {
+   "id": "P04.L2.1",
+   "type": "PipeSegment",
+   "label": "L2 [1/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "size": "1\"",
+    "service": "NITROGEN",
+    "segment": 1,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "P04.L2.2",
+   "type": "PipeSegment",
+   "label": "L2 [2/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "size": "1\"",
+    "service": "NITROGEN",
+    "segment": 2,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "P04.L2.3",
+   "type": "PipeSegment",
+   "label": "L2 [3/3]",
+   "dexpi_class": "PipingNetworkSegment",
+   "sheets": [
+    "SHEET:PID-100-003"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "line_id": "L2",
+    "size": "1\"",
+    "service": "NITROGEN",
+    "segment": 3,
+    "segments": 3
+   },
+   "provenance": [
+    {
+     "sheet": "SHEET:PID-100-003",
+     "page": 4,
+     "source": "vision",
+     "local_id": "L2"
+    }
+   ]
+  },
+  {
+   "id": "LOOP:F-1004",
+   "type": "ControlLoop",
+   "label": "F-1004",
+   "kind": "control",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "variable": "flow",
+    "loop_type": "control",
+    "sensors": [
+     "FT-1004"
+    ],
+    "controllers": [
+     "FIC-1004"
+    ],
+    "measured_at": [
+     "in-line on L-101 (XV-1001 -> V-1002)"
+    ],
+    "description": "Control loop F-1004 (flow). Sensed by FT-1004 (in-line on L-101 (XV-1001 -> V-1002)). Controlled by FIC-1004 (dcs)."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:I-1",
+   "type": "ControlLoop",
+   "label": "I-1",
+   "kind": "interlock",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.85,
+   "attributes": {
+    "variable": "current",
+    "loop_type": "interlock",
+    "final_elements": [
+     "BDV-1001",
+     "XV-1001"
+    ],
+    "manipulated_at": [
+     "BDV-1001 on L-104",
+     "XV-1001 on L-101"
+    ],
+    "description": "Interlock loop I-1 (current). Acts on BDV-1001 on L-104; XV-1001 on L-101."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:I-2",
+   "type": "ControlLoop",
+   "label": "I-2",
+   "kind": "interlock",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.85,
+   "attributes": {
+    "variable": "current",
+    "loop_type": "interlock",
+    "final_elements": [
+     "XV-1001",
+     "XV-1002"
+    ],
+    "manipulated_at": [
+     "XV-1001 on L-101",
+     "XV-1002 on L-103"
+    ],
+    "description": "Interlock loop I-2 (current). Acts on XV-1001 on L-101; XV-1002 on L-103."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:L-1002",
+   "type": "ControlLoop",
+   "label": "L-1002",
+   "kind": "interlock",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "variable": "level",
+    "loop_type": "interlock",
+    "sensors": [
+     "LG-1002",
+     "LT-1002A",
+     "LT-1002B"
+    ],
+    "final_elements": [
+     "XV-1001",
+     "XV-1002"
+    ],
+    "measured_at": [
+     "V-1002"
+    ],
+    "manipulated_at": [
+     "XV-1001 on L-101",
+     "XV-1002 on L-103"
+    ],
+    "description": "Interlock loop L-1002 (level). Sensed by LG-1002, LT-1002A, LT-1002B (V-1002). Acts on XV-1001 on L-101; XV-1002 on L-103."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:L-1006",
+   "type": "ControlLoop",
+   "label": "L-1006",
+   "kind": "control",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "variable": "level",
+    "loop_type": "control",
+    "sensors": [
+     "LT-1006"
+    ],
+    "controllers": [
+     "LIC-1006"
+    ],
+    "final_elements": [
+     "LV-1006"
+    ],
+    "measured_at": [
+     "V-1002"
+    ],
+    "manipulated_at": [
+     "LV-1006 on L-103"
+    ],
+    "description": "Control loop L-1006 (level). Sensed by LT-1006 (V-1002). Controlled by LIC-1006 (dcs). Acts on LV-1006 on L-103."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:P-1001",
+   "type": "ControlLoop",
+   "label": "P-1001",
+   "kind": "interlock",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-001"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "variable": "pressure",
+    "loop_type": "interlock",
+    "sensors": [
+     "PT-1001A",
+     "PT-1001B",
+     "PT-1001C",
+     "PI-1001"
+    ],
+    "final_elements": [
+     "BDV-1001",
+     "XV-1001"
+    ],
+    "measured_at": [
+     "L-101 (XV-1001 -> FT-1004)"
+    ],
+    "manipulated_at": [
+     "BDV-1001 on L-104",
+     "XV-1001 on L-101"
+    ],
+    "description": "Interlock loop P-1001 (pressure). Sensed by PT-1001A, PT-1001B, PT-1001C, PI-1001 (L-101 (XV-1001 -> FT-1004)). Acts on BDV-1001 on L-104; XV-1001 on L-101."
+   },
+   "provenance": []
+  },
+  {
+   "id": "LOOP:P-1005",
+   "type": "ControlLoop",
+   "label": "P-1005",
+   "kind": "control",
+   "dexpi_class": "InstrumentationLoopFunction",
+   "sheets": [
+    "SHEET:PID-100-002"
+   ],
+   "confidence": 0.95,
+   "attributes": {
+    "variable": "pressure",
+    "loop_type": "control",
+    "sensors": [
+     "PT-1005"
+    ],
+    "controllers": [
+     "PIC-1005"
+    ],
+    "final_elements": [
+     "PV-1005"
+    ],
+    "measured_at": [
+     "L-102 (FROM PID-100-001 / V-1002 L-102 -> gate valve)"
+    ],
+    "manipulated_at": [
+     "PV-1005 on L-102"
+    ],
+    "description": "Control loop P-1005 (pressure). Sensed by PT-1005 (L-102 (FROM PID-100-001 / V-1002 L-102 -> gate valve)). Controlled by PIC-1005 (dcs). Acts on PV-1005 on L-102."
+   },
+   "provenance": []
+  },
+  {
+   "id": "PLANT:u-100-feed-gas-inlet-dummy",
+   "type": "Plant",
+   "label": "U-100 Feed Gas Inlet (dummy)",
+   "name": "U-100 Feed Gas Inlet (dummy)",
+   "sheets": [],
+   "confidence": 1.0,
+   "attributes": {
+    "source_file": "U100-PIDS-TX-0057.pdf"
+   },
+   "provenance": []
+  }
+ ],
+ "edges": [
+  {
+   "id": "E00001",
+   "source": "P02.L1.1",
+   "target": "HV-1001",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00002",
+   "source": "HV-1001",
+   "target": "P02.L1.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00003",
+   "source": "P02.L1.2",
+   "target": "XV-1001",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00004",
+   "source": "XV-1001",
+   "target": "P02.L1.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00005",
+   "source": "P02.L1.3",
+   "target": "FT-1004",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00006",
+   "source": "FT-1004",
+   "target": "P02.L1.4",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00007",
+   "source": "P02.L3.1",
+   "target": "LV-1006",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00008",
+   "source": "LV-1006",
+   "target": "P02.L3.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00009",
+   "source": "P02.L3.2",
+   "target": "XV-1002",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00010",
+   "source": "XV-1002",
+   "target": "P02.L3.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00011",
+   "source": "P02.L3.3",
+   "target": "P02.V2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00012",
+   "source": "P02.V2",
+   "target": "P02.L3.4",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00013",
+   "source": "P02.L4.1",
+   "target": "P02.V1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00014",
+   "source": "P02.V1",
+   "target": "P02.L4.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00015",
+   "source": "P02.L4.2",
+   "target": "BDV-1001",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00016",
+   "source": "BDV-1001",
+   "target": "P02.L4.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00017",
+   "source": "BOUNDARY:FEED GAS FROM BL-100",
+   "target": "P02.L1.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00018",
+   "source": "P02.L1.4",
+   "target": "V-1002",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-101"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00019",
+   "source": "V-1002",
+   "target": "P02.L2.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00020",
+   "source": "P02.L2.1",
+   "target": "P02.OPC1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00021",
+   "source": "V-1002",
+   "target": "P02.L3.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00022",
+   "source": "P02.L3.4",
+   "target": "BOUNDARY:LIQUID TO BL-103",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-103"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00023",
+   "source": "V-1002",
+   "target": "P02.L4.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00024",
+   "source": "P02.L4.3",
+   "target": "BOUNDARY:BLOWDOWN TO FLARE-HDR",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-104"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00025",
+   "source": "V-1002",
+   "target": "P02.L5.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00026",
+   "source": "P02.L5.1",
+   "target": "P02.OPC2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00027",
+   "source": "PT-1001A",
+   "target": "P02.L1.3",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00028",
+   "source": "PT-1001B",
+   "target": "P02.L1.3",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00029",
+   "source": "PT-1001C",
+   "target": "P02.L1.3",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00031",
+   "source": "FT-1004",
+   "target": "P02.L1.3",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "inline": true
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00032",
+   "source": "LG-1002",
+   "target": "V-1002",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00033",
+   "source": "LT-1002A",
+   "target": "V-1002",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00034",
+   "source": "LT-1002B",
+   "target": "V-1002",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00035",
+   "source": "LT-1006",
+   "target": "V-1002",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00036",
+   "source": "PT-1001A",
+   "target": "I-1",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00037",
+   "source": "PT-1001B",
+   "target": "I-1",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00038",
+   "source": "PT-1001C",
+   "target": "I-1",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00039",
+   "source": "I-1",
+   "target": "XV-1001",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00040",
+   "source": "I-1",
+   "target": "BDV-1001",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00041",
+   "source": "LT-1002A",
+   "target": "I-2",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00042",
+   "source": "LT-1002B",
+   "target": "I-2",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00043",
+   "source": "I-2",
+   "target": "XV-1002",
+   "type": "SIGNAL_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00044",
+   "source": "I-2",
+   "target": "XV-1001",
+   "type": "SIGNAL_TO",
+   "confidence": 0.85,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00045",
+   "source": "FT-1004",
+   "target": "FIC-1004",
+   "type": "SIGNAL_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "measurement"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00046",
+   "source": "LT-1006",
+   "target": "LIC-1006",
+   "type": "SIGNAL_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "measurement"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00047",
+   "source": "LIC-1006",
+   "target": "LV-1006",
+   "type": "SIGNAL_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "control"
+   },
+   "sheet": "SHEET:PID-100-001"
+  },
+  {
+   "id": "E00048",
+   "source": "P03.L1.1",
+   "target": "P03.V1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00049",
+   "source": "P03.V1",
+   "target": "P03.L1.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00050",
+   "source": "P03.L1.2",
+   "target": "P03.R1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00051",
+   "source": "P03.R1",
+   "target": "P03.L1.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00052",
+   "source": "P03.L1.3",
+   "target": "PV-1005",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00053",
+   "source": "PV-1005",
+   "target": "P03.L1.4",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00054",
+   "source": "P03.L1.4",
+   "target": "P03.R2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00055",
+   "source": "P03.R2",
+   "target": "P03.L1.5",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00056",
+   "source": "P03.L1.5",
+   "target": "P03.V2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00057",
+   "source": "P03.V2",
+   "target": "P03.L1.6",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00058",
+   "source": "P03.L2.1",
+   "target": "FT-1006",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00059",
+   "source": "FT-1006",
+   "target": "P03.L2.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00060",
+   "source": "P03.OPC1",
+   "target": "P03.L1.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00061",
+   "source": "P03.L1.6",
+   "target": "BOUNDARY:FEED GAS TO BL-200",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-102"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00062",
+   "source": "P03.OPC2",
+   "target": "P03.L2.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00063",
+   "source": "P03.L2.2",
+   "target": "BOUNDARY:FUTURE FUEL GAS",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown",
+    "line_number": "L-105"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00064",
+   "source": "PT-1005",
+   "target": "P03.L2.1",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {},
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00065",
+   "source": "FT-1006",
+   "target": "P03.L2.1",
+   "type": "MEASURES",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "inline": true
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00066",
+   "source": "PT-1005",
+   "target": "PIC-1005",
+   "type": "SIGNAL_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "measurement"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00067",
+   "source": "PIC-1005",
+   "target": "PV-1005",
+   "type": "SIGNAL_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "control"
+   },
+   "sheet": "SHEET:PID-100-002"
+  },
+  {
+   "id": "E00068",
+   "source": "P04.L1.1",
+   "target": "P04.V1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00069",
+   "source": "P04.V1",
+   "target": "P04.L1.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00070",
+   "source": "P04.L1.2",
+   "target": "P04.S1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00071",
+   "source": "P04.S1",
+   "target": "P04.L1.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00072",
+   "source": "P04.L2.1",
+   "target": "P04.V2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00073",
+   "source": "P04.V2",
+   "target": "P04.L2.2",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00074",
+   "source": "P04.L2.2",
+   "target": "P04.V3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00075",
+   "source": "P04.V3",
+   "target": "P04.L2.3",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00076",
+   "source": "BOUNDARY:INSTRUMENT AIR HEADER",
+   "target": "P04.L1.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00077",
+   "source": "P04.L1.3",
+   "target": "BOUNDARY:INSTRUMENT AIR USERS",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00078",
+   "source": "BOUNDARY:NITROGEN HEADER",
+   "target": "P04.L2.1",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00079",
+   "source": "P04.L2.3",
+   "target": "BOUNDARY:NITROGEN UTILITY STATION",
+   "type": "FLOWS_TO",
+   "confidence": 0.95,
+   "derived": false,
+   "attributes": {
+    "flow_direction": "shown"
+   },
+   "sheet": "SHEET:PID-100-003"
+  },
+  {
+   "id": "E00080",
+   "source": "P02.OPC2",
+   "target": "P03.OPC2",
+   "type": "FLOWS_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "off_page": true,
+    "match_score": 10.5
+   }
+  },
+  {
+   "id": "E00081",
+   "source": "P02.OPC1",
+   "target": "P03.OPC1",
+   "type": "FLOWS_TO",
+   "confidence": 0.9,
+   "derived": false,
+   "attributes": {
+    "off_page": true,
+    "match_score": 10.5
+   }
+  },
+  {
+   "id": "E00082",
+   "source": "LIC-1006",
+   "target": "LV-1006",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00083",
+   "source": "PT-1001A",
+   "target": "BDV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via": [
+     "I-1"
+    ]
+   }
+  },
+  {
+   "id": "E00084",
+   "source": "PT-1001A",
+   "target": "XV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via": [
+     "I-1"
+    ]
+   }
+  },
+  {
+   "id": "E00085",
+   "source": "I-1",
+   "target": "BDV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00086",
+   "source": "I-1",
+   "target": "XV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00087",
+   "source": "I-2",
+   "target": "XV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00088",
+   "source": "I-2",
+   "target": "XV-1002",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00089",
+   "source": "LT-1002A",
+   "target": "XV-1001",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via": [
+     "I-2"
+    ]
+   }
+  },
+  {
+   "id": "E00090",
+   "source": "LT-1002A",
+   "target": "XV-1002",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via": [
+     "I-2"
+    ]
+   }
+  },
+  {
+   "id": "E00091",
+   "source": "PIC-1005",
+   "target": "PV-1005",
+   "type": "ACTUATES",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {}
+  },
+  {
+   "id": "E00092",
+   "source": "FT-1004",
+   "target": "LOOP:F-1004",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00093",
+   "source": "FIC-1004",
+   "target": "LOOP:F-1004",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "controller"
+   }
+  },
+  {
+   "id": "E00094",
+   "source": "I-1",
+   "target": "LOOP:I-1",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "other"
+   }
+  },
+  {
+   "id": "E00095",
+   "source": "BDV-1001",
+   "target": "LOOP:I-1",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00096",
+   "source": "XV-1001",
+   "target": "LOOP:I-1",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00097",
+   "source": "I-2",
+   "target": "LOOP:I-2",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "other"
+   }
+  },
+  {
+   "id": "E00098",
+   "source": "XV-1001",
+   "target": "LOOP:I-2",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00099",
+   "source": "XV-1002",
+   "target": "LOOP:I-2",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00100",
+   "source": "LG-1002",
+   "target": "LOOP:L-1002",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "gauge"
+   }
+  },
+  {
+   "id": "E00101",
+   "source": "LT-1002A",
+   "target": "LOOP:L-1002",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00102",
+   "source": "LT-1002B",
+   "target": "LOOP:L-1002",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00103",
+   "source": "XV-1001",
+   "target": "LOOP:L-1002",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00104",
+   "source": "XV-1002",
+   "target": "LOOP:L-1002",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00105",
+   "source": "LG-1002",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00106",
+   "source": "LG-1002",
+   "target": "XV-1002",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00107",
+   "source": "LT-1002A",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00108",
+   "source": "LT-1002A",
+   "target": "XV-1002",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00109",
+   "source": "LT-1002B",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00110",
+   "source": "LT-1002B",
+   "target": "XV-1002",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:L-1002"
+   }
+  },
+  {
+   "id": "E00111",
+   "source": "LV-1006",
+   "target": "LOOP:L-1006",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00112",
+   "source": "LT-1006",
+   "target": "LOOP:L-1006",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00113",
+   "source": "LIC-1006",
+   "target": "LOOP:L-1006",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "controller"
+   }
+  },
+  {
+   "id": "E00114",
+   "source": "PT-1001A",
+   "target": "LOOP:P-1001",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00115",
+   "source": "PT-1001B",
+   "target": "LOOP:P-1001",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00116",
+   "source": "PT-1001C",
+   "target": "LOOP:P-1001",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00118",
+   "source": "BDV-1001",
+   "target": "LOOP:P-1001",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00119",
+   "source": "XV-1001",
+   "target": "LOOP:P-1001",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00120",
+   "source": "PT-1001A",
+   "target": "BDV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00121",
+   "source": "PT-1001A",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00122",
+   "source": "PT-1001B",
+   "target": "BDV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00123",
+   "source": "PT-1001B",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00124",
+   "source": "PT-1001C",
+   "target": "BDV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00125",
+   "source": "PT-1001C",
+   "target": "XV-1001",
+   "type": "TRIPS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "loop": "LOOP:P-1001"
+   }
+  },
+  {
+   "id": "E00128",
+   "source": "PV-1005",
+   "target": "LOOP:L-1006",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "final_element"
+   }
+  },
+  {
+   "id": "E00129",
+   "source": "PT-1005",
+   "target": "LOOP:P-1005",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "transmitter"
+   }
+  },
+  {
+   "id": "E00130",
+   "source": "PIC-1005",
+   "target": "LOOP:P-1005",
+   "type": "MEMBER_OF",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "role": "controller"
+   }
+  },
+  {
+   "id": "E00131",
+   "source": "V-1002",
+   "target": "BOUNDARY:FUTURE FUEL GAS",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_lines": [
+     "L-105"
+    ],
+    "via_items": [
+     "FT-1006"
+    ],
+    "off_page": true
+   }
+  },
+  {
+   "id": "E00132",
+   "source": "V-1002",
+   "target": "BOUNDARY:BLOWDOWN TO FLARE-HDR",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_lines": [
+     "L-104"
+    ],
+    "via_items": [
+     "gate valve",
+     "BDV-1001"
+    ]
+   }
+  },
+  {
+   "id": "E00133",
+   "source": "V-1002",
+   "target": "BOUNDARY:LIQUID TO BL-103",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_lines": [
+     "L-103"
+    ],
+    "via_items": [
+     "LV-1006",
+     "XV-1002",
+     "check valve"
+    ]
+   }
+  },
+  {
+   "id": "E00134",
+   "source": "V-1002",
+   "target": "BOUNDARY:FEED GAS TO BL-200",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_lines": [
+     "L-102"
+    ],
+    "via_items": [
+     "gate valve",
+     "reducer",
+     "PV-1005",
+     "reducer",
+     "gate valve"
+    ],
+    "off_page": true
+   }
+  },
+  {
+   "id": "E00135",
+   "source": "BOUNDARY:FEED GAS FROM BL-100",
+   "target": "V-1002",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_lines": [
+     "L-101"
+    ],
+    "via_items": [
+     "HV-1001",
+     "XV-1001",
+     "FT-1004"
+    ]
+   }
+  },
+  {
+   "id": "E00136",
+   "source": "BOUNDARY:INSTRUMENT AIR HEADER",
+   "target": "BOUNDARY:INSTRUMENT AIR USERS",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_items": [
+     "gate valve",
+     "strainer"
+    ]
+   }
+  },
+  {
+   "id": "E00137",
+   "source": "BOUNDARY:NITROGEN HEADER",
+   "target": "BOUNDARY:NITROGEN UTILITY STATION",
+   "type": "FEEDS",
+   "confidence": 1.0,
+   "derived": true,
+   "attributes": {
+    "via_items": [
+     "gate valve",
+     "check valve"
+    ]
+   }
+  },
+  {
+   "id": "E00138",
+   "source": "SHEET:PID-100-001",
+   "target": "PLANT:u-100-feed-gas-inlet-dummy",
+   "type": "PART_OF",
+   "confidence": 1.0,
+   "derived": false,
+   "attributes": {}
+  },
+  {
+   "id": "E00139",
+   "source": "SHEET:PID-100-002",
+   "target": "PLANT:u-100-feed-gas-inlet-dummy",
+   "type": "PART_OF",
+   "confidence": 1.0,
+   "derived": false,
+   "attributes": {}
+  },
+  {
+   "id": "E00140",
+   "source": "SHEET:PID-100-003",
+   "target": "PLANT:u-100-feed-gas-inlet-dummy",
+   "type": "PART_OF",
+   "confidence": 1.0,
+   "derived": false,
+   "attributes": {}
+  },
+  {
+   "id": "E90001",
+   "source": "LT-1006",
+   "target": "XV-1002",
+   "type": "SIGNAL_TO",
+   "confidence": 0.85,
+   "derived": false,
+   "attributes": {
+    "signal_type": "electrical",
+    "purpose": "trip"
+   },
+   "sheet": "SHEET:PID-100-001"
+  }
+ ],
+ "stats": {
+  "nodes": 83,
+  "edges": 137,
+  "nodes_by_type": {
+   "Boundary": 9,
+   "Component": 16,
+   "ControlLoop": 7,
+   "Equipment": 1,
+   "Instrument": 16,
+   "OffPageConnector": 4,
+   "PipeSegment": 27,
+   "Plant": 1,
+   "Sheet": 3
+  },
+  "edges_by_type": {
+   "ACTUATES": 10,
+   "FEEDS": 7,
+   "FLOWS_TO": 56,
+   "MEASURES": 11,
+   "MEMBER_OF": 25,
+   "PART_OF": 3,
+   "SIGNAL_TO": 14,
+   "TRIPS": 14
+  },
+  "loops_by_type": {
+   "control": 3,
+   "interlock": 4
+  },
+  "issues_by_severity": {
+   "warning": 1
+  }
+ },
+ "issues": [
+  {
+   "severity": "warning",
+   "code": "loop_no_final_element",
+   "message": "control loop F-1004 has a controller but no final element",
+   "node": "LOOP:F-1004"
+  }
+ ]
+}
