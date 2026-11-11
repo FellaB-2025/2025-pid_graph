@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "page": 4,
+  "sheet": {
+    "drawing_number": "PID-100-003",
+    "title": "FEED GAS INLET - UTILITY CONNECTIONS",
+    "revision": "A",
+    "drawing_type": "pid",
+    "issue_status": null,
+    "rotation": 0,
+    "legend_notes": [
+      "Project line in title block: DUMMY LNG PROJECT - UNIT 100 FEED GAS INLET. SHEET 1 OF 1. SCALE: NTS.",
+      "1. UTILITY LINES ARE NOT NUMBERED ON THIS SHEET.",
+      "2. DUMMY DATA - NOT A REAL FACILITY."
+    ]
+  },
+  "equipment": [],
+  "components": [
+    {"id": "V1", "kind": "gate_valve", "actuator": "manual",
+     "bbox": [0.293, 0.347, 0.311, 0.366], "confidence": 0.9,
+     "notes": "Untagged plain bow-tie on the instrument air line."},
+    {"id": "S1", "kind": "strainer",
+     "bbox": [0.378, 0.349, 0.397, 0.377], "confidence": 0.8,
+     "notes": "Untagged in-line rectangle with an angled leg containing a dashed line (zoomed crop); read as a Y-type strainer. No label printed."},
+    {"id": "V2", "kind": "gate_valve", "actuator": "manual",
+     "bbox": [0.293, 0.537, 0.311, 0.556], "confidence": 0.9,
+     "notes": "Untagged plain bow-tie on the nitrogen line."},
+    {"id": "V3", "kind": "check_valve",
+     "bbox": [0.377, 0.537, 0.396, 0.556], "confidence": 0.85,
+     "notes": "Untagged bow-tie with one filled triangle on the nitrogen line."}
+  ],
+  "instruments": [],
+  "lines": [
+    {"id": "L1", "line_number": null, "size": "1\"", "service": "INSTRUMENT AIR",
+     "from": "B1", "to": "B2", "path": ["V1", "S1"], "flow_direction": "shown", "confidence": 0.95},
+    {"id": "L2", "line_number": null, "size": "1\"", "service": "NITROGEN",
+     "from": "B3", "to": "B4", "path": ["V2", "V3"], "flow_direction": "shown", "confidence": 0.95}
+  ],
+  "signals": [],
+  "off_page_connectors": [],
+  "boundaries": [
+    {"id": "B1", "name": "INSTRUMENT AIR HEADER", "direction": "source", "bbox": [0.092, 0.342, 0.165, 0.372], "confidence": 0.95},
+    {"id": "B2", "name": "INSTRUMENT AIR USERS", "direction": "sink", "bbox": [0.587, 0.342, 0.66, 0.372], "confidence": 0.95},
+    {"id": "B3", "name": "NITROGEN HEADER", "direction": "source", "bbox": [0.092, 0.531, 0.165, 0.562], "confidence": 0.95},
+    {"id": "B4", "name": "NITROGEN UTILITY STATION", "direction": "sink", "bbox": [0.587, 0.531, 0.66, 0.562], "confidence": 0.95}
+  ],
+  "tiles_reviewed": ["r1c1", "r1c2", "r1c3", "r1c4", "r2c1", "r2c2", "r2c3", "r2c4", "r3c1", "r3c2", "r3c3", "r3c4"],
+  "unreadable": []
+}

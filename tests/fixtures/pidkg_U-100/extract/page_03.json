@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "page": 3,
+  "sheet": {
+    "drawing_number": "PID-100-002",
+    "title": "FEED GAS INLET - PRESSURE CONTROL AND EXPORT",
+    "revision": "B",
+    "drawing_type": "pid",
+    "issue_status": null,
+    "rotation": 0,
+    "legend_notes": [
+      "Project line in title block: DUMMY LNG PROJECT - UNIT 100 FEED GAS INLET. SHEET 1 OF 1. SCALE: NTS.",
+      "1. FC / FO = FAIL CLOSED / FAIL OPEN.",
+      "2. DASHED LINES ARE ELECTRICAL SIGNALS. SQUARED BUBBLES ARE DCS FUNCTIONS.",
+      "3. DUMMY DATA - NOT A REAL FACILITY."
+    ]
+  },
+  "equipment": [],
+  "components": [
+    {"id": "V1", "kind": "gate_valve", "actuator": "manual",
+     "bbox": [0.327, 0.383, 0.345, 0.402], "confidence": 0.9,
+     "notes": "Untagged plain bow-tie upstream of PV-1005."},
+    {"id": "R1", "kind": "reducer",
+     "bbox": [0.387, 0.383, 0.402, 0.402], "confidence": 0.85,
+     "notes": "Untagged trapezoid narrowing in the flow direction, upstream of PV-1005. No size text printed."},
+    {"id": "PV-1005", "tag": "PV-1005", "kind": "control_valve", "actuator": "pneumatic", "fail_position": "FO",
+     "bbox": [0.444, 0.357, 0.463, 0.425], "confidence": 0.95,
+     "notes": "Dome (diaphragm) actuator."},
+    {"id": "R2", "kind": "reducer",
+     "bbox": [0.505, 0.383, 0.52, 0.402], "confidence": 0.85,
+     "notes": "Untagged trapezoid widening in the flow direction, downstream of PV-1005. No size text printed."},
+    {"id": "V2", "kind": "gate_valve", "actuator": "manual",
+     "bbox": [0.562, 0.383, 0.58, 0.402], "confidence": 0.9,
+     "notes": "Untagged plain bow-tie downstream of PV-1005."}
+  ],
+  "instruments": [
+    {"id": "PT-1005", "tag": "PT-1005", "location": "field",
+     "measures": {"line": "L1"}, "bbox": [0.229, 0.283, 0.258, 0.323], "confidence": 0.95,
+     "notes": "Tap on L-102 upstream of the first manual valve."},
+    {"id": "PIC-1005", "tag": "PIC-1005", "location": "dcs",
+     "bbox": [0.338, 0.187, 0.368, 0.229], "confidence": 0.95},
+    {"id": "FT-1006", "tag": "FT-1006", "location": "field",
+     "bbox": [0.271, 0.597, 0.30, 0.638], "confidence": 0.95,
+     "notes": "Bubble drawn in-line on L-105; no signal line leaves it and no separate FE is drawn."}
+  ],
+  "lines": [
+    {"id": "L1", "line_number": "L-102", "size": "10\"", "service": "FEED GAS",
+     "from": "OPC1", "to": "B1", "path": ["V1", "R1", "PV-1005", "R2", "V2"],
+     "flow_direction": "shown", "confidence": 0.95},
+    {"id": "L2", "line_number": "L-105", "size": "2\"", "service": "FUEL GAS",
+     "from": "OPC2", "to": "B2", "path": ["FT-1006"],
+     "flow_direction": "shown", "confidence": 0.95}
+  ],
+  "signals": [
+    {"from": "PT-1005", "to": "PIC-1005", "type": "electrical", "purpose": "measurement", "confidence": 0.95},
+    {"from": "PIC-1005", "to": "PV-1005", "type": "electrical", "purpose": "control", "confidence": 0.95}
+  ],
+  "off_page_connectors": [
+    {"id": "OPC1", "direction": "in", "name": "FROM PID-100-001 / V-1002 L-102", "other_drawing": "PID-100-001",
+     "other_item": "V-1002", "line_number": "L-102", "bbox": [0.05, 0.376, 0.123, 0.409], "confidence": 0.95},
+    {"id": "OPC2", "direction": "in", "name": "FROM PID-100-001 / V-1002 L-105", "other_drawing": "PID-100-001",
+     "other_item": "V-1002", "line_number": "L-105", "bbox": [0.05, 0.602, 0.123, 0.634], "confidence": 0.95}
+  ],
+  "boundaries": [
+    {"id": "B1", "name": "FEED GAS TO BL-200", "direction": "sink", "bbox": [0.756, 0.376, 0.828, 0.409], "confidence": 0.95},
+    {"id": "B2", "name": "FUTURE FUEL GAS", "direction": "sink", "status": "future",
+     "bbox": [0.47, 0.602, 0.542, 0.634], "confidence": 0.9,
+     "notes": "Flag with no drawing number; status 'future' taken from the flag text only (linework is solid black)."}
+  ],
+  "tiles_reviewed": ["r1c1", "r1c2", "r1c3", "r1c4", "r2c1", "r2c2", "r2c3", "r2c4", "r3c1", "r3c2", "r3c3", "r3c4"],
+  "unreadable": []
+}
