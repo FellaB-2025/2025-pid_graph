@@ -220,6 +220,7 @@ pid_graph/
   ops_checks.py    cross-document checks C1-C16 over the operations documents; MOC impact rules I1-I5
   demo.py          scenario demonstrator: python -m pid_graph.demo -> reports/demo_U-100.html
   demo_page.py     the page it writes (self-contained)
+  situation.py     several things out of service at once: python -m pid_graph.situation PT-1001B XV-1001
   run_all.py       python -m pid_graph
 eval/              gold sets + scorers (score.py for v1.2; topology_eval.py for the vision layer)
 tests/             pytest; fixtures/ holds the frozen v1.2 dump and the frozen pid-to-kg extraction

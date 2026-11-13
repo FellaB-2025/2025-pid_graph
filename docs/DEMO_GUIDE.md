@@ -31,6 +31,7 @@ them. Say that first, then show it.
 |---|---|
 | Demonstration order | Nine prepared scenarios, numbered in the order below |
 | Scenario type and Element | Run the same question for any other initiator, alarm, SIF, MOC, tag or document |
+| Build a situation (tab) | Tick several things out of service together and read the combined effect on every SIF, LOPA scenario and protected item |
 | Step through / Next | Reveal one step at a time; the graph on the right lights up what that step followed |
 | The graph walked | Columns: change, instruments, alarms, safety functions, hazard and equipment, documents. Select a node to see its properties and where each came from |
 | Findings on what this scenario touched | Rule findings about the elements just walked, most serious first |
@@ -52,6 +53,10 @@ them. Say that first, then show it.
 
 Then change the Element to something not prepared (bypass LT-1002A, shelve PAH-1001, where used XV-1001) to
 show that nothing is scripted: each scenario type is one fixed template run for every element.
+
+Then open **Build a situation**. It starts "as found at the export" (PT-1001B overridden). Add XV-1001: one valve, and all
+three safety functions change state, because every one of them closes it. Add LAH-1006 and the one compensating alarm SIF-100-02 has goes from in question to gone, in the same hour its valve is out. Press "Nothing out" to show that two LOPA layers are in question even then,
+from findings already open. This is the question a spreadsheet cannot answer.
 
 Finish on the Scorecard tab.
 
@@ -103,6 +108,24 @@ What a change reaches (MOC impact):
   (curated register) or name it in a bypass condition (SRS).
 - I4 An alarm on a SIF initiator reaches that SIF's SRS, for the margin to the trip.
 - I5 An affected element reaches every document it is shown on or that states a fact about it.
+
+## 6a. The rules behind Build a situation
+
+States are what the documents define. Nothing is recalculated: a degraded layer is reported as degraded, not re-rated.
+
+| Rule | Statement |
+|---|---|
+| S1 | An initiator out with a configured override: the SIF runs the override's degraded voting |
+| S2 | An initiator out with no override configured: the vote is not defined; the bypass would be a force |
+| S3 | More than one initiator of a SIF out: not defined by the configuration or the SIL verification |
+| S4 | Every initiator out, or the SIF itself out: the SIF cannot trip |
+| S5 | Final elements follow the SRS architecture (NooM): fewer than N left means the safe state cannot be reached; no architecture stated means every final element is needed |
+| S6 | A compensating alarm counts only if it is not shelved, its transmitter is not out, it is configured and enabled, and no open finding puts its setting or its transmitter's range in question |
+| S7 | A SIF that is not normal needs at least one compensating alarm that counts, and every alarm its SRS bypass conditions name must count |
+| S8 | A LOPA layer is lost if its SIF cannot trip or is not defined, its alarm does not count, or its device is out; it is in question if the SIF is degraded or the alarm has an open finding |
+
+The same function runs in Python (the tested reference, also `python -m pid_graph.situation PT-1001B XV-1001`) and in the
+page. A test runs both on every single element, every pair and 600 larger combinations and requires identical answers.
 
 ## 7. What to say when asked
 
