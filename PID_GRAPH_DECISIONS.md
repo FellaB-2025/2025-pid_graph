@@ -319,3 +319,15 @@ later change must not undo by accident.
   row for row. Their answer key is the topology gold set. Real drawings are never committed; only scores are.
 - **D-V13-11 The vision extraction fixture is frozen.** Extraction is not deterministic; a re-run is a new fixture
   with its own `RUN.md` and review.
+- **D-V13-12 Operations documents enter the graph without a schema change (12 Nov 2026).** The MADB, the DCS/SIS
+  configuration export, the SIL verification, the MOC register and the document register add values to
+  `Document.doc_type` and source-named properties, and nothing else: no label, no relationship, X1-X36 untouched.
+  A MOC is a Document its tags are `SHOWN_ON`; an override switch is an Instrument and the link to what it overrides
+  is a property. Reasons: the questions (where used, MOC impact, bypass, shelving) are answered by the relationships
+  v1.3 already has once every document is a node; a closed schema that grows for every document type stops being
+  closed; and the v1.3 tests stay as written. Cost accepted: "MOS-1001B overrides PT-1001B" is not a path, so a
+  template reads a property to cross it. Revisit if a second unit needs override logic the property cannot carry.
+  The comparisons are a separate series, C1-C16 (`ops_checks.py`), with the MOC impact rules I1-I5 written in its
+  docstring. The loaders are off by default; `pid_graph.demo` turns them on. The design reconciliation shown in the
+  demonstrator runs on a design-only build, because over the full graph it would read the configuration's trip
+  signals as the C&E's.

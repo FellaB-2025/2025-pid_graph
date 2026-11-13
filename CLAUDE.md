@@ -113,7 +113,8 @@ Other closed values: `extracted_by` ∈ `pid_audit, llm, manual, table, pidkg_vi
 `review` ∈ `pending, accepted, rejected` (required on every `pidkg_vision` fact);
 `FLOWS_TO.flow_direction` ∈ `shown, inferred`; `SIGNAL_TO.purpose` ∈ `control, measurement, trip,
 alarm, status, unknown`; `MEMBER_OF.role` ∈ `sensor, controller, relay, final_element`;
-`Document.doc_type` ∈ `PID, CE, IDX, CUR, SRS, LOPA`; unknown revision = `UNKNOWN`.
+`Document.doc_type` ∈ `PID`, `CE`, `IDX`, `CUR`, `SRS`, `LOPA`, `SILV`, `MADB`, `CFG`, `MOC`, `REG`, `PROC`, `PTP`, `LOOP`, `PHIL`, `SISIO` (the ten after `LOPA` are the operations documents, D-V13-12: values only, no new
+label or relationship); unknown revision = `UNKNOWN`.
 
 Competency questions CQ1–CQ18 are defined in the ontology document. CQ14–CQ18 are new in v1.3;
 their templates are in `pid_graph/topology_queries.py`.
@@ -142,6 +143,11 @@ their templates are in `pid_graph/topology_queries.py`.
 | `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
 | `reports/review_register_U-100.xlsx` | The one committed file in `reports/`: the engineer's accept / reject decisions on vision facts |
 | `tests/fixtures/pidkg_U-100/` | Frozen pid-to-kg extraction of the synthetic P&IDs (`graph.json`, `qa_report.md`, `extract/`, `RUN.md`) |
+| `pid_graph/loaders/madb_loader.py`, `config_loader.py`, `silv_loader.py`, `moc_loader.py`, `docreg_loader.py`, `ops_common.py` | Operations documents (D-V13-12), off by default: `build_store(madb=, config=, silv=, moc=, docreg=)`. Claims land in source-named properties (`*_madb`, `*_cfg`, `*_silv`, `override_*`); a MOC is a Document; the document register links what each document covers |
+| `pid_graph/ops_checks.py` | Cross-document checks C1–C16 over those documents (alarm settings, ranges, IPL flags, SIF architecture, SIL verification assumptions, bypass provision, active overrides, MOC close-out and MOC impact rules I1–I5) and the scorecard against the batch 1 answer key. X1–X36 are untouched |
+| `pid_graph/demo.py`, `demo_page.py` | Scenario demonstrator: nine fixed templates (bypass, shelve, MOC impact, MOC close-out, SIF out of service, trip, where used, document revised, everything impaired now) run for every element they apply to, memory backend, trusted view. `python -m pid_graph.demo` writes `reports/demo_U-100.html`; `--artifact PATH` writes the form published privately at https://claude.ai/artifact/6q2YAhHoohUn2HyCCV3XFa ("U-100 Scenario Explorer"). After a change, rebuild and republish with the Artifact tool, passing that URL as `url` |
+| `docs/DEMO_GUIDE.md` | Presenter's guide: the order to show the scenarios in, what each proves, the check codes, what not to claim |
+| `.claude/skills/kg-demo/SKILL.md` | How to rebuild, republish and extend the demonstrator (new scenario, new check, new test documents) |
 | `pid_graph/queries.py` | Fixed Cypher templates: `out_of_service`, `shelve_impact`, `moc_impact`, `trip` (Neo4j only) |
 | `pid_graph/validate.py` | Structural checks + CQ sketches on the live graph |
 | `pid_graph/mcp_server.py`, `.mcp.json` | Read-only MCP server (12 tools, stdio) |
@@ -163,6 +169,14 @@ Commands are in `README.md`. Add `--pidkg tests\fixtures\pidkg_U-100\graph.json`
 ```
 
 ## 5. Known-good answers (U-100)
+
+**Demonstrator** (`python -m pid_graph.demo`, 12 Nov 2026, memory backend, vision layer off): 82 nodes / 308
+relationships / 27 documents; 93 scenarios; 63 findings (43 C, 20 X); every one of the 23 planted batch 1 items found.
+Showcase verdicts: bypass PT-1001B stop (MOS-1001B active 39.7 h against 8 h, no out-of-service entry, both compensating
+alarms impaired); shelve LAH-1006 stop (LOPA IPL, compensating measure and SRS bypass condition for SIF-100-02);
+MOC-2026-016 stop (misses the SRS, the MADB and the compensating-measures register); MOC-2026-014 close-out stop (7 of 8
+documents not revised); SIF-100-03 out of service stop; SIF-100-02 trip caution (2oo2 configured, 2oo3 in the C&E and SRS).
+Tests pin these in one place (`tests/test_ops_demo.py`); everything else there is relative to `data/` and the answer key.
 
 Re-verified on 10 Nov 2026 with the memory backend unless marked *(log)*, which means taken
 from `SESSION_LOG.md` (Neo4j, 9 Sep 2026) and not re-run.

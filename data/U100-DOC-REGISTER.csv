@@ -1,3 +1,6 @@
+DOCUMENT REGISTER - UNIT 100
+Document No. U100-DOC-REGISTER    Rev A    Status: Current    (DUMMY DATA - not a real facility)
+
 Document No.,Title,Type,Rev,Covers
 U100-SRS-001,Safety Requirements Specification - Unit 100,SRS,B,SIF-100-01; SIF-100-02; SIF-100-03; SIS-LS-100
 U100-LOPA-001,LOPA Report - Unit 100,LOPA,A,SIF-100-01; SIF-100-02; SIF-100-03; V-1002

@@ -350,3 +350,15 @@
   `tests/test_batch1_documents.py` (17 cases). 300 passed, 6 skipped (Neo4j not running).
 - OPEN for Alan: review the planted items in the answer key; decide how the new document types enter the ontology
   (Document.doc_type is closed: PID, CE, IDX, CUR, SRS, LOPA).
+- Same day, branch `demo/scenario-explorer` (on top of batch 1). Alan's aim: a demonstration for colleagues where he
+  picks a scenario (bypass, shelving, MOC ...) and the graph shows the relationships. Built without a schema change
+  (D-V13-12): five loaders for the operations documents (off by default), `ops_checks.py` (C1-C16, MOC impact rules
+  I1-I5, scorecard), `demo.py` (nine templates, 93 scenarios on U-100), `demo_page.py`. `U100-DOC-REGISTER.csv` gained a
+  title block (Rev A) so it has a revision; `tests/test_batch1_documents.py` reads it through `read_table` now.
+  Published privately: https://claude.ai/artifact/6q2YAhHoohUn2HyCCV3XFa. `docs/DEMO_GUIDE.md`, skill
+  `.claude/skills/kg-demo`. `tests/test_ops_demo.py` (18 cases).
+- Honest limits, also in the guide: the checks were written knowing what batch 1 planted, so 23 of 23 shows the method
+  works end to end, not that it finds unknown problems; the as-installed SIL figure for SIF-100-02 is in the answer key,
+  not computed by the graph; Neo4j was not used (memory backend) and the MCP server does not expose the C-checks.
+- OPEN for Alan: walk the nine showcase scenarios and say which wording is wrong for an engineer; decide whether batch 2
+  should be a blind test (documents planted by one agent, checks unchanged); fill the amber columns of the inventory.

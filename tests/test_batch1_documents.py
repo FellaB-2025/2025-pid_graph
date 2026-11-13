@@ -9,7 +9,6 @@ that the documents agree with the existing U-100 registers wherever nothing was 
 """
 from __future__ import annotations
 
-import csv
 import importlib.util
 import json
 import sys
@@ -22,7 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 DATA = ROOT / "data"
 
-from pid_graph.loaders.tables import detect_document  # noqa: E402
+from pid_graph.loaders.tables import DOCREG_ALIASES, detect_document, read_table  # noqa: E402
 
 
 def _script():
@@ -66,8 +65,7 @@ def test_each_document_states_its_number_and_revision(name, doc):
 
 
 def test_every_new_document_is_in_the_document_register():
-    with (DATA / "U100-DOC-REGISTER.csv").open(newline="", encoding="utf-8-sig") as f:
-        registered = {(r["Document No."], r["Rev"]) for r in csv.DictReader(f)}
+    registered = {(r["doc_no"], r["rev"]) for r in read_table(DATA / "U100-DOC-REGISTER.csv", None, DOCREG_ALIASES)}
     for name in KEY["documents"]:
         assert detect_document(DATA / name)[:2] in registered, name
 
@@ -178,8 +176,8 @@ def test_the_moc_register_matches_the_moc_records():
 
 
 def test_every_document_a_moc_names_is_registered_or_a_drawing():
-    with (DATA / "U100-DOC-REGISTER.csv").open(newline="", encoding="utf-8-sig") as f:
-        registered = {r["Document No."] for r in csv.DictReader(f)} | {"U100-ALM-REG", "U100-LOOP-REG"}
+    registered = {r["doc_no"] for r in read_table(DATA / "U100-DOC-REGISTER.csv", None, DOCREG_ALIASES)}
+    registered |= {"U100-ALM-REG", "U100-LOOP-REG"}                       # sheets of the instrument index
     for m in _table(DATA / GEN.MOCR, "Register"):
         for col in ("Documents to Revise", "Documents Revised"):
             for d in filter(None, (m[col] or "").split("; ")):
