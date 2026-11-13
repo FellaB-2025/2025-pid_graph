@@ -1,0 +1,2176 @@
+{
+ "_note": "Sealed output of a blind run. Written without reading the unit's answer key. Do not edit.",
+ "unit": "U-300",
+ "freeze": "blind-freeze-2",
+ "freeze_commit": "3de8737ef30b0581c7220333845548f91100ffc7",
+ "run_commit": "254230e932403fcff133dd2aab0ae674e96ba5d0",
+ "frozen_paths": [
+  "pid_graph/ops_checks.py",
+  "pid_graph/reconcile.py",
+  "pid_graph/pipeline.py",
+  "pid_graph/loaders",
+  "pid_graph/records.py",
+  "pid_graph/ontology.py",
+  "pid_graph/tags.py",
+  "pid_graph/quantities.py",
+  "pid_graph/demo.py",
+  "pid_graph/oos.py"
+ ],
+ "export_time": "2026-11-12 06:00",
+ "counts": {
+  "nodes": 147,
+  "rels": 727,
+  "by_label": {
+   "Alarm": 19,
+   "Document": 36,
+   "Equipment": 9,
+   "Instrument": 62,
+   "Line": 9,
+   "SIF": 6,
+   "Scenario": 6
+  },
+  "by_rel": {
+   "ACTUATES": 15,
+   "COMPENSATES_FOR": 6,
+   "CREDITS": 11,
+   "FEEDS": 18,
+   "GENERATES": 53,
+   "INITIATES": 28,
+   "INSTALLED_ON": 56,
+   "MEASURES": 36,
+   "PROTECTS": 12,
+   "SHOWN_ON": 486,
+   "THREATENS": 6
+  }
+ },
+ "documents": [
+  {
+   "doc_no": "U300-CE-CHART",
+   "rev": "C",
+   "doc_type": "CE",
+   "title": "Cause & effect chart U300-CE-CHART",
+   "file": "U300-CE-CHART-Rev-C.xlsx"
+  },
+  {
+   "doc_no": "U300-CE-CHART",
+   "rev": "B",
+   "doc_type": "CE",
+   "title": "Cause & Effect Chart - Unit 300",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-CFG-EXPORT",
+   "rev": "A",
+   "doc_type": "CFG",
+   "title": "DCS / SIS configuration export U300-CFG-EXPORT",
+   "file": "U300-CFG-EXPORT-Rev-A.xlsx"
+  },
+  {
+   "doc_no": "COMPENSATING-MEASURES-U-300",
+   "rev": "2026-10-02",
+   "doc_type": "CUR",
+   "title": "Curated compensating measures",
+   "file": "compensating_measures_U-300.csv"
+  },
+  {
+   "doc_no": "U300-ALM-REG",
+   "rev": "D",
+   "doc_type": "IDX",
+   "title": "Alarm Register - Unit 300 (sheet of the instrument index workbook)",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-INST-INDEX",
+   "rev": "D",
+   "doc_type": "IDX",
+   "title": "Instrument index U300-INST-INDEX",
+   "file": "U300-INST-INDEX-Rev-D.xlsx"
+  },
+  {
+   "doc_no": "U300-LOOP-REG",
+   "rev": "D",
+   "doc_type": "IDX",
+   "title": "Loop Register - Unit 300 (sheet of the instrument index workbook)",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-LOOP-3012",
+   "rev": "A",
+   "doc_type": "LOOP",
+   "title": "Loop Drawings PT-3012A/B/C",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-LOPA-001",
+   "rev": "B",
+   "doc_type": "LOPA",
+   "title": "Layer of protection analysis U300-LOPA-001",
+   "file": "U300-LOPA-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "U300-MADB-001",
+   "rev": "B",
+   "doc_type": "MADB",
+   "title": "Master alarm database U300-MADB-001",
+   "file": "U300-MADB-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "MOC-2026-050",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Re-range PT-3011 compressor discharge pressure from 0-100 to 0-120 barg (anti-surge controller upgrade)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-051",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Temporary: bypass PT-3007B for transmitter replacement",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-052",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Lower the SIF-300-04 discharge temperature trip from 175 to 165 degC (proposed after a seal inspection)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-053",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Lower the SIF-300-03 discharge pressure trip from 85 to 82 barg (discharge system re-rated after inspection)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-054",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Add PT-3033 seal gas supply pressure transmitter upstream of PDT-3030",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-055",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Extend the XV-3001 proof test interval (SIF-300-01) from 12 to 24 months to align with the compressor overhaul",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-056",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Raise the LAH-3003 suction scrubber high level alarm from 1100 to 1200 mm (nuisance alarms during pigging)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-057",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Temporary: bypass TT-3014B for thermowell replacement",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-058",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Remove LAL-3003 suction scrubber low level alarm (rationalised as a duplicate of the SIF-300-02 pre-trip indication)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-059",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Temporary: disable VAH-3017B while the non-drive end proximity probe is replaced",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-060",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Increase the TAH-3016 on-delay from 10 s to 60 s (chattering on fan speed changes)",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-MOC-REG",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Management of change register U300-MOC-REG",
+   "file": "U300-MOC-REG-Rev-A.xlsx"
+  },
+  {
+   "doc_no": "U300-ALM-PHIL",
+   "rev": "A",
+   "doc_type": "PHIL",
+   "title": "Alarm Philosophy and Rationalisation - Unit 300",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-001",
+   "rev": "UNKNOWN",
+   "doc_type": "PID",
+   "title": "",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-001",
+   "rev": "E",
+   "doc_type": "PID",
+   "title": "P&ID - Suction Scrubber V-301 and Compressor Suction",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-002",
+   "rev": "UNKNOWN",
+   "doc_type": "PID",
+   "title": "",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-002",
+   "rev": "D",
+   "doc_type": "PID",
+   "title": "P&ID - Export Gas Compressor K-301, Aftercooler E-301 and Anti-surge Recycle",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-003",
+   "rev": "UNKNOWN",
+   "doc_type": "PID",
+   "title": "",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-300-003",
+   "rev": "C",
+   "doc_type": "PID",
+   "title": "P&ID - Lube Oil and Seal Gas Systems",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-OP-PROC-010",
+   "rev": "C",
+   "doc_type": "PROC",
+   "title": "Operating Procedure - Export Gas Compressor Start-up and Shutdown",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-OP-PROC-020",
+   "rev": "B",
+   "doc_type": "PROC",
+   "title": "SIS Bypass Management Procedure",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-PTP-001",
+   "rev": "D",
+   "doc_type": "PTP",
+   "title": "SIS Proof Test Procedures - Unit 300",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-DOC-REGISTER",
+   "rev": "A",
+   "doc_type": "REG",
+   "title": "Document register U300-DOC-REGISTER",
+   "file": "U300-DOC-REGISTER.csv"
+  },
+  {
+   "doc_no": "U300-SILV-001",
+   "rev": "B",
+   "doc_type": "SILV",
+   "title": "SIL verification U300-SILV-001",
+   "file": "U300-SILV-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "U300-SIS-IO-001",
+   "rev": "B",
+   "doc_type": "SISIO",
+   "title": "SIS I/O Allocation and Application Logic - SIS-LS-300",
+   "file": ""
+  },
+  {
+   "doc_no": "U300-SRS-001",
+   "rev": "C",
+   "doc_type": "SRS",
+   "title": "Safety requirements specification U300-SRS-001",
+   "file": "U300-SRS-001-Rev-C.xlsx"
+  }
+ ],
+ "load_reports": {
+  "index": {
+   "document": {
+    "doc_no": "U300-INST-INDEX",
+    "rev": "D",
+    "detected_from": "title row of sheet Instrument Index"
+   },
+   "rows": 47,
+   "skipped": []
+  },
+  "ce": {
+   "document": {
+    "doc_no": "U300-CE-CHART",
+    "rev": "C",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 19,
+   "ce_only_instruments": [],
+   "ce_only_alarms": [],
+   "skipped": []
+  },
+  "srs": {
+   "document": {
+    "doc_no": "U300-SRS-001",
+    "rev": "C",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 6,
+   "srs_only_sifs": [],
+   "skipped": []
+  },
+  "lopa": {
+   "document": {
+    "doc_no": "U300-LOPA-001",
+    "rev": "B",
+    "detected_from": "title row of sheet Scenarios"
+   },
+   "skipped": [
+    {
+     "ref": "U300-LOPA-001-Rev-B.xlsx:IPLs:4",
+     "reason": "LAH-3003: no PFD credited (listed, not credited)"
+    }
+   ]
+  },
+  "curated": {
+   "document": {
+    "doc_no": "COMPENSATING-MEASURES-U-300",
+    "rev": "2026-10-02"
+   },
+   "rows": 6,
+   "proposed": [],
+   "gaps": [],
+   "skipped": []
+  },
+  "topology": {
+   "rows": 54,
+   "skipped": []
+  },
+  "madb": {
+   "document": {
+    "doc_no": "U300-MADB-001",
+    "rev": "B",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 18,
+   "new_alarms": [],
+   "skipped": []
+  },
+  "config": {
+   "document": {
+    "doc_no": "U300-CFG-EXPORT",
+    "rev": "A",
+    "detected_from": "title row of sheet Points"
+   },
+   "cfg_only_points": [
+    "MOS-3002A",
+    "MOS-3002B",
+    "MOS-3002C",
+    "MOS-3005",
+    "MOS-3012A",
+    "MOS-3012B",
+    "MOS-3012C",
+    "MOS-3014A",
+    "MOS-3014B",
+    "MOS-3020A",
+    "MOS-3020B",
+    "MOS-3020C",
+    "MOS-3007A",
+    "MOS-3007B"
+   ],
+   "new_alarms": [
+    "PAH-3006"
+   ],
+   "skipped": []
+  },
+  "silv": {
+   "document": {
+    "doc_no": "U300-SILV-001",
+    "rev": "B",
+    "detected_from": "title row of sheet SIF Summary"
+   },
+   "unknown_tags": [],
+   "skipped": []
+  },
+  "moc": {
+   "document": {
+    "doc_no": "U300-MOC-REG",
+    "rev": "A",
+    "detected_from": "title row of sheet 1"
+   },
+   "tags_not_in_graph": [],
+   "skipped": []
+  },
+  "docreg": {
+   "document": {
+    "doc_no": "U300-DOC-REGISTER",
+    "rev": "A",
+    "detected_from": "title row of sheet 1"
+   },
+   "unresolved": [],
+   "unknown_types": []
+  }
+ },
+ "findings": [
+  {
+   "key": "F001",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3002A",
+   "detail": "MOS-3002A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:4",
+   "tags": [
+    "MOS-3002A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F002",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3002B",
+   "detail": "MOS-3002B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:5",
+   "tags": [
+    "MOS-3002B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F003",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3002C",
+   "detail": "MOS-3002C is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:6",
+   "tags": [
+    "MOS-3002C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F004",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3005",
+   "detail": "MOS-3005 is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:7",
+   "tags": [
+    "MOS-3005"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F005",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3007A",
+   "detail": "MOS-3007A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:16",
+   "tags": [
+    "MOS-3007A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F006",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3007B",
+   "detail": "MOS-3007B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:17",
+   "tags": [
+    "MOS-3007B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F007",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3012A",
+   "detail": "MOS-3012A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:8",
+   "tags": [
+    "MOS-3012A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F008",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3012B",
+   "detail": "MOS-3012B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:9",
+   "tags": [
+    "MOS-3012B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F009",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3012C",
+   "detail": "MOS-3012C is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:10",
+   "tags": [
+    "MOS-3012C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F010",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3014A",
+   "detail": "MOS-3014A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:11",
+   "tags": [
+    "MOS-3014A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F011",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3014B",
+   "detail": "MOS-3014B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:12",
+   "tags": [
+    "MOS-3014B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F012",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3020A",
+   "detail": "MOS-3020A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:13",
+   "tags": [
+    "MOS-3020A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F013",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3020B",
+   "detail": "MOS-3020B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:14",
+   "tags": [
+    "MOS-3020B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F014",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-3020C",
+   "detail": "MOS-3020C is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:15",
+   "tags": [
+    "MOS-3020C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F015",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "PT-3033",
+   "detail": "PT-3033 is a configured DCS point (DCS-AI-03/04) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "pid_audit_U300_topology.csv:39",
+   "tags": [
+    "PT-3033"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F016",
+   "code": "C3",
+   "title": "Alarm configured but not rationalised in the MADB",
+   "label": "Alarm",
+   "id": "PAH-3006",
+   "detail": "PAH-3006 on PT-3006 is configured (32 barg, Low) but has no MADB record.",
+   "sources": "configuration vs MADB",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:6",
+   "tags": [
+    "PAH-3006",
+    "PT-3006"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F017",
+   "code": "C4",
+   "title": "Alarm rationalised in the MADB but not configured",
+   "label": "Alarm",
+   "id": "FAH-3032",
+   "detail": "FAH-3032 on FT-3032 is rationalised (8 m3/h, High, Implemented) but not configured.",
+   "sources": "MADB vs configuration",
+   "refs": "U300-MADB-001-Rev-B.xlsx:1:21",
+   "tags": [
+    "FAH-3032",
+    "FT-3032"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F018",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "LAH-3003",
+   "detail": "LAH-3003 setpoint: alarm register 1100 mm; MADB 1200 mm; configuration 1200 mm.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:4",
+   "tags": [
+    "LAH-3003",
+    "LT-3003"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F019",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "PAL-3021",
+   "detail": "PAL-3021 setpoint: alarm register 1.5 barg; MADB 1.5 barg; configuration 0.7 barg.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:15",
+   "tags": [
+    "PAL-3021",
+    "PT-3021"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F020",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "PDAL-3030",
+   "detail": "PDAL-3030 setpoint: alarm register 0.5 bar; MADB 0.5 bar; configuration 5 kPa.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:20",
+   "tags": [
+    "PDAL-3030",
+    "PDT-3030"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F021",
+   "code": "C7",
+   "title": "Configured range disagrees with the instrument index",
+   "label": "Instrument",
+   "id": "LT-3002C",
+   "detail": "Index range 0-2000 mm; configured 0-1500 mm.",
+   "sources": "instrument index vs configuration",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:9",
+   "tags": [
+    "LT-3002C"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F022",
+   "code": "C10",
+   "title": "SIF architecture disagrees between C&E, SRS, SIL verification and configuration",
+   "label": "SIF",
+   "id": "SIF-300-01",
+   "detail": "Final elements - C&E: XV-3001, XY-3040; SRS: 2oo2 on XV-3001, XY-3040; SIL verification: 2oo2 on XV-3001, XY-3040; configuration: XY-3040.",
+   "sources": "C&E vs SRS vs SIL verification vs configuration",
+   "refs": "U300-SILV-001-Rev-B.xlsx:SIF Summary:4",
+   "tags": [
+    "SIF-300-01",
+    "XV-3001",
+    "XY-3040"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F023",
+   "code": "C10",
+   "title": "SIF architecture disagrees between C&E, SRS, SIL verification and configuration",
+   "label": "SIF",
+   "id": "SIF-300-04",
+   "detail": "C&E: 1oo2 on TT-3014A, TT-3014B; configuration: 1oo2 on TT-3014A, TT-3014B; SIL verification: 1oo2 on TT-3014A, TT-3015; SRS: 1oo2.",
+   "sources": "C&E vs configuration vs SIL verification vs SRS",
+   "refs": "U300-SILV-001-Rev-B.xlsx:SIF Summary:7",
+   "tags": [
+    "SIF-300-04",
+    "TT-3014A",
+    "TT-3014B",
+    "TT-3015"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F024",
+   "code": "C10",
+   "title": "SIF architecture disagrees between C&E, SRS, SIL verification and configuration",
+   "label": "SIF",
+   "id": "SIF-300-06",
+   "detail": "C&E: 1oo2 on PT-3007A, PT-3007B; configuration: 2oo2 on PT-3007A, PT-3007B; SIL verification: 1oo2 on PT-3007A, PT-3007B; SRS: 1oo2.",
+   "sources": "C&E vs configuration vs SIL verification vs SRS",
+   "refs": "U300-SILV-001-Rev-B.xlsx:SIF Summary:9",
+   "tags": [
+    "PT-3007A",
+    "PT-3007B",
+    "SIF-300-06"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F025",
+   "code": "C13",
+   "title": "Maintenance override active with no out-of-service entry",
+   "label": "Instrument",
+   "id": "MOS-3014B",
+   "detail": "MOS-3014B has overridden TT-3014B (SIF-300-04, degraded to 1oo1) since 2026-11-04 08:00: 190.0 h at the export (2026-11-12 06:00) - over the SRS limit of 8 h. The out-of-service register has no active entry for it.",
+   "sources": "configuration vs out-of-service register",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:12",
+   "tags": [
+    "MOS-3014B",
+    "SIF-300-04",
+    "TT-3014B"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F026",
+   "code": "C14",
+   "title": "MOC implemented or closed with documents not revised",
+   "label": "Document",
+   "id": "MOC-2026-054",
+   "detail": "MOC-2026-054 (Add PT-3033 seal gas supply pressure transmitter upstream of PDT-3030) is Implemented - awaiting close-out; 1 of 2 documents not revised: U300-INST-INDEX. Tags: PT-3033.",
+   "sources": "MOC register",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:8",
+   "tags": [
+    "MOC-2026-054",
+    "PT-3033"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F027",
+   "code": "C14",
+   "title": "MOC implemented or closed with documents not revised",
+   "label": "Document",
+   "id": "MOC-2026-055",
+   "detail": "MOC-2026-055 (Extend the XV-3001 proof test interval (SIF-300-01) from 12 to 24 months to align with the compressor overhaul) is Closed; 1 of 3 documents not revised: U300-SILV-001. Tags: SIF-300-01, XV-3001.",
+   "sources": "MOC register",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:9",
+   "tags": [
+    "MOC-2026-055",
+    "SIF-300-01",
+    "XV-3001"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F028",
+   "code": "C14",
+   "title": "MOC implemented or closed with documents not revised",
+   "label": "Document",
+   "id": "MOC-2026-058",
+   "detail": "MOC-2026-058 (Remove LAL-3003 suction scrubber low level alarm (rationalised as a duplicate of the SIF-300-02 pre-trip indication)) is Closed; 1 of 2 documents not revised: U300-ALM-REG. Tags: LAL-3003, LT-3003.",
+   "sources": "MOC register",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:12",
+   "tags": [
+    "LAL-3003",
+    "LT-3003",
+    "MOC-2026-058"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F029",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-050",
+   "detail": "MOC-2026-050 lists U300-INST-INDEX. The graph also links the change to: U300-MADB-001 (PAH-3011: document register: covers, shown on, states GENERATES (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:4",
+   "tags": [
+    "MOC-2026-050",
+    "PAH-3011",
+    "PT-3011.PAH"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F030",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-053",
+   "detail": "MOC-2026-053 lists U300-SRS-001, U300-CE-CHART, U300-PTP-001. The graph also links the change to: COMPENSATING-MEASURES-U-300 (SIF-300-03: shown on, states COMPENSATES_FOR (I5)); PID-300-002 (PT-3012A: document register: covers, shown on, states INSTALLED_ON (I5)); U300-INST-INDEX (PT-3012A: shown on, states MEASURES (I5)); U300-LOOP-3012 (PT-3012A: document register: covers (I5)); U300-LOPA-001 (SIF-300-03: document register: covers, states CREDITS (I5)); U300-OP-PROC-020 (SIF-300-03: document register: covers (I5)); U300-SILV-001 (PT-3012A: shown on (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:7",
+   "tags": [
+    "MOC-2026-053",
+    "PT-3012A",
+    "PT-3012B",
+    "PT-3012C",
+    "SIF-300-03"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F031",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-055",
+   "detail": "MOC-2026-055 lists U300-SRS-001, U300-SILV-001, U300-PTP-001. The graph also links the change to: COMPENSATING-MEASURES-U-300 (SIF-300-01: shown on, states COMPENSATES_FOR (I5)); PID-300-001 (XV-3001: document register: covers, shown on, states INSTALLED_ON (I5)); U300-CE-CHART (SIF-300-01: document register: covers, shown on, states ACTUATES, states INITIATES, states PROTECTS (I5)); U300-INST-INDEX (XV-3001: shown on, states INSTALLED_ON (I5)); U300-LOPA-001 (SIF-300-01: document register: covers, states CREDITS (I5)); U300-OP-PROC-010 (XV-3001: document register: covers (I5)); U300-OP-PROC-020 (SIF-300-01: document register: covers (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:9",
+   "tags": [
+    "MOC-2026-055",
+    "SIF-300-01",
+    "XV-3001"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F032",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-056",
+   "detail": "MOC-2026-056 lists U300-MADB-001, U300-ALM-REG. The graph also links the change to: COMPENSATING-MEASURES-U-300 (LAH-3003 compensates for SIF-300-01 (I3)); U300-SRS-001 (LAH-3003 named in the SIF-300-01 bypass conditions (I3)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:10",
+   "tags": [
+    "LAH-3003",
+    "LT-3003.LAH",
+    "MOC-2026-056"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F033",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-058",
+   "detail": "MOC-2026-058 lists U300-MADB-001, U300-ALM-REG. The graph also links the change to: COMPENSATING-MEASURES-U-300 (LAL-3003 compensates for SIF-300-02 (I3)); U300-SRS-001 (LAL-3003 named in the SIF-300-02 bypass conditions (I3)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:12",
+   "tags": [
+    "LAL-3003",
+    "LT-3003.LAL",
+    "MOC-2026-058"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F034",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-060",
+   "detail": "MOC-2026-060 lists U300-MADB-001. The graph also links the change to: U300-INST-INDEX (TAH-3016: shown on, states GENERATES (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U300-MOC-REG-Rev-A.xlsx:1:14",
+   "tags": [
+    "MOC-2026-060",
+    "TAH-3016",
+    "TT-3016.TAH"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F035",
+   "code": "C17",
+   "title": "SIF trip setpoint as configured disagrees with the C&E or the SRS",
+   "label": "SIF",
+   "id": "SIF-300-03",
+   "detail": "SIF-300-03 trips at C&E: 82 barg; SRS: 82 barg; configuration: 85 barg. The configured value is what the plant does.",
+   "sources": "C&E vs SRS vs configuration",
+   "refs": "U300-SRS-001-Rev-C.xlsx:1:6",
+   "tags": [
+    "PT-3012A",
+    "PT-3012B",
+    "PT-3012C",
+    "SIF-300-03"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F036",
+   "code": "C18",
+   "title": "SIL verification target out of date, or achieved risk reduction below the current target",
+   "label": "SIF",
+   "id": "SIF-300-02",
+   "detail": "SIL verification of SIF-300-02: it achieves 91, below the 100 now required, although its result reads 'Meets target'.",
+   "sources": "SIL verification vs SRS / LOPA",
+   "refs": "U300-SILV-001-Rev-B.xlsx:SIF Summary:5",
+   "tags": [
+    "SIF-300-02"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F037",
+   "code": "C18",
+   "title": "SIL verification target out of date, or achieved risk reduction below the current target",
+   "label": "SIF",
+   "id": "SIF-300-05",
+   "detail": "SIL verification of SIF-300-05: it cites U300-SRS-001 Rev B; the current revision is C; it took a risk reduction target of 10; the requirement now is 20 (SRS), 20 (LOPA S-300-05).",
+   "sources": "SIL verification vs SRS / LOPA",
+   "refs": "U300-SILV-001-Rev-B.xlsx:SIF Summary:8",
+   "tags": [
+    "SIF-300-05"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F038",
+   "code": "C19",
+   "title": "Operator response time for a credited alarm is longer than the process safety time",
+   "label": "Alarm",
+   "id": "PAH-3013",
+   "detail": "S-300-03 credits operator response to PAH-3013 (PFD 0.1). The MADB allows the operator 10 min; the SRS gives the process safety time of SIF-300-03, the SIF for the same scenario, as 30 s.",
+   "sources": "MADB vs SRS / LOPA",
+   "refs": "U300-MADB-001-Rev-B.xlsx:1:10",
+   "tags": [
+    "PAH-3013",
+    "PT-3013",
+    "S-300-03",
+    "SIF-300-03"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F039",
+   "code": "C19",
+   "title": "Operator response time for a credited alarm is longer than the process safety time",
+   "label": "Alarm",
+   "id": "PAL-3006",
+   "detail": "S-300-06 credits operator response to PAL-3006 (PFD 0.1). The MADB allows the operator 10 min; the SRS gives the process safety time of SIF-300-06, the SIF for the same scenario, as 60 s.",
+   "sources": "MADB vs SRS / LOPA",
+   "refs": "U300-MADB-001-Rev-B.xlsx:1:6",
+   "tags": [
+    "PAL-3006",
+    "PT-3006",
+    "S-300-06",
+    "SIF-300-06"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F040",
+   "code": "C19",
+   "title": "Operator response time for a credited alarm is longer than the process safety time",
+   "label": "Alarm",
+   "id": "PAL-3021",
+   "detail": "S-300-05 credits operator response to PAL-3021 (PFD 0.1). The MADB allows the operator 5 min; the SRS gives the process safety time of SIF-300-05, the SIF for the same scenario, as 20 s.",
+   "sources": "MADB vs SRS / LOPA",
+   "refs": "U300-MADB-001-Rev-B.xlsx:1:15",
+   "tags": [
+    "PAL-3021",
+    "PT-3021",
+    "S-300-05",
+    "SIF-300-05"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F041",
+   "code": "C19",
+   "title": "Operator response time for a credited alarm is longer than the process safety time",
+   "label": "Alarm",
+   "id": "TAH-3015",
+   "detail": "S-300-04 credits operator response to TAH-3015 (PFD 0.1). The MADB allows the operator 30 min; the SRS gives the process safety time of SIF-300-04, the SIF for the same scenario, as 5 min.",
+   "sources": "MADB vs SRS / LOPA",
+   "refs": "U300-MADB-001-Rev-B.xlsx:1:11",
+   "tags": [
+    "S-300-04",
+    "SIF-300-04",
+    "TAH-3015",
+    "TT-3015"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F042",
+   "code": "C20",
+   "title": "System disagrees between index and configuration, or a SIF device is not on the safety logic solver",
+   "label": "Instrument",
+   "id": "LT-3005",
+   "detail": "LT-3005: the index says SIS; it is configured in the DCS on DCS-300-C01 (DCS-AI-01/02). It is a device of SIF-300-02, whose logic solver is DCS-300-C01, SIS-LS-300: the trip does not have the integrity the SIL verification assumes.",
+   "sources": "instrument index vs configuration",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:13",
+   "tags": [
+    "LT-3005",
+    "SIF-300-02"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F043",
+   "code": "C20",
+   "title": "System disagrees between index and configuration, or a SIF device is not on the safety logic solver",
+   "label": "Instrument",
+   "id": "XV-3003",
+   "detail": "XV-3003: the index says SIS; it is configured in the DCS on DCS-300-C01 (DCS-DO-01/01). It is a device of SIF-300-02, whose logic solver is DCS-300-C01, SIS-LS-300: the trip does not have the integrity the SIL verification assumes.",
+   "sources": "instrument index vs configuration",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:14",
+   "tags": [
+    "SIF-300-02",
+    "XV-3003"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F044",
+   "code": "C25",
+   "title": "Element out of service while its compensating measure or protection credit is also out",
+   "label": "Alarm",
+   "id": "PAH-3013",
+   "detail": "PAH-3013 is shelved (OOS-300-0011, since 2026-11-10 10:00), while S-300-03 credits it as a protection layer (PFD 0.1); it is the curated compensating measure (rank 1) for SIF-300-03; the SRS makes it a condition of bypassing SIF-300-03.",
+   "sources": "configuration / out-of-service register vs LOPA / curated register / SRS",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:10",
+   "tags": [
+    "PAH-3013",
+    "PT-3013",
+    "S-300-03",
+    "SIF-300-03"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F045",
+   "code": "C25",
+   "title": "Element out of service while its compensating measure or protection credit is also out",
+   "label": "Instrument",
+   "id": "PT-3012A",
+   "detail": "PT-3012A is overridden by MOS-3012A since 2026-11-11 23:00, leaving SIF-300-03 on 1oo2. PAH-3013 (compensating measure: shelved (OOS-300-0011, since 2026-11-10 10:00)). No compensating measure for SIF-300-03 remains.",
+   "sources": "configuration / out-of-service register vs curated register / SRS",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Overrides:8",
+   "tags": [
+    "PAH-3013",
+    "PT-3012A",
+    "SIF-300-03"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F046",
+   "code": "C26",
+   "title": "Alarm configured on the wrong side of the trip it stands in front of",
+   "label": "Alarm",
+   "id": "PAL-3021",
+   "detail": "PAL-3021 on PT-3021 is set at 0.7 barg (configuration); SIF-300-05 trips on low at 0.8 barg (PT-3020A, PT-3020B, PT-3020C). The alarm would not come before the trip. It is the curated compensating measure for SIF-300-05.",
+   "sources": "configuration vs C&E / SRS",
+   "refs": "U300-CFG-EXPORT-Rev-A.xlsx:Alarms:15",
+   "tags": [
+    "PAL-3021",
+    "PT-3021",
+    "SIF-300-05"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F047",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "HS-3001",
+   "detail": "Index places it on PID-300-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:37",
+   "tags": [
+    "HS-3001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F048",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PSV-3050",
+   "detail": "Index places it on PID-300-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:28",
+   "tags": [
+    "PSV-3050"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F049",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "XY-3040",
+   "detail": "Index places it on PID-300-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:38",
+   "tags": [
+    "XY-3040"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F050",
+   "code": "X15",
+   "title": "SIL disagrees between LOPA, SRS and C&E",
+   "label": "SIF",
+   "id": "SIF-300-02",
+   "detail": "C&E says SIL 1; SRS says SIL 1; LOPA says SIL 2. Both facts kept; resolve in the SRS.",
+   "sources": "C&E vs SRS vs LOPA",
+   "refs": "U300-CE-CHART-Rev-C.xlsx:CE-300:R9C14; U300-SRS-001-Rev-C.xlsx:1:5",
+   "tags": [
+    "SIF-300-02"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F051",
+   "code": "X2",
+   "title": "P&ID instrument not in the instrument index",
+   "label": "Instrument",
+   "id": "PT-3033",
+   "detail": "Extracted from PID-300-003 but has no index row (stub node).",
+   "sources": "pid_audit vs index",
+   "refs": "pid_audit_U300_topology.csv:39",
+   "tags": [
+    "PT-3033"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F052",
+   "code": "X7",
+   "title": "Document revision unknown (title block not read)",
+   "label": "Document",
+   "id": "PID-300-001",
+   "detail": "Referenced by index and/or extraction; revision will be set by the title-block pass.",
+   "sources": "table",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:4",
+   "tags": [
+    "PID-300-001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F053",
+   "code": "X7",
+   "title": "Document revision unknown (title block not read)",
+   "label": "Document",
+   "id": "PID-300-002",
+   "detail": "Referenced by index and/or extraction; revision will be set by the title-block pass.",
+   "sources": "table",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:21",
+   "tags": [
+    "PID-300-002"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F054",
+   "code": "X7",
+   "title": "Document revision unknown (title block not read)",
+   "label": "Document",
+   "id": "PID-300-003",
+   "detail": "Referenced by index and/or extraction; revision will be set by the title-block pass.",
+   "sources": "table",
+   "refs": "U300-INST-INDEX-Rev-D.xlsx:Instrument Index:39",
+   "tags": [
+    "PID-300-003"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F055",
+   "code": "X8",
+   "title": "Off-page / battery-limit stub",
+   "label": "Equipment",
+   "id": "BL-300",
+   "detail": "Referenced on PID-300-001; fills when its owning unit loads.",
+   "sources": "manual",
+   "refs": "pid_audit_U300_topology.csv:2",
+   "tags": [
+    "BL-300"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F056",
+   "code": "X8",
+   "title": "Off-page / battery-limit stub",
+   "label": "Equipment",
+   "id": "BL-310",
+   "detail": "Referenced on PID-300-002; fills when its owning unit loads.",
+   "sources": "pid_audit",
+   "refs": "pid_audit_U300_topology.csv:27",
+   "tags": [
+    "BL-310"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F057",
+   "code": "X8",
+   "title": "Off-page / battery-limit stub",
+   "label": "Equipment",
+   "id": "BL-320",
+   "detail": "Referenced on PID-300-001; fills when its owning unit loads.",
+   "sources": "pid_audit",
+   "refs": "pid_audit_U300_topology.csv:15",
+   "tags": [
+    "BL-320"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F058",
+   "code": "X8",
+   "title": "Off-page / battery-limit stub",
+   "label": "Equipment",
+   "id": "BL-330",
+   "detail": "Referenced on PID-300-003; fills when its owning unit loads.",
+   "sources": "pid_audit",
+   "refs": "pid_audit_U300_topology.csv:39",
+   "tags": [
+    "BL-330"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F059",
+   "code": "X8",
+   "title": "Off-page / battery-limit stub",
+   "label": "Equipment",
+   "id": "FLARE-HDR",
+   "detail": "Referenced on PID-300-003; fills when its owning unit loads.",
+   "sources": "pid_audit",
+   "refs": "pid_audit_U300_topology.csv:43",
+   "tags": [
+    "FLARE-HDR"
+   ],
+   "level": "info"
+  }
+ ],
+ "scenario_verdicts": [
+  {
+   "id": "shelve:FT-3009.FAL",
+   "level": "ok",
+   "text": "FAL-3009 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:FT-3009.FAL",
+   "level": "info",
+   "text": "FAL-3009 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:FT-3032.FAH",
+   "level": "ok",
+   "text": "FAH-3032 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:FT-3032.FAH",
+   "level": "info",
+   "text": "FAH-3032 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-3003.LAH",
+   "level": "stop",
+   "text": "Do not shelve LAH-3003 without a management decision: it is a curated compensating measure for SIF-300-01; the SRS makes it a condition of bypassing SIF-300-01."
+  },
+  {
+   "id": "where_used:LT-3003.LAH",
+   "level": "info",
+   "text": "LAH-3003 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-3003.LAL",
+   "level": "stop",
+   "text": "Do not shelve LAL-3003 without a management decision: it is a curated compensating measure for SIF-300-02; the SRS makes it a condition of bypassing SIF-300-02."
+  },
+  {
+   "id": "where_used:LT-3003.LAL",
+   "level": "info",
+   "text": "LAL-3003 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-3024.LAL",
+   "level": "ok",
+   "text": "LAL-3024 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:LT-3024.LAL",
+   "level": "info",
+   "text": "LAL-3024 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PDT-3023.PDAH",
+   "level": "ok",
+   "text": "PDAH-3023 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PDT-3023.PDAH",
+   "level": "info",
+   "text": "PDAH-3023 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PDT-3030.PDAL",
+   "level": "ok",
+   "text": "PDAL-3030 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PDT-3030.PDAL",
+   "level": "info",
+   "text": "PDAL-3030 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-3006.PAH",
+   "level": "ok",
+   "text": "PAH-3006 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-3006.PAH",
+   "level": "info",
+   "text": "PAH-3006 appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-3006.PAL",
+   "level": "stop",
+   "text": "Do not shelve PAL-3006 without a management decision: it is an independent protection layer in S-300-06; it is a curated compensating measure for SIF-300-06; the SRS makes it a condition of bypassing SIF-300-06."
+  },
+  {
+   "id": "where_used:PT-3006.PAL",
+   "level": "info",
+   "text": "PAL-3006 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-3011.PAH",
+   "level": "ok",
+   "text": "PAH-3011 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-3011.PAH",
+   "level": "info",
+   "text": "PAH-3011 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-3013.PAH",
+   "level": "stop",
+   "text": "Do not shelve PAH-3013 without a management decision: it is an independent protection layer in S-300-03; it is a curated compensating measure for SIF-300-03; the SRS makes it a condition of bypassing SIF-300-03."
+  },
+  {
+   "id": "where_used:PT-3013.PAH",
+   "level": "info",
+   "text": "PAH-3013 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-3021.PAL",
+   "level": "stop",
+   "text": "Do not shelve PAL-3021 without a management decision: it is an independent protection layer in S-300-05; it is a curated compensating measure for SIF-300-05; the SRS makes it a condition of bypassing SIF-300-05."
+  },
+  {
+   "id": "where_used:PT-3021.PAL",
+   "level": "info",
+   "text": "PAL-3021 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-3008.TAH",
+   "level": "ok",
+   "text": "TAH-3008 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-3008.TAH",
+   "level": "info",
+   "text": "TAH-3008 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-3015.TAH",
+   "level": "stop",
+   "text": "Do not shelve TAH-3015 without a management decision: it is an independent protection layer in S-300-04; it is a curated compensating measure for SIF-300-04; the SRS makes it a condition of bypassing SIF-300-04."
+  },
+  {
+   "id": "where_used:TT-3015.TAH",
+   "level": "info",
+   "text": "TAH-3015 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-3016.TAH",
+   "level": "ok",
+   "text": "TAH-3016 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-3016.TAH",
+   "level": "info",
+   "text": "TAH-3016 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-3022.TAH",
+   "level": "ok",
+   "text": "TAH-3022 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-3022.TAH",
+   "level": "info",
+   "text": "TAH-3022 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-3026.TAH",
+   "level": "ok",
+   "text": "TAH-3026 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-3026.TAH",
+   "level": "info",
+   "text": "TAH-3026 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:VT-3017A.VAH",
+   "level": "ok",
+   "text": "VAH-3017A carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:VT-3017A.VAH",
+   "level": "info",
+   "text": "VAH-3017A appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:VT-3017B.VAH",
+   "level": "ok",
+   "text": "VAH-3017B carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:VT-3017B.VAH",
+   "level": "info",
+   "text": "VAH-3017B appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "doc_revised:COMPENSATING-MEASURES-U-300",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "moc:MOC-2026-050",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "closeout:MOC-2026-050",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "moc:MOC-2026-051",
+   "level": "ok",
+   "text": "A temporary change: nothing to revise. Confirm it was removed and recorded."
+  },
+  {
+   "id": "closeout:MOC-2026-051",
+   "level": "ok",
+   "text": "A temporary change: nothing to revise. Confirm it was removed and recorded."
+  },
+  {
+   "id": "moc:MOC-2026-052",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-053",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-053",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-054",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-054",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-055",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-055",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-056",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-056",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-057",
+   "level": "stop",
+   "text": "The temporary change is closed but was not removed: MOS-3014B is active on TT-3014B."
+  },
+  {
+   "id": "closeout:MOC-2026-057",
+   "level": "stop",
+   "text": "The temporary change is closed but was not removed: MOS-3014B is active on TT-3014B."
+  },
+  {
+   "id": "moc:MOC-2026-058",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-058",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-059",
+   "level": "ok",
+   "text": "A temporary change: nothing to revise. Confirm it was removed and recorded."
+  },
+  {
+   "id": "closeout:MOC-2026-059",
+   "level": "ok",
+   "text": "A temporary change: nothing to revise. Confirm it was removed and recorded."
+  },
+  {
+   "id": "moc:MOC-2026-060",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "doc_revised:PID-300-001",
+   "level": "info",
+   "text": "Re-check the 9 documents that share its content."
+  },
+  {
+   "id": "doc_revised:PID-300-002",
+   "level": "info",
+   "text": "Re-check the 10 documents that share its content."
+  },
+  {
+   "id": "doc_revised:PID-300-003",
+   "level": "info",
+   "text": "Re-check the 9 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-ALM-PHIL",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-ALM-REG",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-CE-CHART",
+   "level": "info",
+   "text": "Re-check the 12 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-INST-INDEX",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 10 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-LOOP-3012",
+   "level": "info",
+   "text": "Re-check the 4 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-LOOP-REG",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-LOPA-001",
+   "level": "info",
+   "text": "Re-check the 11 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-MADB-001",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 3 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-OP-PROC-010",
+   "level": "info",
+   "text": "Re-check the 8 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-OP-PROC-020",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-PTP-001",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-SILV-001",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 13 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-SIS-IO-001",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U300-SRS-001",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "where_used:FT-3009",
+   "level": "info",
+   "text": "FT-3009 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:FT-3032",
+   "level": "info",
+   "text": "FT-3032 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:FV-3010",
+   "level": "info",
+   "text": "FV-3010 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:HS-3001",
+   "level": "info",
+   "text": "HS-3001 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:HV-3001",
+   "level": "info",
+   "text": "HV-3001 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LG-3004",
+   "level": "info",
+   "text": "LG-3004 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-3002A",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure LAH-3003 is impaired."
+  },
+  {
+   "id": "where_used:LT-3002A",
+   "level": "info",
+   "text": "LT-3002A appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-3002B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure LAH-3003 is impaired."
+  },
+  {
+   "id": "where_used:LT-3002B",
+   "level": "info",
+   "text": "LT-3002B appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-3002C",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure LAH-3003 is impaired."
+  },
+  {
+   "id": "where_used:LT-3002C",
+   "level": "info",
+   "text": "LT-3002C appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LT-3003",
+   "level": "info",
+   "text": "LT-3003 appears in 10 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-3005",
+   "level": "stop",
+   "text": "Do not rely on this bypass as it stands. LT-3005: the index says SIS; it is configured in the DCS on DCS-300-C01 (DCS-AI-01/02). It is a device of SIF-300-02, whose logic solver is DCS-300-C01, SIS-LS-300: the trip does not have the integrity the SIL verification assumes."
+  },
+  {
+   "id": "where_used:LT-3005",
+   "level": "info",
+   "text": "LT-3005 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LT-3024",
+   "level": "info",
+   "text": "LT-3024 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LV-3003",
+   "level": "info",
+   "text": "LV-3003 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3002A",
+   "level": "info",
+   "text": "MOS-3002A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3002B",
+   "level": "info",
+   "text": "MOS-3002B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3002C",
+   "level": "info",
+   "text": "MOS-3002C appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3005",
+   "level": "info",
+   "text": "MOS-3005 appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3007A",
+   "level": "info",
+   "text": "MOS-3007A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3007B",
+   "level": "info",
+   "text": "MOS-3007B appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3012A",
+   "level": "info",
+   "text": "MOS-3012A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3012B",
+   "level": "info",
+   "text": "MOS-3012B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3012C",
+   "level": "info",
+   "text": "MOS-3012C appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3014A",
+   "level": "info",
+   "text": "MOS-3014A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3014B",
+   "level": "info",
+   "text": "MOS-3014B appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3020A",
+   "level": "info",
+   "text": "MOS-3020A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3020B",
+   "level": "info",
+   "text": "MOS-3020B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-3020C",
+   "level": "info",
+   "text": "MOS-3020C appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PCV-3028",
+   "level": "info",
+   "text": "PCV-3028 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PDT-3023",
+   "level": "info",
+   "text": "PDT-3023 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PDT-3030",
+   "level": "info",
+   "text": "PDT-3030 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PI-3027",
+   "level": "info",
+   "text": "PI-3027 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PSV-3050",
+   "level": "info",
+   "text": "PSV-3050 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-3006",
+   "level": "info",
+   "text": "PT-3006 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3007A",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:PT-3007A",
+   "level": "info",
+   "text": "PT-3007A appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3007B",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:PT-3007B",
+   "level": "info",
+   "text": "PT-3007B appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-3011",
+   "level": "info",
+   "text": "PT-3011 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3012A",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAH-3013 is impaired."
+  },
+  {
+   "id": "where_used:PT-3012A",
+   "level": "info",
+   "text": "PT-3012A appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3012B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAH-3013 is impaired."
+  },
+  {
+   "id": "where_used:PT-3012B",
+   "level": "info",
+   "text": "PT-3012B appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3012C",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAH-3013 is impaired."
+  },
+  {
+   "id": "where_used:PT-3012C",
+   "level": "info",
+   "text": "PT-3012C appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-3013",
+   "level": "info",
+   "text": "PT-3013 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3020A",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAL-3021 is impaired."
+  },
+  {
+   "id": "where_used:PT-3020A",
+   "level": "info",
+   "text": "PT-3020A appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3020B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAL-3021 is impaired."
+  },
+  {
+   "id": "where_used:PT-3020B",
+   "level": "info",
+   "text": "PT-3020B appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-3020C",
+   "level": "stop",
+   "text": "Do not rely on this bypass as it stands. MOS-3020C has been active 38.0 h, over the SRS limit of 8 h. Compensating measure PAL-3021 is impaired."
+  },
+  {
+   "id": "where_used:PT-3020C",
+   "level": "info",
+   "text": "PT-3020C appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-3021",
+   "level": "info",
+   "text": "PT-3021 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-3033",
+   "level": "info",
+   "text": "PT-3033 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PV-3006",
+   "level": "info",
+   "text": "PV-3006 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:ST-3019",
+   "level": "info",
+   "text": "ST-3019 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-3008",
+   "level": "info",
+   "text": "TT-3008 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:TT-3014A",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:TT-3014A",
+   "level": "info",
+   "text": "TT-3014A appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:TT-3014B",
+   "level": "stop",
+   "text": "Do not rely on this bypass as it stands. MOS-3014B has been active 190.0 h with no out-of-service entry - over the SRS limit."
+  },
+  {
+   "id": "where_used:TT-3014B",
+   "level": "info",
+   "text": "TT-3014B appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-3015",
+   "level": "info",
+   "text": "TT-3015 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-3016",
+   "level": "info",
+   "text": "TT-3016 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-3022",
+   "level": "info",
+   "text": "TT-3022 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-3026",
+   "level": "info",
+   "text": "TT-3026 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:VT-3017A",
+   "level": "info",
+   "text": "VT-3017A appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:VT-3017B",
+   "level": "info",
+   "text": "VT-3017B appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-3001",
+   "level": "info",
+   "text": "XV-3001 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-3002",
+   "level": "info",
+   "text": "XV-3002 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-3003",
+   "level": "info",
+   "text": "XV-3003 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XY-3040",
+   "level": "info",
+   "text": "XY-3040 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:ZSC-3001",
+   "level": "info",
+   "text": "ZSC-3001 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:ZSC-3002",
+   "level": "info",
+   "text": "ZSC-3002 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-01",
+   "level": "stop",
+   "text": "SIF-300-01 cannot be taken out of service in line with the SRS today: it is the only layer in its LOPA scenario."
+  },
+  {
+   "id": "trip:SIF-300-01",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: Final elements - C&E: XV-3001, XY-3040; SRS: 2oo2 on XV-3001, XY-3040; SIL verification: 2oo2 on XV-3001, XY-3040; configuration: XY-3040."
+  },
+  {
+   "id": "where_used:SIF-300-01",
+   "level": "info",
+   "text": "SIF-300-01 appears in 11 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-02",
+   "level": "stop",
+   "text": "SIF-300-02 cannot be taken out of service in line with the SRS today: it is the only layer in its LOPA scenario."
+  },
+  {
+   "id": "trip:SIF-300-02",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: LT-3005: the index says SIS; it is configured in the DCS on DCS-300-C01 (DCS-AI-01/02). It is a device of SIF-300-02, whose logic solver is DCS-300-C01, SIS-LS-300: the trip does not have the integrity the SIL verification assumes. XV-3003: the index says SIS; it is configured in the DCS on DCS-300-C01 (DCS-DO-01/01). It is a device of SIF-300-02, whose logic solver is DCS-300-C01, SIS-LS-300: the trip does not have the integrity the SIL verification assumes."
+  },
+  {
+   "id": "where_used:SIF-300-02",
+   "level": "info",
+   "text": "SIF-300-02 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-03",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-300-03",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: SIF-300-03 trips at C&E: 82 barg; SRS: 82 barg; configuration: 85 barg. The configured value is what the plant does."
+  },
+  {
+   "id": "where_used:SIF-300-03",
+   "level": "info",
+   "text": "SIF-300-03 appears in 11 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-04",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-300-04",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: C&E: 1oo2 on TT-3014A, TT-3014B; configuration: 1oo2 on TT-3014A, TT-3014B; SIL verification: 1oo2 on TT-3014A, TT-3015; SRS: 1oo2."
+  },
+  {
+   "id": "where_used:SIF-300-04",
+   "level": "info",
+   "text": "SIF-300-04 appears in 12 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-05",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-300-05",
+   "level": "ok",
+   "text": "The C&E, SRS and configuration agree on how this SIF trips."
+  },
+  {
+   "id": "where_used:SIF-300-05",
+   "level": "info",
+   "text": "SIF-300-05 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-300-06",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-300-06",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: C&E: 1oo2 on PT-3007A, PT-3007B; configuration: 2oo2 on PT-3007A, PT-3007B; SIL verification: 1oo2 on PT-3007A, PT-3007B; SRS: 1oo2."
+  },
+  {
+   "id": "where_used:SIF-300-06",
+   "level": "info",
+   "text": "SIF-300-06 appears in 11 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "now:U-300",
+   "level": "stop",
+   "text": "At 2026-11-12 06:00: 1 override(s) and 1 alarm problem(s) the out-of-service register (6 active entries) does not show. This picture only exists when every document is in one graph."
+  }
+ ],
+ "situation_as_found": {
+  "out": [
+   "LT-3002B",
+   "PT-3012A",
+   "PT-3013.PAH",
+   "PT-3020B",
+   "PT-3020C",
+   "TT-3014B",
+   "VT-3017B.VAH"
+  ]
+ }
+}
