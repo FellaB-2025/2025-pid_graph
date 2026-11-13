@@ -151,8 +151,8 @@ their templates are in `pid_graph/topology_queries.py`.
 | `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set (v1.2, one sheet, pid_audit) |
 | `eval/topology_eval.py`, `eval/gold_topology_U-100.json` | v1.3 topology eval of a pid-to-kg extraction: tags, flow pairs, loops, instrument placement, review workload. `eval/make_topology_gold.py` builds the gold (and `gold_pidkg_U-100.json` for pid-to-kg's own `eval_kg.py`); first numbers in `eval/TOPOLOGY_BASELINE.md` |
 | `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py`, `test_v13_phase1.py`; `tests/fixtures/graph_U-100_v1_2.json` is the frozen v1.2 dump |
-| `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py` |
-| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader) |
+| `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py`, `make_dummy_batch1.py` (SIL verification, MADB, DCS/SIS configuration export, MOC register, with planted discrepancies and their answer key) |
+| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader). Batch 1 (`U100-SILV-001`, `U100-MADB-001`, `U100-CFG-EXPORT`, `U100-MOC-REG`, all Rev A) is not loaded by any loader yet; `data/U100-BATCH1-ANSWER-KEY.json` lists the 23 planted discrepancies with the cells that prove them, tested by `tests/test_batch1_documents.py` |
 | `reports/` | Generated outputs (git-ignored): `exception_register_<unit>.xlsx`, `graph_<unit>.json`, `load_report_<unit>.json`, explorer, reports |
 | `src/` | Two early stray copies of `db.py` / `check_env.py`; not imported by anything |
 

@@ -337,3 +337,16 @@
 - 2026-11-10, after the tag: `main` fast-forwarded to `v1.3.0` at Alan's request (a8c4aa0); 289 passed on main.
   The "main ends at the Phase 0 commit" notes above and in PIDKG_UPGRADE.md Phase 11 describe the state before
   this. The phase branches are still there and can be deleted. Nothing is pushed; there is no remote.
+
+
+## 2026-11-12 - Session 6 (Claude Code): GitHub backup and test documents, batch 1
+
+- Remote added: https://github.com/FellaB-2025/2025-pid_graph (private). Pushed `main` and tags `v1.2-baseline`, `v1.3.0`;
+  the phase branches were not pushed.
+- `docs/TAG_LOCATION_INVENTORY.xlsx` (draft, untracked): document types D01-D28 and questions Q1-Q8, amber columns for Alan.
+- Branch `batch-1/dummy-documents`: `scripts/make_dummy_batch1.py` writes `U100-SILV-001-Rev-A.xlsx`, `U100-MADB-001-Rev-A.xlsx`,
+  `U100-CFG-EXPORT-Rev-A.xlsx`, `U100-MOC-REG-Rev-A.xlsx` and `U100-BATCH1-ANSWER-KEY.json` (23 planted items, every Q1-Q8
+  covered). Three rows added to `U100-DOC-REGISTER.csv`. No loader reads them yet; no schema change.
+  `tests/test_batch1_documents.py` (17 cases). 300 passed, 6 skipped (Neo4j not running).
+- OPEN for Alan: review the planted items in the answer key; decide how the new document types enter the ontology
+  (Document.doc_type is closed: PID, CE, IDX, CUR, SRS, LOPA).
