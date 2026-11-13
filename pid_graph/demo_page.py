@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import json
 
+from .situation import SITUATION_JS
+
 STYLE = r"""
 <title>__UNIT__ Scenario Explorer</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -110,6 +112,24 @@ table.list tr.click:hover td{background:var(--teal-soft)}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 footer .wrap{padding-block:12px 18px;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+.tog{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:4px;padding:4px 9px;font:13px var(--mono);cursor:pointer}
+.tog[aria-pressed="true"]{background:var(--stop);border-color:var(--stop);color:#fff}
+.grp{margin-bottom:12px}
+.grp .lbl{display:block;margin-bottom:5px}
+.togs{display:flex;flex-wrap:wrap;gap:5px}
+.pill{display:inline-block;border-radius:10px;padding:1px 9px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.pill.ok{background:var(--ok)} .pill.warn{background:var(--warn)} .pill.stop{background:var(--stop)}
+.card{border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:4px;padding:9px 11px;background:var(--card)}
+.card.warn{border-left-color:var(--warn)} .card.stop{border-left-color:var(--stop)}
+.card h4{margin:0 0 4px;font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.card p{margin:3px 0}
+.card ul{margin:4px 0 4px 18px;padding:0}
+.card .q{color:var(--muted);font-style:italic}
+.layer{display:inline-block;border-radius:3px;padding:1px 7px;margin:2px 4px 2px 0;font-size:12px;border:1px solid}
+.layer.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.layer.degraded{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.layer.lost{background:var(--stop-soft);border-color:var(--stop);color:var(--stop);text-decoration:line-through}
+.cards{display:grid;gap:8px}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:no-preference){ol.steps li,.node{transition:opacity .2s, background .2s}}
 </style>
@@ -122,6 +142,7 @@ BODY = r"""
 </div></header>
 <nav class="tabs" aria-label="Views"><div class="wrap" role="tablist">
   <button role="tab" data-tab="scen" aria-selected="true">Scenarios</button>
+  <button role="tab" data-tab="sit" aria-selected="false">Build a situation</button>
   <button role="tab" data-tab="find" aria-selected="false">All findings</button>
   <button role="tab" data-tab="score" aria-selected="false">Scorecard</button>
   <button role="tab" data-tab="docs" aria-selected="false">Documents</button>
@@ -145,6 +166,18 @@ BODY = r"""
     </div>
     <div class="panel" style="margin-top:16px"><h3>Findings on what this scenario touched</h3><div class="findings" id="sfind"></div></div>
   </section>
+  <section id="tab-sit" hidden>
+    <div class="grid">
+      <div class="panel">
+        <div class="eyebrow">Build a situation · Q7</div>
+        <h2>Take several things out of service together</h2>
+        <p class="ask">Tick anything that is bypassed, shelved, isolated or disabled. The starting point is the plant as configured at the export, with the findings already open against it.</p>
+        <div class="ctl"><button id="sit-found" class="primary">As found at the export</button><button id="sit-none">Nothing out</button></div>
+        <div id="sit-pick"></div>
+      </div>
+      <div class="panel"><div id="sit-res"></div></div>
+    </div>
+  </section>
   <section id="tab-find" hidden></section>
   <section id="tab-score" hidden></section>
   <section id="tab-docs" hidden></section>
@@ -156,6 +189,7 @@ BODY = r"""
 </div></footer>
 <script type="application/json" id="data">__DATA__</script>
 <script>
+__SITUATION_JS__
 (function(){
 const D = JSON.parse(document.getElementById('data').textContent);
 const S = {}; D.scenarios.forEach(s => S[s.id] = s);
@@ -322,11 +356,73 @@ function how(){
   <h3 style="margin-top:16px">Rebuild</h3><p><code>.venv\\Scripts\\python -m pid_graph.demo</code> regenerates this page from the documents in <code>data\\</code>.</p></div>`;
 }
 
+// ---------------- build a situation
+const M = D.situation; let outSet = new Set(M.presets.as_found);
+const STAT = {normal:['Normal', 'ok'], degraded:['Degraded', 'warn'], lost:['Cannot trip', 'stop'], out:['Out of service', 'stop'], undefined:['Not defined', 'stop']};
+const ASTATE = {ok:'counts', impaired:'in question', shelved:'shelved', source_out:'its transmitter is out', unavailable:'not available', unknown:'unknown'};
+const UNAV = {not_in_any_register:'not in any alarm register', not_configured:'rationalised but not configured', disabled:'disabled in the configuration'};
+const acap = a => (M.alarms[a] || {}).caption || a;
+function violation(v, s){
+  const it = v.items.map(acap).join(', ');
+  return {multiple_channels:`More than one initiator is out (${it}). The configuration and the SIL verification define one channel at a time only.`,
+    no_override:`No maintenance override is configured on ${it}: the bypass would have to be forced, and the vote that results is not defined.`,
+    silv_mismatch:`The SIL verification assumed ${v.items[0]} with one channel out; the configured override gives ${v.items[1]}.`,
+    srs_alarm_unavailable:`The SRS bypass conditions name ${it}, which ${v.items.length > 1 ? 'do' : 'does'} not count at present.`,
+    no_valid_cm: s.cms.length ? 'No compensating alarm counts.' : 'No compensating alarm is curated for this function.'}[v.code] || v.code;
+}
+function whyAlarm(a, state){
+  const al = M.alarms[a]; if (!al) return '';
+  if (state === 'unavailable') return al.unavailable.map(u => UNAV[u] || u).join('; ');
+  if (state === 'impaired') return al.impaired.map(i => i.code + ': ' + i.detail).join(' ');
+  if (state === 'source_out') return al.source + ' is out';
+  return '';
+}
+function sit(){
+  const res = evaluateSituation(M, [...outSet]);
+  const groups = [...new Set(M.elements.map(e => e.group))];
+  document.getElementById('sit-pick').innerHTML = groups.map(g => `<div class="grp"><span class="lbl">${esc(g)}</span><div class="togs">` +
+    M.elements.filter(e => e.group === g).map(e => `<button class="tog" data-e="${esc(e.id)}" aria-pressed="${outSet.has(e.id)}" title="${esc(e.note)}">${esc(e.caption)}</button>`).join('') + '</div></div>').join('');
+  const model = {}; M.sifs.forEach(s => model[s.id] = s);
+  const lost = res.sifs.filter(s => ['lost', 'out', 'undefined'].includes(s.status)).length;
+  const degBad = res.sifs.filter(s => s.status === 'degraded' && s.level === 'stop').length, degOk = res.sifs.filter(s => s.status === 'degraded' && s.level === 'warn').length;
+  const scLost = res.scenarios.filter(s => s.level === 'stop').length, scQ = res.scenarios.filter(s => s.level === 'warn').length;
+  const fn = n => `${n} safety function${n > 1 ? 's' : ''}`, sc = n => `${n} LOPA scenario${n > 1 ? 's' : ''}`;
+  const head = res.level === 'ok' ? 'Every safety function and every credited layer is as designed.' :
+    [lost ? `${fn(lost)} cannot be relied on` : '', degBad ? `${fn(degBad)} degraded outside what the SRS and SIL verification allow` : '',
+     degOk ? `${fn(degOk)} degraded but compensated` : '', scLost ? `${sc(scLost)} ${scLost > 1 ? 'have' : 'has'} lost a credited layer` : '',
+     scQ ? `${sc(scQ)} ${scQ > 1 ? 'have' : 'has'} a layer in question` : ''].filter(Boolean).join('; ') + '.';
+  let h = `<div class="verdict lv-${res.level}" style="margin-top:0"><div class="v">${LV[res.level]}</div><b>${res.out.length ? esc(res.out.map(acap).join(', ')) + ' out of service.' : 'Nothing out of service.'}</b> ${esc(head)}</div>`;
+  h += '<h3 style="margin-top:14px">Safety functions</h3><div class="cards">' + res.sifs.map(s => { const m = model[s.id], st = STAT[s.status];
+    const sw = g => { const i = m.initiators.find(x => x.tag === g); return i && i.override ? i.override.switch : ''; };
+    const sens = s.sensor.state === 'normal' ? `Initiators ${m.initiators.map(i => i.tag).join(', ')} voting ${m.voting.text || 'all'} (${m.voting.source}).` :
+      s.sensor.state === 'degraded' ? `${s.sensor.out.join(', ')} out: running ${s.sensor.effective} on ${s.sensor.remaining.join(', ')} (override ${sw(s.sensor.out[0])}).` :
+      s.sensor.state === 'lost' ? 'Every initiator is out.' : `${s.sensor.out.join(', ')} out; ${s.sensor.remaining.join(', ')} still measuring, but the vote is not defined.`;
+    const fes = m.final_elements.map(f => f.tag + (f.action ? ' ' + f.action.toLowerCase() : '')).join(', ');
+    const fe = s.fe.state === 'normal' ? `Final elements: ${fes}${m.fe ? ' (' + m.fe.text + ' per the SRS)' : ''}.` :
+      s.fe.state === 'degraded' ? `${s.fe.out.join(', ')} out: the safe state now rests on ${s.fe.remaining.join(', ')} (${s.fe.effective}).` : `${s.fe.out.join(', ')} out: the safe state cannot be reached.`;
+    const cms = s.cms.length ? s.cms.map(c => `<span class="layer ${c.state === 'ok' ? 'ok' : c.state === 'impaired' ? 'degraded' : 'lost'}" title="${esc(whyAlarm(c.alarm, c.state))}">${esc(c.caption)}: ${ASTATE[c.state]}</span>`).join('') : '<span class="src">none curated</span>';
+    const why = s.status !== 'normal' ? s.cms.filter(c => c.state !== 'ok' && whyAlarm(c.alarm, c.state)).map(c => `<p class="src">${esc(c.caption)}: ${esc(whyAlarm(c.alarm, c.state))}</p>`).join('') : '';
+    return `<div class="card ${s.level}"><h4>${esc(s.id)} <span class="pill ${st[1]}">${st[0]}</span><span class="src">protects ${esc(m.protects.join(', '))}</span></h4>
+      <p class="src">${esc(m.description)}</p><p>${esc(s.status === 'out' ? 'The whole function is out of service.' : sens)}</p><p>${esc(fe)}</p>
+      ${s.violations.length ? '<ul>' + s.violations.map(v => `<li>${esc(violation(v, s))}</li>`).join('') + '</ul>' : ''}
+      <p>Compensating alarms: ${cms}</p>${why}${s.status !== 'normal' && m.bypass_conditions ? `<p class="q">SRS: “${esc(m.bypass_conditions)}”</p>` : ''}</div>`; }).join('') + '</div>';
+  h += '<h3 style="margin-top:14px">LOPA scenarios</h3><div class="cards">' + res.scenarios.map(sc => { const m = M.scenarios.find(x => x.id === sc.id);
+    return `<div class="card ${sc.level}"><h4>${esc(sc.id)} <span class="src">${sc.ok} of ${sc.total} credited layers fully available</span></h4><p class="src">${esc(m.consequence)}</p>
+      <p>${sc.layers.map(l => `<span class="layer ${l.state}">${esc(l.caption)}${l.pfd != null ? ' · PFD ' + l.pfd : ''}${l.state === 'degraded' ? ' · in question' : l.state === 'lost' ? ' · lost' : ''}</span>`).join('')}</p></div>`; }).join('') + '</div>';
+  h += '<h3 style="margin-top:14px">Protected equipment</h3><div class="cards">' + res.equipment.map(e => `<div class="card ${e.level}"><h4>${esc(e.tag)}</h4>
+      <p>${e.sifs.map(x => `${esc(x.id)} <span class="pill ${STAT[x.status][1]}">${STAT[x.status][0]}</span>`).join(' &nbsp; ')}</p></div>`).join('') + '</div>';
+  h += '<p class="src" style="margin-top:10px">States are what the documents define, not a risk calculation: nothing is recalculated when a layer is degraded. Hover a compensating alarm to see why it does not count.</p>';
+  document.getElementById('sit-res').innerHTML = h;
+  document.querySelectorAll('#sit-pick .tog').forEach(b => b.onclick = () => { outSet.has(b.dataset.e) ? outSet.delete(b.dataset.e) : outSet.add(b.dataset.e); sit(); });
+}
+document.getElementById('sit-found').onclick = () => { outSet = new Set(M.presets.as_found); sit(); };
+document.getElementById('sit-none').onclick = () => { outSet = new Set(); sit(); };
+
 // ---------------- tabs and start
 function tab(t){ document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t));
-  ['scen', 'find', 'score', 'docs', 'how'].forEach(k => document.getElementById('tab-' + k).hidden = k !== t); }
+  ['scen', 'sit', 'find', 'score', 'docs', 'how'].forEach(k => document.getElementById('tab-' + k).hidden = k !== t); }
 document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => tab(b.dataset.tab));
-allFind(); score(); docs(); how();
+allFind(); score(); docs(); how(); sit();
 const start = bySlug[location.hash.slice(1)];
 go(start || cur);
 window.addEventListener('hashchange', () => { const id = bySlug[location.hash.slice(1)]; if (id && id !== cur) { tab('scen'); go(id); } });
@@ -339,7 +435,7 @@ def render(data: dict, standalone: bool = True) -> str:
     payload = json.dumps(data, ensure_ascii=False, default=str).replace("</", "<\\/")
     unit = str(data.get("unit", ""))
     style = STYLE.replace("__UNIT__", unit)
-    body = BODY.replace("__UNIT__", unit).replace("__DATA__", payload)
+    body = BODY.replace("__UNIT__", unit).replace("__SITUATION_JS__", SITUATION_JS).replace("__DATA__", payload)
     if not standalone:
         return style + body
     head = ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8">'

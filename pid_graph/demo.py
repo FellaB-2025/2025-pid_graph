@@ -26,6 +26,7 @@ from . import ops_checks as OC
 from .ops_checks import Graph, MAX_H_RE, _dt, _id, _norm, _vote, moc_impact
 from .pipeline import build_store
 from .records import TrustedView
+from .situation import build_model
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -536,7 +537,8 @@ def run_all_scenarios(store, reports: dict, oos_rows: list[dict] | None = None, 
                 picked.append(of_kind[0]["id"])
     showcase = picked
     return {"unit": reports["unit"], "export_time": g.export_time(), "findings": findings, "scenarios": results, "showcase": showcase,
-            "ops_by_code": ops["by_code"], "titles": {**OC.TITLES}, "graph": export_graph(trusted)}
+            "ops_by_code": ops["by_code"], "titles": {**OC.TITLES}, "graph": export_graph(trusted),
+            "situation": build_model(g, findings, oos_rows)}
 
 
 def export_graph(store) -> dict:
