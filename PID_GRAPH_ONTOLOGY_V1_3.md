@@ -6,6 +6,28 @@ Supersedes `PID_GRAPH_ONTOLOGY_V1_2.md`, `PID_GRAPH_ONTOLOGY_V1_1.md` and `PID_G
 is the closed schema: if a node label or relationship type isn't listed here, it
 doesn't go in the graph. Change the schema by changing this document first.
 
+## 0c. Addendum (12 Nov 2026): operations documents, values only (D-V13-12)
+
+No label and no relationship is added; the lists in sections 2 and 3 stand. What grows is one closed value list
+and the set of properties loaders may write.
+
+* `Document.doc_type` is now one of `PID`, `CE`, `IDX`, `CUR`, `SRS`, `LOPA`, `SILV`, `MADB`, `CFG`, `MOC`, `REG`, `PROC`, `PTP`, `LOOP`, `PHIL`, `SISIO`.
+  `SILV` SIL verification, `MADB` master alarm database, `CFG` DCS/SIS configuration export, `MOC` a management-of-change
+  record or its register, `REG` the document register, `PROC` operating or bypass procedure, `PTP` proof-test procedure,
+  `LOOP` loop drawing, `PHIL` alarm philosophy, `SISIO` SIS I/O allocation and logic.
+* A MOC record is a `Document` (key: MOC number + the register revision it was read from). The tags it changes are
+  `SHOWN_ON` it with `basis = "tags affected"`; the documents it must revise are list properties.
+* The document register links what each document covers with `SHOWN_ON`, `basis = "document register: covers"`.
+  This is how a document no loader parses still answers CQ8.
+* Each operations document's claims sit beside the design documents' in source-named properties, as the SRS's do
+  (`sil_srs`): `*_madb`, `*_cfg`, `*_silv`, and `override_*` on an instrument a maintenance override switch acts on.
+  There is no relationship for "overrides"; the switch is an Instrument and the link is the property.
+* The configuration states `INITIATES` and `ACTUATES` as built, beside the C&E's (one relationship per document, as
+  section 4 already requires).
+* The exception codes X1-X36 are unchanged. The comparisons these documents make possible are a separate series,
+  C1-C16, in `pid_graph/ops_checks.py`.
+* All of it is off by default: a build that is not given these documents is the v1.3 graph, byte for byte.
+
 ## 0b. Changes from v1.2 (10 Nov 2026): segment topology from vision extraction
 
 v1.3 is v1.2 plus the items below (`PIDKG_UPGRADE.md` section 2). It is **additive only**: no v1.2 label,

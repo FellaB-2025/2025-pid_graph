@@ -23,6 +23,7 @@ import re
 from pathlib import Path
 
 from . import ontology as O
+from .quantities import same as same_quantity
 
 VOTING_RE = re.compile(r"(\d+)\s*oo\s*(\d+)", re.I)
 
@@ -183,7 +184,7 @@ def reconcile(store, *, unit: str, ce_report: dict | None = None, titleblock_rep
             add("X15", "SIF", sif, "; ".join(f"{k} says SIL {v}" for k, v in stated.items()) + ". Both facts kept; resolve in the SRS.",
                 " vs ".join(stated), "; ".join(filter(None, [p.get("source_ref", ""), p.get("srs_ref", "")])))
         ce_sps = sorted({str(r["props"].get("setpoint", "")) for r in store.rels("INITIATES") if r["end_key"]["sif_id"] == sif and r["props"].get("setpoint")})
-        if p.get("setpoint_srs") and ce_sps and str(p["setpoint_srs"]).replace(" ", "").lower() not in {s.replace(" ", "").lower() for s in ce_sps}:
+        if p.get("setpoint_srs") and ce_sps and not any(same_quantity(p["setpoint_srs"], s) for s in ce_sps):   # 350 mbarg is 0.35 barg
             add("X16", "SIF", sif, f"SRS trip setpoint {p['setpoint_srs']}; C&E initiators trip at {', '.join(ce_sps)}.", "srs vs cause_effect", p.get("srs_ref", ""))
         arch = VOTING_RE.search(str(p.get("sensor_architecture", "") or ""))
         ce_votes = sorted({str(r["props"].get("voting", "")) for r in store.rels("INITIATES") if r["end_key"]["sif_id"] == sif and r["props"].get("voting")})

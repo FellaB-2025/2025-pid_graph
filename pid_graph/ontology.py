@@ -91,7 +91,9 @@ TRUSTED_EXTRACTED_BY = ("table", "manual", "pid_audit")
 def trusted(props: dict) -> bool:
     """T7: extracted_by IN ['table', 'manual', 'pid_audit'] OR review = 'accepted'."""
     return props.get("extracted_by") in TRUSTED_EXTRACTED_BY or props.get("review") == "accepted"
-DOC_TYPES = ("PID", "CE", "IDX", "CUR", "SRS", "LOPA")   # CUR: curated register (D-P2-10); SRS/LOPA: v1.2
+DOC_TYPES = ("PID", "CE", "IDX", "CUR", "SRS", "LOPA",   # CUR: curated register (D-P2-10); SRS/LOPA: v1.2
+             # D-V13-12 (12 Nov 2026): operations documents; values only, no new label or relationship
+             "SILV", "MADB", "CFG", "MOC", "REG", "PROC", "PTP", "LOOP", "PHIL", "SISIO")
 UNKNOWN_REV = "UNKNOWN"   # decision D-P1-03: revision not stated by the referencing document
 
 

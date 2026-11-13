@@ -1,0 +1,517 @@
+{
+ "_note": "Independent adjudication of the U-200 blind run. Scorer wrote neither the documents nor the checks.",
+ "unit": "U-200",
+ "freeze": "blind-freeze-1",
+ "summary": {
+  "planted": 24,
+  "found": 12,
+  "partial": 3,
+  "missed": 9,
+  "clean_controls": 8,
+  "clean_flagged": 5,
+  "other_true_unplanted": 13,
+  "other_input_gap": 39,
+  "other_false_alarm": 15,
+  "findings_total": 85
+ },
+ "items": [
+  {
+   "id": "B2-01",
+   "category": "trip setpoint",
+   "severity": "high",
+   "what": "The SRS and the cause & effect chart trip SIF-200-04 at 345 degC but the SIS as exported trips at 355 degC.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding mentions the 355 degC configured trip; the only trip-setpoint check compared SRS with C&E. The trip:SIF-200-04 verdict goes further and says the C&E, SRS and configuration agree, which the export contradicts."
+  },
+  {
+   "id": "B2-02",
+   "category": "sensor voting",
+   "severity": "high",
+   "what": "The SRS and the SIL verification use 1oo2 voting on the fuel gas low pressure transmitters, but the cause & effect chart and the configured logic are 2oo2.",
+   "verdict": "found",
+   "by": [
+    "C10 SIF-200-02",
+    "X20 SIF-200-02"
+   ],
+   "reason": "C10 states all four documents and both votings exactly as the key does; X20 repeats the SRS-versus-C&E half."
+  },
+  {
+   "id": "B2-03",
+   "category": "final element architecture",
+   "severity": "high",
+   "what": "The SRS and SIL verification give SIF-200-03 two final elements voted 1oo2, but the cause & effect chart and the configured trip drive only XV-2001.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares final elements between documents; the only SIF-200-03 findings are the proof-test wording false alarms. The trip:SIF-200-03 verdict says the documents agree."
+  },
+  {
+   "id": "B2-04",
+   "category": "SIL verification basis",
+   "severity": "high",
+   "what": "The SIL verification for SIF-200-01 still cites SRS Rev B and a risk reduction target of 120, while the LOPA and the current SRS Rev C require 200 and only 187 is achieved.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "Nothing compares the SIL verification's target, its cited SRS revision or the achieved figure with the SRS or LOPA; the SIF-200-01 findings are about proof-test interval wording only."
+  },
+  {
+   "id": "B2-05",
+   "category": "proof test interval",
+   "severity": "medium",
+   "what": "MOC-2026-034 is closed and moved the SIF-200-05 proof test interval to 24 months, but the SRS and the SIL verification were not revised and still say 12 months.",
+   "verdict": "found",
+   "by": [
+    "C14 MOC-2026-034"
+   ],
+   "reason": "C14 names the MOC, its closed status and the two documents not revised (SRS, SIL verification). It does not confirm they still read 12 months or work out the shortfall, which the rules do not require."
+  },
+  {
+   "id": "B2-06",
+   "category": "unrecorded override",
+   "severity": "high",
+   "what": "Maintenance override MOS-2030A on LT-2030A has been active since 2026-11-08 09:15 with no out-of-service entry, against an SRS limit of 4 h.",
+   "verdict": "found",
+   "by": [
+    "C13 MOS-2030A"
+   ],
+   "reason": "C13 states the override, the element, the start time, the 92.8 h duration against the 4 h SRS limit and the missing register entry."
+  },
+  {
+   "id": "B2-07",
+   "category": "alarm left disabled",
+   "severity": "medium",
+   "what": "LAH-2031 is disabled in the DCS although the master alarm database records it as implemented, and the temporary change that disabled it was closed without re-enabling it.",
+   "verdict": "found",
+   "by": [
+    "C6 LAH-2031"
+   ],
+   "reason": "C6 states that LAH-2031 is disabled with no out-of-service entry while the MADB says Implemented. The link to closed MOC-2026-037 is not in any finding (only a generic stop on the moc:MOC-2026-037 verdict); judged on the main claim."
+  },
+  {
+   "id": "B2-08",
+   "category": "interaction: bypass without its compensating measure",
+   "severity": "high",
+   "what": "SIF-200-05 is running 1oo1 on LT-2030B with its one approved compensating alarm, LAH-2031, disabled.",
+   "verdict": "partial",
+   "by": [
+    "C13 MOS-2030A",
+    "C6 LAH-2031",
+    "scenario_verdict bypass:LT-2030A"
+   ],
+   "reason": "C13 and C6 each report one half and neither states the interaction. The combination is stated only in the bypass:LT-2030A scenario verdict ('Compensating measure LAH-2031 is impaired'), which by the rules is partial."
+  },
+  {
+   "id": "B2-09",
+   "category": "override time limit",
+   "severity": "medium",
+   "what": "The SRS limits a bypass of a SIF-200-04 temperature channel to 8 h but the three override switches are configured with a 24 h maximum.",
+   "verdict": "found",
+   "by": [
+    "C12 MOS-2020A",
+    "C12 MOS-2020B",
+    "C12 MOS-2020C"
+   ],
+   "reason": "Three C12 findings state 24 h (alarm only) against the SRS limit of 8 h, one per switch."
+  },
+  {
+   "id": "B2-10",
+   "category": "instrument range",
+   "severity": "medium",
+   "what": "PT-2010B is 0-4 barg in the instrument index but the SIS point is scaled 0-6 barg.",
+   "verdict": "found",
+   "by": [
+    "C7 PT-2010B"
+   ],
+   "reason": "C7 states index 0-4 barg against configured 0-6 barg."
+  },
+  {
+   "id": "B2-11",
+   "category": "tag in one document only",
+   "severity": "low",
+   "what": "TT-2026 is a configured DCS point that appears in no other document.",
+   "verdict": "found",
+   "by": [
+    "C2 TT-2026"
+   ],
+   "reason": "C2 states TT-2026 is a configured DCS point on DCS-AI-02/06 with no instrument index row."
+  },
+  {
+   "id": "B2-12",
+   "category": "alarm not configured",
+   "severity": "medium",
+   "what": "PDAH-2003 is marked implemented in the master alarm database and listed in the alarm register, but the DCS export has no such alarm.",
+   "verdict": "found",
+   "by": [
+    "C4 PDAH-2003"
+   ],
+   "reason": "C4 states PDAH-2003 on PDT-2003 is rationalised (Implemented) but not configured."
+  },
+  {
+   "id": "B2-13",
+   "category": "credited alarm does not exist",
+   "severity": "high",
+   "what": "The LOPA credits alarm PAH-2014 and the SRS makes it the bypass condition for SIF-200-03, but the alarm does not exist in any alarm list or the DCS.",
+   "verdict": "found",
+   "by": [
+    "X18 PAH-2014",
+    "C9 PAH-2014",
+    "X14 SIF-200-03"
+   ],
+   "reason": "X18 states PAH-2014 is credited in S-200-03 (PFD 0.1) but defined in no register; X14 adds that the curated register records a gap and the alarm does not exist yet; C9 is a variant. The extra risk reduction consequence is not worked out."
+  },
+  {
+   "id": "B2-14",
+   "category": "alarm limit beyond the trip",
+   "severity": "high",
+   "what": "PAL-2014 is rationalised at 0.6 barg but configured at 0.3 barg, which is below the 0.35 barg trip of the SIF it is the compensating alarm for.",
+   "verdict": "partial",
+   "by": [
+    "C5 PAL-2014",
+    "scenario_verdict bypass:PT-2010A"
+   ],
+   "reason": "Two discrepancies in one item; judged on the main claim (category 'alarm limit beyond the trip'). C5 reports only the narrower 0.6 versus 0.3 barg mismatch; no finding compares the limit with the 0.35 barg trip, and the bypass verdicts say only that PAL-2014 is 'impaired'."
+  },
+  {
+   "id": "B2-15",
+   "category": "change closed but not implemented",
+   "severity": "medium",
+   "what": "MOC-2026-039 lowered the PAH-2041 limit to 5.5 barg and is closed, and the alarm documents were revised, but the DCS still alarms at 6 barg.",
+   "verdict": "found",
+   "by": [
+    "C5 PAH-2041"
+   ],
+   "reason": "C5 states alarm register 5.5, MADB 5.5, configuration 6 barg. No finding ties this to closed MOC-2026-039, and the closeout:MOC-2026-039 verdict is 'ok'; judged on the value disagreement, which is the discrepancy itself."
+  },
+  {
+   "id": "B2-16",
+   "category": "alarm priority",
+   "severity": "low",
+   "what": "AAL-2024 is High priority in the master alarm database and the alarm register and Medium in the DCS.",
+   "verdict": "found",
+   "by": [
+    "C5 AAL-2024"
+   ],
+   "reason": "C5 states the three priorities exactly."
+  },
+  {
+   "id": "B2-17",
+   "category": "IPL credit recorded against the wrong alarm",
+   "severity": "medium",
+   "what": "The LOPA credits TAH-2022 in scenario S-200-04, but the master alarm database records that credit against TAH-2021 and treats TAH-2022 as an uncredited operational alarm.",
+   "verdict": "found",
+   "by": [
+    "C9 TAH-2022"
+   ],
+   "reason": "C9 states S-200-04 credits TAH-2022 while the MADB records IPL credit 'No', class Operational - the main claim. The reverse half (MADB credit on TAH-2021 that the LOPA says is not credited) is not reported."
+  },
+  {
+   "id": "B2-18",
+   "category": "interaction: credited alarm shelved",
+   "severity": "high",
+   "what": "TAH-2022 has been shelved since 2026-11-09 although it is the alarm LOPA scenario S-200-04 credits and a curated compensating measure for SIF-200-04.",
+   "verdict": "partial",
+   "by": [
+    "scenario_verdict bypass:TT-2020A",
+    "scenario_verdict shelve:TT-2022.TAH"
+   ],
+   "reason": "No finding says TAH-2022 is shelved. It surfaces only in scenario verdicts: the SIF-200-04 bypass verdicts call it 'impaired' and the what-if shelve verdict names its LOPA and compensating roles; neither says it is shelved now. A weak partial."
+  },
+  {
+   "id": "B2-19",
+   "category": "operator response time",
+   "severity": "medium",
+   "what": "The LOPA credits operator response to FAL-2002, for which the master alarm database allows 15 min, but the SRS gives the process safety time for the same event as 90 s.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares an alarm's time to respond with a process safety time."
+  },
+  {
+   "id": "B2-20",
+   "category": "SIF initiator on the control system",
+   "severity": "high",
+   "what": "PT-2011, the single initiator of SIF-200-03, is a SIS instrument in the index but is wired to DCS controller DCS-200-C01 in the export.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares the system or controller of a point between the index and the configuration; the bypass:PT-2011 verdict is 'ok'."
+  },
+  {
+   "id": "B2-21",
+   "category": "alarm source not independent of the SIF",
+   "severity": "medium",
+   "what": "TAH-2021 is rationalised on BPCS transmitter TT-2021 and approved as an independent compensating measure for SIF-200-04, but in the DCS it is configured on TT-2020A, one of that function's own initiators.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "The alarm comparison covers setpoint and priority only; no finding mentions the source tag of TAH-2021."
+  },
+  {
+   "id": "B2-22",
+   "category": "removed alarm still configured",
+   "severity": "low",
+   "what": "TAL-2021 was removed by rationalisation and is no longer in the alarm register, but it is still configured and enabled in the DCS.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding. TAL-2021 appears only as a 'new alarm' line in the MADB load report, which is not a finding and does not say it is still configured."
+  },
+  {
+   "id": "B2-23",
+   "category": "procedure coverage",
+   "severity": "low",
+   "what": "The SIS bypass management procedure covers SIF-200-01 to SIF-200-04 only, so no bypass procedure covers SIF-200-05.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding examines what the procedures in the document register cover."
+  },
+  {
+   "id": "B2-24",
+   "category": "stale out-of-service entry",
+   "severity": "low",
+   "what": "The out-of-service register still shows an override on TT-2020C as active more than ten days past its expiry, while the SIS export shows MOS-2020C off.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding. The run takes the stale entry at face value (TT-2020C is listed as out in situation_as_found) and never compares it with the override state or its expiry."
+  }
+ ],
+ "clean_controls": [
+  {
+   "description": "SIF-200-02 trip setpoint is written '350 mbarg' in the SRS and '0.35 barg' in the cause & effect chart and the SIS export: the same value in different units.",
+   "flagged": true,
+   "by": [
+    "X16 SIF-200-02"
+   ],
+   "reason": "X16 reports SRS 350 mbarg against C&E 0.35 barg as a trip setpoint disagreement; they are the same value."
+  },
+  {
+   "description": "LT-2040 is ranged 0-3000 mm in the index and its DCS block is scaled 0-100 %; LAL-2040 (600 mm = 20 %) and LAH-2040 (2400 mm = 80 %), with a 60 mm = 2 % deadband, are the same settings in both. Likewise PT-2025 is '-25 to 25' mmWG in the index and -25 / 25 in the export.",
+   "flagged": true,
+   "by": [
+    "C7 LT-2040",
+    "C5 LAL-2040",
+    "C5 LAH-2040"
+   ],
+   "reason": "The LT-2040 range (0-3000 mm against 0-100 %) and both alarm setpoints (600 mm / 20 %, 2400 mm / 80 %) are flagged as disagreements although they are the same settings; PT-2025 was correctly left alone."
+  },
+  {
+   "description": "Two bypasses are properly recorded. MOS-2001B on FT-2001B is active since 2026-11-12 02:10 and has a matching active out-of-service entry (OOS-200-0010) inside the 8 h the SRS allows, with its compensating alarm FAL-2002 enabled. The PT-2010A bypass of 2026-10-28 is closed in the register (OOS-200-0007), closed as MOC-2026-044, and MOS-2010A is off.",
+   "flagged": false,
+   "by": [],
+   "reason": "No finding flags either bypass; note that the bypass:FT-2001B scenario verdict wrongly says MOS-2001B has no out-of-service entry (OOS-200-0010 exists) and the MOC-2026-044 verdicts are 'stop'."
+  },
+  {
+   "description": "LAH-2031 is listed in LOPA scenario S-200-05 with no PFD: deliberately not credited, because it shares LT-2031 with the initiating control loop. The master alarm database agrees (IPL Credit 'No').",
+   "flagged": false,
+   "by": [],
+   "reason": "LAH-2031 was correctly loaded as listed but not credited; no C9 finding was raised for it."
+  },
+  {
+   "description": "MOC-2026-031 (re-range PT-2013 to 0-16 barg) is closed out properly: the index and the DCS point both show 0-16 barg and the one document to revise was revised.",
+   "flagged": true,
+   "by": [
+    "C15 MOC-2026-031"
+   ],
+   "reason": "C15 says the impact list misses the MADB (via PAL-2013), but a re-range changes nothing the MADB records; an advisory 'check each' prompt, so a soft flag."
+  },
+  {
+   "description": "MOC-2026-043 (remove LAL-2031) was cancelled and MOC-2026-046 (TAH-2023 on-delay to 60 s) is still in review: LAL-2031 is rightly still in every alarm list, and TAH-2023 rightly still has a 30 s on-delay everywhere.",
+   "flagged": false,
+   "by": [],
+   "reason": "Nothing flags LAL-2031 or the TAH-2023 on-delay; the C15 on MOC-2026-046 is about the impact list, not about these settings."
+  },
+  {
+   "description": "FALL-2001 is configured in the SIS as a trip notification of SIF-200-01 and is in neither the master alarm database nor the alarm register. That is correct: a trip is not an alarm.",
+   "flagged": true,
+   "by": [
+    "C3 FALL-2001"
+   ],
+   "reason": "C3 raises a warning that FALL-2001 is configured with no MADB record, although its own detail notes it is a trip notification and a trip is not an alarm."
+  },
+  {
+   "description": "For SIF-200-01 to SIF-200-04 the SRS states the proof test interval in one cell ('Sensors 12 months, final elements 24 months') where the SIL verification has two columns (12 months / 24 months); the SRS writes architectures as '2oo3 FT' or '1oo2 (XV-2001 or XV-2002)' where other documents write '2oo3' or list the tags. Same facts, different wording.",
+   "flagged": true,
+   "by": [
+    "C11 SIF-200-01",
+    "C11 SIF-200-02",
+    "C11 SIF-200-03",
+    "C11 SIF-200-04"
+   ],
+   "reason": "Eight stop-level C11 findings (two per SIF) report the SRS cell 'Sensors 12 months, final elements 24 months' as disagreeing with the SIL verification's 12 and 24 months; the architecture wording was handled correctly."
+  }
+ ],
+ "other_findings": [
+  {
+   "code": "C2",
+   "ids": [
+    "MOS-2001A",
+    "MOS-2001B",
+    "MOS-2001C",
+    "MOS-2010A",
+    "MOS-2010B",
+    "MOS-2011",
+    "MOS-2020A",
+    "MOS-2020B",
+    "MOS-2020C",
+    "MOS-2030A",
+    "MOS-2030B"
+   ],
+   "count": 11,
+   "class": "true_unplanted",
+   "reason": "True and checked: none of the eleven override switches has an index row. Info level; soft switches are not normally index items, so of little value."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-034"
+   ],
+   "count": 1,
+   "class": "true_unplanted",
+   "reason": "Variant of B2-05: the LOPA link is defensible (its PFD credit for SIF-200-05 depends on the test interval); the other four documents listed carry no proof test interval and are where-used noise."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-041"
+   ],
+   "count": 1,
+   "class": "true_unplanted",
+   "reason": "Variant of B2-13: correctly notes the LOPA already credits and the SRS already relies on the PAH-2014 this MOC adds; whether they belong on the impact list is arguable."
+  },
+  {
+   "code": "X1",
+   "ids": [
+    "AT-2024",
+    "FT-2001A",
+    "FT-2001B",
+    "FT-2001C",
+    "FT-2002",
+    "FV-2002",
+    "HS-2001",
+    "HV-2001",
+    "LG-2032",
+    "LT-2030A",
+    "LT-2030B",
+    "LT-2031",
+    "LT-2040",
+    "LV-2031",
+    "PDT-2003",
+    "PI-2015",
+    "PSV-2050",
+    "PT-2010A",
+    "PT-2010B",
+    "PT-2011",
+    "PT-2012",
+    "PT-2013",
+    "PT-2014",
+    "PT-2025",
+    "PT-2041",
+    "PV-2012",
+    "TT-2020A",
+    "TT-2020B",
+    "TT-2020C",
+    "TT-2021",
+    "TT-2022",
+    "TT-2023",
+    "XV-2001",
+    "XV-2002",
+    "XV-2004",
+    "ZSC-2001",
+    "ZSC-2002"
+   ],
+   "count": 37,
+   "class": "input_gap",
+   "reason": "No P&ID extraction or topology was supplied for U-200 (unit.json: topology and pdf null), so every one of the 37 index rows is reported as not found on a P&ID."
+  },
+  {
+   "code": "X7",
+   "ids": [
+    "PID-200-001",
+    "PID-200-002"
+   ],
+   "count": 2,
+   "class": "input_gap",
+   "reason": "No P&ID title block was supplied; the document register does give revisions D and C, so the graph holds each P&ID twice (UNKNOWN and the registered revision)."
+  },
+  {
+   "code": "C11",
+   "ids": [
+    "SIF-200-01",
+    "SIF-200-01",
+    "SIF-200-02",
+    "SIF-200-02",
+    "SIF-200-03",
+    "SIF-200-03",
+    "SIF-200-04",
+    "SIF-200-04"
+   ],
+   "count": 8,
+   "class": "false_alarm",
+   "reason": "Checked all four SIFs: SIL verification 12 months sensors / 24 months final elements is exactly what the SRS cell says; the compound cell was not parsed (clean control)."
+  },
+  {
+   "code": "C5",
+   "ids": [
+    "LAH-2040",
+    "LAL-2040"
+   ],
+   "count": 2,
+   "class": "false_alarm",
+   "reason": "600 mm and 2400 mm are 20 % and 80 % of the 0-3000 mm span the index remark says the block is scaled to (clean control)."
+  },
+  {
+   "code": "C7",
+   "ids": [
+    "LT-2040"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "reason": "0-3000 mm and 0-100 % are the same range; the index remark says so (clean control)."
+  },
+  {
+   "code": "X16",
+   "ids": [
+    "SIF-200-02"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "reason": "350 mbarg equals 0.35 barg (clean control)."
+  },
+  {
+   "code": "C3",
+   "ids": [
+    "FALL-2001"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "reason": "A SIS trip notification is rightly absent from the MADB; the finding is a warning even though its detail concedes the point (clean control)."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-031"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "reason": "The MADB records PAL-2013 in barg with no range, so the PT-2013 re-range changes nothing in it; the MOC was closed out properly (clean control)."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-046"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "reason": "Neither the instrument index nor its alarm register sheet has an on-delay column, so an on-delay change does not reach it."
+  }
+ ],
+ "missed_patterns": [
+  "B2-01, B2-03: every SIF attribute (trip setpoint, initiators, voting, final elements) should be compared across SRS, cause & effect, SIL verification AND the configured logic, with values normalised to one unit; here the configuration was compared on sensor voting only and final elements not at all.",
+  "B2-04: check the SIL verification's own target and cited source revision against the current SRS and LOPA requirement, and re-test 'achieved' against the current target rather than trusting the calculation's 'meets target'.",
+  "B2-19: for every alarm credited as a protection layer, compare the operator response time allowed in the alarm database with the process safety time of the scenario it is credited in.",
+  "B2-20: compare the system, controller and I/O allocation of each instrument between the index and the configuration, and flag any SIF initiator or final element that is not on the safety logic solver.",
+  "B2-21: compare an alarm's source tag (not only setpoint and priority) across alarm register, alarm database and configuration, and flag a compensating alarm that is sourced from an initiator of the SIF it backs up.",
+  "B2-22: use the alarm database's lifecycle status in both directions - an alarm recorded as removed or not implemented that is still configured and enabled is a discrepancy, the mirror of 'implemented but not configured'.",
+  "B2-23: a coverage check on the document register - every SIF in the SRS should appear under each kind of procedure that covers its sibling SIFs (bypass, proof test).",
+  "B2-24: reconcile the out-of-service register against the live override and alarm states in both directions and against the clock - an 'active' entry whose override is off, or that is past its expiry, is a finding.",
+  "B2-08, B2-18 (partial): as-found interactions should be findings in their own right - an active bypass, shelf or disabled alarm whose compensating measure or LOPA credit is itself out of service - not left to what-if verdict text.",
+  "B2-14 (partial): compare the configured limit of every pre-alarm or compensating alarm with the trip setpoint of the SIF it stands in front of; the alarm must sit on the safe side of the trip."
+ ],
+ "scorer_notes": "Counted strictly on the `findings` list; scenario verdicts earn at most partial. Found 12 of 24, partial 3, missed 9. Most arguable calls: B2-14 would be 'found' on a lenient reading (the 0.6 v 0.3 barg mismatch is stated; the comparison with the 0.35 barg trip is not), and B2-18 is a weak partial that a harder scorer could call missed - so found is 12 to 13 and missed 9 to 10 depending on the reader. B2-05, B2-07, B2-15 and B2-17 are 'found' on their main claim although part of the story (values still at 12 months, the closed MOC, the credit sitting on TAH-2021) is not in any finding. Clean controls: 5 of 8 flagged by findings. A sixth (the two properly recorded bypasses) is not flagged by any finding but is contradicted in scenario verdicts: bypass:FT-2001B says MOS-2001B has no out-of-service entry when OOS-200-0010 is there, and moc/closeout:MOC-2026-044 are 'stop' for a bypass that was closed correctly. Scenario verdicts also assert agreement where the documents disagree: trip:SIF-200-04 and trip:SIF-200-03 say C&E, SRS and configuration agree (B2-01, B2-03), bypass:PT-2011 is 'ok' (B2-20), closeout:MOC-2026-039 is 'ok' (B2-15). False alarms: 15 findings from 7 entries; 12 are unit or wording normalisation (mbarg v barg, % of span v mm, a compound proof-test cell), 8 of them at stop level. The two C15 impact-list entries classed false are advisory 'check each' prompts; a lenient scorer could call them noise rather than false, and I kept the other two C15 entries as true because their content is correct. Input gap: 39 findings exist only because no P&ID was supplied. The key itself checked out against the documents wherever I tested it (evidence cells, the RRF 27 and 28 figures, dates); I found no error in it and did not need the generator script. Verified by reading every workbook and CSV directly; I did not read the checker's source. Confidence is high on the found and missed verdicts, moderate on the three partials and on the C15 classifications."
+}

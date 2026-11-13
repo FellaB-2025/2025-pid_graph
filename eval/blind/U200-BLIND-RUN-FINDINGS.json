@@ -1,0 +1,2339 @@
+{
+ "_note": "Sealed output of a blind run. Written without reading the unit's answer key. Do not edit.",
+ "unit": "U-200",
+ "freeze": "blind-freeze-1",
+ "freeze_commit": "8175cedebafbd72d270a6b2b542e0686f631f2ef",
+ "run_commit": "3bdbbd4164aa37e1ae8fd9dd4ba21f723ea96dbd",
+ "frozen_paths": [
+  "pid_graph/ops_checks.py",
+  "pid_graph/reconcile.py",
+  "pid_graph/pipeline.py",
+  "pid_graph/loaders",
+  "pid_graph/records.py",
+  "pid_graph/ontology.py",
+  "pid_graph/tags.py"
+ ],
+ "export_time": "2026-11-12 06:00",
+ "counts": {
+  "nodes": 115,
+  "rels": 487,
+  "by_label": {
+   "Alarm": 18,
+   "Document": 30,
+   "Equipment": 3,
+   "Instrument": 49,
+   "Line": 5,
+   "SIF": 5,
+   "Scenario": 5
+  },
+  "by_rel": {
+   "ACTUATES": 16,
+   "COMPENSATES_FOR": 5,
+   "CREDITS": 8,
+   "GENERATES": 47,
+   "INITIATES": 22,
+   "INSTALLED_ON": 9,
+   "MEASURES": 28,
+   "PROTECTS": 10,
+   "SHOWN_ON": 337,
+   "THREATENS": 5
+  }
+ },
+ "documents": [
+  {
+   "doc_no": "U200-CE-CHART",
+   "rev": "B",
+   "doc_type": "CE",
+   "title": "Cause & effect chart U200-CE-CHART",
+   "file": "U200-CE-CHART-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "U200-CFG-EXPORT",
+   "rev": "A",
+   "doc_type": "CFG",
+   "title": "DCS / SIS configuration export U200-CFG-EXPORT",
+   "file": "U200-CFG-EXPORT-Rev-A.xlsx"
+  },
+  {
+   "doc_no": "COMPENSATING-MEASURES-U-200",
+   "rev": "2026-10-09",
+   "doc_type": "CUR",
+   "title": "Curated compensating measures",
+   "file": "compensating_measures_U-200.csv"
+  },
+  {
+   "doc_no": "U200-ALM-REG",
+   "rev": "C",
+   "doc_type": "IDX",
+   "title": "Alarm Register - Unit 200 (sheet of the instrument index workbook)",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-INST-INDEX",
+   "rev": "C",
+   "doc_type": "IDX",
+   "title": "Instrument index U200-INST-INDEX",
+   "file": "U200-INST-INDEX-Rev-C.xlsx"
+  },
+  {
+   "doc_no": "U200-LOOP-REG",
+   "rev": "C",
+   "doc_type": "IDX",
+   "title": "Loop Register - Unit 200 (sheet of the instrument index workbook)",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-LOOP-2001",
+   "rev": "A",
+   "doc_type": "LOOP",
+   "title": "Loop Drawings FT-2001A/B/C",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-LOPA-001",
+   "rev": "B",
+   "doc_type": "LOPA",
+   "title": "Layer of protection analysis U200-LOPA-001",
+   "file": "U200-LOPA-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "U200-MADB-001",
+   "rev": "B",
+   "doc_type": "MADB",
+   "title": "Master alarm database U200-MADB-001",
+   "file": "U200-MADB-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "MOC-2026-031",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Re-range PT-2013 fuel gas supply pressure from 0-10 to 0-16 barg (new supply header rating)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-034",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Extend the SIF-200-05 proof test interval from 12 to 24 months to align with the heater turnaround",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-037",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Temporary: disable LAH-2031 while the LT-2031 impulse lines are re-routed",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-039",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Lower the PAH-2041 expansion drum pressure alarm limit from 6.0 to 5.5 barg (new blanket gas regulator setting)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-041",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Add PAH-2014 at 2.4 barg on PT-2014, independent of PIC-2012 (LOPA revalidation action for S-200-03)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-043",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Remove LAL-2031 fuel gas KO drum low level alarm (proposed as a nuisance alarm)",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-044",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Temporary: bypass PT-2010A for transmitter replacement",
+   "file": ""
+  },
+  {
+   "doc_no": "MOC-2026-046",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Increase the TAH-2023 on-delay from 30 s to 60 s (chattering during burner changes)",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-MOC-REG",
+   "rev": "A",
+   "doc_type": "MOC",
+   "title": "Management of change register U200-MOC-REG",
+   "file": "U200-MOC-REG-Rev-A.xlsx"
+  },
+  {
+   "doc_no": "U200-ALM-PHIL",
+   "rev": "A",
+   "doc_type": "PHIL",
+   "title": "Alarm Philosophy and Rationalisation - Unit 200",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-200-001",
+   "rev": "UNKNOWN",
+   "doc_type": "PID",
+   "title": "",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-200-001",
+   "rev": "D",
+   "doc_type": "PID",
+   "title": "P&ID - Hot Oil Heater H-201 and Hot Oil Circuit",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-200-002",
+   "rev": "UNKNOWN",
+   "doc_type": "PID",
+   "title": "",
+   "file": ""
+  },
+  {
+   "doc_no": "PID-200-002",
+   "rev": "C",
+   "doc_type": "PID",
+   "title": "P&ID - Fuel Gas System",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-OP-PROC-010",
+   "rev": "D",
+   "doc_type": "PROC",
+   "title": "Operating Procedure - Hot Oil Heater Start-up and Shutdown",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-OP-PROC-020",
+   "rev": "B",
+   "doc_type": "PROC",
+   "title": "SIS Bypass Management Procedure",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-PTP-001",
+   "rev": "C",
+   "doc_type": "PTP",
+   "title": "SIS Proof Test Procedures - Unit 200",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-DOC-REGISTER",
+   "rev": "A",
+   "doc_type": "REG",
+   "title": "Document register U200-DOC-REGISTER",
+   "file": "U200-DOC-REGISTER.csv"
+  },
+  {
+   "doc_no": "U200-SILV-001",
+   "rev": "B",
+   "doc_type": "SILV",
+   "title": "SIL verification U200-SILV-001",
+   "file": "U200-SILV-001-Rev-B.xlsx"
+  },
+  {
+   "doc_no": "U200-SIS-IO-001",
+   "rev": "B",
+   "doc_type": "SISIO",
+   "title": "SIS I/O Allocation and Application Logic - SIS-LS-200",
+   "file": ""
+  },
+  {
+   "doc_no": "U200-SRS-001",
+   "rev": "C",
+   "doc_type": "SRS",
+   "title": "Safety requirements specification U200-SRS-001",
+   "file": "U200-SRS-001-Rev-C.xlsx"
+  }
+ ],
+ "load_reports": {
+  "index": {
+   "document": {
+    "doc_no": "U200-INST-INDEX",
+    "rev": "C",
+    "detected_from": "title row of sheet Instrument Index"
+   },
+   "rows": 37,
+   "skipped": []
+  },
+  "ce": {
+   "document": {
+    "doc_no": "U200-CE-CHART",
+    "rev": "B",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 19,
+   "ce_only_instruments": [],
+   "ce_only_alarms": [],
+   "skipped": []
+  },
+  "srs": {
+   "document": {
+    "doc_no": "U200-SRS-001",
+    "rev": "C",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 5,
+   "srs_only_sifs": [],
+   "skipped": []
+  },
+  "lopa": {
+   "document": {
+    "doc_no": "U200-LOPA-001",
+    "rev": "B",
+    "detected_from": "title row of sheet Scenarios"
+   },
+   "skipped": [
+    {
+     "ref": "U200-LOPA-001-Rev-B.xlsx:IPLs:12",
+     "reason": "LAH-2031: no PFD credited (listed, not credited)"
+    }
+   ]
+  },
+  "curated": {
+   "document": {
+    "doc_no": "COMPENSATING-MEASURES-U-200",
+    "rev": "2026-10-09"
+   },
+   "rows": 6,
+   "proposed": [],
+   "gaps": [
+    {
+     "sif_id": "SIF-200-03",
+     "alarm_id": "",
+     "rank": "",
+     "basis": "gap",
+     "rationale": "SIF-200-03 trips at 2.8 barg on PT-2011 (1oo1). The only high pressure alarm, PAH-2012, shares PT-2012 with the PIC-2012 loop whose failure is the demand, so it is not a compensating measure. An independent PAH on PT-2014 is proposed under MOC-2026-041 and does not exist yet.",
+     "ref": "compensating_measures_U-200.csv:4"
+    }
+   ],
+   "skipped": []
+  },
+  "madb": {
+   "document": {
+    "doc_no": "U200-MADB-001",
+    "rev": "B",
+    "detected_from": "title row of sheet 1"
+   },
+   "rows": 16,
+   "new_alarms": [
+    "TAL-2021"
+   ],
+   "skipped": []
+  },
+  "config": {
+   "document": {
+    "doc_no": "U200-CFG-EXPORT",
+    "rev": "A",
+    "detected_from": "title row of sheet Points"
+   },
+   "cfg_only_points": [
+    "TT-2026",
+    "MOS-2001A",
+    "MOS-2001B",
+    "MOS-2001C",
+    "MOS-2010A",
+    "MOS-2010B",
+    "MOS-2011",
+    "MOS-2020A",
+    "MOS-2020B",
+    "MOS-2020C",
+    "MOS-2030A",
+    "MOS-2030B"
+   ],
+   "new_alarms": [
+    "FALL-2001"
+   ],
+   "skipped": []
+  },
+  "silv": {
+   "document": {
+    "doc_no": "U200-SILV-001",
+    "rev": "B",
+    "detected_from": "title row of sheet SIF Summary"
+   },
+   "unknown_tags": [],
+   "skipped": []
+  },
+  "moc": {
+   "document": {
+    "doc_no": "U200-MOC-REG",
+    "rev": "A",
+    "detected_from": "title row of sheet 1"
+   },
+   "tags_not_in_graph": [],
+   "skipped": []
+  },
+  "docreg": {
+   "document": {
+    "doc_no": "U200-DOC-REGISTER",
+    "rev": "A",
+    "detected_from": "title row of sheet 1"
+   },
+   "unresolved": [],
+   "unknown_types": []
+  }
+ },
+ "findings": [
+  {
+   "key": "F001",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2001A",
+   "detail": "MOS-2001A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:5",
+   "tags": [
+    "MOS-2001A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F002",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2001B",
+   "detail": "MOS-2001B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:6",
+   "tags": [
+    "MOS-2001B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F003",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2001C",
+   "detail": "MOS-2001C is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:7",
+   "tags": [
+    "MOS-2001C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F004",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2010A",
+   "detail": "MOS-2010A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:8",
+   "tags": [
+    "MOS-2010A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F005",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2010B",
+   "detail": "MOS-2010B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:9",
+   "tags": [
+    "MOS-2010B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F006",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2011",
+   "detail": "MOS-2011 is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:10",
+   "tags": [
+    "MOS-2011"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F007",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2020A",
+   "detail": "MOS-2020A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:11",
+   "tags": [
+    "MOS-2020A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F008",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2020B",
+   "detail": "MOS-2020B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:12",
+   "tags": [
+    "MOS-2020B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F009",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2020C",
+   "detail": "MOS-2020C is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:13",
+   "tags": [
+    "MOS-2020C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F010",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2030A",
+   "detail": "MOS-2030A is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:14",
+   "tags": [
+    "MOS-2030A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F011",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "MOS-2030B",
+   "detail": "MOS-2030B is a configured maintenance override switch (no channel) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:15",
+   "tags": [
+    "MOS-2030B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F012",
+   "code": "C2",
+   "title": "Configured point not in the instrument index",
+   "label": "Instrument",
+   "id": "TT-2026",
+   "detail": "TT-2026 is a configured DCS point (DCS-AI-02/06) with no instrument index row.",
+   "sources": "configuration vs instrument index",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Points:38",
+   "tags": [
+    "TT-2026"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F013",
+   "code": "C3",
+   "title": "Alarm configured but not rationalised in the MADB",
+   "label": "Alarm",
+   "id": "FALL-2001",
+   "detail": "FALL-2001 on FT-2001A is configured (120 m3/h, High) but has no MADB record. It is configured as a trip notification: a trip is not an alarm.",
+   "sources": "configuration vs MADB",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:20",
+   "tags": [
+    "FALL-2001",
+    "FT-2001A"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F014",
+   "code": "C4",
+   "title": "Alarm rationalised in the MADB but not configured",
+   "label": "Alarm",
+   "id": "PDAH-2003",
+   "detail": "PDAH-2003 on PDT-2003 is rationalised (6 bar, Low, Implemented) but not configured.",
+   "sources": "MADB vs configuration",
+   "refs": "U200-MADB-001-Rev-B.xlsx:1:19",
+   "tags": [
+    "PDAH-2003",
+    "PDT-2003"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F015",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "AAL-2024",
+   "detail": "AAL-2024 priority: alarm register High; MADB High; configuration Medium.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:12",
+   "tags": [
+    "AAL-2024",
+    "AT-2024"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F016",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "LAH-2040",
+   "detail": "LAH-2040 setpoint: alarm register 2400 mm; MADB 2400 mm; configuration 80 %.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:17",
+   "tags": [
+    "LAH-2040",
+    "LT-2040"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F017",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "LAL-2040",
+   "detail": "LAL-2040 setpoint: alarm register 600 mm; MADB 600 mm; configuration 20 %.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:16",
+   "tags": [
+    "LAL-2040",
+    "LT-2040"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F018",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "PAH-2041",
+   "detail": "PAH-2041 setpoint: alarm register 5.5 barg; MADB 5.5 barg; configuration 6 barg.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:18",
+   "tags": [
+    "PAH-2041",
+    "PT-2041"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F019",
+   "code": "C5",
+   "title": "Alarm setpoint or priority disagrees between alarm register, MADB and configuration",
+   "label": "Alarm",
+   "id": "PAL-2014",
+   "detail": "PAL-2014 setpoint: alarm register 0.6 barg; MADB 0.6 barg; configuration 0.3 barg.",
+   "sources": "alarm register vs MADB vs configuration",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:6",
+   "tags": [
+    "PAL-2014",
+    "PT-2014"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F020",
+   "code": "C6",
+   "title": "Alarm disabled in the configuration with no out-of-service entry",
+   "label": "Alarm",
+   "id": "LAH-2031",
+   "detail": "LAH-2031 is disabled in the configuration; the out-of-service register has no active entry for it. MADB status: Implemented.",
+   "sources": "configuration vs out-of-service register",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Alarms:14",
+   "tags": [
+    "LAH-2031",
+    "LT-2031"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F021",
+   "code": "C7",
+   "title": "Configured range disagrees with the instrument index",
+   "label": "Instrument",
+   "id": "LT-2040",
+   "detail": "Index range 0-3000 mm; configured 0-100 %.",
+   "sources": "instrument index vs configuration",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:32",
+   "tags": [
+    "LT-2040"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F022",
+   "code": "C7",
+   "title": "Configured range disagrees with the instrument index",
+   "label": "Instrument",
+   "id": "PT-2010B",
+   "detail": "Index range 0-4 barg; configured 0-6 barg.",
+   "sources": "instrument index vs configuration",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:12",
+   "tags": [
+    "PT-2010B"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F023",
+   "code": "C9",
+   "title": "LOPA-credited alarm not recorded as an IPL in the MADB",
+   "label": "Alarm",
+   "id": "PAH-2014",
+   "detail": "S-200-03 credits PAH-2014 as an IPL (PFD 0.1); the MADB records IPL credit 'none' and class 'none'.",
+   "sources": "LOPA vs MADB",
+   "refs": "U200-LOPA-001-Rev-B.xlsx:IPLs:8",
+   "tags": [
+    "",
+    "PAH-2014"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F024",
+   "code": "C9",
+   "title": "LOPA-credited alarm not recorded as an IPL in the MADB",
+   "label": "Alarm",
+   "id": "TAH-2022",
+   "detail": "S-200-04 credits TAH-2022 as an IPL (PFD 0.1); the MADB records IPL credit 'No' and class 'Operational'.",
+   "sources": "LOPA vs MADB",
+   "refs": "U200-LOPA-001-Rev-B.xlsx:IPLs:10",
+   "tags": [
+    "TAH-2022",
+    "TT-2022"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F025",
+   "code": "C10",
+   "title": "SIF architecture disagrees between C&E, SRS, SIL verification and configuration",
+   "label": "SIF",
+   "id": "SIF-200-02",
+   "detail": "C&E: 2oo2 on PT-2010A, PT-2010B; configuration: 2oo2 on PT-2010A, PT-2010B; SIL verification: 1oo2 on PT-2010A, PT-2010B; SRS: 1oo2.",
+   "sources": "C&E vs configuration vs SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:6",
+   "tags": [
+    "PT-2010A",
+    "PT-2010B",
+    "SIF-200-02"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F026",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-01",
+   "detail": "The SIL verification takes a proof-test interval of 12 months for the sensors; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:5",
+   "tags": [
+    "FT-2001A",
+    "FT-2001B",
+    "FT-2001C",
+    "SIF-200-01"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F027",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-01",
+   "detail": "The SIL verification takes a proof-test interval of 24 months for the final elements; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:5",
+   "tags": [
+    "SIF-200-01",
+    "XV-2001",
+    "XV-2002"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F028",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-02",
+   "detail": "The SIL verification takes a proof-test interval of 12 months for the sensors; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:6",
+   "tags": [
+    "PT-2010A",
+    "PT-2010B",
+    "SIF-200-02"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F029",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-02",
+   "detail": "The SIL verification takes a proof-test interval of 24 months for the final elements; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:6",
+   "tags": [
+    "SIF-200-02",
+    "XV-2001",
+    "XV-2002"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F030",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-03",
+   "detail": "The SIL verification takes a proof-test interval of 12 months for the sensors; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:7",
+   "tags": [
+    "PT-2011",
+    "SIF-200-03"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F031",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-03",
+   "detail": "The SIL verification takes a proof-test interval of 24 months for the final elements; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:7",
+   "tags": [
+    "SIF-200-03",
+    "XV-2001",
+    "XV-2002"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F032",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-04",
+   "detail": "The SIL verification takes a proof-test interval of 12 months for the sensors; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:8",
+   "tags": [
+    "SIF-200-04",
+    "TT-2020A",
+    "TT-2020B",
+    "TT-2020C"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F033",
+   "code": "C11",
+   "title": "SIL verification assumption not met",
+   "label": "SIF",
+   "id": "SIF-200-04",
+   "detail": "The SIL verification takes a proof-test interval of 24 months for the final elements; the SRS specifies Sensors 12 months, final elements 24 months.",
+   "sources": "SIL verification vs SRS",
+   "refs": "U200-SILV-001-Rev-B.xlsx:SIF Summary:8",
+   "tags": [
+    "SIF-200-04",
+    "XV-2001",
+    "XV-2002"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F034",
+   "code": "C12",
+   "title": "Bypass provision disagrees with the SRS",
+   "label": "Instrument",
+   "id": "MOS-2020A",
+   "detail": "MOS-2020A on TT-2020A times out after 24 h (Alarm only); the SRS limits a bypass of SIF-200-04 to 8 h.",
+   "sources": "configuration vs SRS",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:11",
+   "tags": [
+    "MOS-2020A",
+    "SIF-200-04",
+    "TT-2020A"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F035",
+   "code": "C12",
+   "title": "Bypass provision disagrees with the SRS",
+   "label": "Instrument",
+   "id": "MOS-2020B",
+   "detail": "MOS-2020B on TT-2020B times out after 24 h (Alarm only); the SRS limits a bypass of SIF-200-04 to 8 h.",
+   "sources": "configuration vs SRS",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:12",
+   "tags": [
+    "MOS-2020B",
+    "SIF-200-04",
+    "TT-2020B"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F036",
+   "code": "C12",
+   "title": "Bypass provision disagrees with the SRS",
+   "label": "Instrument",
+   "id": "MOS-2020C",
+   "detail": "MOS-2020C on TT-2020C times out after 24 h (Alarm only); the SRS limits a bypass of SIF-200-04 to 8 h.",
+   "sources": "configuration vs SRS",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:13",
+   "tags": [
+    "MOS-2020C",
+    "SIF-200-04",
+    "TT-2020C"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F037",
+   "code": "C13",
+   "title": "Maintenance override active with no out-of-service entry",
+   "label": "Instrument",
+   "id": "MOS-2030A",
+   "detail": "MOS-2030A has overridden LT-2030A (SIF-200-05, degraded to 1oo1) since 2026-11-08 09:15: 92.8 h at the export (2026-11-12 06:00) - over the SRS limit of 4 h. The out-of-service register has no active entry for it.",
+   "sources": "configuration vs out-of-service register",
+   "refs": "U200-CFG-EXPORT-Rev-A.xlsx:Overrides:14",
+   "tags": [
+    "LT-2030A",
+    "MOS-2030A",
+    "SIF-200-05"
+   ],
+   "level": "stop"
+  },
+  {
+   "key": "F038",
+   "code": "C14",
+   "title": "MOC implemented or closed with documents not revised",
+   "label": "Document",
+   "id": "MOC-2026-034",
+   "detail": "MOC-2026-034 (Extend the SIF-200-05 proof test interval from 12 to 24 months to align with the heater turnaround) is Closed; 2 of 3 documents not revised: U200-SRS-001, U200-SILV-001. Tags: SIF-200-05, LT-2030A, LT-2030B, XV-2004.",
+   "sources": "MOC register",
+   "refs": "U200-MOC-REG-Rev-A.xlsx:1:6",
+   "tags": [
+    "LT-2030A",
+    "LT-2030B",
+    "MOC-2026-034",
+    "SIF-200-05",
+    "XV-2004"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F039",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-031",
+   "detail": "MOC-2026-031 lists U200-INST-INDEX. The graph also links the change to: U200-MADB-001 (PAL-2013: document register: covers, shown on, states GENERATES (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U200-MOC-REG-Rev-A.xlsx:1:5",
+   "tags": [
+    "MOC-2026-031",
+    "PAL-2013",
+    "PT-2013.PAL"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F040",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-034",
+   "detail": "MOC-2026-034 lists U200-SRS-001, U200-SILV-001, U200-PTP-001. The graph also links the change to: COMPENSATING-MEASURES-U-200 (SIF-200-05: shown on, states COMPENSATES_FOR (I5)); PID-200-002 (LT-2030A: document register: covers, shown on (I5)); U200-CE-CHART (LT-2030A: shown on, states INITIATES (I5)); U200-INST-INDEX (LT-2030A: shown on, states MEASURES (I5)); U200-LOPA-001 (SIF-200-05: document register: covers, states CREDITS (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U200-MOC-REG-Rev-A.xlsx:1:6",
+   "tags": [
+    "LT-2030A",
+    "LT-2030B",
+    "MOC-2026-034",
+    "SIF-200-05",
+    "XV-2004"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F041",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-041",
+   "detail": "MOC-2026-041 lists U200-MADB-001, U200-ALM-REG. The graph also links the change to: U200-LOPA-001 (PAH-2014 credited in S-200-03 (I3)); U200-SRS-001 (PAH-2014 named in the SIF-200-03 bypass conditions (I3)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U200-MOC-REG-Rev-A.xlsx:1:9",
+   "tags": [
+    "MOC-2026-041",
+    "PAH-2014"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F042",
+   "code": "C15",
+   "title": "MOC impact list misses documents the graph links to the change",
+   "label": "Document",
+   "id": "MOC-2026-046",
+   "detail": "MOC-2026-046 lists U200-MADB-001. The graph also links the change to: U200-INST-INDEX (TAH-2023: shown on, states GENERATES (I5)). Check each.",
+   "sources": "MOC register vs graph",
+   "refs": "U200-MOC-REG-Rev-A.xlsx:1:12",
+   "tags": [
+    "MOC-2026-046",
+    "TAH-2023",
+    "TT-2023.TAH"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F043",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "AT-2024",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:25",
+   "tags": [
+    "AT-2024"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F044",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "FT-2001A",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:5",
+   "tags": [
+    "FT-2001A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F045",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "FT-2001B",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:6",
+   "tags": [
+    "FT-2001B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F046",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "FT-2001C",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:7",
+   "tags": [
+    "FT-2001C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F047",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "FT-2002",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:8",
+   "tags": [
+    "FT-2002"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F048",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "FV-2002",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:9",
+   "tags": [
+    "FV-2002"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F049",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "HS-2001",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:39",
+   "tags": [
+    "HS-2001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F050",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "HV-2001",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:40",
+   "tags": [
+    "HV-2001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F051",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LG-2032",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:31",
+   "tags": [
+    "LG-2032"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F052",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LT-2030A",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:27",
+   "tags": [
+    "LT-2030A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F053",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LT-2030B",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:28",
+   "tags": [
+    "LT-2030B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F054",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LT-2031",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:29",
+   "tags": [
+    "LT-2031"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F055",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LT-2040",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:32",
+   "tags": [
+    "LT-2040"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F056",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "LV-2031",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:30",
+   "tags": [
+    "LV-2031"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F057",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PDT-2003",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:10",
+   "tags": [
+    "PDT-2003"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F058",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PI-2015",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:18",
+   "tags": [
+    "PI-2015"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F059",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PSV-2050",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:41",
+   "tags": [
+    "PSV-2050"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F060",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2010A",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:11",
+   "tags": [
+    "PT-2010A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F061",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2010B",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:12",
+   "tags": [
+    "PT-2010B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F062",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2011",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:13",
+   "tags": [
+    "PT-2011"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F063",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2012",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:14",
+   "tags": [
+    "PT-2012"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F064",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2013",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:16",
+   "tags": [
+    "PT-2013"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F065",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2014",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:17",
+   "tags": [
+    "PT-2014"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F066",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2025",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:26",
+   "tags": [
+    "PT-2025"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F067",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PT-2041",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:33",
+   "tags": [
+    "PT-2041"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F068",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "PV-2012",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:15",
+   "tags": [
+    "PV-2012"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F069",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2020A",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:19",
+   "tags": [
+    "TT-2020A"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F070",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2020B",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:20",
+   "tags": [
+    "TT-2020B"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F071",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2020C",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:21",
+   "tags": [
+    "TT-2020C"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F072",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2021",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:22",
+   "tags": [
+    "TT-2021"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F073",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2022",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:23",
+   "tags": [
+    "TT-2022"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F074",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "TT-2023",
+   "detail": "Index places it on PID-200-001; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:24",
+   "tags": [
+    "TT-2023"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F075",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "XV-2001",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:34",
+   "tags": [
+    "XV-2001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F076",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "XV-2002",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:35",
+   "tags": [
+    "XV-2002"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F077",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "XV-2004",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:36",
+   "tags": [
+    "XV-2004"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F078",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "ZSC-2001",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:37",
+   "tags": [
+    "ZSC-2001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F079",
+   "code": "X1",
+   "title": "Index instrument not found on any P&ID extraction",
+   "label": "Instrument",
+   "id": "ZSC-2002",
+   "detail": "Index places it on PID-200-002; no extraction row mentions it.",
+   "sources": "index vs pid_audit",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:38",
+   "tags": [
+    "ZSC-2002"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F080",
+   "code": "X14",
+   "title": "SIF has no curated compensating measure",
+   "label": "SIF",
+   "id": "SIF-200-03",
+   "detail": "Curation records a GAP: SIF-200-03 trips at 2.8 barg on PT-2011 (1oo1). The only high pressure alarm, PAH-2012, shares PT-2012 with the PIC-2012 loop whose failure is the demand, so it is not a compensating measure. An independent PAH on PT-2014 is proposed under MOC-2026-041 and does not exist yet.",
+   "sources": "curated register",
+   "refs": "compensating_measures_U-200.csv",
+   "tags": [
+    "SIF-200-03"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F081",
+   "code": "X16",
+   "title": "Trip setpoint disagrees between SRS and C&E",
+   "label": "SIF",
+   "id": "SIF-200-02",
+   "detail": "SRS trip setpoint 350 mbarg; C&E initiators trip at 0.35 barg.",
+   "sources": "srs vs cause_effect",
+   "refs": "U200-SRS-001-Rev-C.xlsx:1:6",
+   "tags": [
+    "SIF-200-02"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F082",
+   "code": "X18",
+   "title": "LOPA-credited layer not in any register / not representable",
+   "label": "Alarm",
+   "id": "PAH-2014",
+   "detail": "Credited in S-200-03 as 'Alarm + operator response' (PFD 0.1) but not defined in any loaded register (stub).",
+   "sources": "lopa vs registers",
+   "refs": "U200-LOPA-001-Rev-B.xlsx:IPLs:8",
+   "tags": [
+    "PAH-2014"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F083",
+   "code": "X20",
+   "title": "Sensor architecture disagrees between SRS and C&E",
+   "label": "SIF",
+   "id": "SIF-200-02",
+   "detail": "SRS sensor architecture 1oo2 PT; C&E voting 2oo2.",
+   "sources": "srs vs cause_effect",
+   "refs": "U200-SRS-001-Rev-C.xlsx:1:6",
+   "tags": [
+    "SIF-200-02"
+   ],
+   "level": "warn"
+  },
+  {
+   "key": "F084",
+   "code": "X7",
+   "title": "Document revision unknown (title block not read)",
+   "label": "Document",
+   "id": "PID-200-001",
+   "detail": "Referenced by index and/or extraction; revision will be set by the title-block pass.",
+   "sources": "table",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:5",
+   "tags": [
+    "PID-200-001"
+   ],
+   "level": "info"
+  },
+  {
+   "key": "F085",
+   "code": "X7",
+   "title": "Document revision unknown (title block not read)",
+   "label": "Document",
+   "id": "PID-200-002",
+   "detail": "Referenced by index and/or extraction; revision will be set by the title-block pass.",
+   "sources": "table",
+   "refs": "U200-INST-INDEX-Rev-C.xlsx:Instrument Index:11",
+   "tags": [
+    "PID-200-002"
+   ],
+   "level": "info"
+  }
+ ],
+ "scenario_verdicts": [
+  {
+   "id": "shelve:AT-2024.AAL",
+   "level": "ok",
+   "text": "AAL-2024 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:AT-2024.AAL",
+   "level": "info",
+   "text": "AAL-2024 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:FT-2001A.FALL",
+   "level": "ok",
+   "text": "FALL-2001 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:FT-2001A.FALL",
+   "level": "info",
+   "text": "FALL-2001 appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:FT-2002.FAL",
+   "level": "stop",
+   "text": "Do not shelve FAL-2002 without a management decision: it is an independent protection layer in S-200-01; it is a curated compensating measure for SIF-200-01; the SRS makes it a condition of bypassing SIF-200-01."
+  },
+  {
+   "id": "where_used:FT-2002.FAL",
+   "level": "info",
+   "text": "FAL-2002 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-2031.LAH",
+   "level": "stop",
+   "text": "Do not shelve LAH-2031 without a management decision: it is a curated compensating measure for SIF-200-05; the SRS makes it a condition of bypassing SIF-200-05."
+  },
+  {
+   "id": "where_used:LT-2031.LAH",
+   "level": "info",
+   "text": "LAH-2031 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-2031.LAL",
+   "level": "ok",
+   "text": "LAL-2031 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:LT-2031.LAL",
+   "level": "info",
+   "text": "LAL-2031 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-2040.LAH",
+   "level": "ok",
+   "text": "LAH-2040 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:LT-2040.LAH",
+   "level": "info",
+   "text": "LAH-2040 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:LT-2040.LAL",
+   "level": "ok",
+   "text": "LAL-2040 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:LT-2040.LAL",
+   "level": "info",
+   "text": "LAL-2040 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PAH-2014",
+   "level": "info",
+   "text": "PAH-2014 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PDT-2003.PDAH",
+   "level": "ok",
+   "text": "PDAH-2003 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PDT-2003.PDAH",
+   "level": "info",
+   "text": "PDAH-2003 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-2012.PAH",
+   "level": "ok",
+   "text": "PAH-2012 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-2012.PAH",
+   "level": "info",
+   "text": "PAH-2012 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-2013.PAL",
+   "level": "ok",
+   "text": "PAL-2013 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-2013.PAL",
+   "level": "info",
+   "text": "PAL-2013 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-2014.PAL",
+   "level": "stop",
+   "text": "Do not shelve PAL-2014 without a management decision: it is a curated compensating measure for SIF-200-02; the SRS makes it a condition of bypassing SIF-200-02."
+  },
+  {
+   "id": "where_used:PT-2014.PAL",
+   "level": "info",
+   "text": "PAL-2014 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-2025.PAH",
+   "level": "ok",
+   "text": "PAH-2025 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-2025.PAH",
+   "level": "info",
+   "text": "PAH-2025 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:PT-2041.PAH",
+   "level": "ok",
+   "text": "PAH-2041 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:PT-2041.PAH",
+   "level": "info",
+   "text": "PAH-2041 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-2021.TAH",
+   "level": "stop",
+   "text": "Do not shelve TAH-2021 without a management decision: it is a curated compensating measure for SIF-200-04; the SRS makes it a condition of bypassing SIF-200-04."
+  },
+  {
+   "id": "where_used:TT-2021.TAH",
+   "level": "info",
+   "text": "TAH-2021 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-2021.TAL",
+   "level": "ok",
+   "text": "TAL-2021 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-2021.TAL",
+   "level": "info",
+   "text": "TAL-2021 appears in 2 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-2022.TAH",
+   "level": "stop",
+   "text": "Do not shelve TAH-2022 without a management decision: it is an independent protection layer in S-200-04; it is a curated compensating measure for SIF-200-04."
+  },
+  {
+   "id": "where_used:TT-2022.TAH",
+   "level": "info",
+   "text": "TAH-2022 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "shelve:TT-2023.TAH",
+   "level": "ok",
+   "text": "TAH-2023 carries no protection credit in the graph; shelving follows the alarm philosophy."
+  },
+  {
+   "id": "where_used:TT-2023.TAH",
+   "level": "info",
+   "text": "TAH-2023 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "doc_revised:COMPENSATING-MEASURES-U-200",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "moc:MOC-2026-031",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "closeout:MOC-2026-031",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "moc:MOC-2026-034",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-034",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-037",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-037",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-039",
+   "level": "ok",
+   "text": "The MOC lists every document the graph links to the change."
+  },
+  {
+   "id": "closeout:MOC-2026-039",
+   "level": "ok",
+   "text": "The MOC lists every document the graph links to the change."
+  },
+  {
+   "id": "moc:MOC-2026-041",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-043",
+   "level": "ok",
+   "text": "The MOC lists every document the graph links to the change."
+  },
+  {
+   "id": "moc:MOC-2026-044",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "closeout:MOC-2026-044",
+   "level": "stop",
+   "text": "The plant and its safety documents disagree because of this change. Revise before relying on any of them."
+  },
+  {
+   "id": "moc:MOC-2026-046",
+   "level": "warn",
+   "text": "The impact list is incomplete. Add the missed documents to the MOC."
+  },
+  {
+   "id": "doc_revised:PID-200-001",
+   "level": "info",
+   "text": "Re-check the 8 documents that share its content."
+  },
+  {
+   "id": "doc_revised:PID-200-002",
+   "level": "info",
+   "text": "Re-check the 7 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-ALM-PHIL",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-ALM-REG",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-CE-CHART",
+   "level": "info",
+   "text": "Re-check the 11 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-INST-INDEX",
+   "level": "info",
+   "text": "Re-check the 9 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-LOOP-2001",
+   "level": "info",
+   "text": "Re-check the 4 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-LOOP-REG",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-LOPA-001",
+   "level": "info",
+   "text": "Re-check the 10 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-MADB-001",
+   "level": "warn",
+   "text": "Fold 2 open change(s) into this revision, and re-check the 3 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-OP-PROC-010",
+   "level": "info",
+   "text": "Re-check the 7 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-OP-PROC-020",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-PTP-001",
+   "level": "info",
+   "text": "Re-check the 6 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-SILV-001",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 11 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-SIS-IO-001",
+   "level": "info",
+   "text": "Re-check the 0 documents that share its content."
+  },
+  {
+   "id": "doc_revised:U200-SRS-001",
+   "level": "warn",
+   "text": "Fold 1 open change(s) into this revision, and re-check the 6 documents that share its content."
+  },
+  {
+   "id": "where_used:AT-2024",
+   "level": "info",
+   "text": "AT-2024 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:FT-2001A",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:FT-2001A",
+   "level": "info",
+   "text": "FT-2001A appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:FT-2001B",
+   "level": "stop",
+   "text": "Do not rely on this bypass as it stands. MOS-2001B has been active 3.8 h with no out-of-service entry."
+  },
+  {
+   "id": "where_used:FT-2001B",
+   "level": "info",
+   "text": "FT-2001B appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:FT-2001C",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:FT-2001C",
+   "level": "info",
+   "text": "FT-2001C appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:FT-2002",
+   "level": "info",
+   "text": "FT-2002 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:FV-2002",
+   "level": "info",
+   "text": "FV-2002 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:HS-2001",
+   "level": "info",
+   "text": "HS-2001 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:HV-2001",
+   "level": "info",
+   "text": "HV-2001 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LG-2032",
+   "level": "info",
+   "text": "LG-2032 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-2030A",
+   "level": "stop",
+   "text": "Do not rely on this bypass as it stands. MOS-2030A has been active 92.8 h with no out-of-service entry - over the SRS limit. Compensating measure LAH-2031 is impaired."
+  },
+  {
+   "id": "where_used:LT-2030A",
+   "level": "info",
+   "text": "LT-2030A appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:LT-2030B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure LAH-2031 is impaired."
+  },
+  {
+   "id": "where_used:LT-2030B",
+   "level": "info",
+   "text": "LT-2030B appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LT-2031",
+   "level": "info",
+   "text": "LT-2031 appears in 10 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LT-2040",
+   "level": "info",
+   "text": "LT-2040 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:LV-2031",
+   "level": "info",
+   "text": "LV-2031 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2001A",
+   "level": "info",
+   "text": "MOS-2001A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2001B",
+   "level": "info",
+   "text": "MOS-2001B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2001C",
+   "level": "info",
+   "text": "MOS-2001C appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2010A",
+   "level": "info",
+   "text": "MOS-2010A appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2010B",
+   "level": "info",
+   "text": "MOS-2010B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2011",
+   "level": "info",
+   "text": "MOS-2011 appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2020A",
+   "level": "info",
+   "text": "MOS-2020A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2020B",
+   "level": "info",
+   "text": "MOS-2020B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2020C",
+   "level": "info",
+   "text": "MOS-2020C appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2030A",
+   "level": "info",
+   "text": "MOS-2030A appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:MOS-2030B",
+   "level": "info",
+   "text": "MOS-2030B appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PDT-2003",
+   "level": "info",
+   "text": "PDT-2003 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PI-2015",
+   "level": "info",
+   "text": "PI-2015 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PSV-2050",
+   "level": "info",
+   "text": "PSV-2050 appears in 3 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-2010A",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAL-2014 is impaired."
+  },
+  {
+   "id": "where_used:PT-2010A",
+   "level": "info",
+   "text": "PT-2010A appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-2010B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure PAL-2014 is impaired."
+  },
+  {
+   "id": "where_used:PT-2010B",
+   "level": "info",
+   "text": "PT-2010B appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:PT-2011",
+   "level": "ok",
+   "text": "Bypass can proceed under the SRS conditions, with the compensating measures confirmed active."
+  },
+  {
+   "id": "where_used:PT-2011",
+   "level": "info",
+   "text": "PT-2011 appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-2012",
+   "level": "info",
+   "text": "PT-2012 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-2013",
+   "level": "info",
+   "text": "PT-2013 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-2014",
+   "level": "info",
+   "text": "PT-2014 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-2025",
+   "level": "info",
+   "text": "PT-2025 appears in 5 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PT-2041",
+   "level": "info",
+   "text": "PT-2041 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:PV-2012",
+   "level": "info",
+   "text": "PV-2012 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:TT-2020A",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure TAH-2022 is impaired."
+  },
+  {
+   "id": "where_used:TT-2020A",
+   "level": "info",
+   "text": "TT-2020A appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:TT-2020B",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure TAH-2022 is impaired."
+  },
+  {
+   "id": "where_used:TT-2020B",
+   "level": "info",
+   "text": "TT-2020B appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "bypass:TT-2020C",
+   "level": "warn",
+   "text": "Bypass possible only with the compensating measures restored first. Compensating measure TAH-2022 is impaired."
+  },
+  {
+   "id": "where_used:TT-2020C",
+   "level": "info",
+   "text": "TT-2020C appears in 6 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-2021",
+   "level": "info",
+   "text": "TT-2021 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-2022",
+   "level": "info",
+   "text": "TT-2022 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-2023",
+   "level": "info",
+   "text": "TT-2023 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:TT-2026",
+   "level": "info",
+   "text": "TT-2026 appears in 1 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-2001",
+   "level": "info",
+   "text": "XV-2001 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-2002",
+   "level": "info",
+   "text": "XV-2002 appears in 7 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:XV-2004",
+   "level": "info",
+   "text": "XV-2004 appears in 8 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:ZSC-2001",
+   "level": "info",
+   "text": "ZSC-2001 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "where_used:ZSC-2002",
+   "level": "info",
+   "text": "ZSC-2002 appears in 4 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-200-01",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-200-01",
+   "level": "ok",
+   "text": "The C&E, SRS and configuration agree on how this SIF trips."
+  },
+  {
+   "id": "where_used:SIF-200-01",
+   "level": "info",
+   "text": "SIF-200-01 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-200-02",
+   "level": "stop",
+   "text": "SIF-200-02 cannot be taken out of service in line with the SRS today: it is the only layer in its LOPA scenario."
+  },
+  {
+   "id": "trip:SIF-200-02",
+   "level": "warn",
+   "text": "The documents disagree on how this SIF should trip: C&E: 2oo2 on PT-2010A, PT-2010B; configuration: 2oo2 on PT-2010A, PT-2010B; SIL verification: 1oo2 on PT-2010A, PT-2010B; SRS: 1oo2. SRS trip setpoint 350 mbarg; C&E initiators trip at 0.35 barg. SRS sensor architecture 1oo2 PT; C&E voting 2oo2."
+  },
+  {
+   "id": "where_used:SIF-200-02",
+   "level": "info",
+   "text": "SIF-200-02 appears in 11 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-200-03",
+   "level": "stop",
+   "text": "SIF-200-03 cannot be taken out of service in line with the SRS today: no compensating alarm exists."
+  },
+  {
+   "id": "trip:SIF-200-03",
+   "level": "ok",
+   "text": "The C&E, SRS and configuration agree on how this SIF trips."
+  },
+  {
+   "id": "where_used:SIF-200-03",
+   "level": "info",
+   "text": "SIF-200-03 appears in 10 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-200-04",
+   "level": "warn",
+   "text": "Possible only under the SRS conditions with the compensating measures confirmed active."
+  },
+  {
+   "id": "trip:SIF-200-04",
+   "level": "ok",
+   "text": "The C&E, SRS and configuration agree on how this SIF trips."
+  },
+  {
+   "id": "where_used:SIF-200-04",
+   "level": "info",
+   "text": "SIF-200-04 appears in 9 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "sif_out:SIF-200-05",
+   "level": "stop",
+   "text": "SIF-200-05 cannot be taken out of service in line with the SRS today: it is the only layer in its LOPA scenario."
+  },
+  {
+   "id": "trip:SIF-200-05",
+   "level": "ok",
+   "text": "The C&E, SRS and configuration agree on how this SIF trips."
+  },
+  {
+   "id": "where_used:SIF-200-05",
+   "level": "info",
+   "text": "SIF-200-05 appears in 10 documents. Each of them is a place a change to it has to reach."
+  },
+  {
+   "id": "now:U-200",
+   "level": "stop",
+   "text": "At 2026-11-12 06:00: 1 override(s) and 2 alarm problem(s) the out-of-service register (3 active entries) does not show. This picture only exists when every document is in one graph."
+  }
+ ],
+ "situation_as_found": {
+  "out": [
+   "FT-2001B",
+   "LT-2030A",
+   "TT-2020C",
+   "TT-2022.TAH"
+  ]
+ }
+}

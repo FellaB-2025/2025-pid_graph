@@ -337,3 +337,61 @@
 - 2026-11-10, after the tag: `main` fast-forwarded to `v1.3.0` at Alan's request (a8c4aa0); 289 passed on main.
   The "main ends at the Phase 0 commit" notes above and in PIDKG_UPGRADE.md Phase 11 describe the state before
   this. The phase branches are still there and can be deleted. Nothing is pushed; there is no remote.
+
+
+## 2026-11-12 - Session 6 (Claude Code): GitHub backup and test documents, batch 1
+
+- Remote added: https://github.com/FellaB-2025/2025-pid_graph (private). Pushed `main` and tags `v1.2-baseline`, `v1.3.0`;
+  the phase branches were not pushed.
+- `docs/TAG_LOCATION_INVENTORY.xlsx` (draft, untracked): document types D01-D28 and questions Q1-Q8, amber columns for Alan.
+- Branch `batch-1/dummy-documents`: `scripts/make_dummy_batch1.py` writes `U100-SILV-001-Rev-A.xlsx`, `U100-MADB-001-Rev-A.xlsx`,
+  `U100-CFG-EXPORT-Rev-A.xlsx`, `U100-MOC-REG-Rev-A.xlsx` and `U100-BATCH1-ANSWER-KEY.json` (23 planted items, every Q1-Q8
+  covered). Three rows added to `U100-DOC-REGISTER.csv`. No loader reads them yet; no schema change.
+  `tests/test_batch1_documents.py` (17 cases). 300 passed, 6 skipped (Neo4j not running).
+- OPEN for Alan: review the planted items in the answer key; decide how the new document types enter the ontology
+  (Document.doc_type is closed: PID, CE, IDX, CUR, SRS, LOPA).
+- Same day, branch `demo/scenario-explorer` (on top of batch 1). Alan's aim: a demonstration for colleagues where he
+  picks a scenario (bypass, shelving, MOC ...) and the graph shows the relationships. Built without a schema change
+  (D-V13-12): five loaders for the operations documents (off by default), `ops_checks.py` (C1-C16, MOC impact rules
+  I1-I5, scorecard), `demo.py` (nine templates, 93 scenarios on U-100), `demo_page.py`. `U100-DOC-REGISTER.csv` gained a
+  title block (Rev A) so it has a revision; `tests/test_batch1_documents.py` reads it through `read_table` now.
+  Published privately: https://claude.ai/artifact/6q2YAhHoohUn2HyCCV3XFa. `docs/DEMO_GUIDE.md`, skill
+  `.claude/skills/kg-demo`. `tests/test_ops_demo.py` (18 cases).
+- Honest limits, also in the guide: the checks were written knowing what batch 1 planted, so 23 of 23 shows the method
+  works end to end, not that it finds unknown problems; the as-installed SIL figure for SIF-100-02 is in the answer key,
+  not computed by the graph; Neo4j was not used (memory backend) and the MCP server does not expose the C-checks.
+- OPEN for Alan: walk the nine showcase scenarios and say which wording is wrong for an engineer; decide whether batch 2
+  should be a blind test (documents planted by one agent, checks unchanged); fill the amber columns of the inventory.
+- Same day, later. Build-your-own situation: `pid_graph/situation.py` (rules S1-S8, Python reference + the page's JavaScript,
+  compared by `tests/test_situation.py` on 900-odd combinations) and a tab on the page. The demonstrator is unit-neutral now
+  (`demo.unit_config`, `ops_checks.sheet_aliases`); tag `blind-freeze-1` marks the checks before the blind test.
+- Blind test on U-200 (protocol and full result in `docs/BLIND_TEST.md`): 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings.
+  Planter and scorer were separate agents; the runner committed the sealed findings before opening the key.
+- Alan asked for pushes to happen automatically after every commit from now on (both private repositories).
+- OPEN: fix the false alarms and the missing comparisons as general rules (BLIND_TEST.md sections 6 and 9), fix the two wrong
+  scenario statements the test exposed, then a new blind unit. U-200 has no P&IDs, so X1 fires 37 times there.
+
+
+## 2026-11-12 - Session 7 (Claude Code): fixes after the blind test
+
+- Working tree at the start: clean apart from `docs/TAG_LOCATION_INVENTORY.xlsx` (still untracked). Its "In pid_graph today" and
+  "Gap today" cells and its Read me were brought up to date with the operations loaders; the amber columns are still Alan's.
+- Fixes as general rules (BLIND_TEST.md sections 6 and 9; the result is in its new section 10, the record above it untouched):
+  `pid_graph/quantities.py` (values compared with their units); C5, C7 and C11 made unit-aware, per cent of span read through the
+  index range, the compound SRS proof-test cell split; X16 in `reconcile.py` compares quantities (the v1.2 dump is still byte-identical);
+  C10 extended to final elements; new checks C17-C26; a rule can set a finding's level (`add(level=)`: C3 trip notification is
+  information, C20 and C21 are stop when a SIF is involved); `silv_loader` keeps `rrf_target_silv` and `target_source_silv`.
+- Scenario templates: a recorded bypass quotes its out-of-service entry; a trip verdict looks at C17, C10 final elements and C20;
+  a bypass of a device not on the logic solver is a stop; a closed MOC with an as-found disagreement is a caution; a temporary
+  change is judged on whether it was removed; C19 does not count as "impaired" for a compensating alarm; "Everything impaired
+  now" shows C24 and C25.
+- U-200 after the fixes (regression, self-checked): 24 of 24 planted items have a finding; 87 findings. U-100: 66 findings, 23 of 23.
+- `tests/test_blind_fixes.py` (12 cases). `blind-freeze-1` no longer matches the checks, so `eval/blind_run.py` refuses to run
+  against it: the next blind unit needs a new freeze tag.
+- One existing test edited, with Alan's agreement (the one exception to rule 12, noted in the test):
+  `tests/test_ops_demo.py::test_every_check_fires_on_the_test_documents_and_names_its_sources` now takes the test documents to be
+  those of U-100 and U-200, because eight new checks (C18, C20-C26) have nothing to fire on in U-100; it still requires C2-C16 on
+  U-100 alone. 371 passed, 6 skipped (Neo4j not running).
+- Page rebuilt and republished at the same link (version 5): 93 scenarios, 66 findings, 23 of 23.
+- OPEN for Alan: is C19 the right comparison for a pre-alarm; should trip notifications be in the MADB (C3 is information for now);
+  whether to narrow MOC impact rule I2; the next blind unit.

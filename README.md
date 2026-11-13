@@ -216,12 +216,29 @@ pid_graph/
   report.py        CM register, bypass assessment, shift handover, trip investigation pack (md + docx)
   oos.py           live out-of-service register -> node properties; combined protection status
   pipeline.py      build_store()
+  loaders/ (ops)   madb_loader.py, config_loader.py, silv_loader.py, moc_loader.py, docreg_loader.py (off by default)
+  ops_checks.py    cross-document checks C1-C26 over the operations documents; MOC impact rules I1-I5
+  demo.py          scenario demonstrator: python -m pid_graph.demo -> reports/demo_U-100.html
+  demo_page.py     the page it writes (self-contained)
+  situation.py     several things out of service at once: python -m pid_graph.situation PT-1001B XV-1001
   run_all.py       python -m pid_graph
 eval/              gold sets + scorers (score.py for v1.2; topology_eval.py for the vision layer)
 tests/             pytest; fixtures/ holds the frozen v1.2 dump and the frozen pid-to-kg extraction
 scripts/           setup_neo4j.ps1, make_dummy_pdf.py, make_dummy_srs_lopa.py, make_pidkg_discrepancies.py
 data/              sample unit documents (dummy, incl. drawn synthetic P&ID PDFs); data/external/ is git-ignored
-docs/              V1_3_INVENTORY.md, STRESS_TEST.md
+docs/              V1_3_INVENTORY.md, STRESS_TEST.md, DEMO_GUIDE.md, BLIND_TEST.md
 reports/           outputs (git-ignored, except review_register_<unit>.xlsx)
 third_party/       pid-to-kg, cloned and unmodified (git-ignored; THIRD_PARTY_NOTICES.md)
 ```
+
+## Scenario demonstrator
+
+```bash
+.venv\Scripts\python -m pid_graph.demo
+```
+
+Builds U-100 in memory from every document in `data\` (design documents plus the MADB, configuration export, SIL
+verification, MOC register and document register) and writes `reports\demo_U-100.html`: pick a bypass, a shelved alarm,
+a MOC, a SIF, a trip, a tag or a document and follow the answer step by step, with the documents behind each step.
+No Neo4j needed. `docs\DEMO_GUIDE.md` is the presenter's guide. The test documents and their answer key come from
+`scripts\make_dummy_batch1.py`.

@@ -113,7 +113,8 @@ Other closed values: `extracted_by` ∈ `pid_audit, llm, manual, table, pidkg_vi
 `review` ∈ `pending, accepted, rejected` (required on every `pidkg_vision` fact);
 `FLOWS_TO.flow_direction` ∈ `shown, inferred`; `SIGNAL_TO.purpose` ∈ `control, measurement, trip,
 alarm, status, unknown`; `MEMBER_OF.role` ∈ `sensor, controller, relay, final_element`;
-`Document.doc_type` ∈ `PID, CE, IDX, CUR, SRS, LOPA`; unknown revision = `UNKNOWN`.
+`Document.doc_type` ∈ `PID`, `CE`, `IDX`, `CUR`, `SRS`, `LOPA`, `SILV`, `MADB`, `CFG`, `MOC`, `REG`, `PROC`, `PTP`, `LOOP`, `PHIL`, `SISIO` (the ten after `LOPA` are the operations documents, D-V13-12: values only, no new
+label or relationship); unknown revision = `UNKNOWN`.
 
 Competency questions CQ1–CQ18 are defined in the ontology document. CQ14–CQ18 are new in v1.3;
 their templates are in `pid_graph/topology_queries.py`.
@@ -142,6 +143,14 @@ their templates are in `pid_graph/topology_queries.py`.
 | `pid_graph/review.py` | Review register (`reports/review_register_<unit>.xlsx`: read back on every load, decisions need a named reviewer), T5 priority flags, and the PDF markup of vision facts (`review_markup_<unit>.pdf`) |
 | `reports/review_register_U-100.xlsx` | The one committed file in `reports/`: the engineer's accept / reject decisions on vision facts |
 | `tests/fixtures/pidkg_U-100/` | Frozen pid-to-kg extraction of the synthetic P&IDs (`graph.json`, `qa_report.md`, `extract/`, `RUN.md`) |
+| `pid_graph/loaders/madb_loader.py`, `config_loader.py`, `silv_loader.py`, `moc_loader.py`, `docreg_loader.py`, `ops_common.py` | Operations documents (D-V13-12), off by default: `build_store(madb=, config=, silv=, moc=, docreg=)`. Claims land in source-named properties (`*_madb`, `*_cfg`, `*_silv`, `override_*`); a MOC is a Document; the document register links what each document covers |
+| `pid_graph/ops_checks.py` | Cross-document checks C1–C16 and, since the blind test, C17–C26 over those documents (alarm settings, ranges, IPL flags, SIF architecture, SIL verification assumptions, bypass provision, active overrides, MOC close-out and MOC impact rules I1–I5) and the scorecard against the batch 1 answer key. X1–X36 are untouched |
+| `pid_graph/quantities.py` | Values with units: `same("350 mbarg", "0.35 barg")` is true; gauge and unstated pressure are never converted into each other. Used by C5, C7, C11, C17, C19, C26 and by X16 in `reconcile.py` |
+| `pid_graph/demo.py`, `demo_page.py` | Scenario demonstrator: nine fixed templates (bypass, shelve, MOC impact, MOC close-out, SIF out of service, trip, where used, document revised, everything impaired now) run for every element they apply to, memory backend, trusted view. `python -m pid_graph.demo` writes `reports/demo_U-100.html`; `--artifact PATH` writes the form published privately at https://claude.ai/artifact/6q2YAhHoohUn2HyCCV3XFa ("U-100 Scenario Explorer"). After a change, rebuild and republish with the Artifact tool, passing that URL as `url` |
+| `pid_graph/situation.py` | Build-your-own situation: `build_model()` reads the graph into a plain model, `evaluate(model, out)` is a pure function (rules S1–S8) for any set of elements out of service together; `SITUATION_JS` is the same function for the page. `tests/test_situation.py` tests each rule on made-up models and runs the JavaScript in node against Python on 900-odd combinations (skips without node). Change the two together or that test fails. CLI: `python -m pid_graph.situation [--unit U] [--as-found] TAG ...` |
+| `docs/BLIND_TEST.md`, `eval/blind_run.py`, `eval/blind/`, `data/u200/` | Blind test of the checks on a second unit (U-200, hot oil heater), planted by a separate agent and scored by a third. `eval/blind_run.py --unit U --freeze TAG` refuses to run if anything frozen changed since the tag and never reads the answer key. The sealed findings and the adjudication are records: never regenerate or edit them. Another unit is `data/<slug>/unit.json` (see `demo.unit_config`); `python -m pid_graph.demo --unit U-200` builds its page |
+| `docs/DEMO_GUIDE.md` | Presenter's guide: the order to show the scenarios in, what each proves, the check codes, what not to claim |
+| `.claude/skills/kg-demo/SKILL.md` | How to rebuild, republish and extend the demonstrator (new scenario, new check, new test documents) |
 | `pid_graph/queries.py` | Fixed Cypher templates: `out_of_service`, `shelve_impact`, `moc_impact`, `trip` (Neo4j only) |
 | `pid_graph/validate.py` | Structural checks + CQ sketches on the live graph |
 | `pid_graph/mcp_server.py`, `.mcp.json` | Read-only MCP server (12 tools, stdio) |
@@ -151,8 +160,8 @@ their templates are in `pid_graph/topology_queries.py`.
 | `eval/score.py`, `eval/gold_PID-100-001.json` | Gold-set scorer and gold set (v1.2, one sheet, pid_audit) |
 | `eval/topology_eval.py`, `eval/gold_topology_U-100.json` | v1.3 topology eval of a pid-to-kg extraction: tags, flow pairs, loops, instrument placement, review workload. `eval/make_topology_gold.py` builds the gold (and `gold_pidkg_U-100.json` for pid-to-kg's own `eval_kg.py`); first numbers in `eval/TOPOLOGY_BASELINE.md` |
 | `tests/` | `test_phase1.py` … `test_phase4.py`, `test_mcp_smoke.py`, `test_v13_phase1.py`; `tests/fixtures/graph_U-100_v1_2.json` is the frozen v1.2 dump |
-| `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py` |
-| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader) |
+| `scripts/` | `setup_neo4j.ps1`, `make_dummy_pdf.py`, `make_dummy_srs_lopa.py`, `make_dummy_batch1.py` (SIL verification, MADB, DCS/SIS configuration export, MOC register, with planted discrepancies and their answer key) |
+| `data/` | Synthetic U-100 documents; `data/curated/`, `data/oos/`, `data/moc/`. The P&ID PDFs carry drawn sheets made by `scripts/make_dummy_pdf.py --all`; `data/U100-PIDS-DRAWN-CONTENT.json` is the answer key for what each sheet shows (not read by any loader). Batch 1 (`U100-SILV-001`, `U100-MADB-001`, `U100-CFG-EXPORT`, `U100-MOC-REG`, all Rev A) is not loaded by any loader yet; `data/U100-BATCH1-ANSWER-KEY.json` lists the 23 planted discrepancies with the cells that prove them, tested by `tests/test_batch1_documents.py` |
 | `reports/` | Generated outputs (git-ignored): `exception_register_<unit>.xlsx`, `graph_<unit>.json`, `load_report_<unit>.json`, explorer, reports |
 | `src/` | Two early stray copies of `db.py` / `check_env.py`; not imported by anything |
 
@@ -163,6 +172,21 @@ Commands are in `README.md`. Add `--pidkg tests\fixtures\pidkg_U-100\graph.json`
 ```
 
 ## 5. Known-good answers (U-100)
+
+**Demonstrator** (`python -m pid_graph.demo`, 12 Nov 2026, memory backend, vision layer off): 82 nodes / 308
+relationships / 27 documents; 93 scenarios; 66 findings (46 C, 20 X; it was 63 before C17–C26: the three new ones are C17 SIF-100-01 and C19 PAH-1001, LAH-1006); every one of the 23 planted batch 1 items found.
+Showcase verdicts: bypass PT-1001B stop (MOS-1001B active 39.7 h against 8 h, no out-of-service entry, both compensating
+alarms impaired); shelve LAH-1006 stop (LOPA IPL, compensating measure and SRS bypass condition for SIF-100-02);
+MOC-2026-016 stop (misses the SRS, the MADB and the compensating-measures register); MOC-2026-014 close-out stop (7 of 8
+documents not revised); SIF-100-03 out of service stop; SIF-100-02 trip caution (2oo2 configured, 2oo3 in the C&E and SRS).
+Tests pin these in one place (`tests/test_ops_demo.py`); everything else there is relative to `data/` and the answer key.
+
+**Blind test** (U-200, 12 Nov 2026, checks frozen at `blind-freeze-1`): 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings; 39 further findings only because no P&IDs
+were supplied. Known causes: values compared as text without unit conversion, a compound SRS cell read as one value, and SIF
+comparisons that do not exist yet (trip setpoint and final elements against the configuration, response time against process
+safety time, system allocation, the out-of-service register both ways). `docs/BLIND_TEST.md` section 9 sets the rules for fixing them.
+
+**After the fixes** (same day; U-200 is a regression test now, self-checked, not a blind result): every one of the 24 planted items has a finding (`tests/test_blind_fixes.py` lists which); 87 findings (45 C, 42 X); of the 15 false alarms 12 are gone, the trip notification C3 is information only, and two C15 impact prompts remain. `docs/BLIND_TEST.md` section 10 has the table and what was not fixed. The next blind result needs a new freeze tag and a new unit.
 
 Re-verified on 10 Nov 2026 with the memory backend unless marked *(log)*, which means taken
 from `SESSION_LOG.md` (Neo4j, 9 Sep 2026) and not re-run.
@@ -233,7 +257,7 @@ Its tests: 109 passed (without its Neo4j round-trip test).
 (T5); pending by sheet PID-100-001 85, PID-100-002 35. The trusted view of the graph with the
 vision layer loaded is exactly the v1.2 graph (49 nodes / 164 relationships) until facts are accepted.
 
-**Tests:** 289 collected; 289 passed with Neo4j up on port 7688 (10 Nov 2026, v1.3.0); 6 are skipped when Neo4j is down. At the v1.2 baseline it was 45. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
+**Tests:** 377 collected; 371 passed, 6 skipped with Neo4j down (12 Nov 2026, after the blind-test fixes). At v1.3.0 it was 289 collected; 289 passed with Neo4j up on port 7688 (10 Nov 2026); 6 are skipped when Neo4j is down. At the v1.2 baseline it was 45. Before Phase 5 it was 187 collected; 183 passed, 4 skipped with Neo4j down. Before Phase 3 it was 152 collected; 148 passed, 4 skipped with Neo4j down. After Phase 1 it was 133 collected; 129 passed, 4 skipped with Neo4j down (the skips are the Neo4j-only
 tests). At the v1.2 baseline it was 45 collected, 41 passed, 4 skipped; the session log says 44.
 `test_v12_dump_is_byte_identical` rebuilds U-100 with `load_run = TX-0057-BASELINE` and compares
 it byte for byte with the frozen fixture.

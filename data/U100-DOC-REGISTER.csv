@@ -1,3 +1,6 @@
+DOCUMENT REGISTER - UNIT 100
+Document No. U100-DOC-REGISTER    Rev A    Status: Current    (DUMMY DATA - not a real facility)
+
 Document No.,Title,Type,Rev,Covers
 U100-SRS-001,Safety Requirements Specification - Unit 100,SRS,B,SIF-100-01; SIF-100-02; SIF-100-03; SIS-LS-100
 U100-LOPA-001,LOPA Report - Unit 100,LOPA,A,SIF-100-01; SIF-100-02; SIF-100-03; V-1002
@@ -10,3 +13,6 @@ U100-OP-PROC-020,SIS Bypass Management Procedure,Operating procedure,B,SIF-100-0
 U100-PTP-001,SIS Proof Test Procedures - Unit 100,Proof test procedure,A,SIF-100-01; SIF-100-02; SIF-100-03
 U100-LOOP-1001,Loop Drawings PT-1001A/B/C/D,Loop drawing,A,PT-1001A; PT-1001B; PT-1001C; PT-1001D
 U100-SIS-IO-001,SIS I/O Allocation and Application Logic - SIS-LS-100,SIS logic,B,SIS-LS-100
+U100-MADB-001,Master Alarm Database - Unit 100,MADB,A,PAH-1001; PAH-1005; LAH-1006; LAL-1006; FAL-1004; TAH-1003; XA-1001; PAL-1005
+U100-CFG-EXPORT,DCS / SIS Configuration Export - Unit 100,Configuration export,A,DCS-100-C01; SIS-LS-100
+U100-MOC-REG,Management of Change Register - Unit 100,MOC register,A,U-100

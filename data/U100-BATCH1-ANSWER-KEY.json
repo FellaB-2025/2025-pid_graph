@@ -1,0 +1,829 @@
+{
+  "_note": "Answer key for batch 1 of the U-100 test documents. DUMMY DATA. Written by scripts/make_dummy_batch1.py; not read by any loader. Evidence cells are checked by tests/test_batch1_documents.py.",
+  "documents": [
+    "U100-SILV-001-Rev-A.xlsx",
+    "U100-MADB-001-Rev-A.xlsx",
+    "U100-CFG-EXPORT-Rev-A.xlsx",
+    "U100-MOC-REG-Rev-A.xlsx"
+  ],
+  "export_time": "2026-11-12 06:00",
+  "not_in_index": {
+    "PT-1001D": "SIF-100-03 initiator; already known (not in index, not drawn)",
+    "PT-1001E": "added by MOC-2026-014, implemented, index not revised",
+    "PT-1001F": "added by MOC-2026-014, implemented, index not revised",
+    "LT-1002C": "proposed by MOC-2026-015, not installed",
+    "FT-1007": "configured point left behind by cancelled MOC-2026-018",
+    "HS-1001": "manual shutdown switch named in the SRS, never indexed",
+    "MOS-1001A": "SIS maintenance override switch",
+    "MOS-1001B": "SIS maintenance override switch",
+    "MOS-1001C": "SIS maintenance override switch",
+    "MOS-1002A": "SIS maintenance override switch",
+    "MOS-1002B": "SIS maintenance override switch"
+  },
+  "items": [
+    {
+      "id": "B1-01",
+      "kind": "value_mismatch",
+      "questions": [
+        "Q6",
+        "Q1"
+      ],
+      "tags": [
+        "XV-1001",
+        "BDV-1001",
+        "SIF-100-01"
+      ],
+      "documents": [
+        "U100-SILV-001",
+        "U100-SRS-001"
+      ],
+      "finding": "SIL verification takes a 24-month proof-test interval for the SIF-100-01 final elements; the SRS specifies 12 months. Either the calculation or the SRS (and the proof-test procedure) is wrong.",
+      "evidence": [
+        {
+          "file": "U100-SILV-001-Rev-A.xlsx",
+          "sheet": "SIF Summary",
+          "row": "SIF-100-01",
+          "column": "Proof Test Interval - Final Elements",
+          "value": "24 months"
+        }
+      ]
+    },
+    {
+      "id": "B1-02",
+      "kind": "calculation_assumes_uninstalled_equipment",
+      "questions": [
+        "Q1",
+        "Q2",
+        "Q6"
+      ],
+      "tags": [
+        "LT-1002C",
+        "LT-1002A",
+        "LT-1002B",
+        "SIF-100-02"
+      ],
+      "documents": [
+        "U100-SILV-001",
+        "U100-MOC-REG",
+        "U100-CFG-EXPORT",
+        "U100-INST-INDEX",
+        "U100-LOPA-001"
+      ],
+      "finding": "SIL verification credits a 2oo3 group with LT-1002C (PFDavg 0.00238, RRF 421). LT-1002C is only proposed (MOC-2026-015 not implemented; not in the index); the SIS runs 2oo2 on LT-1002A/B. As installed PFDavg is about 0.0273, RRF about 37: SIL 1. That meets the SRS target (SIL 1, RRF 25) but not the LOPA's (S-100-02, RRF 100). MOC-2026-015 lists the SILV as already revised.",
+      "evidence": [
+        {
+          "file": "U100-SILV-001-Rev-A.xlsx",
+          "sheet": "Subsystems",
+          "row": "SIF-100-02",
+          "column": "Tags",
+          "value": "LT-1002A, LT-1002B, LT-1002C"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-015",
+          "column": "Status",
+          "value": "Approved - awaiting implementation"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-015",
+          "column": "Documents Revised",
+          "value": "U100-SILV-001"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "SIS Trips",
+          "row": "SIF-100-02",
+          "column": "Voting",
+          "value": "2oo2"
+        }
+      ],
+      "computed": {
+        "silv_pfd": 0.00238,
+        "as_installed_pfd": 0.0273,
+        "as_installed_rrf": 37,
+        "as_installed_sil": 1
+      }
+    },
+    {
+      "id": "B1-03",
+      "kind": "degraded_mode_mismatch",
+      "questions": [
+        "Q3",
+        "Q4"
+      ],
+      "tags": [
+        "PT-1001A",
+        "PT-1001B",
+        "PT-1001C",
+        "MOS-1001A",
+        "MOS-1001B",
+        "MOS-1001C",
+        "SIF-100-01"
+      ],
+      "documents": [
+        "U100-SILV-001",
+        "U100-CFG-EXPORT"
+      ],
+      "finding": "SIL verification assumes SIF-100-01 degrades to 1oo2 when one pressure transmitter is overridden; the SIS overrides are configured to degrade to 2oo2 (less safe: one failed transmitter then defeats the trip). The bypass case was verified for a configuration that is not the one running.",
+      "evidence": [
+        {
+          "file": "U100-SILV-001-Rev-A.xlsx",
+          "sheet": "Degraded Operation",
+          "row": "SIF-100-01",
+          "column": "Degraded Voting Assumed",
+          "value": "1oo2"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "row": "MOS-1001A",
+          "column": "Degraded Voting",
+          "value": "2oo2"
+        }
+      ]
+    },
+    {
+      "id": "B1-04",
+      "kind": "document_not_revised_after_moc",
+      "questions": [
+        "Q2",
+        "Q6"
+      ],
+      "tags": [
+        "PT-1001D",
+        "PT-1001E",
+        "PT-1001F",
+        "SIF-100-03"
+      ],
+      "documents": [
+        "U100-SILV-001",
+        "U100-MOC-REG",
+        "U100-CFG-EXPORT"
+      ],
+      "finding": "MOC-2026-014 (SIF-100-03 to 2oo3 on PT-1001D/E/F) is implemented in the SIS, but the SIL verification still calculates 1oo1 on PT-1001D. Only U100-SIS-IO-001 of the eight listed documents has been revised.",
+      "evidence": [
+        {
+          "file": "U100-SILV-001-Rev-A.xlsx",
+          "sheet": "SIF Summary",
+          "row": "SIF-100-03",
+          "column": "Sensor Voting",
+          "value": "1oo1"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "SIS Trips",
+          "row": "SIF-100-03",
+          "column": "Voting",
+          "value": "2oo3"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-014",
+          "column": "Documents Revised",
+          "value": "U100-SIS-IO-001"
+        }
+      ]
+    },
+    {
+      "id": "B1-05",
+      "kind": "config_differs_from_ce",
+      "questions": [
+        "Q2",
+        "Q8"
+      ],
+      "tags": [
+        "PT-1001E",
+        "PT-1001F",
+        "SIF-100-03"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-CE-CHART",
+        "U100-INST-INDEX"
+      ],
+      "finding": "The SIS trips SIF-100-03 on 2oo3 of PT-1001D/E/F; the C&E (Rev A) still shows 1oo1 on PT-1001D. PT-1001E and PT-1001F exist in the configuration but in no index, drawing or C&E (MOC-2026-014 close-out).",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "SIS Trips",
+          "row": "SIF-100-03",
+          "column": "Initiators",
+          "value": "PT-1001D, PT-1001E, PT-1001F"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Points",
+          "row": "PT-1001E",
+          "column": "System",
+          "value": "SIS"
+        }
+      ]
+    },
+    {
+      "id": "B1-06",
+      "kind": "config_differs_from_madb",
+      "questions": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "tags": [
+        "PAH-1001",
+        "PT-1001A"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-MADB-001",
+        "U100-INST-INDEX",
+        "U100-MOC-REG",
+        "U100-SRS-001",
+        "U100-LOPA-001"
+      ],
+      "finding": "PAH-1001 is configured at 64 barg; the MADB and the index alarm register say 62. MOC-2026-009 made the change and closed without revising any document. The pre-alarm now sits 1 barg below the SRS trip setpoint (65 barg), and it is credited as an IPL in LOPA S-100-01.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAH-1001",
+          "column": "Limit",
+          "value": 64
+        },
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAH-1001",
+          "column": "Setpoint",
+          "value": "62"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-009",
+          "column": "Status",
+          "value": "Closed"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-009",
+          "column": "Documents Revised",
+          "value": null
+        }
+      ]
+    },
+    {
+      "id": "B1-07",
+      "kind": "config_differs_from_madb",
+      "questions": [
+        "Q2",
+        "Q3"
+      ],
+      "tags": [
+        "LAH-1006",
+        "LT-1006",
+        "SIF-100-02"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-MADB-001",
+        "U100-MOC-REG",
+        "U100-LOPA-001",
+        "U100-SRS-001"
+      ],
+      "finding": "LAH-1006 is configured Medium; the MADB says High (MOC-2026-011, closed, no document revised). LAH-1006 is an IPL in LOPA S-100-02, the SRS bypass condition for SIF-100-02, and the rank-1 compensating measure for that SIF in the curated register.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAH-1006",
+          "column": "Priority",
+          "value": "Medium"
+        },
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAH-1006",
+          "column": "Priority",
+          "value": "High"
+        }
+      ]
+    },
+    {
+      "id": "B1-08",
+      "kind": "ipl_flag_differs_from_lopa",
+      "questions": [
+        "Q1",
+        "Q5"
+      ],
+      "tags": [
+        "LAH-1006"
+      ],
+      "documents": [
+        "U100-MADB-001",
+        "U100-LOPA-001"
+      ],
+      "finding": "The MADB records LAH-1006 as Operational with no IPL credit; the LOPA credits it as an IPL (S-100-02, PFD 0.1). An IPL alarm needs the class, testing and management of change that go with it.",
+      "evidence": [
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAH-1006",
+          "column": "IPL Credit",
+          "value": "No"
+        },
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAH-1006",
+          "column": "Alarm Class",
+          "value": "Operational"
+        }
+      ]
+    },
+    {
+      "id": "B1-09",
+      "kind": "range_change_breaks_alarm",
+      "questions": [
+        "Q2",
+        "Q3",
+        "Q7"
+      ],
+      "tags": [
+        "PT-1005",
+        "PAH-1005",
+        "SIF-100-01"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-INST-INDEX",
+        "U100-MADB-001",
+        "U100-MOC-REG",
+        "U100-SRS-001"
+      ],
+      "finding": "PT-1005 is configured 0-60 barg; the index says 0-100 (MOC-2026-016, closed, no document revised). PAH-1005 at 60 barg is now at 100 % of span and cannot be relied on to annunciate. PAH-1005 is the SRS bypass condition for SIF-100-01 and the rank-1 compensating measure for it; the MOC listed neither the MADB, the SRS nor the compensating-measures register.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Points",
+          "row": "PT-1005",
+          "column": "Range High",
+          "value": 60
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAH-1005",
+          "column": "Limit",
+          "value": 60
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-016",
+          "column": "Documents to Revise",
+          "value": "U100-INST-INDEX; U100-LOOP-REG"
+        }
+      ]
+    },
+    {
+      "id": "B1-10",
+      "kind": "rationalised_not_configured",
+      "questions": [
+        "Q3",
+        "Q4"
+      ],
+      "tags": [
+        "PAL-1005",
+        "PT-1005",
+        "SIF-100-03"
+      ],
+      "documents": [
+        "U100-MADB-001",
+        "U100-CFG-EXPORT",
+        "U100-MOC-REG",
+        "U100-SRS-001"
+      ],
+      "finding": "PAL-1005 (8 barg, High) is rationalised in the MADB as the compensating alarm for SIF-100-03 but is not configured (MOC-2026-017 in review). The SRS forbids bypassing SIF-100-03 without it, so today SIF-100-03 cannot be bypassed in line with the SRS.",
+      "evidence": [
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAL-1005",
+          "column": "Implementation Status",
+          "value": "Approved - not implemented"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-017",
+          "column": "Status",
+          "value": "In review"
+        }
+      ],
+      "absent": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAL-1005"
+        }
+      ]
+    },
+    {
+      "id": "B1-11",
+      "kind": "bypass_permitted_no_override",
+      "questions": [
+        "Q3",
+        "Q4"
+      ],
+      "tags": [
+        "PT-1001D",
+        "PT-1001E",
+        "PT-1001F",
+        "SIF-100-03"
+      ],
+      "documents": [
+        "U100-SRS-001",
+        "U100-CFG-EXPORT"
+      ],
+      "finding": "The SRS permits a bypass of SIF-100-03 (max 2 h, with a temporary low-pressure alarm), but no maintenance override is configured on PT-1001D/E/F. A bypass would have to be made by forcing, outside the override alarm and timeout.",
+      "absent": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "column": "SIF No.",
+          "value": "SIF-100-03"
+        }
+      ]
+    },
+    {
+      "id": "B1-12",
+      "kind": "override_timeout_exceeds_srs",
+      "questions": [
+        "Q3"
+      ],
+      "tags": [
+        "MOS-1002A",
+        "MOS-1002B",
+        "SIF-100-02"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-SRS-001"
+      ],
+      "finding": "The overrides on LT-1002A/B time out after 8 h, and only raise an alarm; the SRS limits a bypass of SIF-100-02 to 4 h.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "row": "MOS-1002A",
+          "column": "Max Duration (h)",
+          "value": 8
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "row": "MOS-1002B",
+          "column": "Max Duration (h)",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "id": "B1-13",
+      "kind": "alarm_disabled_unrecorded",
+      "questions": [
+        "Q5",
+        "Q7"
+      ],
+      "tags": [
+        "LAL-1006",
+        "LT-1006"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-MADB-001"
+      ],
+      "finding": "LAL-1006 is disabled in the DCS. The MADB says Keep / Implemented and the out-of-service register (data/oos/out_of_service_U-100.csv) has no entry: an alarm out of service with no record.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAL-1006",
+          "column": "Enabled",
+          "value": "No"
+        },
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "LAL-1006",
+          "column": "Implementation Status",
+          "value": "Implemented"
+        }
+      ]
+    },
+    {
+      "id": "B1-14",
+      "kind": "configured_not_rationalised",
+      "questions": [
+        "Q1"
+      ],
+      "tags": [
+        "TAL-1003",
+        "TT-1003"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-MADB-001"
+      ],
+      "finding": "TAL-1003 is configured and enabled but has no MADB record: an alarm nobody rationalised.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "TAL-1003",
+          "column": "Enabled",
+          "value": "Yes"
+        }
+      ],
+      "absent": [
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "TAL-1003"
+        }
+      ]
+    },
+    {
+      "id": "B1-15",
+      "kind": "function_differs_from_index",
+      "questions": [
+        "Q1"
+      ],
+      "tags": [
+        "TT-1003",
+        "TAH-1003"
+      ],
+      "documents": [
+        "U100-MADB-001",
+        "U100-INST-INDEX"
+      ],
+      "finding": "The MADB rationalises TAH-1003 on TT-1003; the index says TT-1003 is indication only (and TT-1003 is not drawn on any P&ID - existing finding).",
+      "evidence": [
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "TAH-1003",
+          "column": "Source Tag",
+          "value": "TT-1003"
+        }
+      ]
+    },
+    {
+      "id": "B1-16",
+      "kind": "trip_notification_not_rationalised",
+      "questions": [
+        "Q8",
+        "Q1"
+      ],
+      "tags": [
+        "PAHH-1001",
+        "SIF-100-01"
+      ],
+      "documents": [
+        "U100-CE-CHART",
+        "U100-CFG-EXPORT",
+        "U100-MADB-001"
+      ],
+      "finding": "PAHH-1001 is a C&E effect of SIF-100-01 and is configured as a High-priority SIS trip notification, but the MADB has no record of it. A trip is not an alarm: rationalise it as an event or remove it from the alarm list.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAHH-1001",
+          "column": "Alarm Type",
+          "value": "TRIP NOTIFY"
+        }
+      ],
+      "absent": [
+        {
+          "file": "U100-MADB-001-Rev-A.xlsx",
+          "sheet": "Alarms",
+          "row": "PAHH-1001"
+        }
+      ]
+    },
+    {
+      "id": "B1-17",
+      "kind": "orphan_configured_point",
+      "questions": [
+        "Q1",
+        "Q2"
+      ],
+      "tags": [
+        "FT-1007"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-INST-INDEX",
+        "U100-MOC-REG"
+      ],
+      "finding": "FT-1007 is configured in the DCS but is in no index or drawing; MOC-2026-018, which would have installed it, was cancelled. The point was never removed.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Points",
+          "row": "FT-1007",
+          "column": "Block Type",
+          "value": "AI"
+        },
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-018",
+          "column": "Status",
+          "value": "Cancelled"
+        }
+      ]
+    },
+    {
+      "id": "B1-18",
+      "kind": "configured_not_indexed",
+      "questions": [
+        "Q1"
+      ],
+      "tags": [
+        "PT-1001D",
+        "HS-1001"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-INST-INDEX",
+        "U100-SRS-001"
+      ],
+      "finding": "PT-1001D and HS-1001 are configured SIS points that the index does not list (PT-1001D is an existing finding; HS-1001 is named only in the SRS).",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Points",
+          "row": "PT-1001D",
+          "column": "Controller",
+          "value": "SIS-LS-100"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Points",
+          "row": "HS-1001",
+          "column": "Block Type",
+          "value": "DI"
+        }
+      ]
+    },
+    {
+      "id": "B1-19",
+      "kind": "moc_impact_incomplete",
+      "questions": [
+        "Q2"
+      ],
+      "tags": [
+        "PAH-1001"
+      ],
+      "documents": [
+        "U100-MOC-REG",
+        "U100-LOPA-001",
+        "U100-SRS-001"
+      ],
+      "finding": "MOC-2026-009 listed only alarm documents. PAH-1001 is credited in LOPA S-100-01 and sits between normal operation and the SIF-100-01 trip, so the LOPA and the SRS were in its blast radius too.",
+      "evidence": [
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-009",
+          "column": "Documents to Revise",
+          "value": "U100-ALM-REG; U100-MADB-001; U100-ALM-PHIL"
+        }
+      ]
+    },
+    {
+      "id": "B1-20",
+      "kind": "moc_impact_incomplete",
+      "questions": [
+        "Q2",
+        "Q3"
+      ],
+      "tags": [
+        "LAH-1006"
+      ],
+      "documents": [
+        "U100-MOC-REG",
+        "U100-LOPA-001",
+        "U100-SRS-001"
+      ],
+      "finding": "MOC-2026-011 listed only the MADB and the alarm register. LAH-1006 is a LOPA IPL, the SRS bypass condition for SIF-100-02 and its curated compensating measure.",
+      "evidence": [
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-011",
+          "column": "Documents to Revise",
+          "value": "U100-MADB-001; U100-ALM-REG"
+        }
+      ]
+    },
+    {
+      "id": "B1-21",
+      "kind": "moc_impact_incomplete",
+      "questions": [
+        "Q2",
+        "Q3"
+      ],
+      "tags": [
+        "PT-1005",
+        "PAH-1005"
+      ],
+      "documents": [
+        "U100-MOC-REG",
+        "U100-MADB-001",
+        "U100-SRS-001"
+      ],
+      "finding": "MOC-2026-016 re-ranged PT-1005 without listing the alarms on it (PAH-1005 in the MADB) or the SRS and compensating-measures register that rely on PAH-1005. See B1-09.",
+      "evidence": [
+        {
+          "file": "U100-MOC-REG-Rev-A.xlsx",
+          "sheet": "Register",
+          "row": "MOC-2026-016",
+          "column": "Status",
+          "value": "Closed"
+        }
+      ]
+    },
+    {
+      "id": "B1-22",
+      "kind": "voting_mismatch",
+      "questions": [
+        "Q1",
+        "Q8"
+      ],
+      "tags": [
+        "LT-1002A",
+        "LT-1002B",
+        "SIF-100-02"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-CE-CHART",
+        "U100-SRS-001"
+      ],
+      "finding": "The SIS votes SIF-100-02 2oo2 on LT-1002A/B; the C&E and the SRS say 2oo3. Corroborates the existing finding (2oo3 declared with two transmitters) from a third document.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "SIS Trips",
+          "row": "SIF-100-02",
+          "column": "Initiators",
+          "value": "LT-1002A, LT-1002B"
+        }
+      ]
+    },
+    {
+      "id": "B1-23",
+      "kind": "bypass_active_unrecorded",
+      "questions": [
+        "Q4",
+        "Q7",
+        "Q3"
+      ],
+      "tags": [
+        "MOS-1001B",
+        "PT-1001B",
+        "SIF-100-01",
+        "PAH-1005",
+        "PAH-1001"
+      ],
+      "documents": [
+        "U100-CFG-EXPORT",
+        "U100-SRS-001"
+      ],
+      "finding": "At the export (2026-11-12 06:00) MOS-1001B has been active since 2026-11-10 14:20 - about 40 h against the SRS limit of 8 h - with no out-of-service register entry. SIF-100-01 is running 2oo2 on PT-1001A/C. Its compensating measures are both impaired: PAH-1005 is at the top of PT-1005's span (B1-09) and PAH-1001 was raised to 64 barg (B1-06). The combined picture (Q7) is the point.",
+      "evidence": [
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "row": "MOS-1001B",
+          "column": "Active",
+          "value": "Yes"
+        },
+        {
+          "file": "U100-CFG-EXPORT-Rev-A.xlsx",
+          "sheet": "Overrides",
+          "row": "MOS-1001B",
+          "column": "Active Since",
+          "value": "2026-11-10 14:20"
+        }
+      ]
+    }
+  ]
+}
