@@ -1,0 +1,540 @@
+{
+ "_note": "Independent adjudication of the U-300 blind run. Scorer wrote neither the documents nor the checks.",
+ "unit": "U-300",
+ "freeze": "blind-freeze-2",
+ "summary": {
+  "planted": 25,
+  "found": 17,
+  "partial": 3,
+  "missed": 5,
+  "by_severity": {
+   "high": {
+    "planted": 11,
+    "found": 8,
+    "partial": 1,
+    "missed": 2
+   },
+   "medium": {
+    "planted": 9,
+    "found": 7,
+    "partial": 2,
+    "missed": 0
+   },
+   "low": {
+    "planted": 5,
+    "found": 2,
+    "partial": 0,
+    "missed": 3
+   }
+  },
+  "clean_controls": 10,
+  "clean_flagged": 1,
+  "clean_contradicted_by_scenario_verdict_only": 2,
+  "findings_total": 59,
+  "findings_basis_of_found_or_partial": 26,
+  "other_true_unplanted": 15,
+  "other_input_gap": 11,
+  "other_false_alarm": 6,
+  "other_variant": 1,
+  "false_alarms": 6,
+  "lenient_range": {
+   "found": "16 to 19",
+   "partial": "1 to 4",
+   "missed": "5",
+   "clean_flagged": "0 to 1",
+   "false_alarms": "2 to 6"
+  }
+ },
+ "items": [
+  {
+   "id": "B3-01",
+   "category": "voting as configured",
+   "severity": "high",
+   "what": "SIF-300-06 is 1oo2 on PT-3007A/B in the C&E, the SRS and the SIL verification, but the logic solver is configured 2oo2, so one failed transmitter defeats the trip.",
+   "verdict": "found",
+   "by": [
+    "C10 SIF-300-06"
+   ],
+   "reason": "C10 states 1oo2 in the C&E, SRS and SIL verification against 2oo2 configured on PT-3007A/B, exactly as planted; the trip:SIF-300-06 verdict repeats it."
+  },
+  {
+   "id": "B3-02",
+   "category": "final element missing from the configured trip",
+   "severity": "high",
+   "what": "SIF-300-01 must trip K-301 through XY-3040 and close XV-3001 (C&E, SRS, SIL verification), but the configured trip drives XY-3040 only; XV-3001 is not closed.",
+   "verdict": "found",
+   "by": [
+    "C10 SIF-300-01"
+   ],
+   "reason": "C10 states the final elements in all four documents: XV-3001 and XY-3040 everywhere except the configuration, which drives XY-3040 only."
+  },
+  {
+   "id": "B3-03",
+   "category": "change closed on paper, not made in the plant",
+   "severity": "high",
+   "what": "MOC-2026-053 (closed) lowered the SIF-300-03 trip from 85 to 82 barg and the SRS and C&E say 82 barg, but the logic solver still trips at 85 barg.",
+   "verdict": "found",
+   "by": [
+    "C17 SIF-300-03"
+   ],
+   "reason": "C17 states C&E 82 barg, SRS 82 barg, configuration 85 barg. That the change was closed as MOC-2026-053 is not in any finding (only the moc/closeout:MOC-2026-053 verdicts say the plant and documents disagree because of the change); the disagreement itself is stated in full."
+  },
+  {
+   "id": "B3-04",
+   "category": "calculation rests on a superseded proof test interval",
+   "severity": "high",
+   "what": "MOC-2026-055 (closed) extended the XV-3001 proof test interval to 24 months and the SRS says so, but the SIL verification still assumes 12 months and was not revised; at 24 months SIF-300-01 achieves about RRF 70 against a target of 100.",
+   "verdict": "partial",
+   "by": [
+    "C14 MOC-2026-055"
+   ],
+   "reason": "C14 reads from the MOC register that the SIL verification was listed and not revised for the 12 to 24 month extension. No finding compares the SRS interval (XV-3001 24 months) with the 12 months / 8760 h in the SIL verification, and none says SIF-300-01 falls to about RRF 70 against a target of 100 (I recalculated 69.6 from the Subsystems sheet). Right place, lesser problem: a close-out gap, not the invalid calculation. Stricter call taken; a lenient reader would score it found."
+  },
+  {
+   "id": "B3-05",
+   "category": "LOPA requirement not carried into the SRS",
+   "severity": "high",
+   "what": "The revalidated LOPA requires SIL 2 / RRF 100 of SIF-300-02 (scenario S-300-02), but the SRS and the C&E still specify SIL 1 (RRF 10) and the SIL verification achieves only RRF 91.",
+   "verdict": "found",
+   "by": [
+    "X15 SIF-300-02",
+    "C18 SIF-300-02"
+   ],
+   "reason": "X15 states LOPA SIL 2 against SIL 1 in the SRS and C&E; C18 states the SIL verification achieves 91 against the 100 now required although it reads 'Meets target'. Both halves of the planted item."
+  },
+  {
+   "id": "B3-06",
+   "category": "credited alarm not independent of the initiating event",
+   "severity": "high",
+   "what": "LOPA scenario S-300-06 credits PAL-3006 (PFD 0.1), but PAL-3006 is generated from PT-3006, the transmitter of the PIC-3006 loop whose failure is the initiating event; without the credit SIF-300-06 would need RRF 200, not 20.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding questions the independence of PAL-3006 from the initiating PIC-3006 loop (both on PT-3006). The only PAL-3006 finding (C19) is about operator response time, a different reason. The shelve:PT-3006.PAL verdict repeats the LOPA and calls it an independent protection layer."
+  },
+  {
+   "id": "B3-07",
+   "category": "alarm relied on as protection is set beyond the trip point",
+   "severity": "high",
+   "what": "PAL-3021 (credited IPL in S-300-05, compensating measure and SRS bypass condition for SIF-300-05) is rationalised at 1.5 barg but configured at 0.7 barg, below the 0.8 barg trip, so it cannot annunciate before the trip.",
+   "verdict": "found",
+   "by": [
+    "C26 PAL-3021",
+    "C5 PAL-3021"
+   ],
+   "reason": "C26 states PAL-3021 is configured at 0.7 barg below the 0.8 barg low trip of SIF-300-05 and would not come before it, and that it is the compensating measure; C5 gives register and MADB 1.5 barg against configuration 0.7 barg. The LOPA credit is not mentioned in either, a detail."
+  },
+  {
+   "id": "B3-08",
+   "category": "bypass closed on paper, still active in the plant",
+   "severity": "high",
+   "what": "MOC-2026-057 and out-of-service entry OOS-300-0010 record the TT-3014B bypass as restored and closed on 2026-11-04, but MOS-3014B is still active in the configuration export of 2026-11-12 06:00 (since 2026-11-04 08:00, about 190 h against 8 h), leaving SIF-300-04 on one transmitter with no live record.",
+   "verdict": "found",
+   "by": [
+    "C13 MOS-3014B"
+   ],
+   "reason": "C13 states MOS-3014B active on TT-3014B since 2026-11-04 08:00, 190 h against 8 h, SIF-300-04 on 1oo1, with no active out-of-service entry. The closed MOC is named only in the moc/closeout:MOC-2026-057 verdicts ('closed but was not removed'); the closed entry OOS-300-0010 is not named anywhere."
+  },
+  {
+   "id": "B3-09",
+   "category": "compensating alarm out of service while the channel is bypassed",
+   "severity": "high",
+   "what": "PT-3012A is overridden (OOS-300-0012) with compensating measures recorded as confirmed and PAH-3013 noted as active, but PAH-3013 has been shelved since 2026-11-10 with PT-3013 isolated (OOS-300-0011); PAH-3013 is the only approved compensating measure and the SRS bypass condition for SIF-300-03, and a credited IPL in S-300-03.",
+   "verdict": "found",
+   "by": [
+    "C25 PT-3012A",
+    "C25 PAH-3013"
+   ],
+   "reason": "The two C25 findings state that PT-3012A is overridden while PAH-3013 is shelved (OOS-300-0011), that no compensating measure for SIF-300-03 remains, and that PAH-3013 is also the LOPA credit and the SRS bypass condition. Not said: that OOS-300-0012 records the measures as confirmed."
+  },
+  {
+   "id": "B3-10",
+   "category": "safety function implemented in the control system",
+   "severity": "high",
+   "what": "SIF-300-02 is assigned to the logic solver SIS-LS-300 in the C&E, SRS, SIL verification and index, but it is configured in the DCS controller DCS-300-C01, with LT-3005 and XV-3003 wired to DCS I/O; it is not independent of the BPCS level loop whose failure is its demand.",
+   "verdict": "found",
+   "by": [
+    "C20 LT-3005",
+    "C20 XV-3003"
+   ],
+   "reason": "Both C20 findings state index SIS against DCS-300-C01 I/O for a device of SIF-300-02 and that the trip lacks the integrity assumed. The independence from the LIC-3003 demand is not spelled out, and the phrase 'whose logic solver is DCS-300-C01, SIS-LS-300' is clumsy, but the disagreement is stated."
+  },
+  {
+   "id": "B3-11",
+   "category": "two channels of one function overridden together",
+   "severity": "high",
+   "what": "PT-3020B and PT-3020C are both overridden at the export time (MOS-3020B and MOS-3020C active; OOS-300-0014 and OOS-300-0015 overlap), but the SRS allows only one channel of SIF-300-05 at a time and the SIL verification covers one bypassed channel only; the trip rests on PT-3020A alone.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding says PT-3020B and PT-3020C are overridden together or cites the SRS 'one channel at a time' condition. situation_as_found lists both tags with no statement. The bypass:PT-3020B and bypass:PT-3020C verdicts treat each channel alone, and bypass:PT-3020A is only 'warn' although overriding it would leave no channel."
+  },
+  {
+   "id": "B3-12",
+   "category": "removed alarm still relied on",
+   "severity": "medium",
+   "what": "LAL-3003 was removed under MOC-2026-058 (MADB 'Removed', no longer configured), but it is still the SRS bypass condition and the approved compensating measure for SIF-300-02 and is still listed in the alarm register; the MOC did not list the SRS or the compensating measures register and the alarm register was not revised.",
+   "verdict": "found",
+   "by": [
+    "C15 MOC-2026-058",
+    "C14 MOC-2026-058"
+   ],
+   "reason": "C15 states the MOC that removes LAL-3003 lists only the MADB and the alarm register while LAL-3003 is the compensating measure for SIF-300-02 and named in its SRS bypass conditions; C14 states the alarm register was not revised. Together that is the planted item. No finding says in so many words that SIF-300-02 now has no compensating alarm, and shelve:LT-3003.LAL still treats the removed alarm as live."
+  },
+  {
+   "id": "B3-13",
+   "category": "range of one voted transmitter differs",
+   "severity": "medium",
+   "what": "LT-3002C is configured 0-1500 mm while the index gives 0-2000 mm (as LT-3002A/B are configured); the SIF-300-01 trip point of 1500 mm is at the top of that channel's configured range.",
+   "verdict": "found",
+   "by": [
+    "C7 LT-3002C"
+   ],
+   "reason": "C7 states index 0-2000 mm against configured 0-1500 mm. That the 1500 mm trip sits at the top of that range is not said."
+  },
+  {
+   "id": "B3-14",
+   "category": "calculation uses the wrong sensor",
+   "severity": "medium",
+   "what": "The SIL verification of SIF-300-04 takes TT-3014A and TT-3015 as the 1oo2 sensor pair; TT-3015 is the BPCS transmitter. The C&E and the configured trip use TT-3014A and TT-3014B.",
+   "verdict": "found",
+   "by": [
+    "C10 SIF-300-04"
+   ],
+   "reason": "C10 states the SIL verification uses TT-3014A, TT-3015 where the C&E and the configuration use TT-3014A, TT-3014B. That TT-3015 is a BPCS transmitter is not said."
+  },
+  {
+   "id": "B3-15",
+   "category": "records disagree on when a bypass began",
+   "severity": "medium",
+   "what": "The out-of-service register starts the PT-3020C override at 2026-11-12 04:00 (2 h before the export), but the logic solver shows MOS-3020C active since 2026-11-10 16:00: 38 h at the export against the 8 h limit, which the register does not show.",
+   "verdict": "partial",
+   "by": [],
+   "reason": "No finding. Only the bypass:PT-3020C scenario verdict says MOS-3020C has been active 38.0 h against the 8 h limit; nothing says the out-of-service register starts the same override at 2026-11-12 04:00. now:U-300 counts one override the register does not show (MOS-3014B), not this one. Scenario verdict only, so partial at most."
+  },
+  {
+   "id": "B3-16",
+   "category": "unit conversion error in a configured limit",
+   "severity": "medium",
+   "what": "PDAL-3030 is rationalised at 0.5 bar (50 kPa) but configured at 5 kPa on a point scaled 0-200 kPa: a factor of ten low, so the seal gas differential pressure alarm will not annunciate until the differential is almost lost.",
+   "verdict": "found",
+   "by": [
+    "C5 PDAL-3030"
+   ],
+   "reason": "C5 states alarm register 0.5 bar, MADB 0.5 bar, configuration 5 kPa, and it did so while leaving the correctly converted PDAH-3023 alone, so the comparison was unit-aware."
+  },
+  {
+   "id": "B3-17",
+   "category": "installed instrument missing from the index",
+   "severity": "medium",
+   "what": "PT-3033 (MOC-2026-054, implemented) is on PID-300-003 and configured in the DCS, but it is not in the instrument index, which the MOC lists as still to be revised.",
+   "verdict": "found",
+   "by": [
+    "C2 PT-3033",
+    "X2 PT-3033",
+    "C14 MOC-2026-054"
+   ],
+   "reason": "C2: configured, no index row. X2: on PID-300-003, no index row. C14: MOC-2026-054 implemented with the index not revised. All three parts."
+  },
+  {
+   "id": "B3-18",
+   "category": "document recorded as revised but not revised",
+   "severity": "medium",
+   "what": "MOC-2026-056 (closed) raised LAH-3003 from 1100 to 1200 mm and records the alarm register as revised; the MADB and the configuration say 1200 mm but the alarm register still says 1100 mm.",
+   "verdict": "found",
+   "by": [
+    "C5 LAH-3003"
+   ],
+   "reason": "C5 states alarm register 1100 mm against MADB and configuration 1200 mm. That MOC-2026-056 records the register as revised is not in a finding (C14 trusts the 'Documents Revised' column); the moc:MOC-2026-056 verdict is 'stop'."
+  },
+  {
+   "id": "B3-19",
+   "category": "rationalised alarm not configured",
+   "severity": "medium",
+   "what": "FAH-3032 (primary seal vent flow high, High priority) is in the MADB as implemented and in the alarm register, but no such alarm is configured.",
+   "verdict": "found",
+   "by": [
+    "C4 FAH-3032"
+   ],
+   "reason": "C4 states FAH-3032 on FT-3032 is rationalised (8 m3/h, High, Implemented) but not configured."
+  },
+  {
+   "id": "B3-20",
+   "category": "credited operator response slower than the time available",
+   "severity": "medium",
+   "what": "The LOPA credits TAH-3015 in S-300-04 on the basis that 10 min are available between the alarm and the trip point, but the MADB rationalises TAH-3015 with a time to respond of 30 min.",
+   "verdict": "partial",
+   "by": [
+    "C19 TAH-3015"
+   ],
+   "reason": "C19 names the right alarm, scenario and MADB figure (30 min) but compares it with the SRS process safety time of SIF-300-04 (5 min), not with the 10 min the LOPA states as available. The same comparison fired on all four credited alarms, including PAH-3013 where the LOPA allows 15 min and the MADB 10 min, so it does not single out the planted one. Right place, different comparison. Stricter call taken; a lenient reader would score it found."
+  },
+  {
+   "id": "B3-21",
+   "category": "calculation cites a superseded target",
+   "severity": "low",
+   "what": "The SIL verification takes the SIF-300-05 target from SRS Rev B (RRF 10); the current SRS Rev C and the LOPA require RRF 20. The achieved RRF still exceeds both.",
+   "verdict": "found",
+   "by": [
+    "C18 SIF-300-05"
+   ],
+   "reason": "C18 states the SIL verification cites SRS Rev B with a target of 10 where the current Rev C and the LOPA require 20."
+  },
+  {
+   "id": "B3-22",
+   "category": "change made before approval",
+   "severity": "low",
+   "what": "MOC-2026-060 (in review, not approved) proposes raising the TAH-3016 on-delay from 10 s to 60 s; the configuration already has 60 s while the MADB has 10 s.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares on-delay between MADB (10 s) and configuration (60 s), or the configuration against a MOC still in review. The only MOC-2026-060 finding (C15) says the impact list lacks the instrument index, a different and unfounded point."
+  },
+  {
+   "id": "B3-23",
+   "category": "configured alarm never rationalised",
+   "severity": "low",
+   "what": "PAH-3006 (PT-3006, 32 barg, Low) is configured in the DCS but is in neither the MADB nor the alarm register.",
+   "verdict": "found",
+   "by": [
+    "C3 PAH-3006"
+   ],
+   "reason": "C3 states PAH-3006 on PT-3006 is configured (32 barg, Low) with no MADB record. Absence from the alarm register is not said."
+  },
+  {
+   "id": "B3-24",
+   "category": "instrument location differs between index and drawing",
+   "severity": "low",
+   "what": "The index places TT-3008 on L-302 (compressor suction, downstream of V-301); the P&ID extraction shows it on L-301, upstream of the scrubber.",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares the index line (L-302) with the line in the P&ID extraction (L-301) for TT-3008."
+  },
+  {
+   "id": "B3-25",
+   "category": "document register out of date",
+   "severity": "low",
+   "what": "The document register lists the cause & effect chart U300-CE-CHART at Rev B; the chart in use is Rev C (re-issued under MOC-2026-053).",
+   "verdict": "missed",
+   "by": [],
+   "reason": "No finding compares the document register revision (Rev B) with the chart loaded (Rev C). The run's own document list holds U300-CE-CHART at both revisions without comment."
+  }
+ ],
+ "clean_controls": [
+  {
+   "id": "CC3-01",
+   "description": "SIF-300-05 trip setpoint: 0.8 barg in the C&E and the configuration, 80 kPag in the SRS.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding on the SIF-300-05 trip setpoint; trip:SIF-300-05 says the C&E, SRS and configuration agree. 80 kPag was read as 0.8 barg."
+  },
+  {
+   "id": "CC3-02",
+   "description": "SIF-300-01 trip setpoint: 1500 mm in the C&E and the configuration, 1.5 m in the SRS.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding on the SIF-300-01 trip setpoint (1.5 m against 1500 mm). The only SIF-300-01 finding is the final element one (B3-02)."
+  },
+  {
+   "id": "CC3-03",
+   "description": "PDT-3023 and PDAH-3023: index range 0-2.5 bar and alarm 1 bar (register, MADB) against a configured range of 0-250 kPa, limit 100 kPa and deadband 5 kPa. The configured range of PDT-3030 (0-200 kPa against 0-2 bar) and the PDAL-3030 deadband are the same kind.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No C5 or C7 finding for PDT-3023, PDAH-3023 or the PDT-3030 range; only the PDAL-3030 limit was flagged, which is the planted item B3-16."
+  },
+  {
+   "id": "CC3-04",
+   "description": "LT-3002B overridden: MOS-3002B active since 2026-11-12 01:30, out-of-service entry OOS-300-0013 active from 01:30 to 09:30.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding flags MOS-3002B or OOS-300-0013. But the bypass:LT-3002A/B/C scenario verdicts (warn) say compensating measure LAH-3003 'is impaired'. In the documents LAH-3003 is configured at 1200 mm, enabled and not shelved; the only thing wrong with it is the stale 1100 mm in the alarm register (B3-18). The verdict contradicts this control although no finding does."
+  },
+  {
+   "id": "CC3-05",
+   "description": "MOC-2026-052 proposed lowering the SIF-300-04 trip from 175 to 165 degC; every document and the configuration still say 175 degC and no document was revised.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No C14, C15 or C17 finding on MOC-2026-052 or the 175 degC trip. But the moc:MOC-2026-052 scenario verdict is 'stop: the plant and its safety documents disagree because of this change', which is wrong: the change was cancelled and every document and the configuration say 175 degC. Contradicted by a scenario verdict, not by a finding."
+  },
+  {
+   "id": "CC3-06",
+   "description": "LAH-3003 is listed in the LOPA IPL sheet for S-300-01 with no PFD, and is marked 'IPL Credit: No' in the MADB, yet it is the approved compensating measure and the SRS bypass condition for SIF-300-01.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding treats the uncredited LAH-3003 as a problem; the LOPA loader's 'listed, not credited' skip is in load_reports only, as the key expects. C15 MOC-2026-056 mentions LAH-3003 as a compensating measure and bypass condition, which is true and is not about the LOPA credit."
+  },
+  {
+   "id": "CC3-07",
+   "description": "PT-3011 remark says it was re-ranged from 0-100 to 0-120 barg; MOC-2026-050.",
+   "flagged": true,
+   "outcome": "flagged",
+   "by": [
+    "C15 MOC-2026-050"
+   ],
+   "reason": "C15 (warn) says the impact list of MOC-2026-050 misses U300-MADB-001 because of PAH-3011, and the moc/closeout:MOC-2026-050 verdicts (warn) say 'the impact list is incomplete'. The MADB holds no range and PAH-3011 is 75 barg in engineering units in all three documents, so nothing in the MADB needed revising. The MOC itself lists PAH-3011 as an affected tag and the finding only says 'check each', so a lenient reader could call it advisory noise and leave this control unflagged."
+  },
+  {
+   "id": "CC3-08",
+   "description": "PT-3007B temporary bypass (MOC-2026-051, OOS-300-0009).",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding on PT-3007B, MOS-3007B, OOS-300-0009 or MOC-2026-051; the moc/closeout:MOC-2026-051 verdicts are 'ok'."
+  },
+  {
+   "id": "CC3-09",
+   "description": "VAH-3017B is disabled in the configuration while the MADB says implemented.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding on VAH-3017B being disabled; moc:MOC-2026-059 is 'ok'. now:U-300 mentions one unnamed 'alarm problem' the register does not show; it cannot be VAH-3017B on the evidence (OOS-300-0016 is active) but the verdict does not say which alarm it means."
+  },
+  {
+   "id": "CC3-10",
+   "description": "SIF-300-03, -04, -05 and -06 achieve a higher SIL band in the SIL verification than their target; PAH-3011 (75 barg) and PAH-3013 (76 barg) are two high pressure alarms on the discharge with different limits.",
+   "flagged": false,
+   "outcome": "left alone",
+   "by": [],
+   "reason": "No finding on a SIL achieved above target, and none on PAH-3011 against PAH-3013. C18 SIF-300-05 concerns the superseded target (B3-21), not the higher band."
+  }
+ ],
+ "other_findings": [
+  {
+   "code": "C2",
+   "ids": [
+    "MOS-3002A",
+    "MOS-3002B",
+    "MOS-3002C",
+    "MOS-3005",
+    "MOS-3007A",
+    "MOS-3007B",
+    "MOS-3012A",
+    "MOS-3012B",
+    "MOS-3012C",
+    "MOS-3014A",
+    "MOS-3014B",
+    "MOS-3020A",
+    "MOS-3020B",
+    "MOS-3020C"
+   ],
+   "count": 14,
+   "class": "true_unplanted",
+   "level": "info",
+   "reason": "True and checked: none of the fourteen override switches has an index row. The key's note expects them as configured-only points; soft switches are not normally index items, so of little value."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-056"
+   ],
+   "count": 1,
+   "class": "true_unplanted",
+   "level": "warn",
+   "reason": "True and checked: the MOC that raised LAH-3003 lists only the MADB and the alarm register, while LAH-3003 is the approved compensating measure for SIF-300-01 (whose register entry quotes the setpoint) and its SRS bypass condition. The curated register already says 1200 mm, so nothing is wrong today; the impact list was still short."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-055"
+   ],
+   "count": 1,
+   "class": "variant",
+   "level": "warn",
+   "reason": "Variant of B3-04: the LOPA link is defensible (its 0.01 credit for SIF-300-01 depends on the proof test interval, and at 24 months the function no longer delivers it); the other six documents listed carry no proof test interval and are where-used noise."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-050"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "level": "warn",
+   "reason": "Clean control CC3-07: the MADB has no range field and PAH-3011 is 75 barg everywhere; the re-range needed no MADB revision."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-053"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "level": "warn",
+   "reason": "Seven documents listed for the 85 to 82 barg trip change; checked each: the index and the SIL verification carry no trip setpoint, the LOPA none, the compensating measures register already says 82 barg, and the P&ID, loop drawings and bypass procedure were not supplied. The one place that is actually wrong, the configuration, is not on the list (that is C17 / B3-03). Advisory 'check each' wording; a lenient reader could call it noise rather than false."
+  },
+  {
+   "code": "C15",
+   "ids": [
+    "MOC-2026-060"
+   ],
+   "count": 1,
+   "class": "false_alarm",
+   "level": "warn",
+   "reason": "Says the on-delay change should reach the instrument index; the alarm register sheet has no on-delay column, so there is nothing to revise. It concerns the MOC of B3-22 but says nothing about the change having been made before approval."
+  },
+  {
+   "code": "C19",
+   "ids": [
+    "PAH-3013",
+    "PAL-3006",
+    "PAL-3021"
+   ],
+   "count": 3,
+   "class": "false_alarm",
+   "level": "warn",
+   "reason": "Compares the MADB time to respond with the process safety time of the SIF, which runs from the trip point, not from the alarm. For PAH-3013 the LOPA itself states 15 min available against 10 min in the MADB, so the documents agree. For PAL-3006 and PAL-3021 the LOPA states no time; the quoted figures are in the documents but are not the same quantity, so no disagreement is shown. A lenient reader could call those two unverifiable rather than false."
+  },
+  {
+   "code": "X1",
+   "ids": [
+    "HS-3001",
+    "PSV-3050",
+    "XY-3040"
+   ],
+   "count": 3,
+   "class": "input_gap",
+   "level": "info",
+   "reason": "Checked: all three are in the index on PID-300-002 and absent from the topology CSV. The key's note (4) says the CSV format cannot carry push-button, relief valve and relay tags; an artefact of the input, neither planted nor a fair false alarm."
+  },
+  {
+   "code": "X7",
+   "ids": [
+    "PID-300-001",
+    "PID-300-002",
+    "PID-300-003"
+   ],
+   "count": 3,
+   "class": "input_gap",
+   "level": "info",
+   "reason": "No P&ID PDF was supplied (unit.json pdf: null; key note 5), so title-block revisions are unknown to the loaders. The document register does give E, D and C."
+  },
+  {
+   "code": "X8",
+   "ids": [
+    "BL-300",
+    "BL-310",
+    "BL-320",
+    "BL-330",
+    "FLARE-HDR"
+   ],
+   "count": 5,
+   "class": "input_gap",
+   "level": "info",
+   "reason": "Battery limits and the flare header in the topology CSV belong to units that were not supplied. Informational and true as far as it goes; not named in the key's note, so 'true unplanted' would also be defensible."
+  }
+ ],
+ "missed_patterns": [
+  "B3-04: when a change alters a proof test interval, compare the interval in the SRS with the interval actually used in the SIL verification (per subsystem, in hours) and re-test the achieved risk reduction at the new interval against the target, instead of relying on the change register's own 'documents revised' column.",
+  "B3-06: for every alarm credited as a protection layer, trace its source transmitter and check it is not part of the control loop (sensor, controller or valve) named as the initiating event of the same scenario; an alarm that shares a component with the initiating cause cannot be credited.",
+  "B3-11: evaluate the overrides active at the same moment per function, not one at a time: count the channels of one SIF overridden together and test that against the SRS bypass condition ('one channel at a time') and the degraded voting the SIL verification covers.",
+  "B3-15: for every override that is active in the control system, compare its 'active since' time with the start time of the matching out-of-service entry, and compute the duration from the control system time, as a finding rather than only inside a scenario answer.",
+  "B3-20: compare the operator response time in the alarm database with the time the hazard analysis itself says is available for that alarm (alarm to trip point), not with the safety function's process safety time, which is a different interval; where the analysis states no time, say so instead of substituting another figure.",
+  "B3-22: compare every configured alarm attribute that the alarm database also holds (on-delay, off-delay, deadband, not only setpoint and priority), and where a difference matches the proposed value of a change that is not yet approved, report it as a change made ahead of approval.",
+  "B3-24: compare the line or equipment an instrument is assigned to in the index with the line it sits on in the drawing extraction, not only the drawing number.",
+  "B3-25: compare the revision of each document as loaded (from its own title block) with the revision the document register holds for it; two revisions of one document number in the same load is itself a finding."
+ ],
+ "scorer_notes": "Counted strictly on the `findings` list; scenario verdicts earn at most partial. Found 17 of 25, partial 3, missed 5 (high 8 / 1 / 2 of 11, medium 7 / 2 / 0 of 9, low 2 / 0 / 3 of 5). Of the 59 findings, 26 are the basis of a found or partial item; the other 33 are 15 true unplanted (14 of them info-level override switches with no index row), 11 input gap, 6 false alarm and 1 variant. Clean controls: 1 of 10 flagged by a finding (CC3-07, by an advisory C15), and two more contradicted only by scenario verdicts: moc:MOC-2026-052 is 'stop' for a cancelled change that altered nothing (CC3-05), and bypass:LT-3002A/B/C call LAH-3003 'impaired' although it is configured, enabled and not shelved (CC3-04). Most arguable calls, all scored the stricter way: B3-04 (C14 says the SIL verification was not revised after the interval change but never states 12 against 24 months or the fall to about RRF 70) and B3-20 (C19 flags the right alarm with the right 30 min but against the 5 min process safety time of the SIF, not the 10 min in the LOPA, and fires equally on all four credited alarms) would both be 'found' to a lenient reader; B3-12 is 'found' only by reading C14 and C15 together and a harder scorer could call it partial. So found is 16 to 19, partial 1 to 4, missed 5 on any reading. B3-03, B3-08 and B3-18 are found on the disagreement itself although the 'closed on paper' half is in scenario verdicts only. False alarms: 6 strictly (three C19, three C15, all warn level); 3 if the two C19 entries with no LOPA time and the MOC-2026-053 where-used list are treated as unverifiable or noise. CC3-07 would be unflagged, and false alarms 2, only if the MOC-2026-050 entry were also treated as advisory. The five X8 battery-limit stubs are classed input gap; true unplanted would also be defensible. Other scenario verdicts that are wrong or unsafe against the documents: bypass:TT-3014A is 'ok, bypass can proceed' while MOS-3014B is already active on the other channel of the 1oo2 pair, and bypass:PT-3020A, PT-3012B/C and LT-3002A/C are only 'warn' with no mention that another channel of the same function is already overridden (the SRS allows one at a time); bypass:TT-3014B says there is 'no out-of-service entry' where a closed one (OOS-300-0010) exists (the C13 finding words it correctly as no active entry); shelve:LT-3003.LAL advises on shelving an alarm that has been removed and is not configured; shelve:PT-3006.PAL calls PAL-3006 an independent protection layer (B3-06); moc:MOC-2026-060 says only that the impact list is incomplete (B3-22); now:U-300 counts one override the register does not show and leaves out the 38 h of MOS-3020C. trip:SIF-300-05 'ok' is correct for the trip settings. The key: every evidence cell of all 25 items was opened and agrees with the files, and the derived figures check (190 h, 38 h, RRF about 70 at 24 months, RRF 200 without the PAL-3006 credit, the LOPA arithmetic). One small error: CC3-10 says SIF-300-03 achieves a higher SIL band than its target; its target is SIL 2 and it achieves SIL 2 (RRF 948 against 100), so it exceeds the target RRF but not the band; -04, -05 and -06 are as described. This affects no score. Confidence: high on found and missed; the three partials and the false alarm count are the judgement calls, with the ranges above. Read: the sealed findings file in full (findings, load reports, all 171 scenario verdicts, situation_as_found), the answer key, every sheet of every workbook and every CSV in data/u300, unit.json, and the U-200 adjudication for its field names only. Not read and not run: the checker's source, its tests and documentation, the session log, the README and the batch 3 generator. Project instructions (CLAUDE.md) were loaded into my context automatically; they name the check modules, the code ranges and the U-200 blind result but do not describe what individual checks do for U-300, and I did not use them in scoring."
+}

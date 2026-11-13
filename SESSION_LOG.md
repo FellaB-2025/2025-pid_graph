@@ -395,3 +395,16 @@
 - Page rebuilt and republished at the same link (version 5): 93 scenarios, 66 findings, 23 of 23.
 - OPEN for Alan: is C19 the right comparison for a pre-alarm; should trip notifications be in the MADB (C3 is information for now);
   whether to narrow MOC impact rule I2; the next blind unit.
+- Second blind test, same day (BLIND_TEST.md section 11). `eval/blind_run.py` now also freezes `quantities.py`, `demo.py` and `oos.py`;
+  tag `blind-freeze-2`. Planter agent wrote U-300 (`scripts/make_dummy_batch3.py`, `data/u300/`, with a topology extract this time);
+  committed unread; sealed findings committed (59 findings, 171 scenarios); scorer agent's adjudication recorded unedited.
+  Result: 17 of 25 found outright, 3 partly, 5 missed; 1 of 10 traps flagged; 6 false alarms in 59 findings.
+- Honest limit: CLAUDE.md is auto-loaded into every agent in this repository, so the planter and the scorer both saw the check code
+  ranges and the U-200 "known causes"; the planter also read the U-200 documents as format examples.
+- OPEN: fix as general rules (section 11, "What would have caught the rest"): concurrent overrides per SIF and the SRS "one channel
+  at a time" condition, independence of a credited alarm from the initiating loop, proof test interval after a change, register times
+  against the logic solver, C19's clock, and the scenario text the scorer found wrong. Then U-300 is a regression test.
+- OPEN for Alan: run the next planter outside this repository (or with CLAUDE.md stripped of the check descriptions) so it is properly blind.
+- Second existing test edited with Alan's agreement: `tests/test_blind_test.py::test_the_page_and_the_write_up_repeat_the_scorers_numbers`
+  pinned the blind units to U-200 alone; it now requires U-200 first and unchanged, and every later unit equal to its own adjudication file.
+  371 passed, 6 skipped. Page republished at the same link with both blind results on the Scorecard tab.

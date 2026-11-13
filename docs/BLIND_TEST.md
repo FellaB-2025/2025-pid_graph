@@ -189,3 +189,125 @@ What U-100 gained from the same rules (none planted): C17 on SIF-100-01 (configu
 PAH-1001 and LAH-1006 (10 min to respond against 120 s and 300 s). Eight of the ten new checks have nothing to fire on in U-100.
 
 The next blind result needs a new freeze tag and a new unit from a planter who has not seen C17 to C26 (rule 4).
+
+## 11. Second blind test — unit U-300
+
+12 November 2026. Checks frozen at `blind-freeze-2` (sections 1 to 10 describe how they got there). Same protocol as
+section 2: a planter who had not read the checks wrote U-300 (an export gas compressor) and its key
+(`scripts/make_dummy_batch3.py`, `data/u300/`); the files were committed unread; `eval/blind_run.py` ran the frozen
+checks and the sealed findings (`eval/blind/U300-BLIND-RUN-FINDINGS.json`) were committed before the key was opened; a
+third agent scored them (`data/u300/U300-BLIND-ADJUDICATION.json`, recorded unedited). Everything in the tables below
+is the scorer's.
+
+How blind it was: less than it should be. Project instructions (`CLAUDE.md`) are loaded into every agent in this
+repository, so the planter and the scorer both saw the check code ranges and the "known causes" of the U-200 result.
+The planter also read the U-200 documents as format examples, and those show that unit's planted problems. Both
+say they did not use it. A planter working outside this repository would remove the doubt.
+
+**17 of 25 found outright, 3 partly, 5 missed.** **1 of 10 deliberately consistent items flagged by a finding** (2 more contradicted in scenario text only), and 6 of the 59 findings were false alarms.
+On a lenient reading the scorer gives found 16 to 19, partly 1 to 4, missed 5, false alarms 2 to 6.
+
+| Severity | Planted | Found | Partly | Missed |
+|---|---|---|---|---|
+| high | 11 | 8 | 1 | 2 |
+| medium | 9 | 7 | 2 | 0 |
+| low | 5 | 2 | 0 | 3 |
+
+| | U-200 (blind-freeze-1) | U-300 (blind-freeze-2) |
+|---|---|---|
+| Found outright | 12 of 24 | 17 of 25 |
+| Partly | 3 | 3 |
+| Missed | 9 | 5 |
+| Clean controls flagged | 5 of 8 | 1 of 10 |
+| False alarms | 15 of 85 findings | 6 of 59 findings |
+| Input-gap findings | 39 | 11 |
+
+The two units are different and were planted by different agents, so the columns are not a like-for-like
+measure of improvement; and see "How blind it was" above.
+
+| Item | Severity | Result | What was planted | Found by |
+|---|---|---|---|---|
+| B3-01 | high | Found | SIF-300-06 is 1oo2 on PT-3007A/B in the C&E, the SRS and the SIL verification, but the logic solver is configured 2oo2, so one failed transmitter defeats the trip. | C10 SIF-300-06 |
+| B3-02 | high | Found | SIF-300-01 must trip K-301 through XY-3040 and close XV-3001 (C&E, SRS, SIL verification), but the configured trip drives XY-3040 only; XV-3001 is not closed. | C10 SIF-300-01 |
+| B3-03 | high | Found | MOC-2026-053 (closed) lowered the SIF-300-03 trip from 85 to 82 barg and the SRS and C&E say 82 barg, but the logic solver still trips at 85 barg. | C17 SIF-300-03 |
+| B3-04 | high | Partial | MOC-2026-055 (closed) extended the XV-3001 proof test interval to 24 months and the SRS says so, but the SIL verification still assumes 12 months and was not revised; at 24 months SIF-300-01 achieves about RRF 70 against a target of 100. | C14 MOC-2026-055 |
+| B3-05 | high | Found | The revalidated LOPA requires SIL 2 / RRF 100 of SIF-300-02 (scenario S-300-02), but the SRS and the C&E still specify SIL 1 (RRF 10) and the SIL verification achieves only RRF 91. | X15 SIF-300-02; C18 SIF-300-02 |
+| B3-06 | high | Missed | LOPA scenario S-300-06 credits PAL-3006 (PFD 0.1), but PAL-3006 is generated from PT-3006, the transmitter of the PIC-3006 loop whose failure is the initiating event; without the credit SIF-300-06 would need RRF 200, not 20. |  |
+| B3-07 | high | Found | PAL-3021 (credited IPL in S-300-05, compensating measure and SRS bypass condition for SIF-300-05) is rationalised at 1.5 barg but configured at 0.7 barg, below the 0.8 barg trip, so it cannot annunciate before the trip. | C26 PAL-3021; C5 PAL-3021 |
+| B3-08 | high | Found | MOC-2026-057 and out-of-service entry OOS-300-0010 record the TT-3014B bypass as restored and closed on 2026-11-04, but MOS-3014B is still active in the configuration export of 2026-11-12 06:00 (since 2026-11-04 08:00, about 190 h against 8 h), leaving SIF-300-04 on one transmitter with no live record. | C13 MOS-3014B |
+| B3-09 | high | Found | PT-3012A is overridden (OOS-300-0012) with compensating measures recorded as confirmed and PAH-3013 noted as active, but PAH-3013 has been shelved since 2026-11-10 with PT-3013 isolated (OOS-300-0011); PAH-3013 is the only approved compensating measure and the SRS bypass condition for SIF-300-03, and a credited IPL in S-300-03. | C25 PT-3012A; C25 PAH-3013 |
+| B3-10 | high | Found | SIF-300-02 is assigned to the logic solver SIS-LS-300 in the C&E, SRS, SIL verification and index, but it is configured in the DCS controller DCS-300-C01, with LT-3005 and XV-3003 wired to DCS I/O; it is not independent of the BPCS level loop whose failure is its demand. | C20 LT-3005; C20 XV-3003 |
+| B3-11 | high | Missed | PT-3020B and PT-3020C are both overridden at the export time (MOS-3020B and MOS-3020C active; OOS-300-0014 and OOS-300-0015 overlap), but the SRS allows only one channel of SIF-300-05 at a time and the SIL verification covers one bypassed channel only; the trip rests on PT-3020A alone. |  |
+| B3-12 | medium | Found | LAL-3003 was removed under MOC-2026-058 (MADB 'Removed', no longer configured), but it is still the SRS bypass condition and the approved compensating measure for SIF-300-02 and is still listed in the alarm register; the MOC did not list the SRS or the compensating measures register and the alarm register was not revised. | C15 MOC-2026-058; C14 MOC-2026-058 |
+| B3-13 | medium | Found | LT-3002C is configured 0-1500 mm while the index gives 0-2000 mm (as LT-3002A/B are configured); the SIF-300-01 trip point of 1500 mm is at the top of that channel's configured range. | C7 LT-3002C |
+| B3-14 | medium | Found | The SIL verification of SIF-300-04 takes TT-3014A and TT-3015 as the 1oo2 sensor pair; TT-3015 is the BPCS transmitter. The C&E and the configured trip use TT-3014A and TT-3014B. | C10 SIF-300-04 |
+| B3-15 | medium | Partial | The out-of-service register starts the PT-3020C override at 2026-11-12 04:00 (2 h before the export), but the logic solver shows MOS-3020C active since 2026-11-10 16:00: 38 h at the export against the 8 h limit, which the register does not show. |  |
+| B3-16 | medium | Found | PDAL-3030 is rationalised at 0.5 bar (50 kPa) but configured at 5 kPa on a point scaled 0-200 kPa: a factor of ten low, so the seal gas differential pressure alarm will not annunciate until the differential is almost lost. | C5 PDAL-3030 |
+| B3-17 | medium | Found | PT-3033 (MOC-2026-054, implemented) is on PID-300-003 and configured in the DCS, but it is not in the instrument index, which the MOC lists as still to be revised. | C2 PT-3033; X2 PT-3033; C14 MOC-2026-054 |
+| B3-18 | medium | Found | MOC-2026-056 (closed) raised LAH-3003 from 1100 to 1200 mm and records the alarm register as revised; the MADB and the configuration say 1200 mm but the alarm register still says 1100 mm. | C5 LAH-3003 |
+| B3-19 | medium | Found | FAH-3032 (primary seal vent flow high, High priority) is in the MADB as implemented and in the alarm register, but no such alarm is configured. | C4 FAH-3032 |
+| B3-20 | medium | Partial | The LOPA credits TAH-3015 in S-300-04 on the basis that 10 min are available between the alarm and the trip point, but the MADB rationalises TAH-3015 with a time to respond of 30 min. | C19 TAH-3015 |
+| B3-21 | low | Found | The SIL verification takes the SIF-300-05 target from SRS Rev B (RRF 10); the current SRS Rev C and the LOPA require RRF 20. The achieved RRF still exceeds both. | C18 SIF-300-05 |
+| B3-22 | low | Missed | MOC-2026-060 (in review, not approved) proposes raising the TAH-3016 on-delay from 10 s to 60 s; the configuration already has 60 s while the MADB has 10 s. |  |
+| B3-23 | low | Found | PAH-3006 (PT-3006, 32 barg, Low) is configured in the DCS but is in neither the MADB nor the alarm register. | C3 PAH-3006 |
+| B3-24 | low | Missed | The index places TT-3008 on L-302 (compressor suction, downstream of V-301); the P&ID extraction shows it on L-301, upstream of the scrubber. |  |
+| B3-25 | low | Missed | The document register lists the cause & effect chart U300-CE-CHART at Rev B; the chart in use is Rev C (re-issued under MOC-2026-053). |  |
+
+### The traps
+
+| Control | Outcome | Scorer's reason |
+|---|---|---|
+| SIF-300-05 trip setpoint: 0.8 barg in the C&E and the configuration, 80 kPag in the SRS. | left alone | No finding on the SIF-300-05 trip setpoint; trip:SIF-300-05 says the C&E, SRS and configuration agree. 80 kPag was read as 0.8 barg. |
+| SIF-300-01 trip setpoint: 1500 mm in the C&E and the configuration, 1.5 m in the SRS. | left alone | No finding on the SIF-300-01 trip setpoint (1.5 m against 1500 mm). The only SIF-300-01 finding is the final element one (B3-02). |
+| PDT-3023 and PDAH-3023: index range 0-2.5 bar and alarm 1 bar (register, MADB) against a configured range of 0-250 kPa, limit 100 kPa and deadband 5 kPa. The configured range of PDT-3030 (0-200 kPa against 0-2 bar) and the PDAL-3030 deadband are the same kind. | left alone | No C5 or C7 finding for PDT-3023, PDAH-3023 or the PDT-3030 range; only the PDAL-3030 limit was flagged, which is the planted item B3-16. |
+| LT-3002B overridden: MOS-3002B active since 2026-11-12 01:30, out-of-service entry OOS-300-0013 active from 01:30 to 09:30. | left alone | No finding flags MOS-3002B or OOS-300-0013. But the bypass:LT-3002A/B/C scenario verdicts (warn) say compensating measure LAH-3003 'is impaired'. In the documents LAH-3003 is configured at 1200 mm, enabled and not shelved; the only thing wrong with it is the stale 1100 mm in the alarm register (B3-18). The verdict contradicts this control although no finding does. |
+| MOC-2026-052 proposed lowering the SIF-300-04 trip from 175 to 165 degC; every document and the configuration still say 175 degC and no document was revised. | left alone | No C14, C15 or C17 finding on MOC-2026-052 or the 175 degC trip. But the moc:MOC-2026-052 scenario verdict is 'stop: the plant and its safety documents disagree because of this change', which is wrong: the change was cancelled and every document and the configuration say 175 degC. Contradicted by a scenario verdict, not by a finding. |
+| LAH-3003 is listed in the LOPA IPL sheet for S-300-01 with no PFD, and is marked 'IPL Credit: No' in the MADB, yet it is the approved compensating measure and the SRS bypass condition for SIF-300-01. | left alone | No finding treats the uncredited LAH-3003 as a problem; the LOPA loader's 'listed, not credited' skip is in load_reports only, as the key expects. C15 MOC-2026-056 mentions LAH-3003 as a compensating measure and bypass condition, which is true and is not about the LOPA credit. |
+| PT-3011 remark says it was re-ranged from 0-100 to 0-120 barg; MOC-2026-050. | flagged | C15 (warn) says the impact list of MOC-2026-050 misses U300-MADB-001 because of PAH-3011, and the moc/closeout:MOC-2026-050 verdicts (warn) say 'the impact list is incomplete'. The MADB holds no range and PAH-3011 is 75 barg in engineering units in all three documents, so nothing in the MADB needed revising. The MOC itself lists PAH-3011 as an affected tag and the finding only says 'check each', so a lenient reader could call it advisory noise and leave this control unflagged. |
+| PT-3007B temporary bypass (MOC-2026-051, OOS-300-0009). | left alone | No finding on PT-3007B, MOS-3007B, OOS-300-0009 or MOC-2026-051; the moc/closeout:MOC-2026-051 verdicts are 'ok'. |
+| VAH-3017B is disabled in the configuration while the MADB says implemented. | left alone | No finding on VAH-3017B being disabled; moc:MOC-2026-059 is 'ok'. now:U-300 mentions one unnamed 'alarm problem' the register does not show; it cannot be VAH-3017B on the evidence (OOS-300-0016 is active) but the verdict does not say which alarm it means. |
+| SIF-300-03, -04, -05 and -06 achieve a higher SIL band in the SIL verification than their target; PAH-3011 (75 barg) and PAH-3013 (76 barg) are two high pressure alarms on the discharge with different limits. | left alone | No finding on a SIL achieved above target, and none on PAH-3011 against PAH-3013. C18 SIF-300-05 concerns the superseded target (B3-21), not the higher band. |
+
+### Every other finding
+
+| Class | Code | Count | Level | Scorer's reason |
+|---|---|---|---|---|
+| true unplanted | C2 | 14 | info | True and checked: none of the fourteen override switches has an index row. The key's note expects them as configured-only points; soft switches are not normally index items, so of little value. |
+| true unplanted | C15 | 1 | warn | True and checked: the MOC that raised LAH-3003 lists only the MADB and the alarm register, while LAH-3003 is the approved compensating measure for SIF-300-01 (whose register entry quotes the setpoint) and its SRS bypass condition. The curated register already says 1200 mm, so nothing is wrong today; the impact list was still short. |
+| variant | C15 | 1 | warn | Variant of B3-04: the LOPA link is defensible (its 0.01 credit for SIF-300-01 depends on the proof test interval, and at 24 months the function no longer delivers it); the other six documents listed carry no proof test interval and are where-used noise. |
+| false alarm | C15 | 1 | warn | Clean control CC3-07: the MADB has no range field and PAH-3011 is 75 barg everywhere; the re-range needed no MADB revision. |
+| false alarm | C15 | 1 | warn | Seven documents listed for the 85 to 82 barg trip change; checked each: the index and the SIL verification carry no trip setpoint, the LOPA none, the compensating measures register already says 82 barg, and the P&ID, loop drawings and bypass procedure were not supplied. The one place that is actually wrong, the configuration, is not on the list (that is C17 / B3-03). Advisory 'check each' wording; a lenient reader could call it noise rather than false. |
+| false alarm | C15 | 1 | warn | Says the on-delay change should reach the instrument index; the alarm register sheet has no on-delay column, so there is nothing to revise. It concerns the MOC of B3-22 but says nothing about the change having been made before approval. |
+| false alarm | C19 | 3 | warn | Compares the MADB time to respond with the process safety time of the SIF, which runs from the trip point, not from the alarm. For PAH-3013 the LOPA itself states 15 min available against 10 min in the MADB, so the documents agree. For PAL-3006 and PAL-3021 the LOPA states no time; the quoted figures are in the documents but are not the same quantity, so no disagreement is shown. A lenient reader could call those two unverifiable rather than false. |
+| input gap | X1 | 3 | info | Checked: all three are in the index on PID-300-002 and absent from the topology CSV. The key's note (4) says the CSV format cannot carry push-button, relief valve and relay tags; an artefact of the input, neither planted nor a fair false alarm. |
+| input gap | X7 | 3 | info | No P&ID PDF was supplied (unit.json pdf: null; key note 5), so title-block revisions are unknown to the loaders. The document register does give E, D and C. |
+| input gap | X8 | 5 | info | Battery limits and the flare header in the topology CSV belong to units that were not supplied. Informational and true as far as it goes; not named in the key's note, so 'true unplanted' would also be defensible. |
+
+### What would have caught the rest (scorer's words)
+
+- B3-04: when a change alters a proof test interval, compare the interval in the SRS with the interval actually used in the SIL verification (per subsystem, in hours) and re-test the achieved risk reduction at the new interval against the target, instead of relying on the change register's own 'documents revised' column.
+- B3-06: for every alarm credited as a protection layer, trace its source transmitter and check it is not part of the control loop (sensor, controller or valve) named as the initiating event of the same scenario; an alarm that shares a component with the initiating cause cannot be credited.
+- B3-11: evaluate the overrides active at the same moment per function, not one at a time: count the channels of one SIF overridden together and test that against the SRS bypass condition ('one channel at a time') and the degraded voting the SIL verification covers.
+- B3-15: for every override that is active in the control system, compare its 'active since' time with the start time of the matching out-of-service entry, and compute the duration from the control system time, as a finding rather than only inside a scenario answer.
+- B3-20: compare the operator response time in the alarm database with the time the hazard analysis itself says is available for that alarm (alarm to trip point), not with the safety function's process safety time, which is a different interval; where the analysis states no time, say so instead of substituting another figure.
+- B3-22: compare every configured alarm attribute that the alarm database also holds (on-delay, off-delay, deadband, not only setpoint and priority), and where a difference matches the proposed value of a change that is not yet approved, report it as a change made ahead of approval.
+- B3-24: compare the line or equipment an instrument is assigned to in the index with the line it sits on in the drawing extraction, not only the drawing number.
+- B3-25: compare the revision of each document as loaded (from its own title block) with the revision the document register holds for it; two revisions of one document number in the same load is itself a finding.
+
+### Scorer's notes
+
+Counted strictly on the `findings` list; scenario verdicts earn at most partial. Found 17 of 25, partial 3, missed 5 (high 8 / 1 / 2 of 11, medium 7 / 2 / 0 of 9, low 2 / 0 / 3 of 5). Of the 59 findings, 26 are the basis of a found or partial item; the other 33 are 15 true unplanted (14 of them info-level override switches with no index row), 11 input gap, 6 false alarm and 1 variant. Clean controls: 1 of 10 flagged by a finding (CC3-07, by an advisory C15), and two more contradicted only by scenario verdicts: moc:MOC-2026-052 is 'stop' for a cancelled change that altered nothing (CC3-05), and bypass:LT-3002A/B/C call LAH-3003 'impaired' although it is configured, enabled and not shelved (CC3-04). Most arguable calls, all scored the stricter way: B3-04 (C14 says the SIL verification was not revised after the interval change but never states 12 against 24 months or the fall to about RRF 70) and B3-20 (C19 flags the right alarm with the right 30 min but against the 5 min process safety time of the SIF, not the 10 min in the LOPA, and fires equally on all four credited alarms) would both be 'found' to a lenient reader; B3-12 is 'found' only by reading C14 and C15 together and a harder scorer could call it partial. So found is 16 to 19, partial 1 to 4, missed 5 on any reading. B3-03, B3-08 and B3-18 are found on the disagreement itself although the 'closed on paper' half is in scenario verdicts only. False alarms: 6 strictly (three C19, three C15, all warn level); 3 if the two C19 entries with no LOPA time and the MOC-2026-053 where-used list are treated as unverifiable or noise. CC3-07 would be unflagged, and false alarms 2, only if the MOC-2026-050 entry were also treated as advisory. The five X8 battery-limit stubs are classed input gap; true unplanted would also be defensible. Other scenario verdicts that are wrong or unsafe against the documents: bypass:TT-3014A is 'ok, bypass can proceed' while MOS-3014B is already active on the other channel of the 1oo2 pair, and bypass:PT-3020A, PT-3012B/C and LT-3002A/C are only 'warn' with no mention that another channel of the same function is already overridden (the SRS allows one at a time); bypass:TT-3014B says there is 'no out-of-service entry' where a closed one (OOS-300-0010) exists (the C13 finding words it correctly as no active entry); shelve:LT-3003.LAL advises on shelving an alarm that has been removed and is not configured; shelve:PT-3006.PAL calls PAL-3006 an independent protection layer (B3-06); moc:MOC-2026-060 says only that the impact list is incomplete (B3-22); now:U-300 counts one override the register does not show and leaves out the 38 h of MOS-3020C. trip:SIF-300-05 'ok' is correct for the trip settings. The key: every evidence cell of all 25 items was opened and agrees with the files, and the derived figures check (190 h, 38 h, RRF about 70 at 24 months, RRF 200 without the PAL-3006 credit, the LOPA arithmetic). One small error: CC3-10 says SIF-300-03 achieves a higher SIL band than its target; its target is SIL 2 and it achieves SIL 2 (RRF 948 against 100), so it exceeds the target RRF but not the band; -04, -05 and -06 are as described. This affects no score. Confidence: high on found and missed; the three partials and the false alarm count are the judgement calls, with the ranges above. Read: the sealed findings file in full (findings, load reports, all 171 scenario verdicts, situation_as_found), the answer key, every sheet of every workbook and every CSV in data/u300, unit.json, and the U-200 adjudication for its field names only. Not read and not run: the checker's source, its tests and documentation, the session log, the README and the batch 3 generator. Project instructions (CLAUDE.md) were loaded into my context automatically; they name the check modules, the code ranges and the U-200 blind result but do not describe what individual checks do for U-300, and I did not use them in scoring.
+
+### What this means
+
+- The comparisons added after U-200 carried over to a unit they were not written for: voting, trip setpoint, final
+  elements, units and the as-found interactions were found, and unit conversion sprang no trap.
+- The misses are again comparisons nobody wrote: more than one channel of a SIF overridden at once, an alarm credited
+  in the LOPA that shares its transmitter with the initiating control loop, the proof test interval after a change,
+  and the times in the out-of-service register against the logic solver.
+- C19 is now a known source of false alarms: it fired on all four credited alarms and the scorer accepted one, partly.
+  It compares response time with the wrong clock for a pre-alarm (section 10 raised this).
+- Scenario text is still wrong in places: a bypass is called acceptable while the other channel of the pair is
+  already overridden; a closed out-of-service entry is reported as none; a removed alarm is treated as live.
+- Section 9 applies again: this result is not overwritten, fixes are general rules, U-300 then becomes a
+  regression test, and only a new unit counts as the next blind result.

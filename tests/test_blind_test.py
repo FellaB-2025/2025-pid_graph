@@ -65,7 +65,12 @@ def test_the_second_unit_builds_through_the_same_code():
 def test_the_page_and_the_write_up_repeat_the_scorers_numbers():
     from pid_graph.demo_page import render
     data = demo.build()
-    assert [b["unit"] for b in data["blind_tests"]] == ["U-200"] and data["blind_tests"][0] == ADJ
+    # Changed on 12 Nov 2026 with Alan's agreement (an exception to rule 12): a second blind unit (U-300) now follows U-200.
+    # U-200 must still come first and be exactly its adjudication; every later one must be its own file, unedited.
+    assert [b["unit"] for b in data["blind_tests"]][0] == "U-200" and data["blind_tests"][0] == ADJ
+    for b in data["blind_tests"][1:]:
+        slug = b["unit"].lower().replace("-", "")
+        assert b == json.loads((ROOT / "data" / slug / f"{b['unit'].replace('-', '')}-BLIND-ADJUDICATION.json").read_text(encoding="utf-8"))
     page = render(data, standalone=False)
     assert "Blind test · unit" in page and "Development test · unit" in page
     s = ADJ["summary"]

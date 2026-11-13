@@ -168,6 +168,8 @@ Say that number. `docs/BLIND_TEST.md` has the protocol, every item and what woul
   only blind result there is. The checks have since been fixed (units, the compound SRS cell, ten further comparisons) and
   every one of the 24 now has a finding on U-200, but those fixes were written after the answer key was opened, so U-200
   shows only that the fixes work. Treat every finding as a prompt for an engineer, not a verdict, until a new unit is run blind.
+- Second blind result, on U-300 with the fixed checks: 17 of 25 found outright, 3 partly, 5 missed; 1 of 10 traps flagged; 6 false alarms in 59 findings. Better, on a different unit, with a planter who had seen
+  the outline of the checks; it does not make the tool safe to trust unsupervised. Half the false alarms come from one check (C19).
 - Two kinds of finding the scorer called false alarms are still raised: a MOC impact list is still told to check every
   document an affected alarm appears in (C15), and a trip notification with no MADB record is still listed, for information (C3).
 - One small unit: 82 nodes and 27 documents. Scale is untested.
