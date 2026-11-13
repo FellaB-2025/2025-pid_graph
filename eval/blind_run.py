@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 FROZEN = ("pid_graph/ops_checks.py", "pid_graph/reconcile.py", "pid_graph/pipeline.py", "pid_graph/loaders", "pid_graph/records.py",
-          "pid_graph/ontology.py", "pid_graph/tags.py")
+          "pid_graph/ontology.py", "pid_graph/tags.py", "pid_graph/quantities.py", "pid_graph/demo.py", "pid_graph/oos.py")
 
 
 def _git(*args: str) -> str:
