@@ -1,0 +1,19 @@
+{
+  "unit": "U-300",
+  "files": {
+    "index": "U300-INST-INDEX-Rev-D.xlsx",
+    "ce": "U300-CE-CHART-Rev-C.xlsx",
+    "srs": "U300-SRS-001-Rev-C.xlsx",
+    "lopa": "U300-LOPA-001-Rev-B.xlsx",
+    "curated": "compensating_measures_U-300.csv",
+    "madb": "U300-MADB-001-Rev-B.xlsx",
+    "config": "U300-CFG-EXPORT-Rev-A.xlsx",
+    "silv": "U300-SILV-001-Rev-B.xlsx",
+    "moc": "U300-MOC-REG-Rev-A.xlsx",
+    "docreg": "U300-DOC-REGISTER.csv",
+    "topology": "pid_audit_U300_topology.csv",
+    "pdf": null
+  },
+  "oos": "out_of_service_U-300.csv",
+  "blind": "U300-BLIND-ADJUDICATION.json"
+}

@@ -1,0 +1,24 @@
+DOCUMENT REGISTER - UNIT 300
+Document No. U300-DOC-REGISTER    Rev A    Status: Current    (DUMMY DATA - not a real facility)
+
+Document No.,Title,Type,Rev,Covers
+U300-SRS-001,Safety Requirements Specification - Unit 300,SRS,C,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06; SIS-LS-300
+U300-LOPA-001,LOPA Report - Unit 300,LOPA,B,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06; V-301; K-301; E-301
+U300-SILV-001,SIL Verification Calculations - Unit 300,SIL verification,B,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06
+U300-CE-CHART,Cause & Effect Chart - Unit 300,C&E,B,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06
+U300-INST-INDEX,Instrument Index - Unit 300,Instrument index,D,U-300
+U300-LOOP-REG,Loop Register - Unit 300 (sheet of the instrument index workbook),Instrument index,D,U-300
+U300-ALM-REG,Alarm Register - Unit 300 (sheet of the instrument index workbook),Instrument index,D,U-300
+U300-ALM-PHIL,Alarm Philosophy and Rationalisation - Unit 300,Alarm philosophy,A,U-300
+U300-OP-PROC-010,Operating Procedure - Export Gas Compressor Start-up and Shutdown,Operating procedure,C,K-301; XV-3001; XV-3002; HV-3001; HS-3001; FV-3010
+U300-OP-PROC-020,SIS Bypass Management Procedure,SIS bypass procedure,B,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06
+U300-PTP-001,SIS Proof Test Procedures - Unit 300,Proof test procedure,D,SIF-300-01; SIF-300-02; SIF-300-03; SIF-300-04; SIF-300-05; SIF-300-06
+U300-LOOP-3012,Loop Drawings PT-3012A/B/C,Loop drawing,A,PT-3012A; PT-3012B; PT-3012C
+U300-SIS-IO-001,SIS I/O Allocation and Application Logic - SIS-LS-300,SIS logic,B,SIS-LS-300
+U300-MADB-001,Master Alarm Database - Unit 300,MADB,B,LAH-3003; LAL-3003; PAL-3006; TAH-3008; FAL-3009; PAH-3011; PAH-3013; TAH-3015; TAH-3016; VAH-3017A; VAH-3017B; PAL-3021; TAH-3022; PDAH-3023; LAL-3024; TAH-3026; PDAL-3030; FAH-3032
+U300-CFG-EXPORT,DCS / SIS Configuration Export - Unit 300,Configuration export,A,DCS-300-C01; SIS-LS-300
+U300-MOC-REG,Management of Change Register - Unit 300,MOC register,A,U-300
+U300-DOC-REGISTER,Document Register - Unit 300,Document register,A,U-300
+PID-300-001,P&ID - Suction Scrubber V-301 and Compressor Suction,P&ID,E,V-301; HV-3001; XV-3001; ZSC-3001; LT-3002A; LT-3002B; LT-3002C; LT-3003; LV-3003; LG-3004; LT-3005; XV-3003; PV-3006; PT-3006; PT-3007A; PT-3007B; TT-3008; FT-3009
+PID-300-002,"P&ID - Export Gas Compressor K-301, Aftercooler E-301 and Anti-surge Recycle",P&ID,D,K-301; E-301; PT-3011; PT-3012A; PT-3012B; PT-3012C; TT-3014A; TT-3014B; TT-3015; PSV-3050; TT-3016; PT-3013; XV-3002; ZSC-3002; FV-3010; VT-3017A; VT-3017B; ST-3019; HS-3001; XY-3040
+PID-300-003,P&ID - Lube Oil and Seal Gas Systems,P&ID,C,TK-301; LT-3024; PDT-3023; PCV-3028; TT-3022; PT-3021; PT-3020A; PT-3020B; PT-3020C; PI-3027; TT-3026; PDT-3030; FT-3032; PT-3033

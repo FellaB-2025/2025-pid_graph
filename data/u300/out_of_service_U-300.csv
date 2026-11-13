@@ -1,0 +1,9 @@
+id,element,kind,status,start,expiry,authorised_by,requester,reason,compensating_measures_confirmed,notes
+OOS-300-0009,PT-3007B,mos,closed,2026-10-21 08:00,2026-10-21 16:00,Shift Supervisor (dummy),Maintenance Planner (dummy),Transmitter replacement (MOC-2026-051),y,Restored 14:10; MOS-3007B confirmed off
+OOS-300-0010,TT-3014B,mos,closed,2026-11-04 08:00,2026-11-04 16:00,Shift Supervisor (dummy),Maintenance Planner (dummy),Thermowell replacement (MOC-2026-057),y,Restored 15:20; MOS-3014B confirmed off
+OOS-300-0011,PT-3013.PAH,shelve,active,2026-11-10 10:00,2026-11-17 10:00,Shift Supervisor (dummy),Panel Operator (dummy),"PT-3013 impulse line leak; transmitter isolated, reading frozen",n,Awaiting impulse line repair
+OOS-300-0012,PT-3012A,mos,active,2026-11-11 23:00,2026-11-12 07:00,Shift Supervisor (dummy),Instrument Technician (dummy),Transmitter drifting high - calibration,y,PAH-3013 confirmed active before the override was set
+OOS-300-0013,LT-3002B,mos,active,2026-11-12 01:30,2026-11-12 09:30,Shift Supervisor (dummy),Instrument Technician (dummy),Probe cleaning,y,LAH-3003 confirmed active before the override was set
+OOS-300-0014,PT-3020B,mos,active,2026-11-12 00:30,2026-11-12 08:30,Shift Supervisor (dummy),Instrument Technician (dummy),Impulse line flushing,y,PAL-3021 confirmed active before the override was set
+OOS-300-0015,PT-3020C,mos,active,2026-11-12 04:00,2026-11-12 12:00,Shift Supervisor (dummy),Instrument Technician (dummy),Transmitter replacement,y,PAL-3021 confirmed active before the override was set
+OOS-300-0016,VT-3017B.VAH,shelve,active,2026-11-05 09:00,2026-11-19 09:00,Shift Supervisor (dummy),Rotating Equipment Engineer (dummy),Proximity probe failed; alarm disabled in the DCS under MOC-2026-059,n,VAH-3017A in service; probe on order
