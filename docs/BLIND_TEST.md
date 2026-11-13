@@ -134,3 +134,58 @@ Counted strictly on the `findings` list; scenario verdicts earn at most partial.
 2. A fix must be a general rule (section 6), never a special case for U-200.
 3. After fixes, U-200 becomes a regression test: its score then shows the fixes work, and nothing more.
 4. Only a new unit, planted by someone who has not seen the fixed checks, counts as the next blind result.
+
+## 10. After the fixes — U-200 as a regression test (not a blind result)
+
+12 November 2026, later the same day. Sections 1 to 9 are the record and are unchanged; the sealed findings
+(`eval/blind/U200-BLIND-RUN-FINDINGS.json`) and the adjudication were not touched. What follows was produced by the
+person who wrote the fixes, with the answer key open. It shows that the fixes do what they were written to do and
+nothing more (rule 3). It has not been scored by anyone independent.
+
+| | Blind run (scored independently) | After the fixes (self-checked) |
+|---|---|---|
+| Planted items with a finding that states them | 12 of 24, 3 partly | 24 of 24 |
+| Findings the scorer called false alarms | 15 | 2 still raised, 1 reduced to information, 12 gone |
+| Traps touched by a finding | 5 of 8 | 2 of 8 (the trip notification, now information only; the PT-2013 re-range impact list) |
+| Findings in all | 85 | 87 (45 C, 42 X; 39 of the X only because no P&IDs were supplied) |
+
+What changed, each as a general rule (rule 2):
+
+| Section 6 item | Fix | Code |
+|---|---|---|
+| Values normalised to one unit | `pid_graph/quantities.py`: values are compared with their units; gauge and unstated pressure are never converted into each other; a limit in per cent of span is read through the index range | C5, C7, X16 |
+| Compound SRS cell | A proof-test cell is split into its sensor and final-element statements before it is compared | C11 |
+| B2-01 | Trip setpoint as configured against the C&E and the SRS | C17 |
+| B2-03 | Final elements and their voting across C&E, SRS, SIL verification and configuration | C10 |
+| B2-04 | The SIL verification's cited revision and target against the current SRS; achieved risk reduction against the current SRS and LOPA requirement | C18 |
+| B2-19 | Operator response time in the MADB against the process safety time of the SIF in the same LOPA scenario | C19 |
+| B2-20 | System in the index against the configuration; a SIF initiator or final element not on the SIF's logic solver | C20 |
+| B2-21 | An alarm's source in each document; a compensating alarm sourced from an initiator of the SIF it backs up | C21 |
+| B2-22 | An alarm the MADB records as removed that is still configured and enabled (and such an alarm is no longer "rationalised but not configured") | C22 |
+| B2-23 | A procedure that covers two or more SIFs and misses one that no other procedure of its kind covers | C23 |
+| B2-24 | An active out-of-service entry past its expiry, or whose override is off in the configuration | C24 |
+| B2-08, B2-18 | As found: an element out of service whose compensating measure, SRS bypass condition or LOPA credit is also out | C25 |
+| B2-14 | An alarm on the same variable and of the same sense as a trip must come before the trip | C26 |
+| Trip notification | Still reported when it has no MADB record, but for information: whether trips are rationalised is for the alarm philosophy | C3 |
+
+Scenario text that was wrong on U-200 and is corrected: a recorded bypass now quotes its out-of-service entry
+instead of saying there is none; a trip is said to agree only if no finding about its setpoint, voting, final elements
+or logic solver exists; a bypass of a transmitter that is not on the logic solver is a stop; a closed MOC whose element
+still disagrees between documents is a caution; a temporary change is judged on whether it was removed, not on
+documents it never had to revise.
+
+Not fixed, and why:
+
+- The two MOC impact prompts the scorer classed as false (a re-range reaching the MADB; an on-delay change reaching the
+  alarm register). Rule I2 sends a change on an instrument to every document its alarms are in. Narrowing it needs to
+  know which attribute a change alters and which attributes each document holds; the MOC register gives the first only
+  as free text. Left as "check each".
+- The 39 input-gap findings: U-200 still has no P&IDs.
+- C19 compares response time with the process safety time of the SIF in the same scenario. That is the comparison the
+  planted item used; an engineer should say whether it is the right one for a pre-alarm, which has the time from the
+  alarm limit, not from the trip point.
+
+What U-100 gained from the same rules (none planted): C17 on SIF-100-01 (configured 68 barg, SRS 65 barg) and C19 on
+PAH-1001 and LAH-1006 (10 min to respond against 120 s and 300 s). Eight of the ten new checks have nothing to fire on in U-100.
+
+The next blind result needs a new freeze tag and a new unit from a planter who has not seen C17 to C26 (rule 4).

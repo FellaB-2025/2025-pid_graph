@@ -217,7 +217,7 @@ pid_graph/
   oos.py           live out-of-service register -> node properties; combined protection status
   pipeline.py      build_store()
   loaders/ (ops)   madb_loader.py, config_loader.py, silv_loader.py, moc_loader.py, docreg_loader.py (off by default)
-  ops_checks.py    cross-document checks C1-C16 over the operations documents; MOC impact rules I1-I5
+  ops_checks.py    cross-document checks C1-C26 over the operations documents; MOC impact rules I1-I5
   demo.py          scenario demonstrator: python -m pid_graph.demo -> reports/demo_U-100.html
   demo_page.py     the page it writes (self-contained)
   situation.py     several things out of service at once: python -m pid_graph.situation PT-1001B XV-1001

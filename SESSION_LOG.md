@@ -370,3 +370,28 @@
 - Alan asked for pushes to happen automatically after every commit from now on (both private repositories).
 - OPEN: fix the false alarms and the missing comparisons as general rules (BLIND_TEST.md sections 6 and 9), fix the two wrong
   scenario statements the test exposed, then a new blind unit. U-200 has no P&IDs, so X1 fires 37 times there.
+
+
+## 2026-11-12 - Session 7 (Claude Code): fixes after the blind test
+
+- Working tree at the start: clean apart from `docs/TAG_LOCATION_INVENTORY.xlsx` (still untracked). Its "In pid_graph today" and
+  "Gap today" cells and its Read me were brought up to date with the operations loaders; the amber columns are still Alan's.
+- Fixes as general rules (BLIND_TEST.md sections 6 and 9; the result is in its new section 10, the record above it untouched):
+  `pid_graph/quantities.py` (values compared with their units); C5, C7 and C11 made unit-aware, per cent of span read through the
+  index range, the compound SRS proof-test cell split; X16 in `reconcile.py` compares quantities (the v1.2 dump is still byte-identical);
+  C10 extended to final elements; new checks C17-C26; a rule can set a finding's level (`add(level=)`: C3 trip notification is
+  information, C20 and C21 are stop when a SIF is involved); `silv_loader` keeps `rrf_target_silv` and `target_source_silv`.
+- Scenario templates: a recorded bypass quotes its out-of-service entry; a trip verdict looks at C17, C10 final elements and C20;
+  a bypass of a device not on the logic solver is a stop; a closed MOC with an as-found disagreement is a caution; a temporary
+  change is judged on whether it was removed; C19 does not count as "impaired" for a compensating alarm; "Everything impaired
+  now" shows C24 and C25.
+- U-200 after the fixes (regression, self-checked): 24 of 24 planted items have a finding; 87 findings. U-100: 66 findings, 23 of 23.
+- `tests/test_blind_fixes.py` (12 cases). `blind-freeze-1` no longer matches the checks, so `eval/blind_run.py` refuses to run
+  against it: the next blind unit needs a new freeze tag.
+- One existing test edited, with Alan's agreement (the one exception to rule 12, noted in the test):
+  `tests/test_ops_demo.py::test_every_check_fires_on_the_test_documents_and_names_its_sources` now takes the test documents to be
+  those of U-100 and U-200, because eight new checks (C18, C20-C26) have nothing to fire on in U-100; it still requires C2-C16 on
+  U-100 alone. 371 passed, 6 skipped (Neo4j not running).
+- Page rebuilt and republished at the same link (version 5): 93 scenarios, 66 findings, 23 of 23.
+- OPEN for Alan: is C19 the right comparison for a pre-alarm; should trip notifications be in the MADB (C3 is information for now);
+  whether to narrow MOC impact rule I2; the next blind unit.

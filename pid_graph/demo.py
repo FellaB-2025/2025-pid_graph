@@ -55,8 +55,8 @@ KINDS = {
     "doc_revised": ("Document revised", "Q6", "This document is being revised: what depends on it?"),
     "now": ("Everything impaired now", "Q7", "What is out of service, overridden or not as designed at the time of the configuration export?"),
 }
-STOP = {"C4", "C6", "C8", "C10", "C11", "C12", "C13"}
-WARN = {"C3", "C5", "C7", "C9", "C14", "C15", "C16", "X9", "X10", "X11", "X14", "X15", "X16", "X17", "X18", "X20"}
+STOP = {"C4", "C6", "C8", "C10", "C11", "C12", "C13", "C17", "C18", "C25", "C26"}
+WARN = {"C3", "C5", "C7", "C9", "C14", "C15", "C16", "C19", "C20", "C21", "C22", "C23", "C24", "X9", "X10", "X11", "X14", "X15", "X16", "X17", "X18", "X20"}
 
 
 def unit_config(unit: str = "U-100") -> dict:
@@ -131,7 +131,9 @@ def _docs_line(g: Graph, docs) -> str:
 def _alarm_health(g: Graph, aid: str, findings: list[dict]) -> list[str]:
     tag = g.p("Alarm", aid).get("alarm_tag", aid)
     src = g.source_of(aid)
-    return [f"{f['code']}: {f['detail']}" for f in findings if f["code"].startswith("C") and (f["id"] == tag or (f["code"] == "C7" and f["id"] == src))]
+    # C19 is about the credit the LOPA takes for the alarm, not about whether the alarm works
+    return [f"{f['code']}: {f['detail']}" for f in findings if f["code"].startswith("C") and f["code"] != "C19"
+            and (f["id"] == tag or (f["code"] == "C7" and f["id"] == src))]
 
 
 def _mocs_of(g: Graph, label: str, ident: str) -> list[dict]:
@@ -160,6 +162,7 @@ def t_bypass(g: Graph, tag: str, findings: list[dict]) -> dict:
     b.step("What it initiates", f"{tag} is an initiator of {', '.join(sifs)}. " + "; ".join(
         f"{r['props']['source_doc']} says {r['props'].get('voting', '?')} at {r['props'].get('setpoint', '?')}" for r in inits) + ".", rels=inits)
     stops, warns = [], []
+    stops += [f["detail"] for f in findings if f["code"] == "C20" and f["id"] == tag and f["level"] == "stop"]
     for sif in sifs:
         sp = g.p("SIF", sif)
         cfg = g.initiators(sif, "CFG") or g.initiators(sif, "CE")
@@ -209,10 +212,18 @@ def t_bypass(g: Graph, tag: str, findings: list[dict]) -> dict:
             since = _dt(ip.get("override_active_since", ""))
             hours = round((now - since).total_seconds() / 3600, 1) if now and since else None
             over = mx and hours is not None and hours > float(mx.group(1))
+            oos = getattr(g, "oos_active", {})
+            entry = oos.get(tag) or oos.get(sw)
+            recorded = (f"The out-of-service register records it: {entry.get('id') or 'an active entry'}"
+                        + (f", {entry['start']} to {entry['expiry']}" if entry.get("start") and entry.get("expiry") else "") + "."
+                        ) if entry else "The out-of-service register has no entry for it."
             b.step("Right now", f"At the configuration export ({g.export_time()}) {sw} is ACTIVE on {tag}, since {ip.get('override_active_since')}"
-                   + (f" ({hours} h; SRS limit {mx.group(1)} h)" if hours is not None and mx else "") + ". The out-of-service register has no entry for it.",
+                   + (f" ({hours} h; SRS limit {mx.group(1)} h)" if hours is not None and mx else "") + ". " + recorded,
                    nodes=[nid("Instrument", sw), nid("Instrument", tag)], docs=[d for d in g.docs if g.doc_type(d) == "CFG"])
-            stops.append(f"{sw} has been active {hours} h with no out-of-service entry" + (" - over the SRS limit." if over else "."))
+            if not entry:
+                stops.append(f"{sw} has been active {hours} h with no out-of-service entry" + (" - over the SRS limit." if over else "."))
+            elif over:
+                stops.append(f"{sw} has been active {hours} h, over the SRS limit of {mx.group(1)} h.")
     if stops:
         b.verdict("stop", "Do not rely on this bypass as it stands. " + " ".join(stops + warns))
     elif warns:
@@ -291,7 +302,25 @@ def t_moc(g: Graph, moc: str, findings: list[dict], closeout: bool = False) -> d
     b.step("Documents the graph links to it", "; ".join(f"{d}: {v[0]}" + (f" (+{len(v) - 1} more)" if len(v) > 1 else "") for d, v in imp["documents"].items()) + ".",
            rels=dep, docs=list(imp["documents"]))
     lvl = "ok"
-    if imp["missed"]:
+    temporary = "temporary" in _norm(m.get("change_type"))      # the same exemption as C15: it is removed, not documented
+    as_found = [f for f in findings if f["code"] in ("C4", "C5", "C6", "C7", "C10", "C17", "C22") and f["level"] in ("stop", "warn")
+                and f["id"] in {e["id"] for e in imp["elements"]} | {g.p("Alarm", e["id"]).get("alarm_tag") for e in imp["elements"] if e["label"] == "Alarm"}]
+    still_out = []
+    if temporary:
+        as_found = []
+        for e in imp["elements"]:                               # what a temporary change took out must be back when it is closed
+            ep = g.p(e["label"], e["id"])
+            if e["label"] == "Alarm" and _norm(ep.get("enabled_cfg")) in OC.NO:
+                still_out.append(f"{ep.get('alarm_tag', e['id'])} is disabled")
+            if e["label"] == "Instrument" and _norm(ep.get("override_active")) in OC.YES and ep.get("block_type_cfg") != "MOS":
+                still_out.append(f"{ep.get('override_switch')} is active on {e['id']}")
+        b.step("A temporary change", "A temporary change revises no document: it has to be removed and recorded. "
+               + (f"At the configuration export ({g.export_time()}): " + "; ".join(still_out) + "." if still_out else
+                  f"At the configuration export ({g.export_time()}) nothing it names is disabled or overridden."),
+               docs=[d for d in g.docs if g.doc_type(d) == "CFG"])
+        if still_out and m.get("stage") == "closed":
+            lvl = "stop"
+    elif imp["missed"]:
         crit = [d for d in imp["missed"] if g.doc_type(d) in ("SRS", "LOPA", "CUR", "SILV", "CE")]
         lvl = "stop" if crit else "warn"
         b.step("What the MOC did not list", f"{len(imp['missed'])} documents the graph reaches are not on the MOC: "
@@ -312,9 +341,17 @@ def t_moc(g: Graph, moc: str, findings: list[dict], closeout: bool = False) -> d
                docs=imp["outstanding"] + [d for d in g.docs if g.doc_type(d) == "CFG"])
         if imp["outstanding"] and m.get("stage") in ("implemented", "closed"):
             lvl = "stop"
-    b.verdict(lvl, {"stop": "The plant and its safety documents disagree because of this change. Revise before relying on any of them.",
-                    "warn": "The impact list is incomplete. Add the missed documents to the MOC.",
-                    "ok": "The MOC lists every document the graph links to the change."}[lvl])
+    text = {"stop": ("The temporary change is closed but was not removed: " + "; ".join(still_out) + ".") if still_out
+            else "The plant and its safety documents disagree because of this change. Revise before relying on any of them.",
+            "warn": "The impact list is incomplete. Add the missed documents to the MOC.",
+            "ok": "A temporary change: nothing to revise. Confirm it was removed and recorded." if temporary
+            else "The MOC lists every document the graph links to the change."}[lvl]
+    if as_found and m.get("stage") in ("implemented", "closed"):
+        b.step("As found: what the change touched", " ".join(f"{f['code']}: {f['detail']}" for f in as_found),
+               nodes=[n for f in as_found for n in _any(g, g.alarm_by_tag.get(f["id"], f["id"]))], docs=[d for d in g.docs if g.doc_type(d) == "CFG"])
+        if lvl == "ok":
+            lvl, text = "warn", "The paperwork is closed, but the plant or its documents do not agree on what this change touched: see the last step."
+    b.verdict(lvl, text)
     return b.done(findings)
 
 
@@ -384,7 +421,8 @@ def t_trip(g: Graph, sif: str, findings: list[dict]) -> dict:
     b.step("Why it is there", "; ".join(f"{_id(r, 'start')}: required SIL {r['props'].get('required_sil')}, credited PFD {r['props'].get('pfd')}" for r in credits)
            + f". SIL verification: achieved SIL {sp.get('sil_achieved_silv', '?')} (RRF {sp.get('rrf_achieved_silv', '?')}).",
            rels=credits + [x for r in credits for x in g.out("THREATENS", "Scenario", _id(r, "start"))])
-    disagree = [f for f in findings if f["code"] in ("C10", "X10", "X16", "X20") and f["id"] == sif]
+    disagree = [f for f in findings if f["code"] in ("C10", "C17", "X10", "X16", "X20") and f["id"] == sif]
+    disagree += [f for f in findings if f["code"] == "C20" and f["level"] == "stop" and sif in f["tags"]]
     b.verdict("warn" if disagree else "ok", ("The documents disagree on how this SIF should trip: " + " ".join(f["detail"] for f in disagree)) if disagree
               else "The C&E, SRS and configuration agree on how this SIF trips.")
     return b.done(findings)
@@ -458,9 +496,17 @@ def t_now(g: Graph, unit: str, findings: list[dict], oos_rows: list[dict]) -> di
     dis = [f for f in findings if f["code"] in ("C6", "C4", "C8")]
     b.step("Alarms not doing their job", " ".join(f"{f['code']}: {f['detail']}" for f in dis) or "None.",
            nodes=[nid("Alarm", g.alarm_by_tag.get(f["id"], f["id"])) for f in dis])
+    both = [f for f in findings if f["code"] == "C25"]
+    stale = [f for f in findings if f["code"] == "C24"]
+    if both:
+        b.step("Out of service with the backup out too", " ".join(f["detail"] for f in both),
+               nodes=[n for f in both for x in f["tags"] for n in _any(g, g.alarm_by_tag.get(x, x))])
+    if stale:
+        b.step("Register entries that do not match the plant", " ".join(f["detail"] for f in stale),
+               nodes=[n for f in stale for x in f["tags"] for n in _any(g, g.alarm_by_tag.get(x, x))])
     for sif in sorted(k for (lab, k) in g.nodes if lab == "SIF"):
         sp = g.p("SIF", sif)
-        issues = [f"{f['code']}: {f['detail']}" for f in findings if f["code"] in ("C10", "C11", "C12", "C13") and (f["id"] == sif or sif in f["tags"])]
+        issues =[f"{f['code']}: {f['detail']}" for f in findings if f["code"] in ("C10", "C11", "C12", "C13") and (f["id"] == sif or sif in f["tags"])]
         cms = g.inc("COMPENSATES_FOR", "SIF", sif)
         cm_state = [f"{g.p('Alarm', _id(r, 'start')).get('alarm_tag')}: " + (" | ".join(_alarm_health(g, _id(r, "start"), findings)) or "no finding")
                     for r in cms]
@@ -492,11 +538,12 @@ def run_all_scenarios(store, reports: dict, oos_rows: list[dict] | None = None, 
     oos_rows = oos_rows or []
     trusted = TrustedView(store)
     g = Graph(trusted, aliases)
+    g.oos_active = {r["element"]: r for r in oos_rows if r.get("status") == "active"}
     ops = OC.run(store, oos_rows, aliases=aliases)
     rec = {"exceptions": x_exceptions if x_exceptions is not None else design_exceptions(unit=reports["unit"])}
     findings = []
     for f in ops["findings"]:
-        findings.append({**f, "level": level(f["code"])})
+        findings.append({**f, "level": f.get("level") or level(f["code"])})      # a rule may set its own (C3, C20, C21)
     for u in (reports.get("docreg") or {}).get("unresolved", []):
         findings.append({"code": "C1", "title": OC.TITLES["C1"], "label": "Document", "id": u.get("doc_no", ""), "detail": f"{u.get('doc_no')} covers "
                          f"{u.get('name')}, which is not in the graph.", "sources": "document register", "refs": u.get("ref", ""), "tags": [u.get("name", "")], "level": "info"})

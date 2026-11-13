@@ -96,6 +96,22 @@ Cross-document checks (`pid_graph/ops_checks.py`):
 | C14 | MOC implemented or closed with documents not revised |
 | C15 | MOC impact list misses documents the graph links to the change |
 | C16 | Alarm on an instrument the index lists as indication only |
+| C17 | SIF trip setpoint as configured disagrees with the C&E or the SRS |
+| C18 | SIL verification target out of date, or achieved risk reduction below the current target |
+| C19 | Operator response time for a credited alarm is longer than the process safety time |
+| C20 | System disagrees between index and configuration, or a SIF device is not on the safety logic solver |
+| C21 | Alarm source disagrees between alarm register, MADB and configuration |
+| C22 | Alarm removed by rationalisation but still configured and enabled |
+| C23 | SIF not covered by a procedure that covers the other SIFs |
+| C24 | Out-of-service entry is past its expiry or does not match the configured state |
+| C25 | Element out of service while its compensating measure or protection credit is also out |
+| C26 | Alarm configured on the wrong side of the trip it stands in front of |
+
+C17 to C26 were added after the blind test on U-200, each as a general rule from section 6 of `docs/BLIND_TEST.md`.
+C10 now compares final elements as well as sensors. Values are compared with their units (`pid_graph/quantities.py`):
+350 mbarg and 0.35 barg are one value, an alarm limit configured in per cent of span is read through the index range, and
+an SRS cell such as "Sensors 12 months, final elements 24 months" is two statements. A trip notification with no MADB
+record (C3) is reported for information only.
 
 X-codes (X1 to X36) are the design reconciliation that already existed: index against P&IDs, C&E, SRS and LOPA.
 
@@ -148,9 +164,12 @@ Say that number. `docs/BLIND_TEST.md` has the protocol, every item and what woul
 
 ## 8. Limits to be straight about
 
-- Blind-test result on U-200: 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings. The checks compare several values as text, so different units for the
-  same value are reported as a disagreement, and several SIF comparisons do not exist yet. Treat every finding as
-  a prompt for an engineer, not a verdict.
+- Blind-test result on U-200: 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings. That is the
+  only blind result there is. The checks have since been fixed (units, the compound SRS cell, ten further comparisons) and
+  every one of the 24 now has a finding on U-200, but those fixes were written after the answer key was opened, so U-200
+  shows only that the fixes work. Treat every finding as a prompt for an engineer, not a verdict, until a new unit is run blind.
+- Two kinds of finding the scorer called false alarms are still raised: a MOC impact list is still told to check every
+  document an affected alarm appears in (C15), and a trip notification with no MADB record is still listed, for information (C3).
 - One small unit: 82 nodes and 27 documents. Scale is untested.
 - The as-installed SIL figure for SIF-100-02 is in the answer key, not calculated by the graph. The graph
   reports that the calculation credits a transmitter that is not installed.

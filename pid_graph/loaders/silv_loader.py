@@ -2,7 +2,8 @@
 
 © 2026 Alan Bowden — Bowden Simulators. All rights reserved.
 
-Per SIF: `sil_target_silv`, `pfd_avg_silv`, `rrf_achieved_silv`, `sil_achieved_silv`, `sensor_tags_silv`,
+Per SIF: `sil_target_silv`, `rrf_target_silv`, `target_source_silv` (the document and revision the target was
+taken from), `pfd_avg_silv`, `rrf_achieved_silv`, `sil_achieved_silv`, `sensor_tags_silv`,
 `sensor_voting_silv`, `fe_tags_silv`, `fe_voting_silv`, `pti_sensors_silv`, `pti_fe_silv`, `result_silv`, and
 from the degraded-operation sheet `degraded_sensor_voting_silv` / `degraded_fe_voting_silv` and a readable
 `degraded_silv` list. Instruments the calculation names are linked to the document (SHOWN_ON); one the
@@ -38,7 +39,8 @@ def load_silv(store: MemoryStore, path: str | Path, *, unit: str, load_run: str)
         p = prov(doc_no, rev, "SIF Summary", load_run, ref)
         deg = degraded.get(sif, [])
         sensors = set(split_tags(r.get("sensor_tags")))
-        props = {"sil_target_silv": r.get("sil_target", ""), "pfd_avg_silv": r.get("pfd_avg", ""),
+        props = {"sil_target_silv": r.get("sil_target", ""), "rrf_target_silv": r.get("rrf_target", ""),
+                 "target_source_silv": r.get("target_source", ""), "pfd_avg_silv": r.get("pfd_avg", ""),
                  "rrf_achieved_silv": r.get("rrf_achieved", ""), "sil_achieved_silv": r.get("sil_achieved", ""),
                  "sensor_tags_silv": r.get("sensor_tags", ""), "sensor_voting_silv": r.get("sensor_voting", ""),
                  "fe_tags_silv": r.get("fe_tags", ""), "fe_voting_silv": r.get("fe_voting", ""),

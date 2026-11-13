@@ -94,7 +94,11 @@ def test_every_planted_problem_is_surfaced_by_a_check_of_its_kind(data):
 
 def test_every_check_fires_on_the_test_documents_and_names_its_sources(data):
     ops = [f for f in data["findings"] if f["code"].startswith("C")]
-    assert {f["code"] for f in ops} == set(OC.TITLES) - {"C1"}            # C1: the register names nothing unknown
+    # Changed on 12 Nov 2026 with Alan's agreement (the one exception to rule 12): C17-C26 came from the blind test on U-200,
+    # and eight of them have nothing to fire on in U-100, so the test documents are now those of both units.
+    u200 = [f for f in demo.build(unit="U-200")["findings"] if f["code"].startswith("C")]
+    assert {f["code"] for f in ops + u200} == set(OC.TITLES) - {"C1"}     # C1: the register names nothing unknown
+    assert {f["code"] for f in ops} >= {f"C{i}" for i in range(2, 17)}    # U-100 alone still exercises every original check
     assert all(f["title"] == OC.TITLES[f["code"]] and f["detail"] and f["sources"] for f in ops)
 
 

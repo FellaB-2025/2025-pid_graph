@@ -17,7 +17,7 @@ presenter's script and the list of limits.
 |---|---|---|
 | Test documents and answer key | `scripts/make_dummy_batch1.py` -> `data/U100-*.xlsx`, `data/U100-BATCH1-ANSWER-KEY.json` | One generator; every planted item lists the cells that prove it |
 | Loaders (off by default) | `pid_graph/loaders/{madb,config,silv,moc,docreg}_loader.py` | No new label or relationship (D-V13-12); claims go in source-named properties |
-| Checks | `pid_graph/ops_checks.py` (C1-C16, impact rules I1-I5, `scorecard`) | A fixed rule each; a finding names its documents |
+| Checks | `pid_graph/ops_checks.py` (C1-C26, impact rules I1-I5, `scorecard`), `pid_graph/quantities.py` | A fixed rule each; a finding names its documents; values are compared with their units, never as text |
 | Scenarios | `pid_graph/demo.py` (`t_bypass`, `t_shelve`, `t_moc`, `t_sif_out`, `t_trip`, `t_where_used`, `t_doc_revised`, `t_now`) | One template per type, run for every element it applies to; trusted view only (T7) |
 | Build a situation | `pid_graph/situation.py` (`build_model`, `evaluate`, `SITUATION_JS`) | Rules S1-S8; Python is the reference and the page's JavaScript must match it (`tests/test_situation.py` runs both) |
 | Page | `pid_graph/demo_page.py` | Self-contained, no external load, house style (Arial, navy/teal/amber, light), copyright footer |
@@ -41,7 +41,7 @@ script and a row to section 5 of the guide. Add a showcase entry only if it make
 
 **A new check.** Add the title to `TITLES` in `ops_checks.py` (next free C number, never renumber), write
 the rule in `run()`, map any answer-key `kind` to it in `KIND_TO_CODES`, give it a level in `STOP` / `WARN`
-in `demo.py`, and add the row to section 6 of the guide (a test compares the two tables).
+in `demo.py` (or pass `level=` to `add()` when the level depends on the case), and add the row to section 6 of the guide (a test compares the two tables).
 
 **A new situation rule.** Change `evaluate()` and `SITUATION_JS` in the same edit, add a made-up-model test for the rule, add its row to
 section 6a of the guide and to the docstring. If the rule needs a fact the model lacks, add it in `build_model()`; never read the graph
