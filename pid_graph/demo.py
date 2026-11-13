@@ -555,6 +555,18 @@ def export_graph(store) -> dict:
     return {"nodes": nodes, "rels": rels}
 
 
+def blind_tests() -> list[dict]:
+    """Every blind-test adjudication on file (data/<unit>/unit.json names it), as the scorer wrote it. Shown on the
+    Scorecard tab of every unit's page: it is evidence about the checks, not about one unit."""
+    out = []
+    for folder in sorted(p for p in DATA.iterdir() if (p / "unit.json").exists()):
+        cfg = json.loads((folder / "unit.json").read_text(encoding="utf-8"))
+        f = folder / cfg["blind"] if cfg.get("blind") else None
+        if f and f.exists():
+            out.append(json.loads(f.read_text(encoding="utf-8")))
+    return out
+
+
 def build(files: dict | None = None, unit: str = "U-100") -> dict:
     from .oos import load_register
     cfg = unit_config(unit)
@@ -563,8 +575,7 @@ def build(files: dict | None = None, unit: str = "U-100") -> dict:
     aliases = OC.sheet_aliases({**cfg["files"], **(files or {})}.get("index"))
     data = run_all_scenarios(store, reports, oos_rows, design_exceptions(files, unit), aliases, cfg["showcase"])
     data["oos_active"] = [r["element"] for r in oos_rows if r.get("status") == "active"]
-    if cfg["blind"] and Path(cfg["blind"]).exists():
-        data["blind"] = json.loads(Path(cfg["blind"]).read_text(encoding="utf-8"))
+    data["blind_tests"] = blind_tests()
     if cfg["answer_key"] and Path(cfg["answer_key"]).exists():
         key = json.loads(Path(cfg["answer_key"]).read_text(encoding="utf-8"))
         data["scorecard"] = OC.scorecard([f for f in data["findings"] if f["code"].startswith("C")], key)

@@ -147,6 +147,7 @@ their templates are in `pid_graph/topology_queries.py`.
 | `pid_graph/ops_checks.py` | Cross-document checks C1–C16 over those documents (alarm settings, ranges, IPL flags, SIF architecture, SIL verification assumptions, bypass provision, active overrides, MOC close-out and MOC impact rules I1–I5) and the scorecard against the batch 1 answer key. X1–X36 are untouched |
 | `pid_graph/demo.py`, `demo_page.py` | Scenario demonstrator: nine fixed templates (bypass, shelve, MOC impact, MOC close-out, SIF out of service, trip, where used, document revised, everything impaired now) run for every element they apply to, memory backend, trusted view. `python -m pid_graph.demo` writes `reports/demo_U-100.html`; `--artifact PATH` writes the form published privately at https://claude.ai/artifact/6q2YAhHoohUn2HyCCV3XFa ("U-100 Scenario Explorer"). After a change, rebuild and republish with the Artifact tool, passing that URL as `url` |
 | `pid_graph/situation.py` | Build-your-own situation: `build_model()` reads the graph into a plain model, `evaluate(model, out)` is a pure function (rules S1–S8) for any set of elements out of service together; `SITUATION_JS` is the same function for the page. `tests/test_situation.py` tests each rule on made-up models and runs the JavaScript in node against Python on 900-odd combinations (skips without node). Change the two together or that test fails. CLI: `python -m pid_graph.situation [--unit U] [--as-found] TAG ...` |
+| `docs/BLIND_TEST.md`, `eval/blind_run.py`, `eval/blind/`, `data/u200/` | Blind test of the checks on a second unit (U-200, hot oil heater), planted by a separate agent and scored by a third. `eval/blind_run.py --unit U --freeze TAG` refuses to run if anything frozen changed since the tag and never reads the answer key. The sealed findings and the adjudication are records: never regenerate or edit them. Another unit is `data/<slug>/unit.json` (see `demo.unit_config`); `python -m pid_graph.demo --unit U-200` builds its page |
 | `docs/DEMO_GUIDE.md` | Presenter's guide: the order to show the scenarios in, what each proves, the check codes, what not to claim |
 | `.claude/skills/kg-demo/SKILL.md` | How to rebuild, republish and extend the demonstrator (new scenario, new check, new test documents) |
 | `pid_graph/queries.py` | Fixed Cypher templates: `out_of_service`, `shelve_impact`, `moc_impact`, `trip` (Neo4j only) |
@@ -178,6 +179,11 @@ alarms impaired); shelve LAH-1006 stop (LOPA IPL, compensating measure and SRS b
 MOC-2026-016 stop (misses the SRS, the MADB and the compensating-measures register); MOC-2026-014 close-out stop (7 of 8
 documents not revised); SIF-100-03 out of service stop; SIF-100-02 trip caution (2oo2 configured, 2oo3 in the C&E and SRS).
 Tests pin these in one place (`tests/test_ops_demo.py`); everything else there is relative to `data/` and the answer key.
+
+**Blind test** (U-200, 12 Nov 2026, checks frozen at `blind-freeze-1`): 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings; 39 further findings only because no P&IDs
+were supplied. Known causes: values compared as text without unit conversion, a compound SRS cell read as one value, and SIF
+comparisons that do not exist yet (trip setpoint and final elements against the configuration, response time against process
+safety time, system allocation, the out-of-service register both ways). `docs/BLIND_TEST.md` section 9 sets the rules for fixing them.
 
 Re-verified on 10 Nov 2026 with the memory backend unless marked *(log)*, which means taken
 from `SESSION_LOG.md` (Neo4j, 9 Sep 2026) and not re-run.

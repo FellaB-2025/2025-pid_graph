@@ -226,7 +226,7 @@ eval/              gold sets + scorers (score.py for v1.2; topology_eval.py for 
 tests/             pytest; fixtures/ holds the frozen v1.2 dump and the frozen pid-to-kg extraction
 scripts/           setup_neo4j.ps1, make_dummy_pdf.py, make_dummy_srs_lopa.py, make_pidkg_discrepancies.py
 data/              sample unit documents (dummy, incl. drawn synthetic P&ID PDFs); data/external/ is git-ignored
-docs/              V1_3_INVENTORY.md, STRESS_TEST.md, DEMO_GUIDE.md
+docs/              V1_3_INVENTORY.md, STRESS_TEST.md, DEMO_GUIDE.md, BLIND_TEST.md
 reports/           outputs (git-ignored, except review_register_<unit>.xlsx)
 third_party/       pid-to-kg, cloned and unmodified (git-ignored; THIRD_PARTY_NOTICES.md)
 ```

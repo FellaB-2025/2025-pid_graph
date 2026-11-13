@@ -321,10 +321,23 @@ function allFind(){
 // ---------------- scorecard
 function score(){
   const sc = D.scorecard, el = document.getElementById('tab-score');
-  if (!sc) { el.innerHTML = '<div class="panel">No answer key loaded.</div>'; return; }
-  el.innerHTML = `<div class="panel"><div class="eyebrow">Concept test</div><h2>Planted problems the graph surfaced</h2>
+  const VERD = {found:['Found', 'yes'], partial:['Partly', ''], missed:['Missed', 'no']};
+  const blind = (D.blind_tests || []).map(b => { const s = b.summary;
+    return `<div class="panel" style="margin-bottom:16px"><div class="eyebrow">Blind test · unit ${esc(b.unit)}</div><h2>Problems planted by someone else, on a unit the checks had never seen</h2>
+    <div class="row"><span class="big">${s.found} of ${s.planted}</span><span class="ask" style="margin:0">found outright; ${s.partial} partly; ${s.missed} missed.
+    A separate agent, barred from reading the checks, invented the unit and planted the problems. The checks ran unchanged (frozen at ${esc(b.freeze)}) and their output was committed before the answer key was opened. A third agent, who wrote neither, did the marking.</span></div>
+    <div class="stats" style="margin-top:10px"><span><b>${s.clean_flagged} of ${s.clean_controls}</b> deliberately consistent items wrongly flagged</span><span><b>${s.other_false_alarm}</b> false alarms</span>
+    <span><b>${s.other_true_unplanted}</b> other findings that are correct</span><span><b>${s.other_input_gap}</b> from inputs not supplied (no P&IDs)</span></div>
+    <div class="tw"><table class="list"><tr><th>Item</th><th>Severity</th><th>Result</th><th>What was planted</th><th>Found by</th><th>Scorer's reason</th></tr>
+    ${b.items.map(i => `<tr><td>${esc(i.id)}</td><td>${esc(i.severity)}</td><td class="${VERD[i.verdict][1]}">${VERD[i.verdict][0]}</td><td>${esc(i.what)}</td><td>${esc((i.by || []).join('; '))}</td><td>${esc(i.reason)}</td></tr>`).join('')}
+    </table></div>
+    ${(b.missed_patterns || []).length ? '<h3 style="margin-top:14px">What would have caught the rest</h3><ul class="prose">' + b.missed_patterns.map(m => `<li>${esc(m)}</li>`).join('') + '</ul>' : ''}
+    ${(b.other_findings || []).filter(o => o.class === 'false_alarm').length ? '<h3 style="margin-top:14px">False alarms</h3><ul class="prose">' + b.other_findings.filter(o => o.class === 'false_alarm').map(o => `<li>${esc(o.code)} ${esc((o.ids || []).join(', '))}: ${esc(o.reason)}</li>`).join('') + '</ul>' : ''}
+    ${b.scorer_notes ? `<p class="src" style="margin-top:10px">Scorer's notes: ${esc(b.scorer_notes)}</p>` : ''}</div>`; }).join('');
+  if (!sc) { el.innerHTML = blind || '<div class="panel">No answer key loaded.</div>'; return; }
+  el.innerHTML = blind + `<div class="panel"><div class="eyebrow">Development test · unit ${esc(D.unit)}</div><h2>Planted problems the graph surfaced</h2>
     <div class="row"><span class="big">${sc.found} of ${sc.planted}</span><span class="ask" style="margin:0">Batch 1 of the test documents carries ${sc.planted} deliberate discrepancies, listed in an answer key written before the checks.
-    A problem counts as found when a check of the matching kind fires on one of its tags. The checks were written knowing what was planted, so this proves the method works end to end, not that it finds unknown problems. The next batch will be a blind test.</span></div>
+    A problem counts as found when a check of the matching kind fires on one of its tags. The checks were written knowing what was planted, so this proves the method works end to end, not that it finds unknown problems. ${(D.blind_tests || []).length ? 'The blind test above is the evidence for that.' : 'A blind test is the evidence for that.'}</span></div>
     <div class="tw" style="margin-top:12px"><table class="list"><tr><th>Item</th><th>Questions</th><th>Found</th><th>Found by</th><th>What was planted</th></tr>
     ${sc.items.map(i => `<tr><td>${esc(i.id)}</td><td>${esc(i.questions.join(', '))}</td><td class="${i.found ? 'yes' : 'no'}">${i.found ? 'Yes' : 'No'}</td><td>${esc(i.by.join('; '))}</td><td>${esc(D.answer_key[i.id].finding)}</td></tr>`).join('')}
     </table></div><p class="src">Findings not tied to a planted item (${sc.other_findings.length}): ${esc(sc.other_findings.join(', '))}. Each is a real consequence of the test data; read them in All findings.</p></div>`;

@@ -5,7 +5,7 @@
 Protocol (docs/BLIND_TEST.md):
   1. A planter who has not read the checks writes the unit's documents and its answer key.
   2. This script runs the checks exactly as they were at the freeze tag, never opens the answer key, and writes
-     every finding and every scenario verdict to <unit folder>/<UNIT>-BLIND-RUN-FINDINGS.json. That file is
+     every finding and every scenario verdict to eval/blind/<UNIT>-BLIND-RUN-FINDINGS.json. That file is
      committed before anyone compares it with the key.
   3. A scorer who wrote neither compares the sealed findings with the key and writes the adjudication file.
 
@@ -39,7 +39,6 @@ def main(argv=None) -> int:
         print("The checks have changed since the freeze; a blind run would not be blind:\n" + changed)
         return 1
     from pid_graph import demo
-    folder = demo.DATA / a.unit.lower().replace("-", "")
     data = demo.build(unit=a.unit)
     reports = demo.build_demo_store(unit=a.unit)[1]
     sealed = {
@@ -55,7 +54,8 @@ def main(argv=None) -> int:
         "scenario_verdicts": [{"id": s["id"], "level": s["verdict"]["level"], "text": s["verdict"]["text"]} for s in data["scenarios"]],
         "situation_as_found": {"out": data["situation"]["presets"]["as_found"]},
     }
-    out = folder / f"{a.unit.replace('-', '')}-BLIND-RUN-FINDINGS.json"
+    out = ROOT / "eval" / "blind" / f"{a.unit.replace('-', '')}-BLIND-RUN-FINDINGS.json"    # not in the unit's folder: that holds only what its generator writes
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(sealed, indent=1, ensure_ascii=False, default=str) + "\n", encoding="utf-8", newline="\n")
     by = {}
     for f in data["findings"]:

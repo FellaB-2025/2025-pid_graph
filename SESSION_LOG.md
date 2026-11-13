@@ -362,3 +362,11 @@
   not computed by the graph; Neo4j was not used (memory backend) and the MCP server does not expose the C-checks.
 - OPEN for Alan: walk the nine showcase scenarios and say which wording is wrong for an engineer; decide whether batch 2
   should be a blind test (documents planted by one agent, checks unchanged); fill the amber columns of the inventory.
+- Same day, later. Build-your-own situation: `pid_graph/situation.py` (rules S1-S8, Python reference + the page's JavaScript,
+  compared by `tests/test_situation.py` on 900-odd combinations) and a tab on the page. The demonstrator is unit-neutral now
+  (`demo.unit_config`, `ops_checks.sheet_aliases`); tag `blind-freeze-1` marks the checks before the blind test.
+- Blind test on U-200 (protocol and full result in `docs/BLIND_TEST.md`): 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings.
+  Planter and scorer were separate agents; the runner committed the sealed findings before opening the key.
+- Alan asked for pushes to happen automatically after every commit from now on (both private repositories).
+- OPEN: fix the false alarms and the missing comparisons as general rules (BLIND_TEST.md sections 6 and 9), fix the two wrong
+  scenario statements the test exposed, then a new blind unit. U-200 has no P&IDs, so X1 fires 37 times there.

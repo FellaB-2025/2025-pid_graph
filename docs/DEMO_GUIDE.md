@@ -140,13 +140,17 @@ document nobody parses, such as a procedure, still appears through the document 
 and row. The graph never picks a winner; it reports the disagreement.
 
 **Did it find all 23 planted problems by itself?** The checks were written knowing what was planted. The
-scorecard shows the method works end to end on a known set. It does not show that it finds unknown problems;
-the next batch of test documents is intended as a blind test.
+U-100 scorecard shows only that the method works end to end. The blind test is the real answer: on a second unit
+(U-200), invented and planted by a separate agent and marked by a third, the unchanged checks scored 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings.
+Say that number. `docs/BLIND_TEST.md` has the protocol, every item and what would have caught the rest.
 
 **Is this real plant data?** No. U-100 is invented. No real project document or tag is in the repository.
 
 ## 8. Limits to be straight about
 
+- Blind-test result on U-200: 12 of 24 found outright, 3 partly, 9 missed; 5 of 8 traps wrongly flagged; 15 false alarms in 85 findings. The checks compare several values as text, so different units for the
+  same value are reported as a disagreement, and several SIF comparisons do not exist yet. Treat every finding as
+  a prompt for an engineer, not a verdict.
 - One small unit: 82 nodes and 27 documents. Scale is untested.
 - The as-installed SIL figure for SIF-100-02 is in the answer key, not calculated by the graph. The graph
   reports that the calculation credits a transmitter that is not installed.

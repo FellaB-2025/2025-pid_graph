@@ -48,9 +48,14 @@ section 6a of the guide and to the docstring. If the rule needs a fact the model
 from `evaluate()`.
 
 **New test documents.** Extend the generator, never the workbooks. Plant the discrepancy in the data, add
-the item to `planted()` with its evidence cells, and regenerate. For a blind test, have a separate agent
-write the generator and the answer key, and do not read the key before running the checks: report found /
-missed honestly, then decide whether a miss needs a new rule.
+the item to `planted()` with its evidence cells, and regenerate.
+
+**A blind test.** Follow `docs/BLIND_TEST.md` section 2 exactly: tag the freeze, brief a fresh agent as planter
+(it must not read `ops_checks.py`, `reconcile.py`, `demo.py`, `situation.py`, their tests, the guide or any answer
+key; it writes `data/<slug>/` with a `unit.json`), commit its files unread, run `python -m eval.blind_run`, commit
+the sealed findings, then brief a second fresh agent as scorer and record its adjudication unedited. Never edit
+or regenerate a sealed findings file or an adjudication. After fixing checks, the old unit is a regression test,
+not a blind result; only a new unit planted by someone who has not seen the fixed checks counts.
 
 **A document type the graph has not seen.** If it fits an existing loader pattern, add a value to
 `O.DOC_TYPES` and say so in section 0c of the ontology document. If it needs a new label or relationship,
@@ -62,6 +67,6 @@ stop: that is a schema change, the ontology document changes first, and it is Al
 - Nothing safety-relevant is produced by a language model; `COMPENSATES_FOR` comes only from the curated
   register.
 - Synthetic data only. No real drawing, tag or project document enters the repository.
-- The page never claims more than the guide's "Limits" section allows. The scorecard wording about the
-  checks having been written with knowledge of the planted items stays until a blind batch replaces it.
+- The page never claims more than the guide's "Limits" section allows. The U-100 scorecard always says the
+  checks were written knowing what was planted; the blind result is shown beside it exactly as scored.
 - British spelling; "node" and "relationship", never "edge".
