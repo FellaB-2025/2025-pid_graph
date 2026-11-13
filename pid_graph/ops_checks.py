@@ -19,7 +19,7 @@ Impact rules for C15 (what a change reaches), used by pid_graph.demo as well:
   I5 an affected element reaches every document it is shown on or that states a fact about it.
 Configuration exports, MOC records and registers of documents are not "documents to revise".
 
-    python -m pid_graph.ops_checks            # build U-100 from data/ in memory and print the findings
+    python -m pid_graph.ops_checks [--unit U-200]   # build the unit from data/ in memory and print the findings
 """
 from __future__ import annotations
 
@@ -53,7 +53,22 @@ RANGE_RE = re.compile(r"^\s*(-?\d+(?:\.\d+)?)\s*(?:-|to)\s*(-?\d+(?:\.\d+)?)\s*$
 VOTE_RE = re.compile(r"(\d)\s*oo\s*(\d)", re.I)
 NOT_TO_REVISE = ("CFG", "MOC", "REG")
 # Sheets of the instrument index that MOCs name as documents of their own.
-DOC_ALIASES = {"U100-ALM-REG": "U100-INST-INDEX", "U100-LOOP-REG": "U100-INST-INDEX"}
+
+
+def sheet_aliases(index_path) -> dict[str, str]:
+    """A workbook's sheets can carry document numbers of their own (the alarm register and the loop register inside
+    the instrument index). A MOC that names one means the workbook: sheet document number -> workbook document number."""
+    from .loaders.tables import detect_document, sheet_names
+    if not index_path:
+        return {}
+    sheets = sheet_names(index_path)
+    main = detect_document(index_path, "Instrument Index" if "Instrument Index" in sheets else None)[0]
+    out = {}
+    for s in sheets:
+        d = detect_document(index_path, s)[0]
+        if d != main:
+            out[d] = main
+    return out
 
 
 def _norm(v) -> str:
@@ -77,8 +92,9 @@ def _dt(s: str) -> datetime | None:
 class Graph:
     """Read helpers over a store (or TrustedView) shared by the checks and the demo templates."""
 
-    def __init__(self, store):
+    def __init__(self, store, aliases: dict | None = None):
         self.s = store
+        self.aliases = aliases or {}
         self.nodes = {(n["label"], tuple(n["key"].values())[0] if n["label"] != "Document" else n["key"]["doc_no"]): n
                       for n in store.nodes()}
         self.rels = store.rels()
@@ -180,7 +196,7 @@ def moc_impact(g: Graph, moc: str) -> dict:
                 srs = next((d for d in g.documents_of("SIF", _id(r, "end")) if g.doc_type(d) == "SRS"), None)
                 if srs:
                     reach(srs, f"{tag} is on {src}, which initiates {_id(r, 'end')}: check the margin to the trip (I4)")
-    listed = {DOC_ALIASES.get(d, d) for d in m.get("documents_to_revise", [])}
+    listed = {g.aliases.get(d, d) for d in m.get("documents_to_revise", [])}
     return {"moc": moc, "title": m.get("title", ""), "status": m.get("status", ""), "stage": m.get("stage", ""),
             "elements": [{"label": lab, "id": i, "why": w} for (lab, i), w in elements.items()],
             "documents": {d: sorted(set(v)) for d, v in sorted(docs.items())},
@@ -188,8 +204,8 @@ def moc_impact(g: Graph, moc: str) -> dict:
             "outstanding": sorted(set(m.get("documents_to_revise", [])) - set(m.get("documents_revised", [])))}
 
 
-def run(store, oos_rows: list[dict] | None = None, trusted: bool = True) -> dict:
-    g = Graph(TrustedView(store) if trusted else store)
+def run(store, oos_rows: list[dict] | None = None, trusted: bool = True, aliases: dict | None = None) -> dict:
+    g = Graph(TrustedView(store) if trusted else store, aliases)
     oos_active = {r["element"] for r in (oos_rows or []) if r.get("status") == "active"}
     ex: list[dict] = []
 
@@ -366,10 +382,15 @@ def scorecard(findings: list[dict], answer_key: dict) -> dict:
 
 
 def main(argv=None) -> int:
+    import argparse
     import json
-    from .demo import build_demo_store
-    store, reports = build_demo_store()
-    res = run(store)
+    from .demo import build_demo_store, unit_config
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--unit", default="U-100")
+    a = ap.parse_args(argv)
+    cfg = unit_config(a.unit)
+    store, reports = build_demo_store(unit=a.unit)
+    res = run(store, aliases=sheet_aliases(cfg["files"].get("index")))
     for f in res["findings"]:
         print(f"{f['code']:4} {f['id']:16} {f['detail']}")
     print(json.dumps(res["by_code"]))

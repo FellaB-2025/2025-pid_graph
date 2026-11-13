@@ -8,9 +8,10 @@ Every result is a fixed template over the trusted view of the graph (T7), run fo
 to, so a presenter can pick any tag, alarm, SIF, MOC or document, not only the showcase ones. Findings come
 from the rules engines (pid_graph.reconcile X-codes, pid_graph.ops_checks C-codes), attached to a scenario
 when they concern an element the scenario walked through. Nothing is written by a model; nothing is
-hard-coded for U-100 except the showcase list (SHOWCASE) and the default file names.
+hard-coded for U-100 except the showcase list (SHOWCASE) and the default file names. Another unit is a folder
+data/<unit in lower case without the dash>/ with a unit.json naming its files (see unit_config).
 
-    python -m pid_graph.demo                         -> reports/demo_U-100.html (memory backend, data/)
+    python -m pid_graph.demo [--unit U-200]          -> reports/demo_<unit>.html (memory backend, data/)
     python -m pid_graph.demo --artifact PATH         also write the page without its <html> wrapper, for publishing
     python -m pid_graph.demo --json PATH             the scenario results as JSON
 """
@@ -57,9 +58,25 @@ STOP = {"C4", "C6", "C8", "C10", "C11", "C12", "C13"}
 WARN = {"C3", "C5", "C7", "C9", "C14", "C15", "C16", "X9", "X10", "X11", "X14", "X15", "X16", "X17", "X18", "X20"}
 
 
-def build_demo_store(files: dict | None = None, load_run: str = "demo"):
-    f = {**DEFAULT_FILES, **(files or {})}
-    return build_store(unit="U-100", load_run=load_run, **{k: v for k, v in f.items()})
+def unit_config(unit: str = "U-100") -> dict:
+    """Where a unit's documents are. U-100 is built in. Any other unit is data/<slug>/unit.json:
+    {"unit": "U-200", "files": {"index": "...", "ce": "...", "srs": "...", "lopa": "...", "curated": "...", "madb": "...",
+     "config": "...", "silv": "...", "moc": "...", "docreg": "...", "topology": null, "pdf": null}, "oos": "..."}
+    with paths relative to that folder. An answer key is never read here: a blind unit's score comes from
+    its adjudication file ("blind", optional), written by whoever compared the sealed findings with the key."""
+    if unit == "U-100":
+        return {"unit": unit, "files": dict(DEFAULT_FILES), "oos": OOS, "answer_key": ANSWER_KEY, "showcase": SHOWCASE, "blind": None}
+    folder = DATA / unit.lower().replace("-", "")
+    cfg = json.loads((folder / "unit.json").read_text(encoding="utf-8"))
+    files = {k: (folder / v if v and k != "transmittal" else v) for k, v in cfg["files"].items()}
+    files.setdefault("topology", None)
+    return {"unit": cfg.get("unit", unit), "files": files, "oos": folder / cfg["oos"] if cfg.get("oos") else None,
+            "answer_key": None, "showcase": [], "blind": folder / cfg["blind"] if cfg.get("blind") else None}
+
+
+def build_demo_store(files: dict | None = None, load_run: str = "demo", unit: str = "U-100"):
+    f = {**unit_config(unit)["files"], **(files or {})}
+    return build_store(unit=unit, load_run=load_run, **{k: v for k, v in f.items()})
 
 
 def nid(label: str, ident: str) -> str:
@@ -87,7 +104,7 @@ class Builder:
         nodes = set(nodes) | {nid(r["start_label"], _id(r, "start")) for r in rels} | {nid(r["end_label"], _id(r, "end")) for r in rels}
         docs = set(docs) | {r["props"].get("source_doc", "") for r in rels if r["props"].get("source_doc") in self.g.docs}
         docs |= {_id(r, "end") for r in rels if r["type"] == "SHOWN_ON"}
-        docs = {OC.DOC_ALIASES.get(d, d) for d in docs} & set(self.g.docs)      # a sheet a MOC names is its workbook
+        docs = {self.g.aliases.get(d, d) for d in docs} & set(self.g.docs)       # a sheet a MOC names is its workbook
         self.out["steps"].append({"title": title, "text": text, "nodes": sorted(nodes), "rels": sorted({rid(r) for r in rels}),
                                   "docs": sorted(d for d in docs if d)})
 
@@ -459,22 +476,23 @@ def t_now(g: Graph, unit: str, findings: list[dict], oos_rows: list[dict]) -> di
 
 
 # ---------------------------------------------------------------- run everything
-def design_exceptions(files: dict | None = None) -> list[dict]:
+def design_exceptions(files: dict | None = None, unit: str = "U-100") -> list[dict]:
     """The X-codes exactly as the pipeline reports them: reconcile over a build of the design documents alone.
     (Run over the full graph, reconcile would read the configuration's trip signals as if they were the C&E's.)"""
     from .reconcile import reconcile
-    f = {k: v for k, v in {**DEFAULT_FILES, **(files or {})}.items() if k not in OPS_DOCS}
-    store, reports = build_store(unit="U-100", load_run="demo-design", **f)
-    return reconcile(TrustedView(store), unit="U-100", ce_report=reports.get("ce"), curated_report=reports.get("curated"),
+    f = {k: v for k, v in {**unit_config(unit)["files"], **(files or {})}.items() if k not in OPS_DOCS}
+    store, reports = build_store(unit=unit, load_run="demo-design", **f)
+    return reconcile(TrustedView(store), unit=unit, ce_report=reports.get("ce"), curated_report=reports.get("curated"),
                      lopa_report=reports.get("lopa"), titleblock_report=reports.get("titleblock"))["exceptions"]
 
 
-def run_all_scenarios(store, reports: dict, oos_rows: list[dict] | None = None, x_exceptions: list[dict] | None = None) -> dict:
+def run_all_scenarios(store, reports: dict, oos_rows: list[dict] | None = None, x_exceptions: list[dict] | None = None,
+                      aliases: dict | None = None, showcase: list | None = None) -> dict:
     oos_rows = oos_rows or []
     trusted = TrustedView(store)
-    g = Graph(trusted)
-    ops = OC.run(store, oos_rows)
-    rec = {"exceptions": x_exceptions if x_exceptions is not None else design_exceptions()}
+    g = Graph(trusted, aliases)
+    ops = OC.run(store, oos_rows, aliases=aliases)
+    rec = {"exceptions": x_exceptions if x_exceptions is not None else design_exceptions(unit=reports["unit"])}
     findings = []
     for f in ops["findings"]:
         findings.append({**f, "level": level(f["code"])})
@@ -505,11 +523,18 @@ def run_all_scenarios(store, reports: dict, oos_rows: list[dict] | None = None, 
             results.append(t_doc_revised(g, k, findings))
     results.append(t_now(g, reports["unit"], findings, oos_rows))
     by_id = {r["id"]: r for r in results}
-    showcase = []
-    for kind, el in SHOWCASE:
+    picked = []
+    for kind, el in (SHOWCASE if showcase is None else showcase):
         sid = f"{kind}:{g.alarm_by_tag.get(el, el) if kind == 'shelve' else el}"
         if sid in by_id:
-            showcase.append(sid)
+            picked.append(sid)
+    if not picked:                      # a unit with no prepared order: the most serious scenario of each type
+        order = {"stop": 0, "warn": 1, "ok": 2, "info": 3}
+        for kind in KINDS:
+            of_kind = sorted((r for r in results if r["kind"] == kind), key=lambda r: (order[r["verdict"]["level"]], r["element"]))
+            if of_kind:
+                picked.append(of_kind[0]["id"])
+    showcase = picked
     return {"unit": reports["unit"], "export_time": g.export_time(), "findings": findings, "scenarios": results, "showcase": showcase,
             "ops_by_code": ops["by_code"], "titles": {**OC.TITLES}, "graph": export_graph(trusted)}
 
@@ -528,13 +553,18 @@ def export_graph(store) -> dict:
     return {"nodes": nodes, "rels": rels}
 
 
-def build(files: dict | None = None) -> dict:
+def build(files: dict | None = None, unit: str = "U-100") -> dict:
     from .oos import load_register
-    store, reports = build_demo_store(files)
-    oos_rows = load_register(OOS) if OOS.exists() else []
-    data = run_all_scenarios(store, reports, oos_rows, design_exceptions(files))
-    if ANSWER_KEY.exists():
-        key = json.loads(ANSWER_KEY.read_text(encoding="utf-8"))
+    cfg = unit_config(unit)
+    store, reports = build_demo_store(files, unit=unit)
+    oos_rows = load_register(cfg["oos"]) if cfg["oos"] and Path(cfg["oos"]).exists() else []
+    aliases = OC.sheet_aliases({**cfg["files"], **(files or {})}.get("index"))
+    data = run_all_scenarios(store, reports, oos_rows, design_exceptions(files, unit), aliases, cfg["showcase"])
+    data["oos_active"] = [r["element"] for r in oos_rows if r.get("status") == "active"]
+    if cfg["blind"] and Path(cfg["blind"]).exists():
+        data["blind"] = json.loads(Path(cfg["blind"]).read_text(encoding="utf-8"))
+    if cfg["answer_key"] and Path(cfg["answer_key"]).exists():
+        key = json.loads(Path(cfg["answer_key"]).read_text(encoding="utf-8"))
         data["scorecard"] = OC.scorecard([f for f in data["findings"] if f["code"].startswith("C")], key)
         data["answer_key"] = {i["id"]: {"finding": i["finding"], "questions": i["questions"], "documents": i["documents"]} for i in key["items"]}
     data["counts"] = store.counts()
@@ -545,14 +575,15 @@ def build(files: dict | None = None) -> dict:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Build the scenario demonstrator page for U-100.")
-    ap.add_argument("--out", default=str(ROOT / "reports" / "demo_U-100.html"))
+    ap = argparse.ArgumentParser(description="Build the scenario demonstrator page for one unit.")
+    ap.add_argument("--unit", default="U-100")
+    ap.add_argument("--out", default="", help="default reports/demo_<unit>.html")
     ap.add_argument("--artifact", default="", help="also write the page body without <html>/<head>, for publishing")
     ap.add_argument("--json", default="", help="also write the scenario results as JSON")
     a = ap.parse_args(argv)
     from .demo_page import render
-    data = build()
-    out = Path(a.out)
+    data = build(unit=a.unit)
+    out = Path(a.out) if a.out else ROOT / "reports" / f"demo_{a.unit}.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(render(data, standalone=True), encoding="utf-8")
     print(out)
