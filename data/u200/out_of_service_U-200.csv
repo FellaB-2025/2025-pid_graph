@@ -1,0 +1,5 @@
+id,element,kind,status,start,expiry,authorised_by,requester,reason,compensating_measures_confirmed,notes
+OOS-200-0007,PT-2010A,mos,closed,2026-10-28 09:00,2026-10-28 13:00,Shift Supervisor (dummy),Maintenance Planner (dummy),Transmitter replacement (MOC-2026-044),y,Restored 12:40; MOS-2010A confirmed off
+OOS-200-0008,TT-2020C,mos,active,2026-11-01 08:00,2026-11-01 16:00,Shift Supervisor (dummy),Instrument Technician (dummy),Thermowell inspection,y,
+OOS-200-0009,TT-2022.TAH,shelve,active,2026-11-09 14:00,2026-11-16 14:00,Shift Supervisor (dummy),Panel Operator (dummy),Skin thermocouple reading erratic; nuisance alarm,n,Awaiting thermocouple replacement
+OOS-200-0010,FT-2001B,mos,active,2026-11-12 02:10,2026-11-12 10:10,Shift Supervisor (dummy),Instrument Technician (dummy),Impulse line blockage - flushing,y,FAL-2002 confirmed active before the override was set
